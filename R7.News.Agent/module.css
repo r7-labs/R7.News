@@ -1,0 +1,9 @@
+﻿/* Place CSS for view control here */
+
+.R7.News.Agent_ContentList { width:100% }                
+.R7.News.Agent_ContentListItem { text-align: left }
+.R7.News.Agent_UserName { font-weight:bold }
+.R7.News.Agent_CreateOnDate { font-style:italic }
+.R7.News.Agent_Content { clear:both }
+
+

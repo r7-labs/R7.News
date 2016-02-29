@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6DA0B432-805E-4A97-B693-FE03027B9B4F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Packaging</RootNamespace>
+    <AssemblyName>Packaging</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Install.targets" />
+    <None Include="LocalDeploy.targets" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MSBuildTasks.1.4.0.128\tools\MSBuild.Community.Tasks.Targets" />
+  <PropertyGroup>
+    <PackageExtension>zip</PackageExtension>
+    <PackageName>R7.News</PackageName>
+    <PackageOutputPath>output</PackageOutputPath>
+    <DnnLocalDeployPath Condition="'$(OS)' != 'Unix'">C:\Dotnetnuke</DnnLocalDeployPath>
+    <DnnLocalDeployPath Condition="'$(OS)' == 'Unix'">/home/redhound/mnt/dnn</DnnLocalDeployPath>
+    <MainProjectOutputPath>..\R7.News\bin\$(Configuration)</MainProjectOutputPath>
+  </PropertyGroup>
+  <Import Project="Install.targets" />
+  <Import Project="LocalDeploy.targets" />
+  <Target Name="AfterBuild" DependsOnTargets="MakeInstallPackage;DoLocalDeploy" />
+  <ItemGroup>
+    <Compile Include="Dummy.cs" />
+  </ItemGroup>
+</Project>

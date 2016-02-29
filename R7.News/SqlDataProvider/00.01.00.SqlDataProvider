@@ -1,0 +1,101 @@
+﻿-- NOTE: To manually execute this script you must 
+-- replace {databaseOwner} and {objectQualifier} with real values. 
+-- Defaults is "dbo." for database owner and "" for object qualifier 
+
+-- Create tables
+
+IF NOT EXISTS (select * from sys.objects where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News]') and type in (N'U'))
+BEGIN
+    CREATE TABLE {databaseOwner}[{objectQualifier}r7_News]
+    (
+        EntryID int NOT NULL IDENTITY (1, 1),
+        PortalID int NOT NULL,
+        ContentItemID int NOT NULL,
+        AgentModuleID int NULL,
+        Title nvarchar (255) NOT NULL,
+        Description nvarchar (max) NULL,
+        StartDate datetime NULL,
+        EndDate datetime NULL,
+        ThresholdDate datetime NULL,
+        DueDate datetime NULL,
+        SortIndex int NOT NULL DEFAULT ((0)),
+        IsSticky bit NOT NULL DEFAULT ((0))
+        CONSTRAINT [PK_{objectQualifier}r7_News] PRIMARY KEY CLUSTERED (EntryID)
+        CONSTRAINT [FK_{objectQualifier}r7_News_Portals] FOREIGN KEY (PortalID)
+            REFERENCES {databaseOwner}[{objectQualifier}Portals] (PortalID) ON DELETE CASCADE,
+        CONSTRAINT [FK_{objectQualifier}r7_News_ContentItems] FOREIGN KEY (ContentItemID)
+            REFERENCES {databaseOwner}[{objectQualifier}ContentItems] (ContentItemID) ON DELETE CASCADE,
+        CONSTRAINT [FK_{objectQualifier}r7_News_AgentModules] FOREIGN KEY (AgentModuleID)
+            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE SET NULL
+    )
+
+    CREATE NONCLUSTERED INDEX [IX_{objectQualifier}_r7_News_PortalID] 
+        ON {databaseOwner}[{objectQualifier}r7_News] (PortalID)
+
+    CREATE NONCLUSTERED INDEX [IX_{objectQualifier}_r7_News_ContentItemID] 
+        ON {databaseOwner}[{objectQualifier}r7_News] (ContentItemID)
+END
+GO
+
+-- Drop stored procedures
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]') and type IN (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
+GO
+
+-- Create stored procedures
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
+    @portalId int,
+    @term1 int,
+    @term2 int = NULL,
+    @term3 int = NULL,
+    @term4 int = NULL,
+    @term5 int = NULL,
+    @term6 int = NULL,
+    @term7 int = NULL,
+    @term8 int = NULL,
+    @term9 int = NULL,
+    @term10 int = NULL,
+    @term11 int = NULL,
+    @term12 int = NULL,
+    @term13 int = NULL,
+    @term14 int = NULL,
+    @term15 int = NULL,
+    @term16 int = NULL,
+    @term17 int = NULL,
+    @term18 int = NULL,
+    @term19 int = NULL,
+    @term20 int = NULL
+AS
+BEGIN
+    SET NOCOUNT ON; 
+
+    SELECT DISTINCT NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+            ON NE.ContentItemID = CI.ContentItemID
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
+            ON CI.ContentItemID = CIT.ContentItemID 
+        WHERE NE.PortalID = @portalId
+            AND (CIT.TermID = @term1
+            OR CIT.TermID = @term2
+            OR CIT.TermID = @term3
+            OR CIT.TermID = @term4
+            OR CIT.TermID = @term5
+            OR CIT.TermID = @term6
+            OR CIT.TermID = @term7
+            OR CIT.TermID = @term8
+            OR CIT.TermID = @term9
+            OR CIT.TermID = @term10
+            OR CIT.TermID = @term11
+            OR CIT.TermID = @term12
+            OR CIT.TermID = @term13
+            OR CIT.TermID = @term14
+            OR CIT.TermID = @term15
+            OR CIT.TermID = @term16
+            OR CIT.TermID = @term17
+            OR CIT.TermID = @term18
+            OR CIT.TermID = @term19
+            OR CIT.TermID = @term20)
+END
+GO

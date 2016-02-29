@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{8500A43C-923D-43B3-9288-BB1239A45BA7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>R7.News.Stream</RootNamespace>
+    <AssemblyName>R7.News.Stream</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\R7.News\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\R7.News\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="DotNetNuke">
+      <HintPath>..\packages\DotNetNuke.Core.7.4.2.216\lib\net40\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationBlocks.Data">
+      <HintPath>..\packages\DotNetNuke.Core.7.4.2.216\lib\net40\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web">
+      <HintPath>..\packages\DotNetNuke.Web.7.4.2.216\lib\net40\DotNetNuke.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI">
+      <HintPath>..\packages\DotNetNuke.Web.7.4.2.216\lib\net40\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.WebUtility">
+      <HintPath>..\packages\DotNetNuke.Web.7.4.2.216\lib\net40\DotNetNuke.WebUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.R7">
+      <HintPath>..\packages\DotNetNuke.R7.0.3.1\lib\net45\DotNetNuke.R7.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="module.css" />
+    <Content Include="admin.css" />
+    <Content Include="packages.config" />
+    <Content Include="EditNewsEntry.ascx" />
+    <Content Include="ViewStream.ascx" />
+    <Content Include="ModuleSettings.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
+    <None Include="App_LocalResources\EditNewsEntry.ascx.resx" />
+    <None Include="App_LocalResources\EditNewsEntry.ascx.ru-RU.resx" />
+    <None Include="App_LocalResources\ViewStream.ascx.resx" />
+    <None Include="App_LocalResources\ViewStream.ascx.ru-RU.resx" />
+    <None Include="App_LocalResources\ModuleSettings.ascx.resx" />
+    <None Include="App_LocalResources\ModuleSettings.ascx.ru-RU.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EditNewsEntry.ascx.cs">
+      <DependentUpon>EditNewsEntry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditNewsEntry.ascx.controls.cs">
+      <DependentUpon>EditNewsEntry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStream.ascx.controls.cs">
+      <DependentUpon>ViewStream.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewStream.ascx.cs">
+      <DependentUpon>ViewStream.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Components\StreamSettings.cs" />
+    <Compile Include="Components\StreamController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ModuleSettings.ascx.cs">
+      <DependentUpon>ModuleSettings.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleSettings.ascx.controls.cs">
+      <DependentUpon>ModuleSettings.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <XspParameters Port="8080" Address="127.0.0.1" SslMode="None" SslProtocol="Default" KeyType="None" CertFile="" KeyFile="" PasswordOptions="None" Password="" Verbose="True" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\R7.News\R7.News.csproj">
+      <Project>{484911EF-DDCA-4B47-8975-D983AD7397B4}</Project>
+      <Name>R7.News</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

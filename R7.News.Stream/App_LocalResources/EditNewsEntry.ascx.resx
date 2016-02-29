@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="lblContent.Text" xml:space="preserve">
+        <value>Content:</value>
+    </data>
+    <data name="lblContent.Help" xml:space="preserve">
+        <value>Enter the Content</value>
+    </data>
+    <data name="valContent.ErrorMessage" xml:space="preserve">
+        <value>&lt;br&gt;Content is required</value>
+    </data>
+    <data name="ModuleHelp.Text" xml:space="preserve">
+        <value>&lt;P&gt;A R7.News.Stream module&lt;/P&gt;</value>
+    </data>
+    <data name="ControlTitle_edit.Text" xml:space="preserve">
+        <value>Edit R7.News.Stream</value>
+    </data>
+    <data name="Add.Text" xml:space="preserve">
+        <value>Add</value>
+    </data>
+    <data name="Update.Text" xml:space="preserve">
+        <value>Update</value>
+    </data>
+    <data name="labelTitle.Text" xml:space="preserve">
+        <value>Title:</value>
+    </data>
+    <data name="labelTitle.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelDescription.Text" xml:space="preserve">
+        <value>Description:</value>
+    </data>
+    <data name="labelDescription.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelThresholdDate.Text" xml:space="preserve">
+        <value>Threshold Date:</value>
+    </data>
+    <data name="labelThresholdDate.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelDueDate.Text" xml:space="preserve">
+        <value>Due Date:</value>
+    </data>
+    <data name="labelDueDate.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelStartDate.Text" xml:space="preserve">
+        <value>Start Date:</value>
+    </data>
+    <data name="labelStartDate.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelEndDate.Text" xml:space="preserve">
+        <value>End Date:</value>
+    </data>
+    <data name="labelEndDate.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelSortIndex.Text" xml:space="preserve">
+        <value>Sort Index:</value>
+    </data>
+    <data name="labelSortIndex.Help" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="labelTerms.Text" xml:space="preserve">
+        <value>Terms:</value>
+    </data>
+    <data name="labelTerms.Help" xml:space="preserve">
+        <value>Select news entry terms.</value>
+    </data>
+</root>

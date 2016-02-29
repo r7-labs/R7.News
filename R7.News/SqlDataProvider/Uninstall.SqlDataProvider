@@ -1,0 +1,16 @@
+﻿-- NOTE: To manually execute this script you must 
+-- replace {databaseOwner} and {objectQualifier} with real values. 
+-- Defaults is "dbo." for database owner and "" for object qualifier 
+
+-- Drop tables
+
+ALTER TABLE {databaseOwner}[{objectQualifier}r7_News 
+    DROP CONSTRAINT [FK_{objectQualifier}r7_News_Portals]
+GO
+
+ALTER TABLE {databaseOwner}[{objectQualifier}r7_News] 
+    DROP CONSTRAINT [FK_{objectQualifier}r7_News_ContentItems]
+GO
+
+DROP TABLE {databaseOwner}[{objectQualifier}r7_News]
+GO

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="ControlTitle_settings.Text" xml:space="preserve">
+        <value>R7.News.Stream Module Settings</value>
+    </data>
+    <data name="ModuleHelp.Text" xml:space="preserve">
+        <value>About R7.News.Stream Module Settings</value>
+    </data>
+    <data name="labelIncludeTerms.Text" xml:space="preserve">
+        <value>Include Terms:</value>
+    </data>
+    <data name="labelIncludeTerms.Help" xml:space="preserve">
+        <value>Select the terms for news entries to display by the module.</value>
+    </data>
+    <data name="labelShowAllNews.Text" xml:space="preserve">
+        <value>Show All News:</value>
+    </data>
+    <data name="labelShowAllNews.Help" xml:space="preserve">
+        <value>If checked, module will show all news on the site, ignoring 'IncludeTerms' setting.</value>
+    </data>
+</root>
