@@ -5,6 +5,7 @@
         <ItemGroup>
             <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)\R7.News*.dll" />
             <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)\R7.News*.pdb" />
+            <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)\YamlDotNet.dll" />
         </ItemGroup>
         <!-- Declare resource files -->
         <ItemGroup>
@@ -19,6 +20,7 @@
             <LocalDeployResourceFiles Include="..\**\*.xml" />
             <LocalDeployResourceFiles Include="..\**\*.xsl" />
             <LocalDeployResourceFiles Include="..\**\*.xslt" />
+            <LocalDeployResourceFiles Include="..\**\*.yml" />
             <LocalDeployResourceFiles Include="..\**\*.resx" />
             <LocalDeployResourceFiles Include="..\**\*.js" />
             <LocalDeployResourceFiles Include="..\**\*.jpg" />

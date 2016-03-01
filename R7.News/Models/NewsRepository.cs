@@ -118,7 +118,7 @@ namespace R7.News.Models
             var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, 20, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesInternal (moduleId, portalId)
             );
         }
@@ -136,7 +136,7 @@ namespace R7.News.Models
             var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, 20, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByTermsInternal (moduleId, portalId, terms)
             );
         }
@@ -153,7 +153,7 @@ namespace R7.News.Models
         {
             var cacheKey = newsCacheKeyPrefix + "_AgentModuleId_" + moduleId;
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, 20, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByAgentInternal (moduleId)
             );
         }

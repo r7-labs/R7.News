@@ -26,4 +26,6 @@
         <hr />
     </ItemSeparatorTemplate>
 </asp:ListView>
-
+<h2>Test:</h2>
+DataCacheTime: <%: R7.News.Components.NewsConfig.Instance.DataCacheTime %><br />
+DefaultImagePath: <%: R7.News.Components.NewsConfig.Instance.DefaultImagesPath %><br />

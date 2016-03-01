@@ -55,6 +55,10 @@
     <Reference Include="DotNetNuke.R7">
       <HintPath>..\packages\DotNetNuke.R7.0.3.1\lib\net45\DotNetNuke.R7.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>..\packages\YamlDotNet.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Serialization" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />
@@ -71,6 +75,7 @@
     <None Include="SqlDataProvider\00.01.00.SqlDataProvider" />
     <None Include="SqlDataProvider\Uninstall.SqlDataProvider" />
     <None Include="R7.News.dnn" />
+    <None Include="R7.News.yml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +93,8 @@
     <Compile Include="Models\NewsEntryModuleRuleInfo.cs" />
     <Compile Include="Models\INewsEntryModuleRule.cs" />
     <Compile Include="Models\NewsEntryVisibility.cs" />
+    <Compile Include="Components\NewsConfig.cs" />
+    <Compile Include="Components\NewsPortalConfig.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
