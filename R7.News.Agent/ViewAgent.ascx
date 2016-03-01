@@ -12,12 +12,14 @@
             <asp:HyperLink id="linkEdit" runat="server">
                 <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
             </asp:HyperLink>
+            EntryId: <%# Eval ("EntryId") %><br />
             Title: <%# Eval ("Title") %><br />
             CreatedOnDate: <%# Eval ("ContentItem.CreatedOnDate") %><br />
             LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
             CreatedByUserID: <%# Eval ("ContentItem.CreatedByUserID") %><br />
             LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />
-            Description: <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+            Description: <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %><br />
+            Visibility: <%# Eval ("Visibility") %>
         </div>
     </ItemTemplate>
     <ItemSeparatorTemplate>

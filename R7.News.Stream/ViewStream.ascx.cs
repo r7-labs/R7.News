@@ -48,18 +48,18 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
 
-                    IEnumerable<INewsEntry> items;
+                    IEnumerable<ModuleNewsEntryInfo> items;
 
                     if (Settings.ShowAllNews) {
-                        items = NewsRepository.Instance.GetNewsEntries (PortalId);
+                        items = NewsRepository.Instance.GetNewsEntries (ModuleId, PortalId);
                     }
                     else {
-                        items = NewsRepository.Instance.GetNewsEntriesByTerms (PortalId, Settings.IncludeTerms);
+                        items = NewsRepository.Instance.GetNewsEntriesByTerms (ModuleId, PortalId, Settings.IncludeTerms);
                     }
 
                     // check if we have some content to display, 
                     // otherwise display a message for module editors.
-                    if (!items.Any () && IsEditable) {
+                    if ((items == null || !items.Any ()) && IsEditable) {
                         this.Message ("NothingToDisplay.Text", MessageType.Info, true);
                     }
                     else {
@@ -111,7 +111,7 @@ namespace R7.News.Stream
         /// <param name="e"></param>
         protected void listStream_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (NewsEntryInfo) e.Item.DataItem;
+            var item = (ModuleNewsEntryInfo) e.Item.DataItem;
 
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");

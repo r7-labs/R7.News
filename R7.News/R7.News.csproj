@@ -83,6 +83,11 @@
     <Compile Include="Components\CacheHelper.cs" />
     <Compile Include="Components\NewsDataProvider.cs" />
     <Compile Include="Models\Extensions\NewsEntryExtensions.cs" />
+    <Compile Include="Models\IModuleNewsEntry.cs" />
+    <Compile Include="Models\ModuleNewsEntryInfo.cs" />
+    <Compile Include="Models\NewsEntryModuleRuleInfo.cs" />
+    <Compile Include="Models\INewsEntryModuleRule.cs" />
+    <Compile Include="Models\NewsEntryVisibility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

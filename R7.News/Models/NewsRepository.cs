@@ -29,6 +29,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.R7;
 using R7.News.Components;
 using R7.News.Models.Extensions;
+using System.Runtime.CompilerServices;
 
 namespace R7.News.Models
 {
@@ -49,7 +50,7 @@ namespace R7.News.Models
 
         public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
         {
-            return NewsDataProvider.Instance.Get<NewsEntryInfo> (entryId, portalId)
+            return (NewsEntryInfo) NewsDataProvider.Instance.Get<NewsEntryInfo> (entryId, portalId)
                 .WithContentItem ();
         }
 
@@ -112,38 +113,40 @@ namespace R7.News.Models
             CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries (int portalId)
+        public IEnumerable<ModuleNewsEntryInfo> GetNewsEntries (int moduleId, int portalId)
         {
-            var cacheKey = newsCacheKeyPrefix + "_PortalId_" + portalId;
+            var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
 
-            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+            return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, 20, CacheItemPriority.Normal),
-                c => GetNewsEntriesInternal (portalId)
+                c => GetNewsEntriesInternal (moduleId, portalId)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesInternal (int portalId)
+        protected IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesInternal (int moduleId, int portalId)
         {
-            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (portalId)
-                .WithContentItems ();
+            return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
+                "r7_News_GetNewsEntries", moduleId, portalId)
+                    .WithContentItems ()
+                    .Cast<ModuleNewsEntryInfo> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms (int portalId, IList<Term> terms)
+        public IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)
         {
-            var cacheKey = newsCacheKeyPrefix + "_PortalId_" + portalId 
-                + "_Terms_" + TextUtils.FormatList ("_", terms.Select (t => t.TermId));
+            var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
 
-            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+            return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, 20, CacheItemPriority.Normal),
-                c => GetNewsEntriesByTermsInternal (portalId, terms)
+                c => GetNewsEntriesByTermsInternal (moduleId, portalId, terms)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int portalId, IList<Term> terms)
+        protected IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesByTermsInternal (int moduleId, int portalId, IList<Term> terms)
         {
-            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
-                "r7_News_GetNewsEntriesByTerms", portalId, terms.Select (t => t.TermId).ToArray ())
-                    .WithContentItems ();
+            return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
+                "r7_News_GetNewsEntriesByTerms", moduleId, portalId, terms.Select (t => t.TermId).ToArray ())
+                    .WithContentItems ()
+                    .Cast<ModuleNewsEntryInfo> ();
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId)
@@ -158,7 +161,8 @@ namespace R7.News.Models
         protected IEnumerable<NewsEntryInfo> GetNewsEntriesByAgentInternal (int moduleId)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
-                .WithContentItemsOneByOne ();
+                .WithContentItemsOneByOne ()
+                .Cast<NewsEntryInfo> ();
         }
     }
 }

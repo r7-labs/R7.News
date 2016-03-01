@@ -37,15 +37,54 @@ BEGIN
 END
 GO
 
+IF NOT EXISTS (select * from sys.objects where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News_ModuleRules]') and type in (N'U'))
+BEGIN
+    CREATE TABLE {databaseOwner}[{objectQualifier}r7_News_ModuleRules]
+    (
+        EntryID int NOT NULL,
+        ModuleID int NOT NULL,
+        Visibility int NOT NULL DEFAULT ((0))
+        CONSTRAINT [PK_{objectQualifier}r7_News_ModuleRules] PRIMARY KEY CLUSTERED (EntryID, ModuleID)
+        CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_News] FOREIGN KEY (EntryID)
+            REFERENCES {databaseOwner}[{objectQualifier}r7_News] (EntryID) ON DELETE CASCADE,
+        CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_Modules] FOREIGN KEY (ModuleID)
+            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE CASCADE
+    )
+END
+GO
+
 -- Drop stored procedures
 
-IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]') and type IN (N'P'))
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]
+GO
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]') and type in (N'P'))
     DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
 GO
 
 -- Create stored procedures
 
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]
+    @moduleId int,
+    @portalId int
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+            ON NE.ContentItemID = CI.ContentItemID
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
+            ON CI.ContentItemID = CIT.ContentItemID 
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
+            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
+        WHERE NE.PortalID = @portalId
+END
+GO
+
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
+    @moduleId int,
     @portalId int,
     @term1 int,
     @term2 int = NULL,
@@ -69,13 +108,15 @@ CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
     @term20 int = NULL
 AS
 BEGIN
-    SET NOCOUNT ON; 
+    SET NOCOUNT ON;
 
-    SELECT DISTINCT NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
             ON NE.ContentItemID = CI.ContentItemID
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
             ON CI.ContentItemID = CIT.ContentItemID 
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
+            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
         WHERE NE.PortalID = @portalId
             AND (CIT.TermID = @term1
             OR CIT.TermID = @term2

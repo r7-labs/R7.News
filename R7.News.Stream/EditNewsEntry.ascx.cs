@@ -59,7 +59,7 @@ namespace R7.News.Stream
         protected override void OnLoadItem (NewsEntryInfo item)
         {
             // load also content item
-            item = item.WithContentItem ();
+            item = (NewsEntryInfo) item.WithContentItem ();
 
             textTitle.Text = item.Title;
             textDescription.Text = item.Description;

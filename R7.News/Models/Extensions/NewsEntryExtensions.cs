@@ -30,13 +30,13 @@ namespace R7.News.Models.Extensions
 {
     public static class NewsEntryExtensions
     {
-        public static NewsEntryInfo WithContentItem (this NewsEntryInfo newsEntry)
+        public static INewsEntry WithContentItem (this INewsEntry newsEntry)
         {
             newsEntry.ContentItem = NewsDataProvider.Instance.ContentController.GetContentItem (newsEntry.ContentItemId);
             return newsEntry;
         }
 
-        public static IEnumerable<NewsEntryInfo> WithContentItems (this IEnumerable<NewsEntryInfo> newsEntries)
+        public static IEnumerable<INewsEntry> WithContentItems (this IEnumerable<INewsEntry> newsEntries)
         {
             var contentController = new ContentController ();
             var contentItems = contentController.GetContentItemsByContentType (NewsDataProvider.Instance.NewsContentType);
@@ -51,7 +51,7 @@ namespace R7.News.Models.Extensions
             );
         }
 
-        public static IEnumerable<NewsEntryInfo> WithContentItemsOneByOne (this IEnumerable<NewsEntryInfo> newsEntries)
+        public static IEnumerable<INewsEntry> WithContentItemsOneByOne (this IEnumerable<INewsEntry> newsEntries)
         {
             foreach (var newsEntry in newsEntries) {
                 yield return newsEntry.WithContentItem ();
