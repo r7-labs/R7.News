@@ -21,9 +21,8 @@
 
 using System;
 using DotNetNuke.ComponentModel.DataAnnotations;
-using DotNetNuke.Entities.Content;
 
-namespace R7.News.Models
+namespace R7.News.Models.Data
 {
     [TableName ("r7_News_ModuleRules")]
     [PrimaryKey ("EntryId,ModuleId", AutoIncrement = false)]

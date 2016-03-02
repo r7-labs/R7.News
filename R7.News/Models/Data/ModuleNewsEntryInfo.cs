@@ -1,5 +1,5 @@
 ﻿//
-//  NewsEntryInfo.cs
+//  ModuleNewsEntryInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -22,15 +22,12 @@
 using System;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
-using System.Web.Caching;
 
-namespace R7.News.Models
+namespace R7.News.Models.Data
 {
-    [TableName ("r7_News")]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
-    // [Cacheable ("r7_News", CacheItemPriority.Default, 20)]
-    public class NewsEntryInfo: INewsEntry
+    public class ModuleNewsEntryInfo: IModuleNewsEntry
     {
         #region INewsEntry implementation
 
@@ -60,6 +57,14 @@ namespace R7.News.Models
 
         [IgnoreColumn]
         public ContentItem ContentItem { get; set; }
+
+        #endregion
+
+        #region IModuleNewsEntry implementation
+
+        public int? ModuleId { get; set; }
+
+        public int? Visibility { get; set; }
 
         #endregion
     }

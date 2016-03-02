@@ -26,12 +26,10 @@ using System.Collections.Generic;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.R7;
 using R7.News.Components;
-using R7.News.Models.Extensions;
-using System.Runtime.CompilerServices;
+using R7.News.Models;
 
-namespace R7.News.Models
+namespace R7.News.Models.Data
 {
     public class NewsRepository
     {

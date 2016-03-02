@@ -28,9 +28,8 @@ using DotNetNuke.Services.Exceptions;
 using R7.News.Stream.Components;
 using DotNetNuke.R7;
 using R7.News.Models;
-using R7.News.Models.Extensions;
+using R7.News.Models.Data;
 using R7.News.Components;
-using System.Reflection;
 
 namespace R7.News.Stream
 {

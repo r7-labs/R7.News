@@ -32,7 +32,7 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.R7;
-using R7.News.Models;
+using R7.News.Models.Data;
 using R7.News.Agent.Components;
 using R7.News.Components;
 

@@ -21,7 +21,7 @@
 
 using System;
 
-namespace R7.News.Models
+namespace R7.News.Models.Data
 {
     public enum NewsEntryVisibility
     {

@@ -26,7 +26,7 @@ using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Data;
 using R7.News.Components;
 
-namespace R7.News.Models.Extensions
+namespace R7.News.Models
 {
     public static class NewsEntryExtensions
     {
