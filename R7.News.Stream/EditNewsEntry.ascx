@@ -54,20 +54,13 @@
             DataTextField="Title"
         />
     </div>
-    <asp:UpdatePanel id="upanelNewsSource" runat="server" UpdateMode="Conditional">
-        <ContentTemplate>
-            <div class="dnnFormItem">
-                <dnn:Label id="labelNewsSource" runat="server" ControlName="comboNewsSource" />
-                <asp:DropDownList id="comboNewsSource" runat="server" 
-                    DataValueField="SourceItemId"
-                    DataTextField="Title"
-                />
-            </div>
-        </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="comboNewsSourceProvider" EventName="SelectedIndexChanged" />
-        </Triggers>
-    </asp:UpdatePanel>
+    <div class="dnnFormItem">
+        <dnn:Label id="labelNewsSource" runat="server" ControlName="comboNewsSource" />
+        <asp:DropDownList id="comboNewsSource" runat="server" 
+            DataValueField="SourceItemId"
+            DataTextField="Title"
+        />
+    </div>
     <div class="dnnFormItem">
         <dnn:Label id="labelUrl" runat="server" ControlName="urlUrl" />
         <dnn:UrlControl id="urlUrl" runat="server"

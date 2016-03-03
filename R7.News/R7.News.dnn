@@ -122,7 +122,7 @@
                                         <controlType>Edit</controlType>
                                         <iconFile />
                                         <helpUrl />
-                                        <supportsPartialRendering>False</supportsPartialRendering>
+                                        <supportsPartialRendering>True</supportsPartialRendering>
                                         <supportsPopUps>True</supportsPopUps>
                                         <viewOrder>0</viewOrder>
                                     </moduleControl>
@@ -196,7 +196,7 @@
                                     <moduleControl>
                                         <controlKey>EditNewsEntry</controlKey>
                                         <controlSrc>DesktopModules/R7.News/R7.News.Stream/EditNewsEntry.ascx</controlSrc>
-                                        <supportsPartialRendering>False</supportsPartialRendering>
+                                        <supportsPartialRendering>True</supportsPartialRendering>
                                         <supportsPopUps>True</supportsPopUps>
                                         <controlTitle>Edit News Entry</controlTitle>
                                         <controlType>Edit</controlType>
