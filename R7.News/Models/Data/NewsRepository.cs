@@ -164,6 +164,7 @@ namespace R7.News.Models.Data
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
+                .WithNewsSources ()
                 .Cast<NewsEntryInfo> ();
         }
     }
