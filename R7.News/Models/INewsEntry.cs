@@ -35,6 +35,8 @@ namespace R7.News.Models
 
         int? AgentModuleId { get; set; }
 
+        string Url { get; set; }
+
         DateTime? StartDate { get; set; }
 
         DateTime? EndDate { get; set; }

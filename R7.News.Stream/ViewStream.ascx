@@ -21,6 +21,8 @@
                 <div style="display:table-cell">
                     EntryId: <%# Eval ("EntryId") %><br />
                     CreatedOnDate: <%# Eval ("ContentItem.CreatedOnDate") %><br />
+                    AgentModuleId: <%# Eval ("AgentModuleId") %><br />
+                    Url: <%# Eval ("Url") %><br />
                     LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
                     CreatedByUserID: <%# Eval ("ContentItem.CreatedByUserID") %><br />
                     LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />

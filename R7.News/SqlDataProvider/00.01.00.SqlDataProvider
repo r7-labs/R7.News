@@ -16,6 +16,7 @@ BEGIN
         SourceItemID int NULL,
         Title nvarchar (255) NOT NULL,
         Description nvarchar (max) NULL,
+        Url nvarchar (255) NULL,
         StartDate datetime NULL,
         EndDate datetime NULL,
         ThresholdDate datetime NULL,

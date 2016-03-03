@@ -33,6 +33,7 @@ using R7.News.Models;
 using R7.News.Models.Data;
 using R7.News.Components;
 using R7.News.Stream.Components;
+using DotNetNuke.UI.UserControls;
 
 namespace R7.News.Stream
 {
@@ -128,6 +129,8 @@ namespace R7.News.Stream
             UpdateNewsSources ();
             comboNewsSource.SelectByValue (item.SourceItemId);
            
+            urlUrl.Url = item.Url;
+
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
             ctlAudit.LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString ();
             ctlAudit.CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName;
@@ -186,6 +189,8 @@ namespace R7.News.Stream
 
                 item.SourceId = TypeUtils.ParseToNullableInt (comboNewsSourceProvider.SelectedValue);
                 item.SourceItemId = TypeUtils.ParseToNullableInt (comboNewsSource.SelectedValue);
+
+                item.Url = urlUrl.Url;
 
                 if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
                     item.AgentModuleId = ModuleId;

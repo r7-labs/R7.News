@@ -90,4 +90,10 @@
     <data name="labelImage.Help" xml:space="preserve">
         <value>Select or upload main news image.</value>
     </data>
+    <data name="labelUrl.Text" xml:space="preserve">
+        <value>Link:</value>
+    </data>
+    <data name="labelUrl.Help" xml:space="preserve">
+        <value>Provide URL to news details.</value>
+    </data>
 </root>

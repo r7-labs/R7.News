@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="EditNewsEntry.ascx.cs" Inherits="R7.News.Stream.EditNewsEntry" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/labelcontrol.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="TextEditor" Src="~/controls/TextEditor.ascx"%>
+<%@ Register TagPrefix="dnn" TagName="UrlControl" Src="~/controls/DnnUrlControl.ascx"%>
 <%@ Register TagPrefix="dnn" TagName="Audit" Src="~/controls/ModuleAuditControl.ascx" %>
 <%@ Register TagPrefix="dnn" TagName="Picker" Src="~/controls/filepickeruploader.ascx" %> 
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web" %>
@@ -43,7 +44,7 @@
     </div>
     <div class="dnnFormItem">
         <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
-        <dnn:TermsSelector id="termsTerms" runat="server" EnableViewState="true" ViewStateMode="Enabled" />
+        <dnn:TermsSelector id="termsTerms" runat="server" />
     </div>
     <div class="dnnFormItem">
         <dnn:Label id="labelNewsSourceProvider" runat="server" ControlName="comboNewSourceProvider" />
@@ -67,6 +68,16 @@
             <asp:AsyncPostBackTrigger ControlID="comboNewsSourceProvider" EventName="SelectedIndexChanged" />
         </Triggers>
     </asp:UpdatePanel>
+    <div class="dnnFormItem">
+        <dnn:Label id="labelUrl" runat="server" ControlName="urlUrl" />
+        <dnn:UrlControl id="urlUrl" runat="server"
+            IncludeActiveTab="true"
+            UrlType="N"
+            ShowNone="true"
+            ShowLog="false"
+            ShowTrack="false"
+        />
+    </div>
  </fieldset>
  <ul class="dnnActions dnnClear">
      <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>

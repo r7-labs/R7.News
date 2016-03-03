@@ -25,5 +25,6 @@ namespace R7.News.Stream
         protected DropDownList comboNewsSourceProvider;
         protected DropDownList comboNewsSource;
         protected DnnFilePickerUploader pickerImage;
+        protected DnnUrlControl urlUrl;
     }
 }
