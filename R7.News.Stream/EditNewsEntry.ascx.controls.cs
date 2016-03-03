@@ -24,5 +24,6 @@ namespace R7.News.Stream
         protected TermsSelector termsTerms;
         protected DropDownList comboNewsSourceProvider;
         protected DropDownList comboNewsSource;
+        protected DnnFilePickerUploader pickerImage;
     }
 }

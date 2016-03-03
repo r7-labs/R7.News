@@ -23,9 +23,12 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using DotNetNuke.Entities.Content;
-using DotNetNuke.Entities.Content.Data;
 using R7.News.Components;
 using R7.News.Models.Data;
+using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
 
 namespace R7.News.Models
 {
@@ -70,6 +73,23 @@ namespace R7.News.Models
             foreach (var newsEntry in newsEntries) {
                 yield return newsEntry.WithNewsSource ();
             }
+        }
+
+        public static IFileInfo GetImage (this INewsEntry newsEntry)
+        {
+            return newsEntry.ContentItem.Images.FirstOrDefault ();
+        }
+
+        public static string GetImageUrl (this INewsEntry newsEntry, int width)
+        {
+            var image = newsEntry.GetImage ();
+            if (image != null) {
+                return Globals.AddHTTP (PortalSettings.Current.PortalAlias.HTTPAlias)
+                    + "/imagehandler.ashx?fileticket=" + UrlUtils.EncryptParameter (image.FileId.ToString ()) 
+                    + "&width=" + width;
+            }
+
+            return string.Empty;
         }
     }
 }

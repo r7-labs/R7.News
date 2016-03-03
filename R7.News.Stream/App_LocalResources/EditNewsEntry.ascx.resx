@@ -84,4 +84,10 @@
     <data name="labelNewsSource.Help" xml:space="preserve">
         <value>Select a news source for this news entry.</value>
     </data>
+    <data name="labelImage.Text" xml:space="preserve">
+        <value>Image:</value>
+    </data>
+    <data name="labelImage.Help" xml:space="preserve">
+        <value>Select or upload main news image.</value>
+    </data>
 </root>

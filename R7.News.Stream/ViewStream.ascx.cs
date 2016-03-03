@@ -30,6 +30,7 @@ using DotNetNuke.R7;
 using R7.News.Models.Data;
 using R7.News.Stream.Components;
 using R7.News.Components;
+using R7.News.Models;
 
 namespace R7.News.Stream
 {
@@ -124,6 +125,16 @@ namespace R7.News.Stream
             // make edit link visible in edit mode
             linkEdit.Visible = IsEditable;
             iconEdit.Visible = IsEditable;
+
+            // show image
+            var imageImage = (Image) e.Item.FindControl ("imageImage");
+            var imageUrl = item.GetImageUrl (width: 192);
+            if (!string.IsNullOrEmpty (imageUrl)) {
+                imageImage.ImageUrl = imageUrl;
+            }
+            else {
+                imageImage.Visible = false;
+            }
         }
     }
 }

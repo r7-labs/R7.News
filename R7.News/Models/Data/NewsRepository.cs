@@ -23,6 +23,7 @@ using System;
 using System.Linq;
 using System.Web.Caching;
 using System.Collections.Generic;
+using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Common.Utilities;
@@ -57,7 +58,7 @@ namespace R7.News.Models.Data
             return NewsDataProvider.Instance.Get<NewsEntryInfo> (int.Parse (contentItem.ContentKey));
         }
 
-        public int AddNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
+        public int AddNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
         {
             var contentItem = new ContentItem {
                 ContentTitle = newsEntry.Title,
@@ -75,6 +76,7 @@ namespace R7.News.Models.Data
 
             // update content item after EntryId get its value
             contentItem.ContentKey = newsEntry.EntryId.ToString ();
+            contentItem.Images.AddRange (images);
             NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
 
             // add terms to content item

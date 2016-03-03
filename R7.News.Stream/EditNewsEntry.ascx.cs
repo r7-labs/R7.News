@@ -26,6 +26,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.R7;
 using R7.News.Models;
@@ -55,6 +56,8 @@ namespace R7.News.Stream
             comboNewsSourceProvider.DataBind ();
 
             UpdateNewsSources ();
+
+            pickerImage.FileFilter = Globals.glbImageFileTypes;
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
@@ -103,6 +106,11 @@ namespace R7.News.Stream
             // load also content item
             item = (NewsEntryInfo) item.WithContentItem ();
 
+            var image = item.ContentItem.Images.FirstOrDefault ();
+            if (image != null) {
+                pickerImage.FileID = image.FileId;
+            }
+
             textTitle.Text = item.Title;
             textDescription.Text = item.Description;
             textSortIndex.Text = item.SortIndex.ToString ();
@@ -139,15 +147,33 @@ namespace R7.News.Stream
         {
             try {
                 NewsEntryInfo item;
+                List<IFileInfo> images;
 
                 if (ItemId == null) {
                     item = new NewsEntryInfo ();
+                    images = new List<IFileInfo> ();
                 }
                 else {
                     item = NewsRepository.Instance.GetNewsEntry (ItemId.Value, PortalId);
+                    images = item.ContentItem.Images;
                 }
 
                 // fill the object
+                var imageFile = FileManager.Instance.GetFile (pickerImage.FileID);
+                if (imageFile != null) {
+
+                    if (images.Count == 0) {
+                        images.Add (imageFile);
+                    }
+                    else {
+                        images.Clear ();
+                        images.Add (imageFile);
+                    }
+                }
+                else if (images.Count > 0) {
+                    images.Clear ();
+                }
+
                 item.Title = textTitle.Text.Trim ();
                 item.Description = textDescription.Text.Trim ();
                 item.SortIndex = int.Parse (textSortIndex.Text);
@@ -166,7 +192,7 @@ namespace R7.News.Stream
                 } 
 
                 if (ItemId == null) {
-                    NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, ModuleId, TabId);
+                    NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
                 }
                 else {
                     NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms);
