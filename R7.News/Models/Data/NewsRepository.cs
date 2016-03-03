@@ -44,7 +44,7 @@ namespace R7.News.Models.Data
 
         #endregion
 
-        private const string newsCacheKeyPrefix = "r7_News";
+        private const string newsCacheKeyPrefix = "r7_News_";
 
         public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
         {
@@ -113,7 +113,7 @@ namespace R7.News.Models.Data
 
         public IEnumerable<ModuleNewsEntryInfo> GetNewsEntries (int moduleId, int portalId)
         {
-            var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
+            var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
@@ -126,12 +126,13 @@ namespace R7.News.Models.Data
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 "r7_News_GetNewsEntries", moduleId, portalId)
                     .WithContentItems ()
+                    .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
         }
 
         public IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)
         {
-            var cacheKey = newsCacheKeyPrefix + "_ModuleId_" + moduleId;
+            var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
@@ -144,12 +145,13 @@ namespace R7.News.Models.Data
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 "r7_News_GetNewsEntriesByTerms", moduleId, portalId, terms.Select (t => t.TermId).ToArray ())
                     .WithContentItems ()
+                    .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId)
         {
-            var cacheKey = newsCacheKeyPrefix + "_AgentModuleId_" + moduleId;
+            var cacheKey = newsCacheKeyPrefix + "AgentModuleId_" + moduleId;
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByAgentInternal (moduleId)
@@ -164,4 +166,3 @@ namespace R7.News.Models.Data
         }
     }
 }
-

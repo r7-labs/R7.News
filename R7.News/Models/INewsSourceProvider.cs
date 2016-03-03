@@ -1,5 +1,5 @@
 ﻿//
-//  INewsSource.cs
+//  INewsSourceProvider.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,23 +20,18 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace R7.News.Models
 {
-    public interface INewsSource
+    public interface INewsSourceProvider
     {
-        int SourceId { get; set; }
+        INewsSource GetSelfSource ();
 
-        int? SourceItemId { get; set; }
+        INewsSource GetSource (int? sourceItemId);
 
-        string Assembly { get; set; }
-
-        string Type { get; set; }
-
-        string Title { get; set; }
-
-        string Url { get; set; }
-
-        bool IsEnabled { get; set; }
+        IEnumerable<INewsSource> GetSources ();
     }
 }
+

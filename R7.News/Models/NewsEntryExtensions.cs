@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Data;
 using R7.News.Components;
+using R7.News.Models.Data;
 
 namespace R7.News.Models
 {
@@ -55,6 +56,19 @@ namespace R7.News.Models
         {
             foreach (var newsEntry in newsEntries) {
                 yield return newsEntry.WithContentItem ();
+            }
+        }
+
+        public static INewsEntry WithNewsSource (this INewsEntry newsEntry)
+        {
+            newsEntry.Source = NewsSourceRepository.Instance.GetSource (newsEntry.SourceId, newsEntry.SourceItemId);
+            return newsEntry;
+        }
+
+        public static IEnumerable<INewsEntry> WithNewsSources (this IEnumerable<INewsEntry> newsEntries)
+        {
+            foreach (var newsEntry in newsEntries) {
+                yield return newsEntry.WithNewsSource ();
             }
         }
     }

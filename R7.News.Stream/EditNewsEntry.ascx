@@ -38,8 +38,30 @@
     </div>
     <div class="dnnFormItem">
         <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
-        <dnn:TermsSelector id="termsTerms" runat="server" />
+        <dnn:TermsSelector id="termsTerms" runat="server" EnableViewState="true" ViewStateMode="Enabled" />
     </div>
+    <div class="dnnFormItem">
+        <dnn:Label id="labelNewsSourceProvider" runat="server" ControlName="comboNewSourceProvider" />
+        <asp:DropDownList id="comboNewsSourceProvider" runat="server" AutoPostBack="true"
+            OnSelectedIndexChanged="comboNewsSourceProvider_SelectedIndexChanged"
+            DataValueField="SourceId"
+            DataTextField="Title"
+        />
+    </div>
+    <asp:UpdatePanel id="upanelNewsSource" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="dnnFormItem">
+                <dnn:Label id="labelNewsSource" runat="server" ControlName="comboNewsSource" />
+                <asp:DropDownList id="comboNewsSource" runat="server" 
+                    DataValueField="SourceItemId"
+                    DataTextField="Title"
+                />
+            </div>
+        </ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="comboNewsSourceProvider" EventName="SelectedIndexChanged" />
+        </Triggers>
+    </asp:UpdatePanel>
  </fieldset>
  <ul class="dnnActions dnnClear">
      <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>

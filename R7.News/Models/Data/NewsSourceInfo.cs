@@ -1,5 +1,5 @@
 ﻿//
-//  INewsSource.cs
+//  NewsSourceInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,23 +20,32 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace R7.News.Models
+namespace R7.News.Models.Data
 {
-    public interface INewsSource
+    [TableName ("r7_News_Sources")]
+    [PrimaryKey ("SourceId", AutoIncrement = true)]
+    public class NewsSourceInfo: INewsSource
     {
-        int SourceId { get; set; }
+        #region INewsSource implementation
 
-        int? SourceItemId { get; set; }
+        public int SourceId { get; set; }
 
-        string Assembly { get; set; }
+        // set by NewsSourceProvider
+        [IgnoreColumn]
+        public int? SourceItemId { get; set; }
 
-        string Type { get; set; }
+        public string Assembly { get; set; }
 
-        string Title { get; set; }
+        public string Type { get; set; }
 
-        string Url { get; set; }
+        public string Title { get; set; }
 
-        bool IsEnabled { get; set; }
+        public string Url { get; set; }
+
+        public bool IsEnabled { get; set; }
+
+        #endregion
     }
 }

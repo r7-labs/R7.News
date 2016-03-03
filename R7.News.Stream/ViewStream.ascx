@@ -19,7 +19,8 @@
             CreatedByUserID: <%# Eval ("ContentItem.CreatedByUserID") %><br />
             LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />
             Description: <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %><br />
-            Visibility: <%# Eval ("Visibility") %>
+            Visibility: <%# Eval ("Visibility") %><br />
+            Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
         </div>
     </ItemTemplate>
     <ItemSeparatorTemplate>

@@ -57,8 +57,15 @@ namespace R7.News.Models.Data
 
         public bool IsSticky { get; set; }
 
+        public int? SourceId { get; set; }
+
+        public int? SourceItemId { get; set; }
+
         [IgnoreColumn]
         public ContentItem ContentItem { get; set; }
+
+        [IgnoreColumn]
+        public INewsSource Source { get; set; }
 
         #endregion
     }

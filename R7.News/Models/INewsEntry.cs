@@ -21,6 +21,7 @@
 
 using System;
 using DotNetNuke.Entities.Content;
+using R7.News.Models;
 
 namespace R7.News.Models
 {
@@ -50,6 +51,14 @@ namespace R7.News.Models
 
         bool IsSticky { get; set; }
 
+        // REVIEW: News without sources?
+        int? SourceId { get; set; }
+
+        // REVIEW: Non-integer item id? SourceItemKey
+        int? SourceItemId { get; set; }
+
         ContentItem ContentItem { get; set; }
+
+        INewsSource Source { get; set; }
     }
 }

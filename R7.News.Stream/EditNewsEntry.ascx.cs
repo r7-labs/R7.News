@@ -20,23 +20,66 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Services.Exceptions;
-using R7.News.Stream.Components;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.R7;
 using R7.News.Models;
 using R7.News.Models.Data;
 using R7.News.Components;
+using R7.News.Stream.Components;
 
 namespace R7.News.Stream
 {
     public partial class EditNewsEntry : EditModuleBase<NewsDataProvider,StreamSettings,NewsEntryInfo>
     {
-        public EditNewsEntry () : base ("entryid")
+        public EditNewsEntry () : base ("entryid", true)
         {
+        }
+
+        protected override void OnInit (EventArgs e)
+        {
+            base.OnInit (e);
+
+            var newsSourceProviders = NewsSourceRepository.Instance.GetSelfSources ();
+            newsSourceProviders.Insert (0, new NewsSourceInfo { 
+                SourceId = Null.NullInteger, 
+                Title = LocalizeString ("NotSelected.Text")
+            });
+
+            comboNewsSourceProvider.DataSource = newsSourceProviders;
+            comboNewsSourceProvider.DataBind ();
+
+            UpdateNewsSources ();
+        }
+
+        protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
+        {
+            // disable handler when loading item
+            if (IsPostBack) {
+                UpdateNewsSources ();
+            }
+        }
+
+        protected void UpdateNewsSources ()
+        {
+            var sourceId = TypeUtils.ParseToNullableInt (comboNewsSourceProvider.SelectedValue);
+
+            var newsSources = NewsSourceRepository.Instance.GetSources (sourceId)
+                .OrderBy (ns => ns.Title)
+                .ToList ();
+            
+            newsSources.Insert (0, new NewsSourceInfo { 
+                SourceItemId = Null.NullInteger, 
+                Title = LocalizeString ("NotSelected.Text")
+            });
+
+            comboNewsSource.DataSource = newsSources;
+            comboNewsSource.DataBind ();
         }
 
         #region Implemented abstract members of EditModuleBase
@@ -73,6 +116,10 @@ namespace R7.News.Stream
             termsTerms.Terms = item.ContentItem.Terms;
             termsTerms.DataBind ();
 
+            comboNewsSourceProvider.SelectByValue (item.SourceId);
+            UpdateNewsSources ();
+            comboNewsSource.SelectByValue (item.SourceItemId);
+           
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
             ctlAudit.LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString ();
             ctlAudit.CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName;
@@ -110,6 +157,9 @@ namespace R7.News.Stream
                 item.StartDate = datetimeStartDate.SelectedDate;
                 item.EndDate = datetimeEndDate.SelectedDate;
                 item.PortalId = PortalId;
+
+                item.SourceId = TypeUtils.ParseToNullableInt (comboNewsSourceProvider.SelectedValue);
+                item.SourceItemId = TypeUtils.ParseToNullableInt (comboNewsSource.SelectedValue);
 
                 if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
                     item.AgentModuleId = ModuleId;
