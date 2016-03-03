@@ -76,8 +76,13 @@ namespace R7.News.Models.Data
 
             // update content item after EntryId get its value
             contentItem.ContentKey = newsEntry.EntryId.ToString ();
-            contentItem.Images.AddRange (images);
             NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
+
+            // add images to content item
+            if (images.Count > 0) {
+                var attachmentController = new AttachmentController (NewsDataProvider.Instance.ContentController);
+                attachmentController.AddImagesToContent (contentItem.ContentItemId, images);
+            }
 
             // add terms to content item
             var termController = new TermController ();
