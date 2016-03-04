@@ -96,4 +96,13 @@
     <data name="labelUrl.Help" xml:space="preserve">
         <value>Provide URL to news details.</value>
     </data>
+    <data name="Common.Tab" xml:space="preserve">
+        <value>Common</value>
+    </data>
+    <data name="Sources.Tab" xml:space="preserve">
+        <value>Sources</value>
+    </data>
+    <data name="Advanced.Tab" xml:space="preserve">
+        <value>Advanced</value>
+    </data>
 </root>

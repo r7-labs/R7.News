@@ -39,6 +39,38 @@ namespace R7.News.Stream
 {
     public partial class EditNewsEntry : EditModuleBase<NewsDataProvider,StreamSettings,NewsEntryInfo>
     {
+        public enum EditNewsEntryTab { Common, Sources, Advanced };
+
+        #region Properties
+
+        protected EditNewsEntryTab SelectedTab
+        {
+            get 
+            {
+                // get postback initiator
+                var eventTarget = Request.Form ["__EVENTTARGET"];
+                if (!string.IsNullOrEmpty (eventTarget)) {
+                    if (eventTarget.Contains ("$" + urlUrl.ID)) {
+                        // urlURL control is on Advanced tab
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.Advanced;
+                        return EditNewsEntryTab.Advanced;
+                    }
+                    if (eventTarget.Contains ("$" + comboNewsSourceProvider.ID)) {
+                        // comboNewsSourceProvider control is on Sources tab
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.Sources;
+                        return EditNewsEntryTab.Sources;
+                    }
+                }
+                    
+                // otherwise, get active tab from viewstate
+                var obj = ViewState ["SelectedTab"];
+                return (obj != null) ? (EditNewsEntryTab) obj : EditNewsEntryTab.Common;
+            }
+            set { ViewState ["SelectedTab"] = value; }
+        }
+
+        #endregion
+
         public EditNewsEntry () : base ("entryid", true)
         {
         }
