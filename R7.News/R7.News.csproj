@@ -65,6 +65,7 @@
     <Folder Include="Models\" />
     <Folder Include="Integrations\" />
     <Folder Include="Models\Data\" />
+    <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -97,7 +98,12 @@
     <Compile Include="Models\INewsSource.cs" />
     <Compile Include="Integrations\UniversityDivisionNewsSourceProvider.cs" />
     <Compile Include="Models\Data\NewsSourceInfo.cs" />
-    <Compile Include="Models\INewsSourceProvider.cs" />
+    <Compile Include="Integrations\UniversityDivisionTermUrlProvider.cs" />
+    <Compile Include="Integrations\UniversityDivisionInfo.cs" />
+    <Compile Include="Providers\ITermUrlProvider.cs" />
+    <Compile Include="Providers\INewsSourceProvider.cs" />
+    <Compile Include="Providers\DescriptionTermUrlProvider.cs" />
+    <Compile Include="Providers\TermUrlManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

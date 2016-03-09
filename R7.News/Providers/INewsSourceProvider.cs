@@ -22,8 +22,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using R7.News.Models;
 
-namespace R7.News.Models
+namespace R7.News.Providers
 {
     public interface INewsSourceProvider
     {

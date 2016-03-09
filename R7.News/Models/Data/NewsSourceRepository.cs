@@ -27,6 +27,7 @@ using System.Collections.Concurrent;
 using DotNetNuke.Common;
 using R7.News.Components;
 using R7.News.Models;
+using R7.News.Providers;
 
 namespace R7.News.Models.Data
 {

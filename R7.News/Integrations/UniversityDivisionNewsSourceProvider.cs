@@ -24,25 +24,13 @@ using System.Linq;
 using System.Web.Caching;
 using System.Collections.Generic;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.ComponentModel.DataAnnotations;
 using R7.News.Models;
 using R7.News.Models.Data;
 using R7.News.Components;
+using R7.News.Providers;
 
 namespace R7.News.Integrations
 {
-    // TODO: Move to separate assembly?
-    [TableName ("University_Divisions")]
-    [PrimaryKey ("DivisionID", AutoIncrement = false)]
-    public class UniversityDivisionInfo
-    {
-        public int DivisionID { get; set; }
-
-        public string Title { get; set; }
-            
-        public string HomePage { get; set; }
-    }
-
     public class UniversityDivisionNewsSourceProvider: INewsSourceProvider
     {
         private const string cacheKey = "r7_NewsSources_UniversityDivisions";
