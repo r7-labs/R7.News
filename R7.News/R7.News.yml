@@ -4,4 +4,4 @@ default-images-path: images/news
 
 term-url-providers:
   - R7.News.Providers.DescriptionTermUrlProvider
-  - R7.News.Providers.UniversityDivisionTermUrlProvider
+  - R7.News.Integrations.UniversityDivisionTermUrlProvider
