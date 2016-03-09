@@ -20,20 +20,18 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
-using System.Collections.Concurrent;
+using System.IO;
 using System.Collections.ObjectModel;
-using R7.News.Integrations;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Framework.Providers;
+using DotNetNuke.Common;
+using DotNetNuke.Services.Log.EventLog;
+using R7.News.Components;
+using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Providers
 {
     public class TermUrlManager
     {
-        private readonly Collection<ITermUrlProvider> providers = 
-            new Collection<ITermUrlProvider> ();
-        
         #region Singleton implementation
 
         private static readonly Lazy<TermUrlManager> instance = 
@@ -46,11 +44,57 @@ namespace R7.News.Providers
 
         private TermUrlManager ()
         {
-            providers.Add (new UniversityDivisionTermUrlProvider ());
-            providers.Add (new DescriptionTermUrlProvider ());
+            LoadProviders ();
         }
 
         #endregion
+
+        private readonly Collection<ITermUrlProvider> providers = 
+            new Collection<ITermUrlProvider> ();
+        
+        private static readonly char [] colon = { ':' };
+
+        private void LoadProviders ()
+        {
+            foreach (var providerEntry in NewsConfig.Instance.TermUrlProviders) {
+                try {
+                    // parse config entry
+                    var providerEntrySplitted = providerEntry.Split (colon, StringSplitOptions.RemoveEmptyEntries);
+                    string assemblyName;
+                    string typeName;
+                    if (providerEntrySplitted.Length == 1) {
+                        assemblyName = null;
+                        typeName = providerEntrySplitted [0];
+                    }
+                    else if (providerEntrySplitted.Length == 2) {
+                        assemblyName = providerEntrySplitted [0];
+                        typeName = providerEntrySplitted [1];
+                    }
+                    else {
+                        continue;
+                    }
+
+                    // load assembly and type
+                    Assembly assembly;
+                    if (string.IsNullOrEmpty (assemblyName)){
+                        assembly = Assembly.GetExecutingAssembly ();
+                    }
+                    else {
+                        assembly = Assembly.LoadFrom (
+                            Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName)
+                        );
+                    }
+
+                    var type = assembly.GetType (typeName);
+                    var provider = Activator.CreateInstance (type) as ITermUrlProvider;
+                    providers.Add (provider);
+                }
+                catch (Exception ex) {
+                    var logController = new ExceptionLogController ();
+                    logController.AddLog (ex);
+                }
+            }
+        }
 
         public string GetUrl (int termId)
         {

@@ -21,6 +21,7 @@
 
 using System;
 using YamlDotNet.Serialization;
+using System.Collections.Generic;
 
 namespace R7.News.Components
 {
@@ -29,6 +30,8 @@ namespace R7.News.Components
         public int DataCacheTime { get; set; }
 
         public string DefaultImagesPath { get; set; }
+
+        public List<string> TermUrlProviders { get; set; }
     }
 }
 
