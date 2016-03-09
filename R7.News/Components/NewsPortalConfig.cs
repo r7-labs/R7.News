@@ -36,7 +36,7 @@ namespace R7.News.Components
 
         public Collection<string> TermUrlProviders { get; set; }
 
-        protected Collection<ITermUrlProvider> TermUrlProvidersInternal { get; set; }
+        protected readonly Collection<ITermUrlProvider> TermUrlProvidersInternal = new Collection<ITermUrlProvider> ();
 
         public Collection<ITermUrlProvider> GetTermUrlProviders ()
         {
@@ -45,6 +45,7 @@ namespace R7.News.Components
 
         public void AddTermUrlProvider (ITermUrlProvider provider)
         {
+            
             TermUrlProvidersInternal.Add (provider);
         }
 
