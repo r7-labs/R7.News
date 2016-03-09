@@ -18,14 +18,43 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
+using DotNetNuke.Common;
+using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.R7;
+using R7.News.Providers;
 
 namespace R7.News.Controls.ViewModels
 {
     public class TermLinksViewModel
     {
-        public TermLinksViewModel ()
+        public ViewModelContext Context { get; protected set; }
+
+        public Term Term { get; protected set; }
+
+        public int TermId
         {
+            get { return Term.TermId; }    
+        }
+
+        public string Name
+        {
+            get { return Term.Name; }
+        }
+
+        public string Url
+        {
+            get
+            {
+                return Globals.LinkClick (TermUrlManager.GetUrl (Term), Context.Module.TabId, Context.Module.ModuleId);
+            }
+        }
+
+        public TermLinksViewModel (Term term, ViewModelContext context)
+        {
+            Term = term;
+            Context = context;
         }
     }
 }

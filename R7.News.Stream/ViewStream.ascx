@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
+﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
+<%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
@@ -29,6 +30,7 @@
                     Description: <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %><br />
                     Visibility: <%# Eval ("Visibility") %><br />
                     Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
+                    <news:TermLinks id="termLinks" runat="server" />
                 </div>
             </div>
         </div>

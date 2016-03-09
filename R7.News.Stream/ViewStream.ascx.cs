@@ -31,6 +31,7 @@ using R7.News.Models.Data;
 using R7.News.Stream.Components;
 using R7.News.Components;
 using R7.News.Models;
+using R7.News.Controls;
 
 namespace R7.News.Stream
 {
@@ -135,6 +136,12 @@ namespace R7.News.Stream
             else {
                 imageImage.Visible = false;
             }
+
+            // show term links
+            var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
+            termLinks.Module = this;
+            termLinks.DataSource = item.ContentItem.Terms;
+            termLinks.DataBind ();
         }
     }
 }
