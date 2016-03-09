@@ -21,7 +21,8 @@
 
 using System;
 using YamlDotNet.Serialization;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using R7.News.Providers;
 
 namespace R7.News.Components
 {
@@ -31,7 +32,22 @@ namespace R7.News.Components
 
         public string DefaultImagesPath { get; set; }
 
-        public List<string> TermUrlProviders { get; set; }
+        #region TermUrlProviders
+
+        public Collection<string> TermUrlProviders { get; set; }
+
+        protected Collection<ITermUrlProvider> TermUrlProvidersInternal { get; set; }
+
+        public Collection<ITermUrlProvider> GetTermUrlProviders ()
+        {
+            return TermUrlProvidersInternal;
+        }
+
+        public void AddTermUrlProvider (ITermUrlProvider provider)
+        {
+            TermUrlProvidersInternal.Add (provider);
+        }
+
+        #endregion
     }
 }
-

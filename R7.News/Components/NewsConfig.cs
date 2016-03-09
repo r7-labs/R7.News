@@ -22,10 +22,13 @@
 using System;
 using System.IO;
 using System.Collections.Concurrent;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using DotNetNuke.Common;
+using DotNetNuke.Services.Log.EventLog;
+using R7.News.Providers;
+using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Components
 {
@@ -54,7 +57,10 @@ namespace R7.News.Components
 
                         using (var configReader = new StringReader (File.ReadAllText (portalConfigFile))) {
                             var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
-                            return deserializer.Deserialize<NewsPortalConfig> (configReader);
+                            var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
+
+                            LoadTermUrlProviders (portalConfig);
+                            return portalConfig;
                         }
                     }
                  ));
@@ -64,5 +70,50 @@ namespace R7.News.Components
         }
 
         #endregion
+
+        private static readonly char [] colon = { ':' };
+
+        private static void LoadTermUrlProviders (NewsPortalConfig portalConfig)
+        {
+            foreach (var providerEntry in portalConfig.TermUrlProviders) {
+                try {
+                    // parse config entry
+                    var providerEntrySplitted = providerEntry.Split (colon, StringSplitOptions.RemoveEmptyEntries);
+                    string assemblyName;
+                    string typeName;
+                    if (providerEntrySplitted.Length == 1) {
+                        assemblyName = null;
+                        typeName = providerEntrySplitted [0];
+                    }
+                    else if (providerEntrySplitted.Length == 2) {
+                        assemblyName = providerEntrySplitted [0];
+                        typeName = providerEntrySplitted [1];
+                    }
+                    else {
+                        continue;
+                    }
+
+                    // load assembly and type
+                    Assembly assembly;
+                    if (string.IsNullOrEmpty (assemblyName)){
+                        assembly = Assembly.GetExecutingAssembly ();
+                    }
+                    else {
+                        assembly = Assembly.LoadFrom (
+                            Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName)
+                        );
+                    }
+
+                    var type = assembly.GetType (typeName);
+                    var provider = Activator.CreateInstance (type) as ITermUrlProvider;
+                    portalConfig.AddTermUrlProvider (provider);
+                }
+                catch (Exception ex) {
+                    var logController = new ExceptionLogController ();
+                    logController.AddLog (ex);
+                }
+            }
+        }
+
     }
 }
