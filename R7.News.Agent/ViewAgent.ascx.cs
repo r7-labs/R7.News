@@ -31,15 +31,16 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
-using DotNetNuke.R7;
 using R7.News.Models.Data;
 using R7.News.Agent.Components;
 using R7.News.Components;
 using R7.News.Models;
+using DotNetNuke.R7;
+using DotNetNuke.R7.Entities.Modules;
 
 namespace R7.News.Agent
 {
-    public partial class ViewAgent : ExtendedPortalModuleBase<NewsDataProvider,AgentSettings>, IActionable
+    public partial class ViewAgent : PortalModuleBase<AgentSettings>, IActionable
     {
         #region Handlers
 

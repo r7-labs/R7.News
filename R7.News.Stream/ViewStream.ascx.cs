@@ -26,16 +26,16 @@ using System.Linq;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.R7;
 using R7.News.Models.Data;
 using R7.News.Stream.Components;
-using R7.News.Components;
 using R7.News.Models;
 using R7.News.Controls;
+using DotNetNuke.R7;
+using DotNetNuke.R7.Entities.Modules;
 
 namespace R7.News.Stream
 {
-    public partial class ViewStream : ExtendedPortalModuleBase<NewsDataProvider,StreamSettings>, IActionable
+    public partial class ViewStream : PortalModuleBase<StreamSettings>, IActionable
     {
         #region Handlers
 

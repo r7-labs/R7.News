@@ -21,15 +21,12 @@
 
 using System;
 using System.Linq;
-using System.Collections.Generic;
-using DotNetNuke.Services.Search.Entities;
-using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.R7;
 
 namespace R7.News.Components
 {
-    public class NewsDataProvider: ControllerBase
+    public class NewsDataProvider: Dal2DataProvider
     {
         #region Singleton implementation
 
@@ -74,16 +71,5 @@ namespace R7.News.Components
         }
 
         #endregion
-
-        #region Fake ModuleSearchBase implementaion
-
-        public override IList<SearchDocument> GetModifiedSearchDocuments (ModuleInfo modInfo, DateTime beginDate)
-        {
-            throw new NotImplementedException ();
-        }
-
-        #endregion
     }
-
 }
-

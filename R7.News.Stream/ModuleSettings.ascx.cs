@@ -20,20 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Web.UI.WebControls;
-using System.Linq;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.UI.UserControls;
-using DotNetNuke.Web.UI.WebControls;
 using R7.News.Stream.Components;
-using DotNetNuke.R7;
-using R7.News.Models;
-using R7.News.Components;
+using DotNetNuke.R7.Entities.Modules;
 
 namespace R7.News.Stream
 {
-    public partial class ModuleSettings : ExtendedModuleSettingsBase<NewsDataProvider,StreamSettings>
+    public partial class ModuleSettings : ModuleSettingsBase<StreamSettings>
     {
         /// <summary>
         /// Handles the loading of the module setting for this control

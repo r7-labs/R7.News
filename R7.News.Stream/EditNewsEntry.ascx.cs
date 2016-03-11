@@ -28,19 +28,18 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.R7;
+using DotNetNuke.R7.Entities.Modules;
 using R7.News.Models;
 using R7.News.Models.Data;
 using R7.News.Components;
-using R7.News.Stream.Components;
-using DotNetNuke.UI.UserControls;
+using DotNetNuke.R7;
 
 namespace R7.News.Stream
 {
-    public partial class EditNewsEntry : EditModuleBase<NewsDataProvider,StreamSettings,NewsEntryInfo>
-    {
-        public enum EditNewsEntryTab { Common, Sources, Advanced };
+    public enum EditNewsEntryTab { Common, Sources, Advanced };
 
+    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
+    {
         #region Properties
 
         protected EditNewsEntryTab SelectedTab
@@ -103,7 +102,7 @@ namespace R7.News.Stream
 
         protected void UpdateNewsSources ()
         {
-            var sourceId = TypeUtils.ParseToNullableInt (comboNewsSourceProvider.SelectedValue);
+            var sourceId = TypeUtils.ParseToNullable<int> (comboNewsSourceProvider.SelectedValue);
 
             var newsSources = NewsSourceRepository.Instance.GetSources (sourceId)
                 .OrderBy (ns => ns.Title)
@@ -118,14 +117,14 @@ namespace R7.News.Stream
             comboNewsSource.DataBind ();
         }
 
-        #region Implemented abstract members of EditModuleBase
+        #region Implemented abstract and overriden members of EditPortalModuleBase
 
-        protected override void OnInitControls ()
+        protected override void InitControls ()
         {
             InitControls (buttonUpdate, buttonDelete, linkCancel, ctlAudit); 
         }
 
-        protected override void OnLoadNewItem ()
+        protected override void LoadNewItem ()
         {
             termsTerms.PortalId = PortalId;
             termsTerms.Terms = new List<Term> ();
@@ -134,7 +133,7 @@ namespace R7.News.Stream
             buttonUpdate.Text = LocalizeString ("Add.Text");
         }
 
-        protected override void OnLoadItem (NewsEntryInfo item)
+        protected override void LoadItem (NewsEntryInfo item)
         {
             // load also content item
             item = (NewsEntryInfo) item.WithContentItem ();
@@ -160,7 +159,7 @@ namespace R7.News.Stream
             comboNewsSourceProvider.SelectByValue (item.SourceId);
             UpdateNewsSources ();
             comboNewsSource.SelectByValue (item.SourceItemId);
-           
+
             urlUrl.Url = item.Url;
 
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
@@ -170,101 +169,75 @@ namespace R7.News.Stream
 
             buttonUpdate.Text = LocalizeString ("Update.Text");
         }
-    
-        protected override void OnUpdateItem (NewsEntryInfo item)
+
+        private List<IFileInfo> images;
+
+        protected override void BeforeUpdateItem (NewsEntryInfo item)
         {
-            // empty, entire OnButtonUpdateClick is overriden
+            if (ItemId == null) {
+                images = new List<IFileInfo> ();
+            }
+            else {
+                images = item.ContentItem.Images;
+            }
+
+            var imageFile = FileManager.Instance.GetFile (pickerImage.FileID);
+            if (imageFile != null) {
+
+                if (images.Count == 0) {
+                    images.Add (imageFile);
+                }
+                else {
+                    images.Clear ();
+                    images.Add (imageFile);
+                }
+            }
+            else if (images.Count > 0) {
+                images.Clear ();
+            }
+
+            // fill the object
+            item.Title = textTitle.Text.Trim ();
+            item.Description = textDescription.Text.Trim ();
+            item.SortIndex = int.Parse (textSortIndex.Text);
+
+            item.ThresholdDate = datetimeThresholdDate.SelectedDate;
+            item.DueDate = datetimeDueDate.SelectedDate;
+            item.StartDate = datetimeStartDate.SelectedDate;
+            item.EndDate = datetimeEndDate.SelectedDate;
+            item.PortalId = PortalId;
+
+            item.SourceId = TypeUtils.ParseToNullable<int> (comboNewsSourceProvider.SelectedValue);
+            item.SourceItemId = TypeUtils.ParseToNullable<int> (comboNewsSource.SelectedValue);
+
+            item.Url = urlUrl.Url;
+
+            if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
+                item.AgentModuleId = ModuleId;
+            }   
+        }
+
+        protected override NewsEntryInfo GetItem (int itemId)
+        {
+            return NewsRepository.Instance.GetNewsEntry (itemId, PortalId);
+        }
+
+        protected override int AddItem (NewsEntryInfo item)
+        {
+            NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
+            return item.EntryId;
+        }
+
+        protected override void UpdateItem (NewsEntryInfo item)
+        {
+            NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms);
+        }
+
+        protected override void DeleteItem (NewsEntryInfo item)
+        {
+            NewsRepository.Instance.DeleteNewsEntry (item);
         }
 
         #endregion
-
-        protected override void OnButtonUpdateClick (object sender, EventArgs e)
-        {
-            try {
-                NewsEntryInfo item;
-                List<IFileInfo> images;
-
-                if (ItemId == null) {
-                    item = new NewsEntryInfo ();
-                    images = new List<IFileInfo> ();
-                }
-                else {
-                    item = NewsRepository.Instance.GetNewsEntry (ItemId.Value, PortalId);
-                    images = item.ContentItem.Images;
-                }
-
-                // fill the object
-                var imageFile = FileManager.Instance.GetFile (pickerImage.FileID);
-                if (imageFile != null) {
-
-                    if (images.Count == 0) {
-                        images.Add (imageFile);
-                    }
-                    else {
-                        images.Clear ();
-                        images.Add (imageFile);
-                    }
-                }
-                else if (images.Count > 0) {
-                    images.Clear ();
-                }
-
-                item.Title = textTitle.Text.Trim ();
-                item.Description = textDescription.Text.Trim ();
-                item.SortIndex = int.Parse (textSortIndex.Text);
-
-                item.ThresholdDate = datetimeThresholdDate.SelectedDate;
-                item.DueDate = datetimeDueDate.SelectedDate;
-                item.StartDate = datetimeStartDate.SelectedDate;
-                item.EndDate = datetimeEndDate.SelectedDate;
-                item.PortalId = PortalId;
-
-                item.SourceId = TypeUtils.ParseToNullableInt (comboNewsSourceProvider.SelectedValue);
-                item.SourceItemId = TypeUtils.ParseToNullableInt (comboNewsSource.SelectedValue);
-
-                item.Url = urlUrl.Url;
-
-                if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
-                    item.AgentModuleId = ModuleId;
-                } 
-
-                if (ItemId == null) {
-                    NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
-                }
-                else {
-                    NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms);
-                }
-
-                ModuleController.SynchronizeModule (ModuleId);
-
-                Response.Redirect (Globals.NavigateURL (), true);
-            }
-            catch (Exception ex) {
-                Exceptions.ProcessModuleLoadException (this, ex);
-            }    
-        }
-
-        protected override void OnButtonDeleteClick (object sender, EventArgs e)
-        {
-            try
-            {
-                if (ItemId.HasValue)
-                {
-                    var item = NewsRepository.Instance.GetNewsEntry (ItemId.Value, PortalId);
-                    if (item != null && CanDeleteItem (item))
-                    {
-                        NewsRepository.Instance.DeleteNewsEntry (item);
-
-                        Response.Redirect (Globals.NavigateURL (), true);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Exceptions.ProcessModuleLoadException (this, ex);
-            }
-        }
-
     }
 }
-
