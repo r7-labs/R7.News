@@ -17,13 +17,12 @@
                 <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
             <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
-            <div style="display:table-row">
-                <div style="display:table-cell">
-                    <asp:Image id="imageImage" runat="server" CssClass="img img-rounded" 
-                        Style="vertical-align:top;margin-right:1em" />    
-                   
+            <div class="row">
+                <div class="col-sm-4">
+                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
+                        CssClass="img img-rounded img-responsive" Style="margin-bottom:1em" />
                 </div>
-                <div style="display:table-cell">
+                <div class="col-sm-8">
                    <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                 </div>
             </div>

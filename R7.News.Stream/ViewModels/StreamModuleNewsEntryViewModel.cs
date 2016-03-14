@@ -160,6 +160,11 @@ namespace R7.News.Stream.ViewModels
 
         #endregion
 
+        public string ImageUrl
+        {
+            get { return NewsEntry.GetImageUrl (width: 192); }
+        }
+
         public string TitleLink
         {
             get

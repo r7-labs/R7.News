@@ -137,13 +137,7 @@ namespace R7.News.Stream
 
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");
-            var imageUrl = item.GetImageUrl (width: 192);
-            if (!string.IsNullOrEmpty (imageUrl)) {
-                imageImage.ImageUrl = imageUrl;
-            }
-            else {
-                imageImage.Visible = false;
-            }
+            imageImage.Visible = item.GetImage () != null;
 
             // show term links
             var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
