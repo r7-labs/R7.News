@@ -14,7 +14,7 @@
                 <asp:HyperLink id="linkEdit" runat="server">
                     <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                 </asp:HyperLink>
-                <%# Eval ("Title") %>
+                <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
             <div style="display:table-row">
                 <asp:Image id="imageImage" runat="server" CssClass="img img-rounded" 

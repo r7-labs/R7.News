@@ -32,11 +32,19 @@ using R7.News.Models;
 using R7.News.Controls;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.Stream.ViewModels;
+using System.Runtime.InteropServices;
 
 namespace R7.News.Stream
 {
     public partial class ViewStream : PortalModuleBase<StreamSettings>, IActionable
     {
+        ViewModelContext viewModelContext;
+        protected ViewModelContext ViewModelContext
+        {
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
+        }
+
         #region Handlers
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace R7.News.Stream
                     }
                     else {
                         // bind the data
-                        listStream.DataSource = items;
+                        listStream.DataSource = items.Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext));
                         listStream.DataBind ();
                     }
                 }
@@ -113,7 +121,7 @@ namespace R7.News.Stream
         /// <param name="e"></param>
         protected void listStream_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (ModuleNewsEntryInfo) e.Item.DataItem;
+            var item = (StreamModuleNewsEntryViewModel) e.Item.DataItem;
 
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");
