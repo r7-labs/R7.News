@@ -16,22 +16,27 @@
                 </asp:HyperLink>
                 <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
+            <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
             <div style="display:table-row">
-                <asp:Image id="imageImage" runat="server" CssClass="img img-rounded" 
-                    Style="display:table-cell;vertical-align:top;margin:0 1em 1em 0" />
                 <div style="display:table-cell">
-                    EntryId: <%# Eval ("EntryId") %><br />
-                    CreatedOnDate: <%# Eval ("ContentItem.CreatedOnDate") %><br />
-                    AgentModuleId: <%# Eval ("AgentModuleId") %><br />
-                    Url: <%# Eval ("Url") %><br />
-                    LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
-                    CreatedByUserID: <%# Eval ("ContentItem.CreatedByUserID") %><br />
-                    LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />
-                    Description: <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %><br />
-                    Visibility: <%# Eval ("Visibility") %><br />
-                    Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
-                    <news:TermLinks id="termLinks" runat="server" />
+                    <asp:Image id="imageImage" runat="server" CssClass="img img-rounded" 
+                        Style="vertical-align:top;margin-right:1em" />    
+                   
                 </div>
+                <div style="display:table-cell">
+                   <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                </div>
+            </div>
+            <p>
+                <news:TermLinks id="termLinks" runat="server" />
+            </p>
+            <div class="small">
+                EntryId: <%# Eval ("EntryId") %><br />
+                AgentModuleId: <%# Eval ("AgentModuleId") %><br />
+                LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
+                LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />    
+                Visibility: <%# Eval ("Visibility") %><br />
+                Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
             </div>
         </div>
     </ItemTemplate>

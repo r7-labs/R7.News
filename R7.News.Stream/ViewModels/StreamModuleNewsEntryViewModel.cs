@@ -26,6 +26,7 @@ using DotNetNuke.Entities.Content;
 using DotNetNuke.R7;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Services.Localization;
 
 namespace R7.News.Stream.ViewModels
 {
@@ -180,6 +181,29 @@ namespace R7.News.Stream.ViewModels
                 }
 
                 return Title;
+            }
+        }
+
+        public string CreatedOnDateString
+        {
+            get 
+            {
+                return ContentItem.CreatedOnDate.ToString (Localization.GetString (
+                    "CreatedOnDate.Format",
+                    Context.LocalResourceFile));
+            }
+        }
+
+        public string CreatedByUserName
+        {
+            get 
+            {
+                var user = ContentItem.CreatedByUser (Context.Module.PortalId);
+                if (user != null) {
+                    return user.DisplayName;        
+                }
+
+                return string.Empty;
             }
         }
     }
