@@ -68,6 +68,7 @@
     <Folder Include="Providers\" />
     <Folder Include="Controls\" />
     <Folder Include="Controls\ViewModels\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -111,6 +112,7 @@
       <DependentUpon>TermLinks.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewModels\TermLinksViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
