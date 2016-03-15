@@ -32,17 +32,17 @@ using R7.News.Models;
 using R7.News.Controls;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.ViewModels;
 using R7.News.Stream.ViewModels;
-using System.Runtime.InteropServices;
 
 namespace R7.News.Stream
 {
     public partial class ViewStream : PortalModuleBase<StreamSettings>, IActionable
     {
-        ViewModelContext viewModelContext;
-        protected ViewModelContext ViewModelContext
+        ViewModelContext<StreamSettings> viewModelContext;
+        protected ViewModelContext<StreamSettings> ViewModelContext
         {
-            get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext<StreamSettings> (this, Settings)); }
         }
 
         #region Handlers

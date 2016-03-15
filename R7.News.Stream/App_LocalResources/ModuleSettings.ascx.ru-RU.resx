@@ -18,4 +18,10 @@
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>Если отмечено, модуль будет отображать все новости сайта, игнорируя настройку 'Показывать новости с метками'.</value>
     </data>
+    <data name="labelThumbnailWidth.Text" xml:space="preserve">
+        <value>Ширина миниатюры:</value>
+    </data>
+    <data name="labelThumbnailWidth.Help" xml:space="preserve">
+        <value>Устанавливает ширину в пикселах генерируемой миниатюры изображения.</value>
+    </data>
 </root>

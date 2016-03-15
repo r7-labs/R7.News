@@ -12,5 +12,6 @@ namespace R7.News.Stream
     {
         protected CheckBox checkShowAllNews;
         protected TermsSelector termsIncludeTerms;
+        protected TextBox textThumbnailWidth;
     }
 }

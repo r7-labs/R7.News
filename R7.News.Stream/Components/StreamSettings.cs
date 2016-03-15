@@ -75,6 +75,17 @@ namespace R7.News.Stream.Components
         }
 
         #endregion
+
+        #region Tab-specific module settings
+
+        public int ThumbnailWidth
+        {
+            // TODO: Get default thumbnail width from config
+            get { return ReadSetting<int> ("r7_News_Stream_ThumbnailWidth", 192); }
+            set { WriteTabModuleSetting<int> ("r7_News_Stream_ThumbnailWidth", value); }
+        }
+
+        #endregion
     }
 }
 

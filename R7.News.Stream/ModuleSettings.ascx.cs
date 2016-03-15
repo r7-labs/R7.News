@@ -36,7 +36,8 @@ namespace R7.News.Stream
         {
             try {
                 if (!IsPostBack) {
-                    
+
+                    textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
                     checkShowAllNews.Checked = Settings.ShowAllNews;
                     termsIncludeTerms.PortalId = PortalId;
                     termsIncludeTerms.Terms = Settings.IncludeTerms;
@@ -56,6 +57,7 @@ namespace R7.News.Stream
         {
             try {
 
+                Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
                 Settings.ShowAllNews = checkShowAllNews.Checked;
                 Settings.IncludeTerms = termsIncludeTerms.Terms;
 

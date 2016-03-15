@@ -27,16 +27,18 @@ using DotNetNuke.R7;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
+using R7.News.Stream.Components;
+using R7.News.ViewModels;
 
 namespace R7.News.Stream.ViewModels
 {
     public class StreamModuleNewsEntryViewModel: IModuleNewsEntry
     {
-        protected ViewModelContext Context;
+        protected ViewModelContext<StreamSettings> Context;
 
         protected IModuleNewsEntry NewsEntry;
 
-        public StreamModuleNewsEntryViewModel (IModuleNewsEntry newsEntry, ViewModelContext context)
+        public StreamModuleNewsEntryViewModel (IModuleNewsEntry newsEntry, ViewModelContext<StreamSettings> context)
         {
             NewsEntry = newsEntry;
             Context = context;
@@ -162,7 +164,7 @@ namespace R7.News.Stream.ViewModels
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: 192); }
+            get { return NewsEntry.GetImageUrl (width: Context.Settings.ThumbnailWidth); }
         }
 
         public string TitleLink

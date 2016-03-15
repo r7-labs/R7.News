@@ -18,4 +18,10 @@
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>If checked, module will show all news on the site, ignoring 'IncludeTerms' setting.</value>
     </data>
+    <data name="labelThumbnailWidth.Text" xml:space="preserve">
+        <value>Thumbnail Width:</value>
+    </data>
+    <data name="labelThumbnailWidth.Help" xml:space="preserve">
+        <value>Set width in px for generated thumbnail image.</value>
+    </data>
 </root>

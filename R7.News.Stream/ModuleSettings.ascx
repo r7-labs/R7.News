@@ -14,5 +14,10 @@
             <dnn:Label id="labelIncludeTerms" runat="server" ControlName="termsIncludeTerms" />
             <dnn:TermsSelector id="termsIncludeTerms" runat="server" />
         </div>
+        <div class="dnnFormItem">
+            <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
+            <%-- TODO: Add client-side validation --%>
+            <asp:TextBox id="textThumbnailWidth" runat="server" />
+        </div>
     </fieldset> 
 </div>
