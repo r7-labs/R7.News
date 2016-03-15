@@ -66,6 +66,9 @@
     <data name="labelSortIndex.Help" xml:space="preserve">
         <value></value>
     </data>
+    <data name="SortIndex.Invalid" xml:space="preserve">
+        <value>Sort index must be an integer number.</value>
+    </data>
     <data name="labelTerms.Text" xml:space="preserve">
         <value>Terms:</value>
     </data>

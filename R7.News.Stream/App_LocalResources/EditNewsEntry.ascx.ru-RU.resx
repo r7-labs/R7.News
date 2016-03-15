@@ -15,4 +15,7 @@
     <data name="ControlTitle_edit.Text" xml:space="preserve">
         <value>Редактировать R7.News.Stream</value>
     </data>
+    <data name="SortIndex.Invalid" xml:space="preserve">
+        <value>Индекс сортировки должен быть целым числом.</value>
+    </data>
 </root>

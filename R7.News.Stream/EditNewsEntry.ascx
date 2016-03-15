@@ -76,6 +76,9 @@
                <div class="dnnFormItem">
                     <dnn:Label id="labelSortIndex" runat="server" ControlName="textSortIndex" />
                     <asp:TextBox id="textSortIndex" runat="server" Value="0" />
+                    <asp:RegularExpressionValidator runat="server" resourcekey="SortIndex.Invalid"
+                        ControlToValidate="textSortIndex" Display="Dynamic" CssClass="dnnFormMessage dnnFormError" 
+                        ValidationExpression="-?\d+$" />
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelUrl" runat="server" ControlName="urlUrl" />
