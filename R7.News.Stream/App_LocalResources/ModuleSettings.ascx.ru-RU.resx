@@ -24,4 +24,7 @@
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
         <value>Устанавливает ширину в пикселах генерируемой миниатюры изображения.</value>
     </data>
+    <data name="ThumbnailWidth.Invalid" xml:space="preserve">
+        <value>Ширина миниатюры должна быть целым числом большим 0.</value>
+    </data>
 </root>

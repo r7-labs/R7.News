@@ -16,8 +16,10 @@
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
-            <%-- TODO: Add client-side validation --%>
             <asp:TextBox id="textThumbnailWidth" runat="server" />
+            <asp:RegularExpressionValidator runat="server" resourcekey="ThumbnailWidth.Invalid"
+                ControlToValidate="textThumbnailWidth" Display="Dynamic" CssClass="dnnFormMessage dnnFormError" 
+                ValidationExpression="^0*[1-9]\d*$" />
         </div>
     </fieldset> 
 </div>
