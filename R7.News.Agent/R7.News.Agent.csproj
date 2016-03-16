@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -91,6 +92,7 @@
     <Compile Include="ModuleSettings.ascx.controls.cs">
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AgentModuleNewsEntryViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

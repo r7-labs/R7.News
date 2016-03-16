@@ -4,7 +4,7 @@
 
 <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
     <LayoutTemplate>
-        <div runat="server" style="display:table">
+        <div runat="server">
             <div runat="server" id="itemPlaceholder"></div>
         </div>
     </LayoutTemplate>

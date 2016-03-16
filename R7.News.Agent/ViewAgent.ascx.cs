@@ -31,17 +31,25 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
-using R7.News.Models.Data;
-using R7.News.Agent.Components;
-using R7.News.Components;
-using R7.News.Models;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.Models.Data;
+using R7.News.Agent.Components;
+using R7.News.Models;
+using R7.News.Controls;
+using R7.News.ViewModels;
+using R7.News.Agent.ViewModels;
 
 namespace R7.News.Agent
 {
     public partial class ViewAgent : PortalModuleBase<AgentSettings>, IActionable
     {
+        ViewModelContext<AgentSettings> viewModelContext;
+        protected ViewModelContext<AgentSettings> ViewModelContext
+        {
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
+        }
+
         #region Handlers
 
         /// <summary>
@@ -59,12 +67,12 @@ namespace R7.News.Agent
 
                     // check if we have some content to display, 
                     // otherwise display a message for module editors.
-                    if (!items.Any () && IsEditable) {
+                    if ((items == null || !items.Any ()) && IsEditable) {
                         this.Message ("NothingToDisplay.Text", MessageType.Info, true);
                     }
                     else {
                         // bind the data
-                        listAgent.DataSource = items;
+                        listAgent.DataSource = items.Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
                         listAgent.DataBind ();
                     }
                 }
@@ -111,8 +119,7 @@ namespace R7.News.Agent
         /// <param name="e"></param>
         protected void listAgent_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            // e.Item.DataItem is object of R7.News.AgentInfo class
-            var item = (NewsEntryInfo) e.Item.DataItem;
+            var item = (AgentModuleNewsEntryViewModel) e.Item.DataItem;
             
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");
@@ -131,13 +138,13 @@ namespace R7.News.Agent
 
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");
-            var imageUrl = item.GetImageUrl (width: 192);
-            if (!string.IsNullOrEmpty (imageUrl)) {
-                imageImage.ImageUrl = imageUrl;
-            }
-            else {
-                imageImage.Visible = false;
-            }
+            imageImage.Visible = item.GetImage () != null;
+
+            // show term links
+            var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
+            termLinks.Module = this;
+            termLinks.DataSource = item.ContentItem.Terms;
+            termLinks.DataBind ();
         }
     }
 }
