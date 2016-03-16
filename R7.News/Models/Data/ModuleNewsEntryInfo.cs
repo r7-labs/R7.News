@@ -22,6 +22,7 @@
 using System;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
+using DotNetNuke.Entities.Modules;
 
 namespace R7.News.Models.Data
 {
@@ -63,6 +64,9 @@ namespace R7.News.Models.Data
 
         [IgnoreColumn]
         public ContentItem ContentItem { get; set; }
+
+        [IgnoreColumn]
+        public ModuleInfo AgentModule { get; set; }
 
         [IgnoreColumn]
         public INewsSource Source { get; set; }

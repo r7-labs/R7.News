@@ -133,6 +133,7 @@ namespace R7.News.Models.Data
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 "r7_News_GetNewsEntries", moduleId, portalId)
                     .WithContentItems ()
+                    .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
         }
@@ -152,6 +153,7 @@ namespace R7.News.Models.Data
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 "r7_News_GetNewsEntriesByTerms", moduleId, portalId, terms.Select (t => t.TermId).ToArray ())
                     .WithContentItems ()
+                    .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
         }
@@ -169,6 +171,7 @@ namespace R7.News.Models.Data
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
+                .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                 .WithNewsSources ()
                 .Cast<NewsEntryInfo> ();
         }

@@ -22,6 +22,7 @@
 using System;
 using DotNetNuke.Entities.Content;
 using R7.News.Models;
+using DotNetNuke.Entities.Modules;
 
 namespace R7.News.Models
 {
@@ -60,6 +61,8 @@ namespace R7.News.Models
         int? SourceItemId { get; set; }
 
         ContentItem ContentItem { get; set; }
+
+        ModuleInfo AgentModule { get; set; }
 
         INewsSource Source { get; set; }
     }

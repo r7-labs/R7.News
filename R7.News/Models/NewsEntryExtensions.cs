@@ -29,6 +29,8 @@ using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using System.Net;
+using DotNetNuke.Entities.Modules;
 
 namespace R7.News.Models
 {
@@ -72,6 +74,22 @@ namespace R7.News.Models
         {
             foreach (var newsEntry in newsEntries) {
                 yield return newsEntry.WithNewsSource ();
+            }
+        }
+
+        public static INewsEntry WithAgentModule (this INewsEntry newsEntry, ModuleController moduleController)
+        {
+            if (newsEntry.AgentModuleId != null) {
+                newsEntry.AgentModule = moduleController.GetModule (newsEntry.AgentModuleId.Value);
+            }
+
+            return newsEntry;
+        }
+
+        public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries, ModuleController moduleController)
+        {
+            foreach (var newsEntry in newsEntries) {
+                yield return newsEntry.WithAgentModule (moduleController);
             }
         }
 

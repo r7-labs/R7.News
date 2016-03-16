@@ -23,6 +23,7 @@ using System;
 using System.Linq;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.R7;
+using DotNetNuke.Entities.Modules;
 
 namespace R7.News.Components
 {
@@ -67,6 +68,19 @@ namespace R7.News.Components
                 }
 
                 return contentController;
+            }
+        }
+
+        private ModuleController moduleController;
+        public ModuleController ModuleController
+        {
+            get
+            { 
+                if (moduleController == null) {
+                    moduleController = new ModuleController ();
+                }
+
+                return moduleController;
             }
         }
 

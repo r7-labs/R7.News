@@ -142,6 +142,12 @@ namespace R7.News.Stream.ViewModels
             set {}
         }
 
+        public ModuleInfo AgentModule
+        {
+            get { return NewsEntry.AgentModule; }
+            set {}
+        }
+
         public INewsSource Source
         {
             get { return NewsEntry.Source; }
@@ -175,10 +181,8 @@ namespace R7.News.Stream.ViewModels
                 if (!string.IsNullOrWhiteSpace (Url)) {
                     url = Url;
                 }
-                else if (AgentModuleId != null) {
-                    var moduleController = new ModuleController ();
-                    var agentModule = moduleController.GetModule (AgentModuleId.Value);
-                    url = agentModule.TabID.ToString ();
+                else if (AgentModule != null) {
+                    url = AgentModule.TabID.ToString ();
                 }
 
                 if (!string.IsNullOrEmpty (url)) {
