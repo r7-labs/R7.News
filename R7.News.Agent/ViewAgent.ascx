@@ -23,12 +23,12 @@
                         CssClass="img img-rounded img-responsive" Style="margin-bottom:1em" />
                 </div>
                 <div class="col-sm-8">
-                   <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                    <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                    <p>
+                        <news:TermLinks id="termLinks" runat="server" />
+                    </p>
                 </div>
             </div>
-            <p>
-                <news:TermLinks id="termLinks" runat="server" />
-            </p>
             <div class="small">
                 EntryId: <%# Eval ("EntryId") %><br />
                 AgentModuleId: <%# Eval ("AgentModuleId") %><br />
