@@ -22,33 +22,41 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Linq;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.Localization;
+using DotNetNuke.Entities.Tabs;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
-using R7.News.Models.Data;
+using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Services.Localization;
 using R7.News.Agent.Components;
-using R7.News.Models;
-using R7.News.Controls;
-using R7.News.ViewModels;
 using R7.News.Agent.ViewModels;
+using R7.News.Components;
+using R7.News.Controls;
+using R7.News.Models;
+using R7.News.Models.Data;
+using R7.News.ViewModels;
 
 namespace R7.News.Agent
 {
     public partial class ViewAgent : PortalModuleBase<AgentSettings>, IActionable
     {
+        #region Properties
+
         ViewModelContext<AgentSettings> viewModelContext;
         protected ViewModelContext<AgentSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
         }
+
+        #endregion
 
         #region Handlers
 
@@ -62,26 +70,25 @@ namespace R7.News.Agent
             
             try {
                 if (!IsPostBack) {
-                    
                     var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
 
                     // check if we have some content to display, 
                     // otherwise display a message for module editors.
                     if ((items == null || !items.Any ()) && IsEditable) {
-                        this.Message ("NothingToDisplay.Text", MessageType.Info, true);
+
+                        // show panel with add button
+                        panelAddDefaultEntry.Visible = true;
                     }
                     else {
-                        
-                        // bind the data
+                        // create viewmodels
                         var viewModels = items
                             .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
                             .GroupByAgentModule (Settings.EnableGrouping)
                             .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
 
+                        // bind the data
                         listAgent.DataSource = viewModels;
                         listAgent.DataBind ();
-
-                        // UpdateModuleTitle (items.First ().Title);
                     }
                 }
             }
@@ -100,6 +107,9 @@ namespace R7.News.Agent
                 // create a new action to add an item, this will be added 
                 // to the controls dropdown menu
                 var actions = new ModuleActionCollection ();
+
+                // TODO: Add action to create news entry from tab data
+
                 actions.Add (
                     GetNextActionID (), 
                     Localization.GetString (ModuleActionType.AddContent, this.LocalResourceFile),
@@ -190,6 +200,43 @@ namespace R7.News.Agent
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");
             imageImage.Visible = item.GetImage () != null;
+        }
+
+        protected void buttonAddFromTabData_Click (object sender, EventArgs e)
+        {
+            var newsEntry = AddFromTabData ();
+            UpdateModuleTitle (newsEntry.Title);
+
+            Response.Redirect (Globals.NavigateURL (), true);
+        }
+
+        protected INewsEntry AddFromTabData ()
+        {
+            var tabController = new TabController ();
+            var activeTab = tabController.GetTab (TabId, PortalId);
+
+            // add default news entry based on tab data
+            var newsEntry = new NewsEntryInfo {
+                Title = activeTab.TabName,
+                Description = activeTab.Description,
+                AgentModuleId = ModuleId,
+                EndDate = DateTime.Today
+            };
+
+            // add news entry
+            NewsRepository.Instance.AddNewsEntry (newsEntry, activeTab.Terms, new List<IFileInfo> (), ModuleId, TabId);
+
+            return newsEntry;
+        }
+
+        protected void UpdateModuleTitle (string title)
+        {
+            var moduleController = NewsDataProvider.Instance.ModuleController;
+            var module = moduleController.GetModule (ModuleId, TabId);
+            if (module.ModuleTitle != title) {
+                module.ModuleTitle = title;
+                moduleController.UpdateModule (module);
+            }
         }
     }
 }

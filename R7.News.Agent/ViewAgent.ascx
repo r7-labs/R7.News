@@ -2,6 +2,11 @@
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Import Namespace="System.Web" %>
 
+<asp:Panel id="panelAddDefaultEntry" runat="server" Visible="false" CssClass="dnnFormMessage dnnFormInfo">
+    <asp:LinkButton id="buttonAddFromTabData" runat="server" resourcekey="buttonAddFromTabData.Text"
+        CssClass="dnnSecondaryAction dnnRight" Style="position:relative;top:-.5em" OnClick="buttonAddFromTabData_Click" />
+    <%: LocalizeString ("NothingToDisplay.Text") %>
+</asp:Panel>
 <asp:ListView id="listAgent" DataKeyNames="EntryId" runat="server" OnItemDataBound="listAgent_ItemDataBound">
     <LayoutTemplate>
         <div runat="server">

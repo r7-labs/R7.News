@@ -7,7 +7,10 @@
         <value>&lt;P&gt;A R7.News.Agent module&lt;/P&gt;</value>
     </data>
     <data name="NothingToDisplay.Text" xml:space="preserve">
-        <value>Nothing to display, add some items.</value>
+        <value>Module have nothing to display</value>
+    </data>
+    <data name="buttonAddFromTabData.Text" xml:space="preserve">
+        <value>Add From Page Data</value>
     </data>
     <data name="CreatedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>

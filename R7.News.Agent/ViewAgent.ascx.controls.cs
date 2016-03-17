@@ -11,6 +11,7 @@ namespace R7.News.Agent
 {
     public partial class ViewAgent
     {
+        protected Panel panelAddDefaultEntry;
         protected ListView listAgent;
     }
 }

@@ -7,7 +7,10 @@
         <value>&lt;P&gt; Модуль R7.News.Agent&lt;/P&gt;</value>
     </data>
     <data name="NothingToDisplay.Text" xml:space="preserve">
-        <value>Нечего отображать, добавьте элементы.</value>
+        <value>Нет элементов для отображения</value>
+    </data>
+    <data name="buttonAddFromTabData.Text" xml:space="preserve">
+        <value>Создать из данных страницы</value>
     </data>
     <data name="CreatedOnDate.Format" xml:space="preserve">
         <value>dd MMMM yyyy</value>
