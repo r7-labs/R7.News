@@ -43,11 +43,12 @@ namespace R7.News.Agent.Components
         {
         }
 
-        #region Properties for settings
+        #region Tab-specific module settings
 
         public bool EnableGrouping
         {
-            get { return true; }
+            get { return ReadSetting<bool> ("r7_News_Agent_EnableGrouping", false); }
+            set { WriteTabModuleSetting<bool> ("r7_News_Agent_EnableGrouping", value); }
         }
 
         #endregion

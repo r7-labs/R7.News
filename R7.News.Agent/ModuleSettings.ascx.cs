@@ -36,6 +36,7 @@ namespace R7.News.Agent
         {
             try {
                 if (!IsPostBack) {
+                    checkEnableGrouping.Checked = Settings.EnableGrouping;
                 }
             }
             catch (Exception ex) {
@@ -49,6 +50,8 @@ namespace R7.News.Agent
         public override void UpdateSettings ()
         {
             try {
+                Settings.EnableGrouping = checkEnableGrouping.Checked;
+
                 ModuleController.SynchronizeModule (ModuleId);
             }
             catch (Exception ex) {

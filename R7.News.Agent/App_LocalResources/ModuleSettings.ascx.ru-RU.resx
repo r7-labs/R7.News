@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data xml:space="preserve" name="lblTemplate.Text">
-    <value>Шаблон</value>
-  </data>
-    <data xml:space="preserve" name="lblTemplate.Help">
-    <value>Позволяет задать пользовательский шаблон для отображения элементов. Используйте параметры для замены: [CONTENT] [CREATEDONDATE] [CREATEDBYUSER] [CREATEDBYUSERNAME]</value>
-  </data>
-    <data xml:space="preserve" name="ControlTitle_settings.Text">
-    <value>Настройки R7.News.Agent</value>
-  </data>
-    <data xml:space="preserve" name="ModuleHelp.Text">
-    <value>О настройках R7.News.Agent</value>
-  </data>
+    <data name="ControlTitle_settings.Text" xml:space="preserve">
+        <value>Настройки R7.News.Agent</value>
+    </data>
+    <data name="ModuleHelp.Text" xml:space="preserve">
+        <value>О настройках R7.News.Agent</value>
+    </data>
+    <data name="labelEnableGrouping.Text" xml:space="preserve">
+        <value>Включить группировку:</value>
+    </data>
+    <data name="labelEnableGrouping.Help" xml:space="preserve">
+        <value>Отметьте, чтобы включить группировку новостей, относящихся к данному модулю.</value>
+    </data>
 </root>

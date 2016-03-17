@@ -7,6 +7,8 @@
 <div class="dnnForm dnnClear">
     <fieldset>  
         <div class="dnnFormItem">
+            <dnn:Label id="labelEnableGrouping" runat="server" ControlName="checkEnableGrouping" />
+            <asp:CheckBox id="checkEnableGrouping" runat="server" />
         </div>
-    </fieldset> 
+    </fieldset>
 </div>
