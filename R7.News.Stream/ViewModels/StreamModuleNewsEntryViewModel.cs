@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using R7.News.Models;
 using R7.News.Models.Data;
 using DotNetNuke.Entities.Content;
@@ -151,6 +152,12 @@ namespace R7.News.Stream.ViewModels
         public INewsSource Source
         {
             get { return NewsEntry.Source; }
+            set {}
+        }
+
+        public ICollection<INewsEntry> Group
+        {
+            get { return NewsEntry.Group; }
             set {}
         }
 

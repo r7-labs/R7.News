@@ -20,9 +20,10 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DotNetNuke.Entities.Content;
-using R7.News.Models;
 using DotNetNuke.Entities.Modules;
+using R7.News.Models;
 
 namespace R7.News.Models
 {
@@ -65,5 +66,7 @@ namespace R7.News.Models
         ModuleInfo AgentModule { get; set; }
 
         INewsSource Source { get; set; }
+
+        ICollection<INewsEntry> Group { get; set; }
     }
 }

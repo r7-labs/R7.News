@@ -22,6 +22,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using DotNetNuke.Entities.Content;
 using R7.News.Components;
 using R7.News.Models.Data;
@@ -108,6 +109,36 @@ namespace R7.News.Models
             }
 
             return string.Empty;
+        }
+
+        public static IEnumerable<INewsEntry> GroupByAgentModule (this IEnumerable<INewsEntry> newsEntries, bool enableGrouping)
+        {
+            if (enableGrouping) {
+                var newsList = new List<INewsEntry> ();
+                foreach (var newsEntry in newsEntries) {
+
+                    // find group entry
+                    var groupEntry = newsList
+                        .SingleOrDefault (ne => ne.AgentModuleId != null && ne.AgentModuleId == newsEntry.AgentModuleId);
+
+                    // add current entry to the group
+                    if (groupEntry != null) {
+                        if (groupEntry.Group == null) {
+                            groupEntry.Group = new Collection<INewsEntry> ();
+                        }
+                        groupEntry.Group.Add (newsEntry);
+                        continue;
+                    }
+
+                    // add current entry as group entry
+                    newsEntry.Group = null;
+                    newsList.Add (newsEntry);
+                }
+
+                return newsList;
+            }
+
+            return newsEntries;
         }
     }
 }

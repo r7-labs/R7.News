@@ -10,23 +10,48 @@
     </LayoutTemplate>
     <ItemTemplate>
         <div>
-            <h3>
-                <asp:HyperLink id="linkEdit" runat="server">
-                    <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
-                </asp:HyperLink>
-                <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
-            </h3>
-            <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
                         CssClass="img img-rounded img-responsive" Style="margin-bottom:1em" />
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-6">
+                    <h3 style="margin-top:0">
+                        <asp:HyperLink id="linkEdit" runat="server">
+                            <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
+                        </asp:HyperLink>
+                        <%# Eval ("Title") %>
+                    </h3>
+                    <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     <p>
                         <news:TermLinks id="termLinks" runat="server" />
                     </p>
+                    <asp:ListView id="listGroup" DataKeyNames="EntryId" runat="server" OnItemDataBound="listGroup_ItemDataBound">
+                        <LayoutTemplate>
+                            <div runat="server">
+                                <div runat="server" id="itemPlaceholder"></div>
+                            </div>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                                <h4>
+                                    <asp:HyperLink id="linkEdit" runat="server">
+                                        <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
+                                    </asp:HyperLink>
+                                    <%# Eval ("Title") %>
+                                </h4>
+                                <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+                            <div style="display:table-row">
+                                <div style="display:table-cell">
+                                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>'
+                                        CssClass="img" Style="margin-bottom:1em;margin-right:1em" />
+                                </div>
+                                <div style="display:table-cell;vertical-align:top">
+                                    <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                                </div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:ListView>
                 </div>
             </div>
             <div class="small">

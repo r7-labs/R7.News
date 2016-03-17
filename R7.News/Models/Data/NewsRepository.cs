@@ -158,20 +158,22 @@ namespace R7.News.Models.Data
                     .Cast<ModuleNewsEntryInfo> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId)
+        public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId, bool enableGrouping)
         {
             var cacheKey = newsCacheKeyPrefix + "AgentModuleId_" + moduleId;
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                c => GetNewsEntriesByAgentInternal (moduleId)
+                c => GetNewsEntriesByAgentInternal (moduleId, enableGrouping)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByAgentInternal (int moduleId)
+        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByAgentInternal (int moduleId, bool enableGrouping)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
+                .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
                 // .WithAgentModules (NewsDataProvider.Instance.ModuleController)
+                .GroupByAgentModule (enableGrouping)
                 .WithNewsSources ()
                 .Cast<NewsEntryInfo> ();
         }

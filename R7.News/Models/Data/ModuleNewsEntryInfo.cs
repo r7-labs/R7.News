@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
@@ -70,6 +71,9 @@ namespace R7.News.Models.Data
 
         [IgnoreColumn]
         public INewsSource Source { get; set; }
+
+        [IgnoreColumn]
+        public ICollection<INewsEntry> Group { get; set; }
 
         #endregion
 

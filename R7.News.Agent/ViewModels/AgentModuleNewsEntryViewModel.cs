@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using R7.News.Models;
 using R7.News.Models.Data;
 using DotNetNuke.Entities.Content;
@@ -154,11 +155,22 @@ namespace R7.News.Agent.ViewModels
             set {}
         }
 
+        public ICollection<INewsEntry> Group
+        {
+            get { return NewsEntry.Group; }
+            set {}
+        }
+
         #endregion
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: 360); }
+            get { return NewsEntry.GetImageUrl (width: 555); }
+        }
+
+        public string GroupImageUrl
+        {
+            get { return NewsEntry.GetImageUrl (width: 133); }
         }
 
         public string TitleLink

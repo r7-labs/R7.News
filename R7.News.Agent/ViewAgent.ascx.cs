@@ -63,7 +63,7 @@ namespace R7.News.Agent
             try {
                 if (!IsPostBack) {
                     
-                    var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
+                    var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, Settings.EnableGrouping);
 
                     // check if we have some content to display, 
                     // otherwise display a message for module editors.
@@ -71,9 +71,14 @@ namespace R7.News.Agent
                         this.Message ("NothingToDisplay.Text", MessageType.Info, true);
                     }
                     else {
+                        
                         // bind the data
-                        listAgent.DataSource = items.Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+                        var viewModels = items.Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+
+                        listAgent.DataSource = viewModels;
                         listAgent.DataBind ();
+
+                        // UpdateModuleTitle (items.First ().Title);
                     }
                 }
             }
@@ -112,7 +117,7 @@ namespace R7.News.Agent
         #endregion
 
         /// <summary>
-        /// Handles the items being bound to the datalist control. In this method we merge the data with the
+        /// Handles the items being bound to the listview control. In this method we merge the data with the
         /// template defined for this control to produce the result to display to the user
         /// </summary>
         /// <param name="sender"></param>
@@ -145,6 +150,43 @@ namespace R7.News.Agent
             termLinks.Module = this;
             termLinks.DataSource = item.ContentItem.Terms;
             termLinks.DataBind ();
+
+            // show grouped news
+            var listGroup = (ListView) e.Item.FindControl ("listGroup");
+
+            if (item.Group != null && item.Group.Count > 0) {
+                listGroup.DataSource = item.Group
+                    .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+                    .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+                listGroup.DataBind ();
+            }
+        }
+
+        /// <summary>
+        /// Handles the items being bound to the listview control. In this method we merge the data with the
+        /// template defined for this control to produce the result to display to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void listGroup_ItemDataBound (object sender, ListViewItemEventArgs e)
+        {
+            var item = (AgentModuleNewsEntryViewModel) e.Item.DataItem;
+
+            var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
+            var iconEdit = (Image) e.Item.FindControl ("imageEdit");
+
+            // edit link
+            if (IsEditable) {
+                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
+            }
+
+            // make edit link visible in edit mode
+            linkEdit.Visible = IsEditable;
+            iconEdit.Visible = IsEditable;
+
+            // show image
+            var imageImage = (Image) e.Item.FindControl ("imageImage");
+            imageImage.Visible = item.GetImage () != null;
         }
     }
 }

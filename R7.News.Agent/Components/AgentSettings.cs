@@ -45,6 +45,11 @@ namespace R7.News.Agent.Components
 
         #region Properties for settings
 
+        public bool EnableGrouping
+        {
+            get { return true; }
+        }
+
         #endregion
     }
 }
