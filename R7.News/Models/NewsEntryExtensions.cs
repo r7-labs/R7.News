@@ -137,8 +137,14 @@ namespace R7.News.Models
 
                 return newsList;
             }
+            else {
+                // clear group references
+                foreach (var newsEntry in newsEntries) {
+                    newsEntry.Group = null;
+                }
 
-            return newsEntries;
+                return newsEntries;
+            }
         }
     }
 }

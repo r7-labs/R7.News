@@ -63,7 +63,7 @@ namespace R7.News.Agent
             try {
                 if (!IsPostBack) {
                     
-                    var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, Settings.EnableGrouping);
+                    var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
 
                     // check if we have some content to display, 
                     // otherwise display a message for module editors.
@@ -73,7 +73,10 @@ namespace R7.News.Agent
                     else {
                         
                         // bind the data
-                        var viewModels = items.Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+                        var viewModels = items
+                            .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+                            .GroupByAgentModule (Settings.EnableGrouping)
+                            .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
 
                         listAgent.DataSource = viewModels;
                         listAgent.DataBind ();
