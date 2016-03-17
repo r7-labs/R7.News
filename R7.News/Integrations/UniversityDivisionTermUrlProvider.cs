@@ -40,7 +40,7 @@ namespace R7.News.Integrations
         public string GetUrl (Term term)
         {
             var division = GetDivisions ()
-                .SingleOrDefault (d => d.DivisionTermId == term.TermId);
+                .FirstOrDefault (d => d.DivisionTermId == term.TermId);
 
             if (division != null) {
                 return division.HomePage;
@@ -52,7 +52,7 @@ namespace R7.News.Integrations
         public string GetUrl (int termId, TermController termController)
         {
             var division = GetDivisions ()
-                .SingleOrDefault (d => d.DivisionTermId == termId);
+                .FirstOrDefault (d => d.DivisionTermId == termId);
 
             if (division != null) {
                 return division.HomePage;
