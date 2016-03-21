@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
+<%@ Register TagPrefix="dnn" Assembly="DotNetNuke.R7" Namespace="DotNetNuke.R7" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
@@ -43,6 +44,9 @@
         <hr />
     </ItemSeparatorTemplate>
 </asp:ListView>
-<h2>Test:</h2>
+<hr />
+<dnn:PagingControl id="pagingControl" runat="server" OnPageChanged="pagingControl_PageChanged" />
+<hr />
+<h2>Config:</h2>
 DataCacheTime: <%: R7.News.Components.NewsConfig.Instance.DataCacheTime %><br />
 DefaultImagePath: <%: R7.News.Components.NewsConfig.Instance.DefaultImagesPath %><br />

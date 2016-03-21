@@ -20,20 +20,22 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Web.UI.WebControls;
 using System.Linq;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
-using DotNetNuke.Services.Exceptions;
-using R7.News.Models.Data;
-using R7.News.Stream.Components;
-using R7.News.Models;
-using R7.News.Controls;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
-using R7.News.ViewModels;
+using DotNetNuke.Services.Exceptions;
+using R7.News.Controls;
+using R7.News.Models;
+using R7.News.Models.Data;
+using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
+using R7.News.ViewModels;
+using PagingControlMode = DotNetNuke.R7.PagingControlMode;
 
 namespace R7.News.Stream
 {
@@ -45,7 +47,23 @@ namespace R7.News.Stream
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<StreamSettings> (this, Settings)); }
         }
 
+        protected int PageSize = 2;
+
+        protected int PageNumber = 1;
+
         #region Handlers
+
+        protected override void OnInit (EventArgs e)
+        {
+            base.OnInit (e);
+
+            // setup paging control
+            pagingControl.CurrentPage = 1;
+            pagingControl.TabID = TabId;
+            pagingControl.PageSize = PageSize;
+            pagingControl.Mode = PagingControlMode.PostBack;
+            pagingControl.QuerystringParams = "pagingModuleId=" + ModuleId;
+        }
 
         /// <summary>
         /// Handles Load event for a control
@@ -54,34 +72,72 @@ namespace R7.News.Stream
         protected override void OnLoad (EventArgs e)
         {
             base.OnLoad (e);
-            
+
             try {
                 if (!IsPostBack) {
+                    int itemsCount;
+                    var pagedItems = GetPagedItems (pagingControl.CurrentPage - 1, out itemsCount);
 
-                    IEnumerable<ModuleNewsEntryInfo> items;
+                    // setup paging control
+                    pagingControl.TotalRecords = itemsCount;
 
-                    if (Settings.ShowAllNews) {
-                        items = NewsRepository.Instance.GetNewsEntries (ModuleId, PortalId);
-                    }
-                    else {
-                        items = NewsRepository.Instance.GetNewsEntriesByTerms (ModuleId, PortalId, Settings.IncludeTerms);
-                    }
-
-                    // check if we have some content to display, 
-                    // otherwise display a message for module editors.
-                    if ((items == null || !items.Any ()) && IsEditable) {
-                        this.Message ("NothingToDisplay.Text", MessageType.Info, true);
-                    }
-                    else {
+                    if (itemsCount > 0) {
                         // bind the data
-                        listStream.DataSource = items.Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext));
+                        listStream.DataSource = pagedItems;
                         listStream.DataBind ();
+                    }
+                    else if (IsEditable) {
+                        this.Message ("NothingToDisplay.Text", MessageType.Info, true);
                     }
                 }
             }
             catch (Exception ex) {
                 Exceptions.ProcessModuleLoadException (this, ex);
             }
+        }
+
+        protected void pagingControl_PageChanged (object sender, EventArgs e)
+        {
+            int itemsCount;
+            var pagedItems = GetPagedItems (pagingControl.CurrentPage - 1, out itemsCount);
+
+            // setup paging control
+            pagingControl.TotalRecords = itemsCount;
+        
+            if (itemsCount > 0) {
+                // bind the data
+                listStream.DataSource = pagedItems;
+                listStream.DataBind ();
+            }
+        }
+
+        protected IList<StreamModuleNewsEntryViewModel> GetPagedItems (int pageIndex, out int itemsCount)
+        {
+            IEnumerable<ModuleNewsEntryInfo> items;
+
+            if (Settings.ShowAllNews) {
+                items = NewsRepository.Instance.GetNewsEntries (ModuleId, PortalId);
+            }
+            else {
+                items = NewsRepository.Instance.GetNewsEntriesByTerms (ModuleId, PortalId, Settings.IncludeTerms);
+            }
+
+            // TODO: Implement check for pageIndex > totalPages
+
+            if (pageIndex < 0 || items == null || !items.Any ()) {
+
+                    itemsCount = 0;
+                    return null;
+            }
+     
+            itemsCount =  items.Count ();
+
+            return items.OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+                .Skip (pageIndex * PageSize)
+                .Take (PageSize)
+                .Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext))
+                .ToList ();
+            
         }
 
         #endregion
