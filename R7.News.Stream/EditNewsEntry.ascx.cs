@@ -33,14 +33,21 @@ using R7.News.Models;
 using R7.News.Models.Data;
 using R7.News.Components;
 using DotNetNuke.R7;
+using DotNetNuke.R7.ViewModels;
 
 namespace R7.News.Stream
 {
     public enum EditNewsEntryTab { Common, Sources, Advanced };
 
-    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
+    public partial class EditNewsEntry : EditPortalModuleBase<ModuleNewsEntryInfo,int>
     {
         #region Properties
+
+        ViewModelContext viewModelContext;
+        protected ViewModelContext ViewModelContext
+        {
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
+        }
 
         protected EditNewsEntryTab SelectedTab
         {
@@ -90,6 +97,9 @@ namespace R7.News.Stream
             UpdateNewsSources ();
 
             pickerImage.FileFilter = Globals.glbImageFileTypes;
+
+            radioVisibility.DataSource = EnumViewModel<NewsEntryVisibility>.GetValues (ViewModelContext, false);
+            radioVisibility.DataBind ();
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
@@ -133,10 +143,10 @@ namespace R7.News.Stream
             buttonUpdate.Text = LocalizeString ("Add.Text");
         }
 
-        protected override void LoadItem (NewsEntryInfo item)
+        protected override void LoadItem (ModuleNewsEntryInfo item)
         {
             // load also content item
-            item = (NewsEntryInfo) item.WithContentItem ();
+            item = (ModuleNewsEntryInfo) item.WithContentItem ();
 
             var image = item.ContentItem.Images.FirstOrDefault ();
             if (image != null) {
@@ -162,6 +172,8 @@ namespace R7.News.Stream
 
             urlUrl.Url = item.Url;
 
+            radioVisibility.SelectByValue (item.NewsEntryVisibility);
+
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
             ctlAudit.LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString ();
             ctlAudit.CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName;
@@ -172,7 +184,7 @@ namespace R7.News.Stream
 
         private List<IFileInfo> images;
 
-        protected override void BeforeUpdateItem (NewsEntryInfo item)
+        protected override void BeforeUpdateItem (ModuleNewsEntryInfo item)
         {
             if (ItemId == null) {
                 images = new List<IFileInfo> ();
@@ -212,28 +224,30 @@ namespace R7.News.Stream
 
             item.Url = urlUrl.Url;
 
+            item.NewsEntryVisibility = (NewsEntryVisibility) Enum.Parse (typeof (NewsEntryVisibility), radioVisibility.SelectedValue);
+
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
                 item.AgentModuleId = ModuleId;
             }   
         }
 
-        protected override NewsEntryInfo GetItem (int itemId)
+        protected override ModuleNewsEntryInfo GetItem (int itemId)
         {
-            return NewsRepository.Instance.GetNewsEntry (itemId, PortalId);
+            return NewsRepository.Instance.GetModuleNewsEntry (itemId, ModuleId);
         }
 
-        protected override int AddItem (NewsEntryInfo item)
+        protected override int AddItem (ModuleNewsEntryInfo item)
         {
-            NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
+            NewsRepository.Instance.AddModuleNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
             return item.EntryId;
         }
 
-        protected override void UpdateItem (NewsEntryInfo item)
+        protected override void UpdateItem (ModuleNewsEntryInfo item)
         {
-            NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms);
+            NewsRepository.Instance.UpdateModuleNewsEntry (item, termsTerms.Terms, ModuleId);
         }
 
-        protected override void DeleteItem (NewsEntryInfo item)
+        protected override void DeleteItem (ModuleNewsEntryInfo item)
         {
             NewsRepository.Instance.DeleteNewsEntry (item);
         }

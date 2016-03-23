@@ -53,12 +53,35 @@ namespace R7.News.Models.Data
                 .WithContentItem ();
         }
 
+        public ModuleNewsEntryInfo GetModuleNewsEntry (int entryId, int moduleId)
+        {
+            return (ModuleNewsEntryInfo) NewsDataProvider.Instance.GetObjectsFromSp<ModuleNewsEntryInfo> (
+                    "r7_News_GetModuleNewsEntry", entryId, moduleId)
+                .Single ()
+                .WithContentItem ();
+        }
+
         public NewsEntryInfo GetNewsEntryByContentItem (ContentItem contentItem)
         {
             return NewsDataProvider.Instance.Get<NewsEntryInfo> (int.Parse (contentItem.ContentKey));
         }
 
-        public int AddNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
+        public int AddModuleNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
+        {
+            var entryId = AddNewsEntry (newsEntry, terms, images, moduleId, tabId);
+
+            if (newsEntry.Visibility != null) {
+                NewsDataProvider.Instance.Add<ModuleRuleInfo> (new ModuleRuleInfo { 
+                    EntryId = entryId,
+                    ModuleId = moduleId,
+                    Visibility = newsEntry.Visibility
+                });
+            }
+
+            return entryId;
+        }
+
+        public int AddNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
         {
             var contentItem = new ContentItem {
                 ContentTitle = newsEntry.Title,
@@ -72,7 +95,7 @@ namespace R7.News.Models.Data
 
             // add content item and news entry
             newsEntry.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
-            NewsDataProvider.Instance.Add<NewsEntryInfo> (newsEntry);
+            NewsDataProvider.Instance.Add<ModuleNewsEntryInfo> (newsEntry);
 
             // update content item after EntryId get its value
             contentItem.ContentKey = newsEntry.EntryId.ToString ();
@@ -95,10 +118,40 @@ namespace R7.News.Models.Data
             return newsEntry.EntryId;
         }
 
-        public void UpdateNewsEntry (NewsEntryInfo newsEntry, List<Term> terms)
+        public void UpdateModuleNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, int moduleId)
+        {
+            UpdateNewsEntry (newsEntry, terms);
+
+            var entryId = newsEntry.EntryId;
+            var moduleRule = NewsDataProvider.Instance.Get<ModuleRuleInfo> (
+                                 "WHERE ModuleID = @0 AND EntryID = @1",
+                                 moduleId,
+                                 entryId);
+            
+            if (moduleRule != null) {
+                if (newsEntry.Visibility == null) {
+                    NewsDataProvider.Instance.Delete<ModuleRuleInfo> (moduleRule);
+                }
+                else {
+                    moduleRule.Visibility = newsEntry.Visibility;
+                    NewsDataProvider.Instance.Update<ModuleRuleInfo> (moduleRule);
+                }
+            }
+            else {
+                if (newsEntry.Visibility != null) {
+                    NewsDataProvider.Instance.Add<ModuleRuleInfo> (new ModuleRuleInfo { 
+                        EntryId = entryId,
+                        ModuleId = moduleId,
+                        Visibility = newsEntry.Visibility
+                    });
+                }
+            }
+        }
+
+        public void UpdateNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms)
         {
             NewsDataProvider.Instance.ContentController.UpdateContentItem (newsEntry.ContentItem);
-            NewsDataProvider.Instance.Update<NewsEntryInfo> (newsEntry);
+            NewsDataProvider.Instance.Update<ModuleNewsEntryInfo> (newsEntry);
 
             // update content item terms
             var termController = new TermController ();
@@ -110,7 +163,7 @@ namespace R7.News.Models.Data
             CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
         }
 
-        public void DeleteNewsEntry (NewsEntryInfo newsEntry)
+        public void DeleteNewsEntry (INewsEntry newsEntry)
         {
             // delete content item, related news entry will be deleted by foreign key rule
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
@@ -118,37 +171,37 @@ namespace R7.News.Models.Data
             CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
         }
 
-        public IEnumerable<ModuleNewsEntryInfo> GetNewsEntries (int moduleId, int portalId)
+        public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntries (int moduleId, int portalId)
         {
             var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                c => GetNewsEntriesInternal (moduleId, portalId)
+                c => GetModuleNewsEntriesInternal (moduleId, portalId)
             );
         }
 
-        protected IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesInternal (int moduleId, int portalId)
+        protected IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntriesInternal (int moduleId, int portalId)
         {
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
-                "r7_News_GetNewsEntries", moduleId, portalId)
+                "r7_News_GetModuleNewsEntries", moduleId, portalId)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
         }
 
-        public IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)
+        public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)
         {
             var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                c => GetNewsEntriesByTermsInternal (moduleId, portalId, terms)
+                c => GetModuleNewsEntriesByTermsInternal (moduleId, portalId, terms)
             );
         }
 
-        protected IEnumerable<ModuleNewsEntryInfo> GetNewsEntriesByTermsInternal (int moduleId, int portalId, IList<Term> terms)
+        protected IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntriesByTermsInternal (int moduleId, int portalId, IList<Term> terms)
         {
             return NewsDataProvider.Instance.GetObjects<ModuleNewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 "r7_News_GetNewsEntriesByTerms", moduleId, portalId, terms.Select (t => t.TermId).ToArray ())

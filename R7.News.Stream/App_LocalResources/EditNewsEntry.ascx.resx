@@ -99,13 +99,31 @@
     <data name="labelUrl.Help" xml:space="preserve">
         <value>Provide URL to news details.</value>
     </data>
+    <data name="labelVisibility.Text" xml:space="preserve">
+        <value>Visibility:</value>
+    </data>
+    <data name="labelVisibility.Help" xml:space="preserve">
+        <value>Set news entry visibility in the current module. It may be visible (default), hidden or hidden by default.</value>
+    </data>
     <data name="Common.Tab" xml:space="preserve">
         <value>Common</value>
+    </data>
+    <data name="Module.Tab" xml:space="preserve">
+        <value>Module</value>
     </data>
     <data name="Sources.Tab" xml:space="preserve">
         <value>Sources</value>
     </data>
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Advanced</value>
+    </data>
+    <data name="NewsEntryVisibility_Show.Text" xml:space="preserve">
+        <value>Show</value>
+    </data>
+    <data name="NewsEntryVisibility_HideAlways.Text" xml:space="preserve">
+        <value>Hide Always</value>
+    </data>
+    <data name="NewsEntryVisibility_HideByDefault.Text" xml:space="preserve">
+        <value>Hide by Default</value>
     </data>
 </root>

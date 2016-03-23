@@ -18,4 +18,31 @@
     <data name="SortIndex.Invalid" xml:space="preserve">
         <value>Индекс сортировки должен быть целым числом.</value>
     </data>
+    <data name="labelVisibility.Text" xml:space="preserve">
+        <value>Видимость:</value>
+    </data>
+    <data name="labelVisibility.Help" xml:space="preserve">
+        <value>Задайте видимость новости в текущем модуле. Новость может быть показана (по-умолчанию), скрыта, скрыта по-умолчанию.</value>
+    </data>
+    <data name="Common.Tab" xml:space="preserve">
+        <value>Общие</value>
+    </data>
+    <data name="Module.Tab" xml:space="preserve">
+        <value>Модуль</value>
+    </data>
+    <data name="Sources.Tab" xml:space="preserve">
+        <value>Источники</value>
+    </data>
+    <data name="Advanced.Tab" xml:space="preserve">
+        <value>Расширенные</value>
+    </data>
+    <data name="NewsEntryVisibility_Show.Text" xml:space="preserve">
+        <value>Показывать</value>
+    </data>
+    <data name="NewsEntryVisibility_HideAlways.Text" xml:space="preserve">
+        <value>Скрывать всегда</value>
+    </data>
+    <data name="NewsEntryVisibility_HideByDefault.Text" xml:space="preserve">
+        <value>Скрывать по-умолчанию</value>
+    </data>
 </root>

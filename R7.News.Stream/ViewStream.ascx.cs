@@ -116,10 +116,10 @@ namespace R7.News.Stream
             IEnumerable<ModuleNewsEntryInfo> items;
 
             if (Settings.ShowAllNews) {
-                items = NewsRepository.Instance.GetNewsEntries (ModuleId, PortalId);
+                items = NewsRepository.Instance.GetModuleNewsEntries (ModuleId, PortalId);
             }
             else {
-                items = NewsRepository.Instance.GetNewsEntriesByTerms (ModuleId, PortalId, Settings.IncludeTerms);
+                items = NewsRepository.Instance.GetModuleNewsEntriesByTerms (ModuleId, PortalId, Settings.IncludeTerms);
             }
 
             // TODO: Implement check for pageIndex > totalPages

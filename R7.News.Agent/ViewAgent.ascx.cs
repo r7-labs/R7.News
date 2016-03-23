@@ -216,7 +216,7 @@ namespace R7.News.Agent
             var activeTab = tabController.GetTab (TabId, PortalId);
 
             // add default news entry based on tab data
-            var newsEntry = new NewsEntryInfo {
+            var newsEntry = new ModuleNewsEntryInfo {
                 Title = activeTab.TabName,
                 Description = activeTab.Description,
                 AgentModuleId = ModuleId,
