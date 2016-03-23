@@ -25,13 +25,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using DotNetNuke.Entities.Content;
 using R7.News.Components;
-using R7.News.Models.Data;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using System.Net;
 using DotNetNuke.Entities.Modules;
+using R7.News.Data;
 
 namespace R7.News.Models
 {

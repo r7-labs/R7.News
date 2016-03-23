@@ -1,5 +1,5 @@
 ﻿//
-//  NewsEntryModuleRuleInfo.cs
+//  NewsSourceInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -21,20 +21,31 @@
 
 using System;
 using DotNetNuke.ComponentModel.DataAnnotations;
+using R7.News.Models;
 
-namespace R7.News.Models.Data
+namespace R7.News.Data
 {
-    [TableName ("r7_News_ModuleRules")]
-    [PrimaryKey ("EntryId,ModuleId", AutoIncrement = false)]
-    public class NewsEntryModuleRuleInfo: INewsEntryModuleRule
+    [TableName ("r7_News_Sources")]
+    [PrimaryKey ("SourceId", AutoIncrement = true)]
+    public class NewsSourceInfo: INewsSource
     {
-        #region INewsEntryModuleRule implementation
+        #region INewsSource implementation
 
-        public int EntryId { get; set; }
+        public int SourceId { get; set; }
 
-        public int ModuleId { get; set; }
+        // set by NewsSourceProvider
+        [IgnoreColumn]
+        public int? SourceItemId { get; set; }
 
-        public int Visibility { get; set; }
+        public string Assembly { get; set; }
+
+        public string Type { get; set; }
+
+        public string Title { get; set; }
+
+        public string Url { get; set; }
+
+        public bool IsEnabled { get; set; }
 
         #endregion
     }

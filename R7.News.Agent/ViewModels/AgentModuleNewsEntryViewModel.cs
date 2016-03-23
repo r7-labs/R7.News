@@ -22,7 +22,7 @@
 using System;
 using System.Collections.Generic;
 using R7.News.Models;
-using R7.News.Models.Data;
+using R7.News.Data;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.R7;
 using DotNetNuke.Common;

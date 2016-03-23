@@ -30,7 +30,7 @@ using DotNetNuke.Common.Utilities;
 using R7.News.Components;
 using R7.News.Models;
 
-namespace R7.News.Models.Data
+namespace R7.News.Data
 {
     public class NewsRepository
     {

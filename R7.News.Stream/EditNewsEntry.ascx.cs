@@ -30,7 +30,7 @@ using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.R7.Entities.Modules;
 using R7.News.Models;
-using R7.News.Models.Data;
+using R7.News.Data;
 using R7.News.Components;
 using DotNetNuke.R7;
 using DotNetNuke.R7.ViewModels;

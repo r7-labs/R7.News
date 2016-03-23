@@ -1,5 +1,5 @@
 ﻿//
-//  NewsSourceInfo.cs
+//  NewsEntryVisibility.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,32 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace R7.News.Models.Data
+namespace R7.News.Models
 {
-    [TableName ("r7_News_Sources")]
-    [PrimaryKey ("SourceId", AutoIncrement = true)]
-    public class NewsSourceInfo: INewsSource
+    public enum NewsEntryVisibility
     {
-        #region INewsSource implementation
-
-        public int SourceId { get; set; }
-
-        // set by NewsSourceProvider
-        [IgnoreColumn]
-        public int? SourceItemId { get; set; }
-
-        public string Assembly { get; set; }
-
-        public string Type { get; set; }
-
-        public string Title { get; set; }
-
-        public string Url { get; set; }
-
-        public bool IsEnabled { get; set; }
-
-        #endregion
+        Show = 0, 
+        HideAlways = 1,
+        HideByDefault = 2
     }
 }
+

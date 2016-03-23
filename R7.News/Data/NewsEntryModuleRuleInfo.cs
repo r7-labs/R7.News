@@ -1,5 +1,5 @@
 ﻿//
-//  ModuleNewsEntryExtensions.cs
+//  NewsEntryModuleRuleInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,19 +20,23 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DotNetNuke.ComponentModel.DataAnnotations;
+using R7.News.Models;
 
-namespace R7.News.Models.Data
+namespace R7.News.Data
 {
-    public static class ModuleNewsEntryExtensions
+    [TableName ("r7_News_ModuleRules")]
+    [PrimaryKey ("EntryId,ModuleId", AutoIncrement = false)]
+    public class NewsEntryModuleRuleInfo: INewsEntryModuleRule
     {
-        public static NewsEntryVisibility GetNewsEntryVisibility (this IModuleNewsEntry newsEntry)
-        {
-            if (newsEntry.Visibility != null) {
-                return (NewsEntryVisibility) newsEntry.Visibility.Value;
-            }
+        #region INewsEntryModuleRule implementation
 
-            return NewsEntryVisibility.Show;
-        }
+        public int EntryId { get; set; }
+
+        public int ModuleId { get; set; }
+
+        public int Visibility { get; set; }
+
+        #endregion
     }
 }
-

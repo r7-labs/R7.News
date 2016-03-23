@@ -41,7 +41,7 @@ using R7.News.Agent.ViewModels;
 using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Models;
-using R7.News.Models.Data;
+using R7.News.Data;
 using R7.News.ViewModels;
 
 namespace R7.News.Agent

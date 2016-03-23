@@ -1,5 +1,5 @@
 ﻿//
-//  NewsEntryInfo.cs
+//  ModuleNewsEntryInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,19 +20,18 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using R7.News.Models;
 
-namespace R7.News.Models.Data
+namespace R7.News.Data
 {
     [TableName ("r7_News")]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
-    // [Cacheable ("r7_News", CacheItemPriority.Default, 20)]
-    public class NewsEntryInfo: INewsEntry
+    public class ModuleNewsEntryInfo: IModuleNewsEntry
     {
         #region INewsEntry implementation
 
@@ -79,5 +78,30 @@ namespace R7.News.Models.Data
         public ICollection<INewsEntry> Group { get; set; }
 
         #endregion
+
+        #region IModuleNewsEntry implementation
+
+        [ReadOnlyColumn]
+        public int? ModuleId { get; set; }
+
+        [ReadOnlyColumn]
+        public int? Visibility { get; set; }
+
+        #endregion
+
+        [IgnoreColumn]
+        public NewsEntryVisibility NewsEntryVisibility
+        {
+            get { return this.GetNewsEntryVisibility (); }
+            set 
+            {
+                if (value == NewsEntryVisibility.Show) {
+                    Visibility = null;
+                }
+                else {
+                    Visibility = (int?) value;
+                }
+            }
+        }
     }
 }

@@ -64,11 +64,11 @@
     <Folder Include="js\" />
     <Folder Include="Models\" />
     <Folder Include="Integrations\" />
-    <Folder Include="Models\Data\" />
     <Folder Include="Providers\" />
     <Folder Include="Controls\" />
     <Folder Include="Controls\ViewModels\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -92,16 +92,9 @@
     <Compile Include="Models\INewsEntryModuleRule.cs" />
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
-    <Compile Include="Models\Data\ModuleNewsEntryInfo.cs" />
-    <Compile Include="Models\Data\NewsEntryInfo.cs" />
-    <Compile Include="Models\Data\NewsEntryModuleRuleInfo.cs" />
-    <Compile Include="Models\Data\NewsEntryVisibility.cs" />
-    <Compile Include="Models\Data\NewsRepository.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />
-    <Compile Include="Models\Data\NewsSourceRepository.cs" />
     <Compile Include="Models\INewsSource.cs" />
     <Compile Include="Integrations\UniversityDivisionNewsSourceProvider.cs" />
-    <Compile Include="Models\Data\NewsSourceInfo.cs" />
     <Compile Include="Integrations\UniversityDivisionTermUrlProvider.cs" />
     <Compile Include="Integrations\UniversityDivisionInfo.cs" />
     <Compile Include="Providers\ITermUrlProvider.cs" />
@@ -113,9 +106,16 @@
     </Compile>
     <Compile Include="Controls\ViewModels\TermLinksViewModel.cs" />
     <Compile Include="ViewModels\ViewModelContext.cs" />
-    <Compile Include="Models\Data\ModuleNewsEntryExtensions.cs" />
     <Compile Include="Models\IModuleRule.cs" />
-    <Compile Include="Models\Data\ModuleRuleInfo.cs" />
+    <Compile Include="Models\ModuleNewsEntryExtensions.cs" />
+    <Compile Include="Data\ModuleNewsEntryInfo.cs" />
+    <Compile Include="Data\ModuleRuleInfo.cs" />
+    <Compile Include="Data\NewsEntryInfo.cs" />
+    <Compile Include="Data\NewsEntryModuleRuleInfo.cs" />
+    <Compile Include="Data\NewsRepository.cs" />
+    <Compile Include="Data\NewsSourceInfo.cs" />
+    <Compile Include="Data\NewsSourceRepository.cs" />
+    <Compile Include="Models\NewsEntryVisibility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
