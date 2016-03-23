@@ -46,14 +46,16 @@ IF NOT EXISTS (select * from sys.objects where object_id = object_id (N'{databas
 BEGIN
     CREATE TABLE {databaseOwner}[{objectQualifier}r7_News_ModuleRules]
     (
+        RuleID bigint NOT NULL IDENTITY (1, 1),
         EntryID int NOT NULL,
         ModuleID int NOT NULL,
         Visibility int NOT NULL DEFAULT ((0))
-        CONSTRAINT [PK_{objectQualifier}r7_News_ModuleRules] PRIMARY KEY CLUSTERED (EntryID, ModuleID)
+        CONSTRAINT [PK_{objectQualifier}r7_News_ModuleRules] PRIMARY KEY CLUSTERED (RuleID)
         CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_News] FOREIGN KEY (EntryID)
             REFERENCES {databaseOwner}[{objectQualifier}r7_News] (EntryID) ON DELETE CASCADE,
         CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_Modules] FOREIGN KEY (ModuleID)
-            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE CASCADE
+            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE CASCADE,
+        CONSTRAINT [UN_{objectQualifier}r7_News_ModuleRules] UNIQUE NONCLUSTERED (EntryID, ModuleID)
     )
 END
 GO
@@ -88,7 +90,21 @@ GO
 
 -- Create stored procedures
 
-CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntry]
+    @entryId int,
+    @moduleId int
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
+            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
+        WHERE NE.EntryID = @entryId
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntries]
     @moduleId int,
     @portalId int
 AS

@@ -24,9 +24,11 @@ using System.Collections.Generic;
 using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Web.Validators;
 
 namespace R7.News.Models.Data
 {
+    [TableName ("r7_News")]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
     public class ModuleNewsEntryInfo: IModuleNewsEntry
@@ -79,10 +81,27 @@ namespace R7.News.Models.Data
 
         #region IModuleNewsEntry implementation
 
+        [ReadOnlyColumn]
         public int? ModuleId { get; set; }
 
+        [ReadOnlyColumn]
         public int? Visibility { get; set; }
 
         #endregion
+
+        [IgnoreColumn]
+        public NewsEntryVisibility NewsEntryVisibility
+        {
+            get { return this.GetNewsEntryVisibility (); }
+            set 
+            {
+                if (value == NewsEntryVisibility.Show) {
+                    Visibility = null;
+                }
+                else {
+                    Visibility = (int?) value;
+                }
+            }
+        }
     }
 }

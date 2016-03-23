@@ -113,6 +113,9 @@
     </Compile>
     <Compile Include="Controls\ViewModels\TermLinksViewModel.cs" />
     <Compile Include="ViewModels\ViewModelContext.cs" />
+    <Compile Include="Models\Data\ModuleNewsEntryExtensions.cs" />
+    <Compile Include="Models\IModuleRule.cs" />
+    <Compile Include="Models\Data\ModuleRuleInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

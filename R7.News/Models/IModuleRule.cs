@@ -1,5 +1,5 @@
 ﻿//
-//  ModuleNewsEntryExtensions.cs
+//  IModuleRule.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -18,21 +18,19 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
 
-namespace R7.News.Models.Data
+namespace R7.News.Models
 {
-    public static class ModuleNewsEntryExtensions
+    public interface IModuleRule
     {
-        public static NewsEntryVisibility GetNewsEntryVisibility (this IModuleNewsEntry newsEntry)
-        {
-            if (newsEntry.Visibility != null) {
-                return (NewsEntryVisibility) newsEntry.Visibility.Value;
-            }
+        long RuleId { get; set; }
 
-            return NewsEntryVisibility.Show;
-        }
+        int EntryId { get; set; }
+
+        int ModuleId { get; set; }
+
+        int? Visibility { get; set; }
     }
 }
 
