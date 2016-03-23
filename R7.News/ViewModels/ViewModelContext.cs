@@ -21,8 +21,9 @@
 
 using System;
 using System.Web.UI;
-using DotNetNuke.R7;
 using DotNetNuke.UI.Modules;
+using DotNetNuke.R7.ViewModels;
+using DotNetNuke.R7.Entities.Modules;
 
 namespace R7.News.ViewModels
 {

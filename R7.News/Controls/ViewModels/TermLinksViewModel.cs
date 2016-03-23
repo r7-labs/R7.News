@@ -22,7 +22,7 @@
 using System;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.R7;
+using DotNetNuke.R7.ViewModels;
 using R7.News.Providers;
 
 namespace R7.News.Controls.ViewModels

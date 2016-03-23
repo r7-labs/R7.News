@@ -26,10 +26,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Collections.Generic;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.R7;
 using DotNetNuke.Entities.Modules;
 using R7.News.Controls.ViewModels;
-using DotNetNuke.Services.Tokens;
+using DotNetNuke.R7.ViewModels;
 
 namespace R7.News.Controls
 {
