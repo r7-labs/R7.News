@@ -13,5 +13,9 @@ namespace R7.News.Stream
         protected CheckBox checkShowAllNews;
         protected TermsSelector termsIncludeTerms;
         protected TextBox textThumbnailWidth;
+        protected CheckBox checkShowTopPager;
+        protected CheckBox checkShowBottomPager;
+        protected TextBox textPageSize;
+        protected TextBox textMaxPageLinks;
     }
 }

@@ -78,6 +78,30 @@ namespace R7.News.Stream.Components
 
         #region Tab-specific module settings
 
+        public bool ShowTopPager
+        {
+            get { return ReadSetting<bool> ("r7_News_Stream_ShowTopPager", true); }
+            set { WriteTabModuleSetting<bool> ("r7_News_Stream_ShowTopPager", value); }
+        }
+
+        public bool ShowBottomPager
+        {
+            get { return ReadSetting<bool> ("r7_News_Stream_ShowBottomPager", true); }
+            set { WriteTabModuleSetting<bool> ("r7_News_Stream_ShowBottomPager", value); }
+        }
+
+        public int PageSize
+        {
+            get { return ReadSetting<int> ("r7_News_Stream_PageSize", 3); }
+            set { WriteTabModuleSetting<int> ("r7_News_Stream_PageSize", value); }
+        }
+
+        public int MaxPageLinks
+        {
+            get { return ReadSetting<int> ("r7_News_Stream_MaxPageLinks", 3); }
+            set { WriteTabModuleSetting<int> ("r7_News_Stream_MaxPageLinks", value); }
+        }
+
         public int ThumbnailWidth
         {
             // TODO: Get default thumbnail width from config

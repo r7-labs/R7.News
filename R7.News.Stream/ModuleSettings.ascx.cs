@@ -38,6 +38,12 @@ namespace R7.News.Stream
                 if (!IsPostBack) {
 
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
+
+                    checkShowTopPager.Checked = Settings.ShowTopPager;
+                    checkShowBottomPager.Checked = Settings.ShowBottomPager;
+                    textPageSize.Text = Settings.PageSize.ToString ();
+                    textMaxPageLinks.Text = Settings.MaxPageLinks.ToString ();
+
                     checkShowAllNews.Checked = Settings.ShowAllNews;
                     termsIncludeTerms.PortalId = PortalId;
                     termsIncludeTerms.Terms = Settings.IncludeTerms;
@@ -58,6 +64,12 @@ namespace R7.News.Stream
             try {
 
                 Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
+
+                Settings.ShowTopPager = checkShowTopPager.Checked;
+                Settings.ShowBottomPager = checkShowBottomPager.Checked;
+                Settings.PageSize = int.Parse (textPageSize.Text);
+                Settings.MaxPageLinks = int.Parse (textMaxPageLinks.Text);
+
                 Settings.ShowAllNews = checkShowAllNews.Checked;
                 Settings.IncludeTerms = termsIncludeTerms.Terms;
 

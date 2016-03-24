@@ -24,7 +24,52 @@
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
         <value>Set width in px for generated thumbnail image.</value>
     </data>
+    <data name="ThumbnailWidth.Required" xml:space="preserve">
+        <value>Thumbnail width is required.</value>
+    </data>
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
-        <value>Thumbnail width must be an integer greater than 0.</value>
+        <value>Thumbnail width must be an integer from 1 to 4096.</value>
+    </data>
+    <data name="labelShowTopPager.Text" xml:space="preserve">
+        <value>Show Top Pager:</value>
+    </data>
+    <data name="labelShowTopPager.Help" xml:space="preserve">
+        <value>Check to show top paging control.</value>
+    </data>
+    <data name="labelShowBottomPager.Text" xml:space="preserve">
+        <value>Show Bottom Pager:</value>
+    </data>
+    <data name="labelShowBottomPager.Help" xml:space="preserve">
+        <value>Check to show bottom paging control.</value>
+    </data>
+    <data name="labelPageSize.Text" xml:space="preserve">
+        <value>Page Size:</value>
+    </data>
+    <data name="labelPageSize.Help" xml:space="preserve">
+        <value>Set number of news entries displayed per one page.</value>
+    </data>
+    <data name="PageSize.Required" xml:space="preserve">
+        <value>Page size is required.</value>
+    </data>
+    <data name="PageSize.Invalid" xml:space="preserve">
+        <value>Page size must be an integer between from 1 to 100.</value>
+    </data>
+    <data name="labelMaxPageLinks.Text" xml:space="preserve">
+        <value>Max. Page Links:</value>
+    </data>
+    <data name="labelMaxPageLinks.Help" xml:space="preserve">
+        <value>Set maximum number of page links in pager controls.</value>
+    </data>
+    <data name="MaxPageLinks.Required" xml:space="preserve">
+        <value>Maximum page links value is required.</value>
+    </data>
+    <data name="MaxPageLinks.Invalid" xml:space="preserve">
+        <value>Maximum page links value must be an integer between from 1 to 100.</value>
+    </data>
+    <data name="sectionBasic.Text" xml:space="preserve">
+        <value>Basic Settings</value>
+    </data>
+    <data name="sectionPagination.Text" xml:space="preserve">
+        <value>Pagination Settings</value>
     </data>
 </root>

@@ -24,7 +24,52 @@
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
         <value>Устанавливает ширину в пикселах генерируемой миниатюры изображения.</value>
     </data>
+    <data name="ThumbnailWidth.Required" xml:space="preserve">
+        <value>Укажите ширину миниатюры.</value>
+    </data>
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
-        <value>Ширина миниатюры должна быть целым числом большим 0.</value>
+        <value>Ширина миниатюры должна быть целым числом от 1 до 4096.</value>
+    </data>
+    <data name="labelShowTopPager.Text" xml:space="preserve">
+        <value>Переключатель страниц сверху:</value>
+    </data>
+    <data name="labelShowTopPager.Help" xml:space="preserve">
+        <value>Отметьте, чтобы показать переключатель страниц сверху от списка новостей.</value>
+    </data>
+    <data name="labelShowBottomPager.Text" xml:space="preserve">
+        <value>Переключатель страниц внизу:</value>
+    </data>
+    <data name="labelShowBottomPager.Help" xml:space="preserve">
+        <value>Отметьте, чтобы показать переключатель страниц снизу от списка новостей.</value>
+    </data>
+    <data name="labelPageSize.Text" xml:space="preserve">
+        <value>Новостей на страницу:</value>
+    </data>
+    <data name="labelPageSize.Help" xml:space="preserve">
+        <value>Задайте количество новостей, отображаемых на одной странице.</value>
+    </data>
+    <data name="PageSize.Required" xml:space="preserve">
+        <value>Укажите количество новостей на страницу.</value>
+    </data>
+    <data name="PageSize.Invalid" xml:space="preserve">
+        <value>Количество новостей на страницу должно быть целым числом от 1 до 100.</value>
+    </data>
+    <data name="labelMaxPageLinks.Text" xml:space="preserve">
+        <value>Макс. ссылок в переключателе:</value>
+    </data>
+    <data name="labelMaxPageLinks.Help" xml:space="preserve">
+        <value>Задайте максимальное число ссылок на страницы в переключателе страниц.</value>
+    </data>
+    <data name="MaxPageLinks.Required" xml:space="preserve">
+        <value>Укажите максимальное число ссылок в переключателе.</value>
+    </data>
+    <data name="MaxPageLinks.Invalid" xml:space="preserve">
+        <value>Максимальное число ссылок в переключателе должно быть целым числом от 1 до 100.</value>
+    </data>
+    <data name="sectionBasic.Text" xml:space="preserve">
+        <value>Основные настройки</value>
+    </data>
+    <data name="sectionPagination.Text" xml:space="preserve">
+        <value>Настройки разбивки на страницы</value>
     </data>
 </root>
