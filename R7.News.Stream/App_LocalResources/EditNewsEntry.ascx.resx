@@ -117,13 +117,13 @@
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Advanced</value>
     </data>
-    <data name="NewsEntryVisibility_Show.Text" xml:space="preserve">
+    <data name="NewsEntryVisibility_Shown.Text" xml:space="preserve">
         <value>Show</value>
     </data>
-    <data name="NewsEntryVisibility_HideAlways.Text" xml:space="preserve">
+    <data name="NewsEntryVisibility_Hidden.Text" xml:space="preserve">
         <value>Hide Always</value>
     </data>
-    <data name="NewsEntryVisibility_HideByDefault.Text" xml:space="preserve">
+    <data name="NewsEntryVisibility_DefaultHidden.Text" xml:space="preserve">
         <value>Hide by Default</value>
     </data>
 </root>
