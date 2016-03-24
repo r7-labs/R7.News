@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke.R7" Namespace="DotNetNuke.R7" %>
 <%@ Import Namespace="System.Web" %>
 
+<dnn:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
 <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
     <LayoutTemplate>
         <div runat="server" class="news-stream">
@@ -47,7 +48,7 @@
     </ItemSeparatorTemplate>
 </asp:ListView>
 <hr />
-<dnn:PagingControl id="pagingControl" runat="server" OnPageChanged="pagingControl_PageChanged" />
+<dnn:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
 <hr />
 <h2>Config:</h2>
 DataCacheTime: <%: R7.News.Components.NewsConfig.Instance.DataCacheTime %><br />

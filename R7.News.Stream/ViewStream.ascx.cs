@@ -36,7 +36,6 @@ using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 using R7.News.ViewModels;
 using PagingControlMode = DotNetNuke.R7.PagingControlMode;
-using System.Runtime.InteropServices;
 
 namespace R7.News.Stream
 {
@@ -48,9 +47,7 @@ namespace R7.News.Stream
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<StreamSettings> (this, Settings)); }
         }
 
-        protected int PageSize = 2;
-
-        protected int PageNumber = 1;
+        protected int CurrentPage = 1;
 
         #region Handlers
 
@@ -58,12 +55,31 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            // setup paging control
-            pagingControl.CurrentPage = 1;
-            pagingControl.TabID = TabId;
-            pagingControl.PageSize = PageSize;
-            pagingControl.Mode = PagingControlMode.PostBack;
-            pagingControl.QuerystringParams = "pagingModuleId=" + ModuleId;
+            // setup top paging control
+            if (Settings.ShowTopPager) {
+                pagerTop.CurrentPage = CurrentPage;
+                pagerTop.TabID = TabId;
+                pagerTop.PageSize = Settings.PageSize;
+                pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
+                pagerTop.Mode = PagingControlMode.PostBack;
+                pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
+            }
+            else {
+                pagerTop.Visible = false;
+            }
+
+            // setup bottom paging control
+            if (Settings.ShowBottomPager) {
+                pagerBottom.CurrentPage = CurrentPage;
+                pagerBottom.TabID = TabId;
+                pagerBottom.PageSize = Settings.PageSize;
+                pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
+                pagerBottom.Mode = PagingControlMode.PostBack;
+                pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
+            }
+            else {
+                pagerBottom.Visible = false;
+            }
         }
 
         /// <summary>
@@ -77,10 +93,11 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
                     int itemsCount;
-                    var pagedItems = GetPagedItems (pagingControl.CurrentPage - 1, out itemsCount);
+                    var pagedItems = GetPagedItems (CurrentPage - 1, out itemsCount);
 
-                    // setup paging control
-                    pagingControl.TotalRecords = itemsCount;
+                    // setup paging controls
+                    pagerTop.TotalRecords = itemsCount;
+                    pagerBottom.TotalRecords = itemsCount;
 
                     if (itemsCount > 0) {
                         // bind the data
@@ -100,11 +117,22 @@ namespace R7.News.Stream
         protected void pagingControl_PageChanged (object sender, EventArgs e)
         {
             int itemsCount;
-            var pagedItems = GetPagedItems (pagingControl.CurrentPage - 1, out itemsCount);
+            var pagingControl = (PagingControl) sender;
 
-            // setup paging control
-            pagingControl.TotalRecords = itemsCount;
-        
+            CurrentPage = pagingControl.CurrentPage;
+            var pagedItems = GetPagedItems (CurrentPage - 1, out itemsCount);
+
+            pagerTop.TotalRecords = itemsCount;
+            pagerBottom.TotalRecords = itemsCount;
+
+            // sync paging controls
+            if (pagingControl == pagerTop) {
+                pagerBottom.CurrentPage = CurrentPage;
+            }
+            else {
+                pagerTop.CurrentPage = CurrentPage;
+            }
+
             if (itemsCount > 0) {
                 // bind the data
                 listStream.DataSource = pagedItems;
@@ -134,8 +162,8 @@ namespace R7.News.Stream
             itemsCount =  items.Count ();
 
             return items.OrderByDescending (ne => ne.PublishedOnDate ())
-                .Skip (pageIndex * PageSize)
-                .Take (PageSize)
+                .Skip (pageIndex * Settings.PageSize)
+                .Take (Settings.PageSize)
                 .Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext))
                 .ToList ();
             

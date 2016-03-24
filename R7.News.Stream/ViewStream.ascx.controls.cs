@@ -13,6 +13,7 @@ namespace R7.News.Stream
     public partial class ViewStream
     {
         protected ListView listStream;
-        protected PagingControl pagingControl;
+        protected PagingControl pagerTop;
+        protected PagingControl pagerBottom;
     }
 }
