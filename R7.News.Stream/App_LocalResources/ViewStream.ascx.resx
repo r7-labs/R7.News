@@ -12,7 +12,7 @@
     <data name="NothingToDisplay.Text" xml:space="preserve">
         <value>Nothing to display, add some items.</value>
     </data>
-    <data name="CreatedOnDate.Format" xml:space="preserve">
+    <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
     </data>
     <data name="Visibility_Hidden.Text" xml:space="preserve">

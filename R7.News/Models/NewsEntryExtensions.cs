@@ -160,6 +160,11 @@ namespace R7.News.Models
         {
             return ModelHelper.HasBeenExpired (newsEntry.StartDate, newsEntry.EndDate);
         }
+
+        public static DateTime PublishedOnDate (this INewsEntry newsEntry)
+        {
+            return ModelHelper.PublishedOnDate (newsEntry.StartDate, newsEntry.ContentItem.CreatedOnDate);
+        }
     }
 }
 

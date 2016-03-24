@@ -42,6 +42,11 @@ namespace R7.News.Models
             var now = DateTime.Now;
             return (endDate != null || now >= endDate);
         }
+
+        public static DateTime PublishedOnDate (DateTime? startDate, DateTime createdOnDate)
+        {
+            return (startDate != null)? startDate.Value : createdOnDate;
+        }
     }
 }
 

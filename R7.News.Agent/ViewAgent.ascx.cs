@@ -82,7 +82,7 @@ namespace R7.News.Agent
                     else {
                         // create viewmodels
                         var viewModels = items
-                            .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+                            .OrderByDescending (ne => ne.PublishedOnDate ())
                             .GroupByAgentModule (Settings.EnableGrouping)
                             .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
 
@@ -169,7 +169,7 @@ namespace R7.News.Agent
 
             if (item.Group != null && item.Group.Count > 0) {
                 listGroup.DataSource = item.Group
-                    .OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+                    .OrderByDescending (ne => ne.PublishedOnDate ())
                     .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
                 listGroup.DataBind ();
             }

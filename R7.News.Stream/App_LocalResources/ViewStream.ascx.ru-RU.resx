@@ -12,7 +12,7 @@
     <data name="NothingToDisplay.Text" xml:space="preserve">
         <value>Нечего отображать, добавьте элементы.</value>
     </data>
-    <data name="CreatedOnDate.Format" xml:space="preserve">
+    <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMMM yyyy</value>
     </data>
 </root>

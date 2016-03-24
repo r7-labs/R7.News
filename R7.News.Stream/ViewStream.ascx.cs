@@ -133,7 +133,7 @@ namespace R7.News.Stream
      
             itemsCount =  items.Count ();
 
-            return items.OrderByDescending (ne => ne.ContentItem.CreatedOnDate)
+            return items.OrderByDescending (ne => ne.PublishedOnDate ())
                 .Skip (pageIndex * PageSize)
                 .Take (PageSize)
                 .Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext))

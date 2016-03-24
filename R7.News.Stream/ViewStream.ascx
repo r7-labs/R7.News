@@ -19,7 +19,7 @@
                 <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
             <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-            <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+            <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
             <div class="row">
                 <div class="col-sm-4">
                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'

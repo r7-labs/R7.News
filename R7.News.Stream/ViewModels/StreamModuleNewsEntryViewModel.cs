@@ -203,13 +203,11 @@ namespace R7.News.Stream.ViewModels
             }
         }
 
-        public string CreatedOnDateString
+        public string PublishedOnDateString
         {
-            get 
-            {
-                return ContentItem.CreatedOnDate.ToString (Localization.GetString (
-                    "CreatedOnDate.Format",
-                    Context.LocalResourceFile));
+            get { 
+                return this.PublishedOnDate ().ToString (
+                    Localization.GetString ("PublishedOnDate.Format", Context.LocalResourceFile));
             }
         }
 

@@ -27,7 +27,7 @@
                         </asp:HyperLink>
                         <%# Eval ("Title") %>
                     </h3>
-                    <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+                    <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     <p>
                         <news:TermLinks id="termLinks" runat="server" />

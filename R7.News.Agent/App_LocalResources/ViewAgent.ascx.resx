@@ -12,7 +12,7 @@
     <data name="buttonAddFromTabData.Text" xml:space="preserve">
         <value>Add From Page Data</value>
     </data>
-    <data name="CreatedOnDate.Format" xml:space="preserve">
+    <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
     </data>
 </root>
