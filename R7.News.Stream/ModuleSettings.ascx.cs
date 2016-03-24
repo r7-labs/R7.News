@@ -39,6 +39,7 @@ namespace R7.News.Stream
 
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
 
+                    checkUseShowMore.Checked = Settings.UseShowMore;
                     checkShowTopPager.Checked = Settings.ShowTopPager;
                     checkShowBottomPager.Checked = Settings.ShowBottomPager;
                     textPageSize.Text = Settings.PageSize.ToString ();
@@ -65,6 +66,7 @@ namespace R7.News.Stream
 
                 Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
 
+                Settings.UseShowMore = checkUseShowMore.Checked;
                 Settings.ShowTopPager = checkShowTopPager.Checked;
                 Settings.ShowBottomPager = checkShowBottomPager.Checked;
                 Settings.PageSize = int.Parse (textPageSize.Text);

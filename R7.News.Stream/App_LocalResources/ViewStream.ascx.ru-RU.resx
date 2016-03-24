@@ -15,4 +15,7 @@
     <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMMM yyyy</value>
     </data>
+    <data name="buttonShowMore.Text" xml:space="preserve">
+        <value>Показать еще</value>
+    </data>
 </root>

@@ -28,6 +28,10 @@
     <h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionPagination.Text") %></a></h2>
     <fieldset>
         <div class="dnnFormItem">
+            <dnn:Label id="labelUseShowMore" runat="server" ControlName="checkUseShowMore" />
+            <asp:CheckBox id="checkUseShowMore" runat="server" />
+        </div>
+        <div class="dnnFormItem">
             <dnn:Label id="labelShowTopPager" runat="server" ControlName="checkShowTopPager" />
             <asp:CheckBox id="checkShowTopPager" runat="server" />
         </div>

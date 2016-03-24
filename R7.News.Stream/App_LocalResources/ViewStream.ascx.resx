@@ -27,4 +27,7 @@
     <data name="Visibility_Expired.Format" xml:space="preserve">
         <value>Expired: {0}</value>
     </data>
+    <data name="buttonShowMore.Text" xml:space="preserve">
+        <value>Show More</value>
+    </data>
 </root>

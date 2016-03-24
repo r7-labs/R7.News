@@ -30,6 +30,12 @@
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Thumbnail width must be an integer from 1 to 4096.</value>
     </data>
+    <data name="labelUseShowMore.Text" xml:space="preserve">
+        <value>Use "Show More" button:</value>
+    </data>
+    <data name="labelUseShowMore.Help" xml:space="preserve">
+        <value>Check to use "Show More" button instead of paging controls.</value>
+    </data>
     <data name="labelShowTopPager.Text" xml:space="preserve">
         <value>Show Top Pager:</value>
     </data>

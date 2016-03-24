@@ -30,6 +30,12 @@
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Ширина миниатюры должна быть целым числом от 1 до 4096.</value>
     </data>
+    <data name="labelUseShowMore.Text" xml:space="preserve">
+        <value>Использовать кнопку "Показать еще":</value>
+    </data>
+    <data name="labelUseShowMore.Help" xml:space="preserve">
+        <value>Отметьте, чтобы использовать кнопку "Показать еще" вместо переключателей страниц.</value>
+    </data>
     <data name="labelShowTopPager.Text" xml:space="preserve">
         <value>Переключатель страниц сверху:</value>
     </data>

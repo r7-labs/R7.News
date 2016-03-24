@@ -78,6 +78,12 @@ namespace R7.News.Stream.Components
 
         #region Tab-specific module settings
 
+        public bool UseShowMore
+        {
+            get { return ReadSetting<bool> ("r7_News_Stream_UseShowMore", false); }
+            set { WriteTabModuleSetting<bool> ("r7_News_Stream_UseShowMore", value); }
+        }
+
         public bool ShowTopPager
         {
             get { return ReadSetting<bool> ("r7_News_Stream_ShowTopPager", true); }

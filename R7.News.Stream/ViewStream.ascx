@@ -48,6 +48,7 @@
     </ItemSeparatorTemplate>
 </asp:ListView>
 <hr />
+<asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-default" OnClick="buttonShowMore_Click" />
 <dnn:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
 <hr />
 <h2>Config:</h2>

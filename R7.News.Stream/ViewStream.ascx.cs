@@ -55,30 +55,43 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            // setup top paging control
-            if (Settings.ShowTopPager) {
-                pagerTop.CurrentPage = CurrentPage;
-                pagerTop.TabID = TabId;
-                pagerTop.PageSize = Settings.PageSize;
-                pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
-                pagerTop.Mode = PagingControlMode.PostBack;
-                pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
-            }
-            else {
-                pagerTop.Visible = false;
-            }
+            if (Settings.UseShowMore) {
+                buttonShowMore.Visible = true;
 
-            // setup bottom paging control
-            if (Settings.ShowBottomPager) {
-                pagerBottom.CurrentPage = CurrentPage;
-                pagerBottom.TabID = TabId;
-                pagerBottom.PageSize = Settings.PageSize;
-                pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
-                pagerBottom.Mode = PagingControlMode.PostBack;
-                pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
+                // hide paging controls
+                pagerTop.Visible = false;
+                pagerBottom.Visible = false;
             }
             else {
-                pagerBottom.Visible = false;
+
+                // hide "show more" button
+                buttonShowMore.Visible = false;
+
+                // setup top paging control
+                if (Settings.ShowTopPager) {
+                    pagerTop.CurrentPage = CurrentPage;
+                    pagerTop.TabID = TabId;
+                    pagerTop.PageSize = Settings.PageSize;
+                    pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
+                    pagerTop.Mode = PagingControlMode.PostBack;
+                    pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
+                }
+                else {
+                    pagerTop.Visible = false;
+                }
+
+                // setup bottom paging control
+                if (Settings.ShowBottomPager) {
+                    pagerBottom.CurrentPage = CurrentPage;
+                    pagerBottom.TabID = TabId;
+                    pagerBottom.PageSize = Settings.PageSize;
+                    pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
+                    pagerBottom.Mode = PagingControlMode.PostBack;
+                    pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
+                }
+                else {
+                    pagerBottom.Visible = false;
+                }
             }
         }
 
@@ -93,7 +106,7 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
                     int itemsCount;
-                    var pagedItems = GetPagedItems (CurrentPage - 1, out itemsCount);
+                    var pagedItems = GetPagedItems (CurrentPage - 1, Settings.PageSize, out itemsCount);
 
                     // setup paging controls
                     pagerTop.TotalRecords = itemsCount;
@@ -120,7 +133,7 @@ namespace R7.News.Stream
             var pagingControl = (PagingControl) sender;
 
             CurrentPage = pagingControl.CurrentPage;
-            var pagedItems = GetPagedItems (CurrentPage - 1, out itemsCount);
+            var pagedItems = GetPagedItems (CurrentPage - 1, Settings.PageSize, out itemsCount);
 
             pagerTop.TotalRecords = itemsCount;
             pagerBottom.TotalRecords = itemsCount;
@@ -140,7 +153,37 @@ namespace R7.News.Stream
             }
         }
 
-        protected IList<StreamModuleNewsEntryViewModel> GetPagedItems (int pageIndex, out int itemsCount)
+        protected int PageSize
+        {
+            get
+            { 
+                var objPageSize = ViewState ["PageSize"];
+                if (objPageSize != null) {
+                    return (int) ViewState ["PageSize"];
+                }
+
+                return Settings.PageSize;
+            }
+            set { ViewState ["PageSize"] = value; }
+        }
+
+        protected void buttonShowMore_Click (object sender, EventArgs e)
+        {
+            int itemsCount;
+
+            PageSize = PageSize + Settings.PageSize;
+            var pagedItems = GetPagedItems (CurrentPage - 1, PageSize, out itemsCount);
+
+            // hide "show more" button, if there are no more items
+            if (PageSize >= itemsCount) {
+                buttonShowMore.Visible = false;
+            }
+
+            listStream.DataSource = pagedItems;
+            listStream.DataBind ();
+        }
+
+        protected IList<StreamModuleNewsEntryViewModel> GetPagedItems (int pageIndex, int pageSize, out int itemsCount)
         {
             IEnumerable<ModuleNewsEntryInfo> items;
 
@@ -162,8 +205,8 @@ namespace R7.News.Stream
             itemsCount =  items.Count ();
 
             return items.OrderByDescending (ne => ne.PublishedOnDate ())
-                .Skip (pageIndex * Settings.PageSize)
-                .Take (Settings.PageSize)
+                .Skip (pageIndex * pageSize)
+                .Take (pageSize)
                 .Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext))
                 .ToList ();
             

@@ -15,5 +15,6 @@ namespace R7.News.Stream
         protected ListView listStream;
         protected PagingControl pagerTop;
         protected PagingControl pagerBottom;
+        protected LinkButton buttonShowMore;
     }
 }
