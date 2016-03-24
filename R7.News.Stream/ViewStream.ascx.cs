@@ -36,6 +36,7 @@ using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 using R7.News.ViewModels;
 using PagingControlMode = DotNetNuke.R7.PagingControlMode;
+using System.Runtime.InteropServices;
 
 namespace R7.News.Stream
 {
@@ -190,6 +191,46 @@ namespace R7.News.Stream
             // make edit link visible in edit mode
             linkEdit.Visible = IsEditable;
             iconEdit.Visible = IsEditable;
+
+            // visibility badges
+            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
+            List<Badge> badges = null;
+
+            if (IsEditable) {
+
+                badges = new List<Badge> ();
+            
+                if (!item.IsPublished ()) {
+                    if (item.HasBeenExpired ()) {
+                        badges.Add (new Badge {
+                            CssClass = "expired",
+                            Text = string.Format (LocalizeString ("Visibility_Expired.Format"), item.EndDate)
+                        });
+                    }
+                    else {
+                        badges.Add (new Badge {
+                            CssClass = "not-published",
+                            Text = string.Format (LocalizeString ("Visibility_NotPublished.Format"), item.StartDate)
+                        });
+                    }
+                }
+
+                if (item.GetNewsEntryVisibility () == NewsEntryVisibility.Hidden) {
+                    badges.Add (new Badge {
+                        CssClass = "is-hidden",
+                        Text = LocalizeString ("Visibility_Hidden.Text")
+                    });
+                }
+                else if (item.GetNewsEntryVisibility () == NewsEntryVisibility.DefaultHidden) {
+                    badges.Add (new Badge {
+                        CssClass = "default-hidden",
+                        Text = LocalizeString ("Visibility_DefaultHidden.Text")
+                    });
+                }
+            }
+
+            listBadges.DataSource = badges;
+            listBadges.DataBind ();
 
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");

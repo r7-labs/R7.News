@@ -1,5 +1,5 @@
 ﻿//
-//  NewsEntryVisibility.cs
+//  ModelHelper.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -23,11 +23,25 @@ using System;
 
 namespace R7.News.Models
 {
-    public enum NewsEntryVisibility
+    public static class ModelHelper
     {
-        Shown = 0, 
-        Hidden = 1,
-        DefaultHidden = 2
+        public static bool IsPublished (DateTime? startDate, DateTime? endDate)
+        {
+            var now = DateTime.Now;
+            return (startDate == null || now >= startDate) && (endDate == null || now < endDate);
+        }
+
+        public static bool WillBePublished (DateTime? startDate, DateTime? endDate)
+        {
+            var now = DateTime.Now;
+            return (startDate != null || now < startDate);
+        }
+
+        public static bool HasBeenExpired (DateTime? startDate, DateTime? endDate)
+        {
+            var now = DateTime.Now;
+            return (endDate != null || now >= endDate);
+        }
     }
 }
 

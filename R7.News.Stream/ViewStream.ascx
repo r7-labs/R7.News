@@ -1,11 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
+<%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Register TagPrefix="dnn" Assembly="DotNetNuke.R7" Namespace="DotNetNuke.R7" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
     <LayoutTemplate>
-        <div runat="server">
+        <div runat="server" class="news-stream">
             <div runat="server" id="itemPlaceholder"></div>
         </div>
     </LayoutTemplate>
@@ -17,6 +18,7 @@
                 </asp:HyperLink>
                 <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
+            <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
             <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
             <div class="row">
                 <div class="col-sm-4">

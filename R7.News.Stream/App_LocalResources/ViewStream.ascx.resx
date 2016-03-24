@@ -15,4 +15,16 @@
     <data name="CreatedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
     </data>
+    <data name="Visibility_Hidden.Text" xml:space="preserve">
+        <value>Hidden</value>
+    </data>
+    <data name="Visibility_DefaultHidden.Text" xml:space="preserve">
+        <value>Hidden by Default</value>
+    </data>
+    <data name="Visibility_NotPublished.Format" xml:space="preserve">
+        <value>Will be Published: {0}</value>
+    </data>
+    <data name="Visibility_Expired.Format" xml:space="preserve">
+        <value>Expired: {0}</value>
+    </data>
 </root>

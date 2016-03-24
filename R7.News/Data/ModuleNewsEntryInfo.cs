@@ -95,7 +95,7 @@ namespace R7.News.Data
             get { return this.GetNewsEntryVisibility (); }
             set 
             {
-                if (value == NewsEntryVisibility.Show) {
+                if (value == NewsEntryVisibility.Shown) {
                     Visibility = null;
                 }
                 else {

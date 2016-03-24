@@ -31,7 +31,7 @@ namespace R7.News.Models
                 return (NewsEntryVisibility) newsEntry.Visibility.Value;
             }
 
-            return NewsEntryVisibility.Show;
+            return NewsEntryVisibility.Shown;
         }
     }
 }

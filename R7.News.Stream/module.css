@@ -1,2 +1,25 @@
-﻿/* Place CSS for view control here */
+﻿
+.news-stream .visibility-badges {
+    margin-left:inherit
+}
 
+.news-stream .visibility-badges .badge {
+    padding-left:.5em;
+    padding-right:.5em
+}
+
+.news-stream .visibility-badges .badge.not-published {
+    background-color:#cc3
+}
+
+.news-stream .visibility-badges .badge.expired {
+    background-color:#c33
+}
+
+.news-stream .visibility-badges .badge.is-hidden {
+    background-color:#333
+}
+
+.news-stream .visibility-badges .badge.default-hidden {
+    background-color:#ccc
+}

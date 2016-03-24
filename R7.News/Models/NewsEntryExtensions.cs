@@ -145,6 +145,21 @@ namespace R7.News.Models
                 return newsEntries;
             }
         }
+
+        public static bool IsPublished (this INewsEntry newsEntry)
+        {
+            return ModelHelper.IsPublished (newsEntry.StartDate, newsEntry.EndDate);
+        }
+
+        public static bool WillBePublished (this INewsEntry newsEntry)
+        {
+            return ModelHelper.WillBePublished (newsEntry.StartDate, newsEntry.EndDate);
+        }
+
+        public static bool HasBeenExpired (this INewsEntry newsEntry)
+        {
+            return ModelHelper.HasBeenExpired (newsEntry.StartDate, newsEntry.EndDate);
+        }
     }
 }
 
