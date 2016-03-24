@@ -194,42 +194,7 @@ namespace R7.News.Stream
 
             // visibility badges
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
-            List<Badge> badges = null;
-
-            if (IsEditable) {
-
-                badges = new List<Badge> ();
-            
-                if (!item.IsPublished ()) {
-                    if (item.HasBeenExpired ()) {
-                        badges.Add (new Badge {
-                            CssClass = "expired",
-                            Text = string.Format (LocalizeString ("Visibility_Expired.Format"), item.EndDate)
-                        });
-                    }
-                    else {
-                        badges.Add (new Badge {
-                            CssClass = "not-published",
-                            Text = string.Format (LocalizeString ("Visibility_NotPublished.Format"), item.StartDate)
-                        });
-                    }
-                }
-
-                if (item.GetNewsEntryVisibility () == NewsEntryVisibility.Hidden) {
-                    badges.Add (new Badge {
-                        CssClass = "is-hidden",
-                        Text = LocalizeString ("Visibility_Hidden.Text")
-                    });
-                }
-                else if (item.GetNewsEntryVisibility () == NewsEntryVisibility.DefaultHidden) {
-                    badges.Add (new Badge {
-                        CssClass = "default-hidden",
-                        Text = LocalizeString ("Visibility_DefaultHidden.Text")
-                    });
-                }
-            }
-
-            listBadges.DataSource = badges;
+            listBadges.DataSource = item.Badges;
             listBadges.DataBind ();
 
             // show image

@@ -30,6 +30,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
 using R7.News.Stream.Components;
 using R7.News.ViewModels;
+using R7.News.Controls;
 
 namespace R7.News.Stream.ViewModels
 {
@@ -222,6 +223,50 @@ namespace R7.News.Stream.ViewModels
                 }
 
                 return string.Empty;
+            }
+        }
+
+        public List<Badge> Badges
+        {
+            get
+            { 
+                if (Context.Module.IsEditable) {
+                    var badges = new List<Badge> ();
+
+                    if (!NewsEntry.IsPublished ()) {
+                        if (NewsEntry.HasBeenExpired ()) {
+                            badges.Add (new Badge {
+                                CssClass = "expired",
+                                Text = string.Format (Localization.GetString (
+                                    "Visibility_Expired.Format", Context.LocalResourceFile), NewsEntry.EndDate)
+                            });
+                        }
+                        else {
+                            badges.Add (new Badge {
+                                CssClass = "not-published",
+                                Text = string.Format (Localization.GetString (
+                                    "Visibility_NotPublished.Format", Context.LocalResourceFile), NewsEntry.StartDate)
+                            });
+                        }
+                    }
+
+                    if (NewsEntry.GetNewsEntryVisibility () == NewsEntryVisibility.Hidden) {
+                        badges.Add (new Badge {
+                            CssClass = "is-hidden",
+                            Text = Localization.GetString ("Visibility_Hidden.Text", Context.LocalResourceFile)
+                        });
+                    }
+                    else if (NewsEntry.GetNewsEntryVisibility () == NewsEntryVisibility.DefaultHidden) {
+                        badges.Add (new Badge {
+                            CssClass = "default-hidden",
+                            Text = Localization.GetString ("Visibility_DefaultHidden.Text", Context.LocalResourceFile)
+                        });
+                    }
+
+                    return badges;
+                }
+
+                return null;
             }
         }
     }
