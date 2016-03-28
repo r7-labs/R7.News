@@ -52,7 +52,7 @@
                                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>'
                                         CssClass="img" Style="margin-bottom:1em;margin-right:1em" />
                                 </div>
-                                <div style="display:table-cell;vertical-align:top">
+                                <div style="display:table-cell;vertical-align:top;font-size:small">
                                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                                 </div>
                             </div>
