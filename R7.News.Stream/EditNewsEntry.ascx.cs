@@ -101,6 +101,7 @@ namespace R7.News.Stream
 
             radioVisibility.DataSource = EnumViewModel<NewsEntryVisibility>.GetValues (ViewModelContext, false);
             radioVisibility.DataBind ();
+            radioVisibility.SelectedIndex = 0;
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
