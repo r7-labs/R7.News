@@ -100,7 +100,8 @@
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\StreamModuleNewsEntryViewModel.cs" />
-    <Compile Include="ViewModels\StreamModuleNewsEntriesPage.cs" />
+    <Compile Include="ViewModels\StreamViewModel.cs" />
+    <Compile Include="ViewModels\StreamModuleNewsEntryViewModelPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

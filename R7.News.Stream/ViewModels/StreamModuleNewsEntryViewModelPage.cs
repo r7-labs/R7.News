@@ -1,5 +1,5 @@
 ﻿//
-//  StreamModuleNewsEntriesPage.cs
+//  StreamModuleNewsEntryViewModelPage.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -25,7 +25,7 @@ using System.Collections.Generic;
 
 namespace R7.News.Stream.ViewModels
 {
-    public struct StreamModuleNewsEntriesPage
+    public struct StreamModuleNewsEntryViewModelPage
     {
         public IList<StreamModuleNewsEntryViewModel> Page { get; set; }
 
