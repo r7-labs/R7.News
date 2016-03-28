@@ -105,6 +105,7 @@ namespace R7.News.Agent
 
                 // create viewmodels
                 var viewModels = items
+                    .Where (ne => ne.IsPublished () || IsEditable)
                     .OrderByDescending (ne => ne.EntryId == GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
@@ -191,6 +192,7 @@ namespace R7.News.Agent
 
             if (item.Group != null && item.Group.Count > 0) {
                 listGroup.DataSource = item.Group
+                    .Where (ne => ne.IsPublished () || IsEditable)
                     .OrderByDescending (ne => ne.PublishedOnDate ())
                     .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
                 listGroup.DataBind ();

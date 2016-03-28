@@ -39,10 +39,12 @@ namespace R7.News.Stream.ViewModels
         {
         }
 
-        public StreamModuleNewsEntryViewModelPage GetPage(int pageIndex, int pageSize)
+        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {
             if (pageIndex == 0 && pageSize == Settings.PageSize) {
-                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId + "&PageIndex=0&PageSize=" + pageSize;
+                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId 
+                    + "&PageIndex=0&PageSize=" + pageSize + "&IsEditable=" + Module.IsEditable;
+                
                 return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                     c => GetPageInternal (pageIndex, pageSize)
@@ -54,23 +56,38 @@ namespace R7.News.Stream.ViewModels
 
         protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize)
         {
-            IEnumerable<ModuleNewsEntryInfo> items;
+            IEnumerable<ModuleNewsEntryInfo> baseItems;
+
+            // check for pageIndex < 0
+            if (pageIndex < 0) {
+                return StreamModuleNewsEntryViewModelPage.Empty;
+            }
 
             if (Settings.ShowAllNews) {
-                items = NewsRepository.Instance.GetModuleNewsEntries (Module.ModuleId, Module.PortalId);
+                baseItems = NewsRepository.Instance.GetModuleNewsEntries (Module.ModuleId, Module.PortalId);
             }
             else {
-                items = NewsRepository.Instance.GetModuleNewsEntriesByTerms (Module.ModuleId, 
+                baseItems = NewsRepository.Instance.GetModuleNewsEntriesByTerms (Module.ModuleId, 
                     Module.PortalId, Settings.IncludeTerms);
             }
 
-            // check for pageIndex < 0 and no data available
-            if (pageIndex < 0 || items == null || !items.Any ()) {
+            // check for no data available
+            if (baseItems == null || !baseItems.Any ()) {
+                return StreamModuleNewsEntryViewModelPage.Empty;
+            }
+
+            // get only published items
+            IList<ModuleNewsEntryInfo> items = baseItems
+                .Where (ne => ne.IsPublished () || Module.IsEditable)
+                .ToList ();
+            
+            // check for no data available
+            var totalItems = items.Count;
+            if (totalItems == 0) {
                 return StreamModuleNewsEntryViewModelPage.Empty;
             }
 
             // check for pageIndex > totalPages
-            var totalItems = items.Count ();
             var totalPages = totalItems / pageSize + ((totalItems % pageSize == 0) ? 0 : 1);
             if (pageIndex > totalPages) {
                 return StreamModuleNewsEntryViewModelPage.Empty;
