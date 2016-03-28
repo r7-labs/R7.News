@@ -45,7 +45,7 @@
                                     </asp:HyperLink>
                                     <%# Eval ("Title") %>
                                 </h4>
-                                <p class="small" style="color:gray"><%# Eval ("CreatedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+                                <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                             <div style="display:table-row">
                                 <div style="display:table-cell">
                                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>'

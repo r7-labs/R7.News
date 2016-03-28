@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="AddContent.Action" xml:space="preserve">
-        <value>Добавить содержимое</value>
+    <data name="AddNewsEntry.Action" xml:space="preserve">
+        <value>Добавить новость</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve"> 
         <value>&lt;P&gt; Модуль R7.News.Stream&lt;/P&gt;</value>

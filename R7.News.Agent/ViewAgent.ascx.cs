@@ -43,6 +43,7 @@ using R7.News.Controls;
 using R7.News.Models;
 using R7.News.Data;
 using R7.News.ViewModels;
+using DotNetNuke.Entities.Icons;
 
 namespace R7.News.Agent
 {
@@ -67,7 +68,7 @@ namespace R7.News.Agent
         protected override void OnLoad (EventArgs e)
         {
             base.OnLoad (e);
-            
+
             try {
                 if (!IsPostBack) {
                     var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
@@ -112,10 +113,10 @@ namespace R7.News.Agent
 
                 actions.Add (
                     GetNextActionID (), 
-                    Localization.GetString (ModuleActionType.AddContent, this.LocalResourceFile),
-                    ModuleActionType.AddContent, 
-                    "", 
-                    "", 
+                    LocalizeString ("AddNewsEntry.Action"),
+                    ModuleActionType.AddContent,
+                    "",
+                    IconController.IconURL ("Add"), 
                     EditUrl ("EditNewsEntry"),
                     false, 
                     DotNetNuke.Security.SecurityAccessLevel.Edit,

@@ -26,6 +26,7 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
+using DotNetNuke.Entities.Icons;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
@@ -223,13 +224,13 @@ namespace R7.News.Stream
                 // to the controls dropdown menu
                 var actions = new ModuleActionCollection ();
                 actions.Add (
-                    GetNextActionID (), 
-                    LocalizeString (ModuleActionType.AddContent),
+                    GetNextActionID (),
+                    LocalizeString ("AddNewsEntry.Action"),
                     ModuleActionType.AddContent,
-                    "", 
-                    "", 
+                    "",
+                    IconController.IconURL ("Add"),
                     EditUrl ("EditNewsEntry"),
-                    false, 
+                    false,
                     DotNetNuke.Security.SecurityAccessLevel.Edit,
                     true, 
                     false
