@@ -43,7 +43,8 @@
                                     <asp:HyperLink id="linkEdit" runat="server">
                                         <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                                     </asp:HyperLink>
-                                    <%# Eval ("Title") %>
+                                    <asp:LinkButton id="buttonTitle" runat="server" Text='<%# Eval ("Title") %>' 
+                                        OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
                                 </h4>
                                 <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                             <div style="display:table-row">

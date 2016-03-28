@@ -20,30 +20,25 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
-using DotNetNuke.Services.Localization;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
 using R7.News.Components;
 using R7.News.Controls;
-using R7.News.Models;
 using R7.News.Data;
+using R7.News.Models;
 using R7.News.ViewModels;
-using DotNetNuke.Entities.Icons;
 
 namespace R7.News.Agent
 {
@@ -55,6 +50,20 @@ namespace R7.News.Agent
         protected ViewModelContext<AgentSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
+        }
+
+        protected int GroupEntryId
+        {
+            get
+            { 
+                var objGroupEntryId = ViewState ["GroupEntryId"];
+                if (objGroupEntryId != null) {
+                    return (int) objGroupEntryId;
+                }
+
+                return Null.NullInteger;
+            }
+            set { ViewState ["GroupEntryId"] = value; }
         }
 
         #endregion
@@ -71,26 +80,7 @@ namespace R7.News.Agent
 
             try {
                 if (!IsPostBack) {
-                    var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
-
-                    // check if we have some content to display, 
-                    // otherwise display a message for module editors.
-                    if ((items == null || !items.Any ()) && IsEditable) {
-
-                        // show panel with add button
-                        panelAddDefaultEntry.Visible = true;
-                    }
-                    else {
-                        // create viewmodels
-                        var viewModels = items
-                            .OrderByDescending (ne => ne.PublishedOnDate ())
-                            .GroupByAgentModule (Settings.EnableGrouping)
-                            .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
-
-                        // bind the data
-                        listAgent.DataSource = viewModels;
-                        listAgent.DataBind ();
-                    }
+                    Bind ();
                 }
             }
             catch (Exception ex) {
@@ -99,6 +89,32 @@ namespace R7.News.Agent
         }
 
         #endregion
+
+        protected void Bind ()
+        {
+            var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
+
+            // check if we have some content to display, 
+            // otherwise display a message for module editors.
+            if ((items == null || !items.Any ()) && IsEditable) {
+
+                // show panel with add button
+                panelAddDefaultEntry.Visible = true;
+            }
+            else {
+
+                // create viewmodels
+                var viewModels = items
+                    .OrderByDescending (ne => ne.EntryId == GroupEntryId)
+                    .ThenByDescending (ne => ne.PublishedOnDate ())
+                    .GroupByAgentModule (Settings.EnableGrouping)
+                    .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+
+                // bind the data
+                listAgent.DataSource = viewModels;
+                listAgent.DataBind ();
+            }
+        }
 
         #region IActionable implementation
 
@@ -209,6 +225,15 @@ namespace R7.News.Agent
             UpdateModuleTitle (newsEntry.Title);
 
             Response.Redirect (Globals.NavigateURL (), true);
+        }
+
+        protected void buttonTitle_Command (object sender, CommandEventArgs e)
+        {
+            int groupEntryId;
+            if (int.TryParse ((string) e.CommandArgument, out groupEntryId)) {
+                GroupEntryId = groupEntryId;
+                Bind ();
+            }
         }
 
         protected INewsEntry AddFromTabData ()
