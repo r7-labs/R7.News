@@ -45,7 +45,7 @@ namespace R7.News.Data
 
         #endregion
 
-        private const string newsCacheKeyPrefix = "r7_News_";
+        public const string NewsCacheKeyPrefix = "//r7_News?";
 
         public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
         {
@@ -113,7 +113,7 @@ namespace R7.News.Data
                 termController.AddTermToContent (term, contentItem);
             }
 
-            CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
+            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
 
             return newsEntry.EntryId;
         }
@@ -167,7 +167,7 @@ namespace R7.News.Data
                 termController.AddTermToContent (term, newsEntry.ContentItem);
             }
 
-            CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
+            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
         }
 
         public void DeleteNewsEntry (INewsEntry newsEntry)
@@ -175,12 +175,12 @@ namespace R7.News.Data
             // delete content item, related news entry will be deleted by foreign key rule
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
 
-            CacheHelper.RemoveCacheByPrefix (newsCacheKeyPrefix);
+            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
         }
 
         public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntries (int moduleId, int portalId)
         {
-            var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
+            var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
@@ -200,7 +200,7 @@ namespace R7.News.Data
 
         public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)
         {
-            var cacheKey = newsCacheKeyPrefix + "ModuleId_" + moduleId;
+            var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<ModuleNewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
@@ -220,7 +220,7 @@ namespace R7.News.Data
 
         public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId)
         {
-            var cacheKey = newsCacheKeyPrefix + "AgentModuleId_" + moduleId;
+            var cacheKey = NewsCacheKeyPrefix + "AgentModuleId=" + moduleId;
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByAgentInternal (moduleId)

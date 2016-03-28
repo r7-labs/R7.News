@@ -42,7 +42,7 @@ namespace R7.News.Stream.ViewModels
         public StreamModuleNewsEntryViewModelPage GetPage(int pageIndex, int pageSize)
         {
             if (pageIndex == 0 && pageSize == Settings.PageSize) {
-                var cacheKey = "r7_News_ModuleId_" + Module.ModuleId + "_PageIndex_0_PageSize_" + pageSize;
+                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId + "&PageIndex=0&PageSize=" + pageSize;
                 return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                     c => GetPageInternal (pageIndex, pageSize)
@@ -71,7 +71,6 @@ namespace R7.News.Stream.ViewModels
                 return new StreamModuleNewsEntryViewModelPage {
                     TotalItems = 0,
                     Page = null
-
                 };
             }
 
