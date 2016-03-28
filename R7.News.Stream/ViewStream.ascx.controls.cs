@@ -12,6 +12,7 @@ namespace R7.News.Stream
 {
     public partial class ViewStream
     {
+        protected Panel panelStream;
         protected ListView listStream;
         protected PagingControl pagerTop;
         protected PagingControl pagerBottom;
