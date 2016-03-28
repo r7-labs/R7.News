@@ -1,6 +1,6 @@
 ﻿data-cache-time: 20
 
-default-images-path: images/news
+default-images-path: images
 
 term-url-providers:
   - R7.News.Providers.DescriptionTermUrlProvider

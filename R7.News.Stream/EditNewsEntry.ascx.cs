@@ -96,6 +96,7 @@ namespace R7.News.Stream
 
             UpdateNewsSources ();
 
+            pickerImage.FolderPath = NewsConfig.Instance.DefaultImagesPath;
             pickerImage.FileFilter = Globals.glbImageFileTypes;
 
             radioVisibility.DataSource = EnumViewModel<NewsEntryVisibility>.GetValues (ViewModelContext, false);
