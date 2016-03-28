@@ -37,6 +37,9 @@ using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 using R7.News.ViewModels;
 using PagingControlMode = DotNetNuke.R7.PagingControlMode;
+using DotNetNuke.Common.Utilities;
+using R7.News.Components;
+using System.Web.Caching;
 
 namespace R7.News.Stream
 {
@@ -106,16 +109,16 @@ namespace R7.News.Stream
 
             try {
                 if (!IsPostBack) {
-                    int itemsCount;
-                    var pagedItems = GetPagedItems (CurrentPage - 1, Settings.PageSize, out itemsCount);
+                    
+                    var page = GetPage (CurrentPage - 1, Settings.PageSize);
 
                     // setup paging controls
-                    pagerTop.TotalRecords = itemsCount;
-                    pagerBottom.TotalRecords = itemsCount;
+                    pagerTop.TotalRecords = page.TotalItems;
+                    pagerBottom.TotalRecords = page.TotalItems;
 
-                    if (itemsCount > 0) {
+                    if (page.TotalItems > 0) {
                         // bind the data
-                        listStream.DataSource = pagedItems;
+                        listStream.DataSource = page.Page;
                         listStream.DataBind ();
                     }
                     else if (IsEditable) {
@@ -130,14 +133,14 @@ namespace R7.News.Stream
 
         protected void pagingControl_PageChanged (object sender, EventArgs e)
         {
-            int itemsCount;
             var pagingControl = (PagingControl) sender;
 
             CurrentPage = pagingControl.CurrentPage;
-            var pagedItems = GetPagedItems (CurrentPage - 1, Settings.PageSize, out itemsCount);
 
-            pagerTop.TotalRecords = itemsCount;
-            pagerBottom.TotalRecords = itemsCount;
+            var page = GetPage (CurrentPage - 1, Settings.PageSize);
+
+            pagerTop.TotalRecords = page.TotalItems;
+            pagerBottom.TotalRecords = page.TotalItems;
 
             // sync paging controls
             if (pagingControl == pagerTop) {
@@ -147,9 +150,9 @@ namespace R7.News.Stream
                 pagerTop.CurrentPage = CurrentPage;
             }
 
-            if (itemsCount > 0) {
+            if (page.TotalItems > 0) {
                 // bind the data
-                listStream.DataSource = pagedItems;
+                listStream.DataSource = page.Page;
                 listStream.DataBind ();
             }
         }
@@ -170,21 +173,33 @@ namespace R7.News.Stream
 
         protected void buttonShowMore_Click (object sender, EventArgs e)
         {
-            int itemsCount;
-
             PageSize = PageSize + Settings.PageSize;
-            var pagedItems = GetPagedItems (CurrentPage - 1, PageSize, out itemsCount);
+
+            var page = GetPage (CurrentPage - 1, PageSize);
 
             // hide "show more" button, if there are no more items
-            if (PageSize >= itemsCount) {
+            if (PageSize >= page.TotalItems) {
                 buttonShowMore.Visible = false;
             }
 
-            listStream.DataSource = pagedItems;
+            listStream.DataSource = page.Page;
             listStream.DataBind ();
         }
 
-        protected IList<StreamModuleNewsEntryViewModel> GetPagedItems (int pageIndex, int pageSize, out int itemsCount)
+        protected StreamModuleNewsEntriesPage GetPage(int pageIndex, int pageSize)
+        {
+            if (pageIndex == 0 && pageSize == Settings.PageSize) {
+                var cacheKey = "r7_News_ModuleId_" + ModuleId + "_PageIndex_0_PageSize_" + pageSize;
+                return DataCache.GetCachedData<StreamModuleNewsEntriesPage> (
+                    new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                    c => GetPageInternal (pageIndex, pageSize)
+                );
+            }
+
+            return GetPageInternal (pageIndex, pageSize);
+        }
+
+        private StreamModuleNewsEntriesPage GetPageInternal (int pageIndex, int pageSize)
         {
             IEnumerable<ModuleNewsEntryInfo> items;
 
@@ -199,18 +214,21 @@ namespace R7.News.Stream
 
             if (pageIndex < 0 || items == null || !items.Any ()) {
 
-                    itemsCount = 0;
-                    return null;
-            }
-     
-            itemsCount =  items.Count ();
+                return new StreamModuleNewsEntriesPage {
+                    TotalItems = 0,
+                    Page = null
 
-            return items.OrderByDescending (ne => ne.PublishedOnDate ())
+                };
+            }
+
+            return new StreamModuleNewsEntriesPage {
+                TotalItems = items.Count (),
+                Page = items.OrderByDescending (ne => ne.PublishedOnDate ())
                 .Skip (pageIndex * pageSize)
                 .Take (pageSize)
                 .Select (ne => new StreamModuleNewsEntryViewModel (ne, ViewModelContext))
-                .ToList ();
-            
+                .ToList ()
+            };
         }
 
         #endregion
