@@ -24,6 +24,8 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using R7.News.Stream.Components;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.Data;
+using R7.News.Components;
 
 namespace R7.News.Stream
 {
@@ -74,6 +76,9 @@ namespace R7.News.Stream
 
                 Settings.ShowAllNews = checkShowAllNews.Checked;
                 Settings.IncludeTerms = termsIncludeTerms.Terms;
+
+                // clear module-specific cache
+                CacheHelper.RemoveCacheByPrefix (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + ModuleId);
 
                 ModuleController.SynchronizeModule (ModuleId);
             }
