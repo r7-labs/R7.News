@@ -244,7 +244,7 @@ namespace R7.News.Stream
 
         protected override void UpdateItem (ModuleNewsEntryInfo item)
         {
-            NewsRepository.Instance.UpdateModuleNewsEntry (item, termsTerms.Terms, ModuleId);
+            NewsRepository.Instance.UpdateModuleNewsEntry (item, termsTerms.Terms, ModuleId, TabId);
         }
 
         protected override void DeleteItem (ModuleNewsEntryInfo item)

@@ -83,12 +83,12 @@ namespace R7.News.Data
 
         public int AddNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
         {
+            // TODO: Add value to ContentKey
             var contentItem = new ContentItem {
                 ContentTitle = newsEntry.Title,
+                Content = newsEntry.Title,
                 ContentTypeId = NewsDataProvider.Instance.NewsContentType.ContentTypeId,
                 Indexed = false,
-                // Content = newsEntry.Description,
-                // ContentKey = "mid=" + moduleId + "&ctl=DetailControlKey" + "&entryId=" + newsEntry.EntryId,
                 ModuleID = newsEntry.AgentModuleId ?? moduleId,
                 TabID = tabId,
             };
@@ -118,9 +118,9 @@ namespace R7.News.Data
             return newsEntry.EntryId;
         }
 
-        public void UpdateModuleNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, int moduleId)
+        public void UpdateModuleNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
         {
-            UpdateNewsEntry (newsEntry, terms);
+            UpdateNewsEntry (newsEntry, terms, moduleId, tabId);
 
             var entryId = newsEntry.EntryId;
             var moduleRule = NewsDataProvider.Instance.Get<ModuleRuleInfo> (
@@ -148,9 +148,16 @@ namespace R7.News.Data
             }
         }
 
-        public void UpdateNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms)
+        public void UpdateNewsEntry (ModuleNewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
         {
+            // TODO: Update value of ContentKey
+            // update content item
+            newsEntry.ContentItem.ContentTitle = newsEntry.Title;
+            newsEntry.ContentItem.Content = newsEntry.Title;
+            newsEntry.ContentItem.ModuleID = newsEntry.AgentModuleId ?? moduleId;
+            newsEntry.ContentItem.TabID = tabId;
             NewsDataProvider.Instance.ContentController.UpdateContentItem (newsEntry.ContentItem);
+
             NewsDataProvider.Instance.Update<ModuleNewsEntryInfo> (newsEntry);
 
             // update content item terms
