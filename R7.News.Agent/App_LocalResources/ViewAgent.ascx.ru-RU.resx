@@ -15,4 +15,10 @@
     <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMMM yyyy</value>
     </data>
+    <data name="Visibility_NotPublished.Format" xml:space="preserve">
+        <value>Будет опубликовано: {0}</value>
+    </data>
+    <data name="Visibility_Expired.Format" xml:space="preserve">
+        <value>Срок публикации истек: {0}</value>
+    </data>
 </root>

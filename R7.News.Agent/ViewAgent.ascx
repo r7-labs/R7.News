@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ViewAgent.ascx.cs" Inherits="R7.News.Agent.ViewAgent" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
+<%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:Panel id="panelAddDefaultEntry" runat="server" Visible="false" CssClass="dnnFormMessage dnnFormInfo">
@@ -9,7 +10,7 @@
 </asp:Panel>
 <asp:ListView id="listAgent" DataKeyNames="EntryId" runat="server" OnItemDataBound="listAgent_ItemDataBound">
     <LayoutTemplate>
-        <div runat="server">
+        <div runat="server" class="news-agent">
             <div runat="server" id="itemPlaceholder"></div>
         </div>
     </LayoutTemplate>
@@ -27,6 +28,7 @@
                         </asp:HyperLink>
                         <%# Eval ("Title") %>
                     </h3>
+                    <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
                     <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     <p>
@@ -46,6 +48,7 @@
                                     <asp:LinkButton id="buttonTitle" runat="server" Text='<%# Eval ("Title") %>' 
                                         OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
                                 </h4>
+                                <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
                                 <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
                             <div style="display:table-row">
                                 <div style="display:table-cell">

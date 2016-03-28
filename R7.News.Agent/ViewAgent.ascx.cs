@@ -171,6 +171,11 @@ namespace R7.News.Agent
             linkEdit.Visible = IsEditable;
             iconEdit.Visible = IsEditable;
 
+            // visibility badges
+            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
+            listBadges.DataSource = item.Badges;
+            listBadges.DataBind ();
+
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");
             imageImage.Visible = item.GetImage () != null;
@@ -213,6 +218,11 @@ namespace R7.News.Agent
             // make edit link visible in edit mode
             linkEdit.Visible = IsEditable;
             iconEdit.Visible = IsEditable;
+
+            // visibility badges
+            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
+            listBadges.DataSource = item.Badges;
+            listBadges.DataBind ();
 
             // show image
             var imageImage = (Image) e.Item.FindControl ("imageImage");

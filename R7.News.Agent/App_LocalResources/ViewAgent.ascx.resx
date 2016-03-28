@@ -15,4 +15,10 @@
     <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
     </data>
+    <data name="Visibility_NotPublished.Format" xml:space="preserve">
+        <value>Will be Published: {0}</value>
+    </data>
+    <data name="Visibility_Expired.Format" xml:space="preserve">
+        <value>Expired: {0}</value>
+    </data>
 </root>
