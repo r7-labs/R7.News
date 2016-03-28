@@ -27,8 +27,19 @@ namespace R7.News.Stream.ViewModels
 {
     public struct StreamModuleNewsEntryViewModelPage
     {
-        public IList<StreamModuleNewsEntryViewModel> Page { get; set; }
+        public IList<StreamModuleNewsEntryViewModel> Page { get; private set; }
 
-        public int TotalItems { get; set; }
+        public int TotalItems { get; private set; }
+
+        public static StreamModuleNewsEntryViewModelPage Empty
+        {
+            get { return new StreamModuleNewsEntryViewModelPage (0, null); }
+        }
+
+        public StreamModuleNewsEntryViewModelPage (int totalItems, IList<StreamModuleNewsEntryViewModel> page)
+        {
+            TotalItems = totalItems;
+            Page = page;
+        }
     }
 }

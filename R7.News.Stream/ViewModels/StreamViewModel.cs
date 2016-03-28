@@ -64,24 +64,26 @@ namespace R7.News.Stream.ViewModels
                     Module.PortalId, Settings.IncludeTerms);
             }
 
-            // TODO: Implement check for pageIndex > totalPages
-
+            // check for pageIndex < 0 and no data available
             if (pageIndex < 0 || items == null || !items.Any ()) {
-
-                return new StreamModuleNewsEntryViewModelPage {
-                    TotalItems = 0,
-                    Page = null
-                };
+                return StreamModuleNewsEntryViewModelPage.Empty;
             }
 
-            return new StreamModuleNewsEntryViewModelPage {
-                TotalItems = items.Count (),
-                Page = items.OrderByDescending (ne => ne.PublishedOnDate ())
+            // check for pageIndex > totalPages
+            var totalItems = items.Count ();
+            var totalPages = totalItems / pageSize + ((totalItems % pageSize == 0) ? 0 : 1);
+            if (pageIndex > totalPages) {
+                return StreamModuleNewsEntryViewModelPage.Empty;
+            }
+
+            return new StreamModuleNewsEntryViewModelPage (
+                totalItems,
+                items.OrderByDescending (ne => ne.PublishedOnDate ())
                     .Skip (pageIndex * pageSize)
                     .Take (pageSize)
                     .Select (ne => new StreamModuleNewsEntryViewModel (ne, this))
                     .ToList ()
-                };
+            );
         }
 
     }

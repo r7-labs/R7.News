@@ -105,22 +105,38 @@ namespace R7.News.Stream
                     
                     var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
 
-                    // setup paging controls
-                    pagerTop.TotalRecords = page.TotalItems;
-                    pagerBottom.TotalRecords = page.TotalItems;
-
                     if (page.TotalItems > 0) {
+                        // setup paging controls
+                        pagerTop.TotalRecords = page.TotalItems;
+                        pagerBottom.TotalRecords = page.TotalItems;
+
+                        ShowStreamControls ();
+
                         // bind the data
                         listStream.DataSource = page.Page;
                         listStream.DataBind ();
                     }
-                    else if (IsEditable) {
-                        this.Message ("NothingToDisplay.Text", MessageType.Info, true);
-                    }
+                    else {
+                        HideStreamControls ();
+                   }
                 }
             }
             catch (Exception ex) {
                 Exceptions.ProcessModuleLoadException (this, ex);
+            }
+        }
+
+        protected void ShowStreamControls ()
+        {
+            panelStream.Visible = true;
+        }
+
+        protected void HideStreamControls ()
+        {
+            panelStream.Visible = false;
+
+            if (IsEditable) {
+                this.Message ("NothingToDisplay.Text", MessageType.Info, true);
             }
         }
 
@@ -132,9 +148,6 @@ namespace R7.News.Stream
 
             var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
 
-            pagerTop.TotalRecords = page.TotalItems;
-            pagerBottom.TotalRecords = page.TotalItems;
-
             // sync paging controls
             if (pagingControl == pagerTop) {
                 pagerBottom.CurrentPage = CurrentPage;
@@ -144,9 +157,18 @@ namespace R7.News.Stream
             }
 
             if (page.TotalItems > 0) {
+                // setup paging controls
+                pagerTop.TotalRecords = page.TotalItems;
+                pagerBottom.TotalRecords = page.TotalItems;
+
+                ShowStreamControls ();
+
                 // bind the data
                 listStream.DataSource = page.Page;
                 listStream.DataBind ();
+            }
+            else {
+                HideStreamControls ();
             }
         }
 
@@ -175,8 +197,16 @@ namespace R7.News.Stream
                 buttonShowMore.Visible = false;
             }
 
-            listStream.DataSource = page.Page;
-            listStream.DataBind ();
+            if (page.TotalItems > 0) {
+                ShowStreamControls ();
+
+                // bind the data
+                listStream.DataSource = page.Page;
+                listStream.DataBind ();
+            }
+            else {
+                HideStreamControls ();
+            }
         }
 
         #endregion
