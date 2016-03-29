@@ -33,6 +33,11 @@ namespace R7.News.Models
 
             return NewsEntryVisibility.Shown;
         }
+
+        public static bool IsVisible (this IModuleNewsEntry newsEntry, bool showDefaultHidden)
+        {
+            return ModelHelper.IsVisible (newsEntry.GetNewsEntryVisibility (), showDefaultHidden);
+        }
     }
 }
 

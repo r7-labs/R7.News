@@ -60,13 +60,16 @@ namespace R7.News.Stream
 
         protected int CurrentPage = 1;
 
-        protected int TotalItems = 0;
+        protected bool ShowDefaultHidden = false;
 
         #region Handlers
 
         protected override void OnInit (EventArgs e)
         {
             base.OnInit (e);
+
+
+            // checkShowDefaultHidden.
 
             if (Settings.UseShowMore) {
                 buttonShowMore.Visible = true;
@@ -119,7 +122,7 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
                     
-                    var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
+                    var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize, ShowDefaultHidden);
 
                     ToggleStreamControls (page.TotalItems);
 
@@ -137,8 +140,6 @@ namespace R7.News.Stream
 
         protected void ToggleStreamControls (int totalItems)
         {
-            TotalItems = totalItems;
-            
             if (totalItems > 0) {
                 panelStream.Visible = true;
 
@@ -165,7 +166,7 @@ namespace R7.News.Stream
 
             CurrentPage = pagingControl.CurrentPage;
 
-            var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
+            var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize, ShowDefaultHidden);
 
             // sync paging controls
             if (pagingControl == pagerTop) {
@@ -188,12 +189,27 @@ namespace R7.News.Stream
         {
             PageSize = PageSize + Settings.PageSize;
 
-            var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
+            var page = ViewModel.GetPage (CurrentPage - 1, PageSize, ShowDefaultHidden);
 
             // hide "show more" button, if there are no more items
             if (PageSize >= page.TotalItems) {
                 buttonShowMore.Visible = false;
             }
+
+            ToggleStreamControls (page.TotalItems);
+
+            if (page.TotalItems > 0) {
+                // bind the data
+                listStream.DataSource = page.Page;
+                listStream.DataBind ();
+            }
+        }
+
+        protected void checkShowDefaultHidden_CheckedChanged (object sender, EventArgs e)
+        {
+            ShowDefaultHidden = ((CheckBox) sender).Checked;
+
+            var page = ViewModel.GetPage (CurrentPage - 1, PageSize, ShowDefaultHidden);
 
             ToggleStreamControls (page.TotalItems);
 

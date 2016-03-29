@@ -39,22 +39,22 @@ namespace R7.News.Stream.ViewModels
         {
         }
 
-        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
+        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize, bool showDefaultHidden)
         {
-            if (pageIndex == 0 && pageSize == Settings.PageSize) {
+            if (!Module.IsEditable && pageIndex == 0 && pageSize == Settings.PageSize) {
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId 
-                    + "&PageIndex=0&PageSize=" + pageSize + "&IsEditable=" + Module.IsEditable;
+                    + "&PageIndex=0&PageSize=" + pageSize + "&ShowDefaultHidden=" + showDefaultHidden;
                 
                 return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                    c => GetPageInternal (pageIndex, pageSize)
+                    c => GetPageInternal (pageIndex, pageSize, showDefaultHidden)
                 );
             }
 
-            return GetPageInternal (pageIndex, pageSize);
+            return GetPageInternal (pageIndex, pageSize, showDefaultHidden);
         }
 
-        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize)
+        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool showDefaultHidden)
         {
             IEnumerable<ModuleNewsEntryInfo> baseItems;
 
@@ -78,7 +78,7 @@ namespace R7.News.Stream.ViewModels
 
             // get only published items
             IList<ModuleNewsEntryInfo> items = baseItems
-                .Where (ne => ne.IsPublished () || Module.IsEditable)
+                .Where (ne => (ne.IsPublished () && ne.IsVisible (showDefaultHidden)) || Module.IsEditable)
                 .ToList ();
             
             // check for no data available

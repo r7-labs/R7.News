@@ -30,4 +30,7 @@
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Show More</value>
     </data>
+    <data name="checkShowDefaultHidden.Text" xml:space="preserve">
+        <value>Show Hidden News</value>
+    </data>
 </root>
