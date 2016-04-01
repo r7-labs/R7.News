@@ -22,13 +22,13 @@
         <value>Thematic Weight Filter:</value>
     </data>
     <data name="labelThematicWeightFilter.Help" xml:space="preserve">
-        <value>Select minimum and maximum value of news entries thematic weight this module should display.</value>
+        <value>Select minimum and maximum value of news entries thematic weight range this module should display.</value>
     </data>
     <data name="labelStructuralWeightFilter.Text" xml:space="preserve">
         <value>Structural Weight Filter:</value>
     </data>
     <data name="labelStructuralWeightFilter.Help" xml:space="preserve">
-        <value>Select minimum and maximum value of news entries structural weight this module should display.</value>
+        <value>Select minimum and maximum value of news entries structural weight range this module should display.</value>
     </data>
     <data name="labelMaxStructuralWeight.Text" xml:space="preserve">
         <value>Max. Structural Weight:</value>
