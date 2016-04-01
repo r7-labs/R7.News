@@ -126,6 +126,18 @@ namespace R7.News.Stream.ViewModels
             set {}
         }
 
+        public int ThematicWeight
+        { 
+            get { return NewsEntry.ThematicWeight; }
+            set { }
+        }
+
+        public int StructuralWeight
+        { 
+            get { return NewsEntry.StructuralWeight; }
+            set { }
+        }
+
         public int? SourceId
         {
             get { return NewsEntry.SourceId; }

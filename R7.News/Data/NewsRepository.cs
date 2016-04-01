@@ -178,6 +178,30 @@ namespace R7.News.Data
             CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
         }
 
+        public IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId, int portalId, 
+            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        {
+            var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
+
+            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                c => GetNewsEntriesInternal (moduleId, portalId, 
+                    minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
+            );
+        }
+
+        protected IEnumerable<NewsEntryInfo> GetNewsEntriesInternal (int moduleId, int portalId, 
+            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        {
+            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
+                "r7_News_GetNewsEntries", moduleId, portalId, 
+                        minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
+                    .WithContentItems ()
+                    .WithAgentModules (NewsDataProvider.Instance.ModuleController)
+                    .WithNewsSources ()
+                    .Cast<NewsEntryInfo> ();
+        }
+
         public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntries (int moduleId, int portalId)
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
@@ -196,6 +220,32 @@ namespace R7.News.Data
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .WithNewsSources ()
                     .Cast<ModuleNewsEntryInfo> ();
+        }
+
+        public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms (int moduleId, int portalId,
+            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
+            IList<Term> terms)
+        {
+            var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
+
+            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                c => GetNewsEntriesByTermsInternal (moduleId, portalId, 
+                    minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight, terms)
+            );
+        }
+
+        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int moduleId, int portalId, 
+            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
+            IList<Term> terms)
+        {
+            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
+                "r7_News_GetNewsEntriesByTerms", moduleId, portalId, minThematicWeight, maxThematicWeight, 
+                        minStructuralWeight, maxStructuralWeight, terms.Select (t => t.TermId).ToArray ())
+                    .WithContentItems ()
+                    .WithAgentModules (NewsDataProvider.Instance.ModuleController)
+                    .WithNewsSources ()
+                    .Cast<NewsEntryInfo> ();
         }
 
         public IEnumerable<ModuleNewsEntryInfo> GetModuleNewsEntriesByTerms (int moduleId, int portalId, IList<Term> terms)

@@ -55,6 +55,10 @@ namespace R7.News.Models
 
         bool IsSticky { get; set; }
 
+        int ThematicWeight { get; set; }
+
+        int StructuralWeight { get; set; }
+
         // REVIEW: News without sources?
         int? SourceId { get; set; }
 

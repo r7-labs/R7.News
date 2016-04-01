@@ -61,6 +61,10 @@ namespace R7.News.Data
 
         public bool IsSticky { get; set; }
 
+        public int ThematicWeight { get; set; }
+
+        public int StructuralWeight { get; set; }
+
         public int? SourceId { get; set; }
 
         public int? SourceItemId { get; set; }

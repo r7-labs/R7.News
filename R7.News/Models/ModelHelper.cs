@@ -53,6 +53,13 @@ namespace R7.News.Models
             return visibility == NewsEntryVisibility.Shown ||
                 (visibility == NewsEntryVisibility.DefaultHidden && showDefaultHidden);
         }
+
+        public static bool IsVisible (int thematicWeight, int structuralWeight, 
+            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        {
+            return (thematicWeight >= minThematicWeight && thematicWeight <= maxThematicWeight)
+                || (structuralWeight >= minStructuralWeight && structuralWeight <= maxStructuralWeight);
+        }
     }
 }
 

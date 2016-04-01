@@ -67,6 +67,10 @@ namespace R7.News.Data
 
         public int? SourceItemId { get; set; }
 
+        public int ThematicWeight { get; set; }
+
+        public int StructuralWeight { get; set; }
+
         [IgnoreColumn]
         public ContentItem ContentItem { get; set; }
 

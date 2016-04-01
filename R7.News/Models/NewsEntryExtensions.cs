@@ -165,6 +165,13 @@ namespace R7.News.Models
         {
             return ModelHelper.PublishedOnDate (newsEntry.StartDate, newsEntry.ContentItem.CreatedOnDate);
         }
+
+        public static bool IsVisible (this INewsEntry newsEntry, int minThematicWeight, int maxThematicWeight,
+            int minStructuralWeight, int maxStructuralWeight)
+        {
+            return ModelHelper.IsVisible (newsEntry.ThematicWeight, newsEntry.StructuralWeight, 
+                minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight);
+        }
     }
 }
 
