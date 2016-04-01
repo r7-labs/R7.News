@@ -18,5 +18,9 @@ namespace R7.News.Stream
         protected CheckBox checkShowBottomPager;
         protected TextBox textPageSize;
         protected TextBox textMaxPageLinks;
+        protected DropDownList comboMinThematicWeight;
+        protected DropDownList comboMaxThematicWeight;
+        protected DropDownList comboMinStructuralWeight;
+        protected DropDownList comboMaxStructuralWeight;
     }
 }

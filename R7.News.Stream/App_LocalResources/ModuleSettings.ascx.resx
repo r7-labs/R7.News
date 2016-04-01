@@ -18,6 +18,24 @@
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>If checked, module will show all news on the site, ignoring 'IncludeTerms' setting.</value>
     </data>
+    <data name="labelThematicWeightFilter.Text" xml:space="preserve">
+        <value>Thematic Weight Filter:</value>
+    </data>
+    <data name="labelThematicWeightFilter.Help" xml:space="preserve">
+        <value>Select minimum and maximum value of news entries thematic weight this module should display.</value>
+    </data>
+    <data name="labelStructuralWeightFilter.Text" xml:space="preserve">
+        <value>Structural Weight Filter:</value>
+    </data>
+    <data name="labelStructuralWeightFilter.Help" xml:space="preserve">
+        <value>Select minimum and maximum value of news entries structural weight this module should display.</value>
+    </data>
+    <data name="labelMaxStructuralWeight.Text" xml:space="preserve">
+        <value>Max. Structural Weight:</value>
+    </data>
+    <data name="labelMaxStructuralWeight.Help" xml:space="preserve">
+        <value>Select maximum value of news entries structural weight this module should display.</value>
+    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Thumbnail Width:</value>
     </data>

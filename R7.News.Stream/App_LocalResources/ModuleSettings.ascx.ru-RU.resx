@@ -18,6 +18,30 @@
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>Если отмечено, модуль будет отображать все новости сайта, игнорируя настройку 'Показывать новости с метками'.</value>
     </data>
+    <data name="labelMinThematicWeight.Text" xml:space="preserve">
+        <value>Мин. тематический вес:</value>
+    </data>
+    <data name="labelMinThematicWeight.Help" xml:space="preserve">
+        <value>Выберите значение минимального тематического веса новостей, отображаемых данным модулем.</value>
+    </data>
+    <data name="labelMaxThematicWeight.Text" xml:space="preserve">
+        <value>Макс. тематический вес:</value>
+    </data>
+    <data name="labelMaxThematicWeight.Help" xml:space="preserve">
+        <value>Выберите значение максимального тематического веса новостей, отображаемых данным модулем.</value>
+    </data>
+    <data name="labelMinStructuralWeight.Text" xml:space="preserve">
+        <value>Мин. структурный вес:</value>
+    </data>
+    <data name="labelMinStructuralWeight.Help" xml:space="preserve">
+        <value>Выберите значение минимального структурного веса новостей, отображаемых данным модулем.</value>
+    </data>
+    <data name="labelMaxStructuralWeight.Text" xml:space="preserve">
+        <value>Макс. структурный вес:</value>
+    </data>
+    <data name="labelMaxStructuralWeight.Help" xml:space="preserve">
+        <value>Выберите значение максимального структурного веса новостей, отображаемых данным модулем.</value>
+    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Ширина миниатюры:</value>
     </data>

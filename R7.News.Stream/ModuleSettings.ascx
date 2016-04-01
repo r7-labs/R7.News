@@ -16,6 +16,18 @@
             <dnn:TermsSelector id="termsIncludeTerms" runat="server" />
         </div>
         <div class="dnnFormItem">
+            <dnn:Label id="labelThematicWeightFilter" runat="server" ControlName="comboMinThematicWeight" />
+            <asp:DropDownList id="comboMinThematicWeight" runat="server" Style="width:auto" />
+            <span style="padding-right:.5em;padding-left:.5em">&ndash;</span>
+            <asp:DropDownList id="comboMaxThematicWeight" runat="server" Style="width:auto" />
+        </div>
+        <div class="dnnFormItem">
+            <dnn:Label id="labelStructuralWeightFilter" runat="server" ControlName="comboMinStructuralWeight" />
+            <asp:DropDownList id="comboMinStructuralWeight" runat="server" Style="width:auto" />
+            <span style="padding-right:.5em;padding-left:.5em">&ndash;</span>
+            <asp:DropDownList id="comboMaxStructuralWeight" runat="server" Style="width:auto" />
+        </div>
+        <div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="textThumbnailWidth"

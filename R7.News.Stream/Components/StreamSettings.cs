@@ -81,18 +81,18 @@ namespace R7.News.Stream.Components
             set { WriteModuleSetting<int> ("r7_News_Stream_MinThematicWeight", value); }
         }
 
-        public int MinStructuralWeight
-        {
-            // TODO: Define default values in config
-            get { return ReadSetting<int> ("r7_News_Stream_MinStructuralWeight", 0); }
-            set { WriteModuleSetting<int> ("r7_News_Stream_MinStructuralWeight", value); }
-        }
-
         public int MaxThematicWeight
         {
             // TODO: Define default values in config
             get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", 10); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MaxThematicWeight", value); }
+        }
+
+        public int MinStructuralWeight
+        {
+            // TODO: Define default values in config
+            get { return ReadSetting<int> ("r7_News_Stream_MinStructuralWeight", 0); }
+            set { WriteModuleSetting<int> ("r7_News_Stream_MinStructuralWeight", value); }
         }
 
         public int MaxStructuralWeight

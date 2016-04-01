@@ -20,17 +20,33 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Exceptions;
-using R7.News.Stream.Components;
+using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
-using R7.News.Data;
+using DotNetNuke.Services.Exceptions;
 using R7.News.Components;
+using R7.News.Data;
+using R7.News.Stream.Components;
 
 namespace R7.News.Stream
 {
     public partial class ModuleSettings : ModuleSettingsBase<StreamSettings>
     {
+        protected override void OnInit (EventArgs e)
+        {
+            base.OnInit (e);
+
+            // TODO: Get max value from config
+            // fill weight comboboxes
+            for (var i = 0; i < 10; i++) {
+                comboMinThematicWeight.Items.Add (i.ToString ());
+                comboMaxThematicWeight.Items.Add (i.ToString ());
+                comboMinStructuralWeight.Items.Add (i.ToString ());
+                comboMaxStructuralWeight.Items.Add (i.ToString ());
+            }
+        }
+
         /// <summary>
         /// Handles the loading of the module setting for this control
         /// </summary>
@@ -52,6 +68,10 @@ namespace R7.News.Stream
                     termsIncludeTerms.Terms = Settings.IncludeTerms;
                     termsIncludeTerms.DataBind ();
 
+                    comboMinThematicWeight.SelectByValue (Settings.MinThematicWeight);
+                    comboMaxThematicWeight.SelectByValue (Settings.MaxThematicWeight);
+                    comboMinStructuralWeight.SelectByValue (Settings.MinStructuralWeight);
+                    comboMaxStructuralWeight.SelectByValue (Settings.MaxStructuralWeight);
                 }
             }
             catch (Exception ex) {
@@ -76,6 +96,25 @@ namespace R7.News.Stream
 
                 Settings.ShowAllNews = checkShowAllNews.Checked;
                 Settings.IncludeTerms = termsIncludeTerms.Terms;
+
+                var minThematicWeight = int.Parse (comboMinThematicWeight.SelectedValue);
+                var maxThematicWeight = int.Parse (comboMaxThematicWeight.SelectedValue);
+                var minStructuralWeight = int.Parse (comboMinStructuralWeight.SelectedValue);
+                var maxStructuralWeight = int.Parse (comboMaxStructuralWeight.SelectedValue);
+
+                // HACK: Implement custom validator for this
+                if (minThematicWeight > maxThematicWeight) {
+                    minThematicWeight = maxThematicWeight;
+                }
+
+                if (minStructuralWeight > maxStructuralWeight) {
+                    minStructuralWeight = maxStructuralWeight;
+                }
+
+                Settings.MinThematicWeight = minThematicWeight;
+                Settings.MaxThematicWeight = maxThematicWeight;
+                Settings.MinStructuralWeight = minStructuralWeight;
+                Settings.MaxStructuralWeight = maxStructuralWeight;
 
                 // clear module-specific cache
                 CacheHelper.RemoveCacheByPrefix (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + ModuleId);
