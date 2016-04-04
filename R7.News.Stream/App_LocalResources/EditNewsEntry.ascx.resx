@@ -99,6 +99,18 @@
     <data name="labelUrl.Help" xml:space="preserve">
         <value>Provide URL to news details.</value>
     </data>
+    <data name="labelThematicWeight.Text" xml:space="preserve">
+        <value>Thematic Weight:</value>
+    </data>
+    <data name="labelThematicWeight.Help" xml:space="preserve">
+        <value>Select news entry thematic weight. Using this value, each Stream module will decide to display (or not) the news entry according to the module thematic weight filter settings.</value>
+    </data>
+    <data name="labelStructuralWeight.Text" xml:space="preserve">
+        <value>Structural Weight:</value>
+    </data>
+    <data name="labelStructuralWeight.Help" xml:space="preserve">
+        <value>Select news entry structural weight. Using this value, each Stream module will decide to display (or not) the news entry according to the module structural weight filter settings.</value>
+    </data>
     <data name="labelVisibility.Text" xml:space="preserve">
         <value>Visibility:</value>
     </data>

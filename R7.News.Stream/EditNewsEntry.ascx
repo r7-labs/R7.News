@@ -36,8 +36,16 @@
                 </div>
             </fieldset>
         </div>
-         <div id="newsentry-module-tab">
+        <div id="newsentry-module-tab">
             <fieldset>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
+                    <asp:DropDownList id="comboThematicWeight" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
+                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
+                </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelVisibility" runat="server" ControlName="radioVisibility" />
                     <asp:RadioButtonList id="radioVisibility" runat="server"

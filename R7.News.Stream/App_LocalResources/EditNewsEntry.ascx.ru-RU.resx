@@ -18,6 +18,18 @@
     <data name="SortIndex.Invalid" xml:space="preserve">
         <value>Индекс сортировки должен быть целым числом.</value>
     </data>
+    <data name="labelThematicWeight.Text" xml:space="preserve">
+        <value>Тематический вес:</value>
+    </data>
+    <data name="labelThematicWeight.Help" xml:space="preserve">
+        <value>Выберите тематический вес новости. Используя это значение и настройки своего тематического фильтра, каждый модуль Stream может решить, следует ли отображать данную новость.</value>
+    </data>
+    <data name="labelStructuralWeight.Text" xml:space="preserve">
+        <value>Структурный вес:</value>
+    </data>
+    <data name="labelStructuralWeight.Help" xml:space="preserve">
+        <value>Выберите структурный вес новости. Используя это значение и настройки своего структурного фильтра, каждый модуль Stream может решить, следует ли отображать данную новость.</value>
+    </data>
     <data name="labelVisibility.Text" xml:space="preserve">
         <value>Видимость:</value>
     </data>

@@ -102,6 +102,13 @@ namespace R7.News.Stream
             radioVisibility.DataSource = EnumViewModel<NewsEntryVisibility>.GetValues (ViewModelContext, false);
             radioVisibility.DataBind ();
             radioVisibility.SelectedIndex = 0;
+
+            // TODO: Get max value from config
+            // fill weight comboboxes
+            for (var i = 0; i < 10; i++) {
+                comboThematicWeight.Items.Add (i.ToString ());
+                comboStructuralWeight.Items.Add (i.ToString ());
+            }
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
@@ -174,6 +181,9 @@ namespace R7.News.Stream
 
             urlUrl.Url = item.Url;
 
+            comboThematicWeight.SelectByValue (item.ThematicWeight);
+            comboStructuralWeight.SelectByValue (item.StructuralWeight);
+
             radioVisibility.SelectByValue (item.NewsEntryVisibility);
 
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
@@ -225,6 +235,9 @@ namespace R7.News.Stream
             item.SourceItemId = TypeUtils.ParseToNullable<int> (comboNewsSource.SelectedValue);
 
             item.Url = urlUrl.Url;
+
+            item.ThematicWeight = int.Parse (comboThematicWeight.SelectedValue);
+            item.StructuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
 
             item.NewsEntryVisibility = (NewsEntryVisibility) Enum.Parse (typeof (NewsEntryVisibility), radioVisibility.SelectedValue);
 
