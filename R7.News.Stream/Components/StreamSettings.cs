@@ -27,6 +27,7 @@ using DotNetNuke.UI.Modules;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.R7;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.Components;
 
 namespace R7.News.Stream.Components
 {
@@ -74,31 +75,28 @@ namespace R7.News.Stream.Components
             set { WriteModuleSetting<bool> ("r7_News_Stream_ShowAllNews", value); }
         }
 
+        // REVIEW: Separate config settings for weight filters
         public int MinThematicWeight
         {
-            // TODO: Define default values in config
             get { return ReadSetting<int> ("r7_News_Stream_MinThematicWeight", 0); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MinThematicWeight", value); }
         }
 
         public int MaxThematicWeight
         {
-            // TODO: Define default values in config
-            get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", 10); }
+            get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", NewsConfig.Instance.NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MaxThematicWeight", value); }
         }
 
         public int MinStructuralWeight
         {
-            // TODO: Define default values in config
             get { return ReadSetting<int> ("r7_News_Stream_MinStructuralWeight", 0); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MinStructuralWeight", value); }
         }
 
         public int MaxStructuralWeight
         {
-            // TODO: Define default values in config
-            get { return ReadSetting<int> ("r7_News_Stream_MaxStructuralWeight", 10); }
+            get { return ReadSetting<int> ("r7_News_Stream_MaxStructuralWeight", NewsConfig.Instance.NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MaxStructuralWeight", value); }
         }
 

@@ -2,6 +2,11 @@
 
 default-images-path: images
 
+news-entry:
+  max-weight: 10
+  default-thematic-weight: 10
+  default-structural-weight: 10
+
 term-url-providers:
   - R7.News.Providers.DescriptionTermUrlProvider
   - R7.News.Integrations.UniversityDivisionTermUrlProvider

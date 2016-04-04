@@ -37,9 +37,8 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            // TODO: Get max value from config
             // fill weight comboboxes
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i <= NewsConfig.Instance.NewsEntry.MaxWeight; i++) {
                 comboMinThematicWeight.Items.Add (i.ToString ());
                 comboMaxThematicWeight.Items.Add (i.ToString ());
                 comboMinStructuralWeight.Items.Add (i.ToString ());

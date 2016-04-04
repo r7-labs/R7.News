@@ -32,6 +32,8 @@ namespace R7.News.Components
 
         public string DefaultImagesPath { get; set; }
 
+        public NewsEntryConfig NewsEntry { get; set; }
+
         #region TermUrlProviders
 
         public Collection<string> TermUrlProviders { get; set; }
@@ -45,10 +47,18 @@ namespace R7.News.Components
 
         public void AddTermUrlProvider (ITermUrlProvider provider)
         {
-            
             TermUrlProvidersInternal.Add (provider);
         }
 
         #endregion
+    }
+
+    public class NewsEntryConfig
+    {
+        public int MaxWeight { get; set; }
+
+        public int DefaultThematicWeight { get; set; }
+
+        public int DefaultStructuralWeight { get; set; }
     }
 }

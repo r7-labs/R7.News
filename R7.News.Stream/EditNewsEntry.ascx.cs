@@ -103,12 +103,15 @@ namespace R7.News.Stream
             radioVisibility.DataBind ();
             radioVisibility.SelectedIndex = 0;
 
-            // TODO: Get max value from config
-            // fill weight comboboxes
-            for (var i = 0; i < 10; i++) {
+            // fill weight comboboxes, -1 allow to create hidden news
+            for (var i = -1; i <= NewsConfig.Instance.NewsEntry.MaxWeight; i++) {
                 comboThematicWeight.Items.Add (i.ToString ());
                 comboStructuralWeight.Items.Add (i.ToString ());
             }
+
+            // set default news entry weight
+            comboThematicWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultThematicWeight);
+            comboStructuralWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultStructuralWeight);
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
