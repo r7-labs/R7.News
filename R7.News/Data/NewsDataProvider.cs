@@ -25,7 +25,7 @@ using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.R7.Data;
 
-namespace R7.News.Components
+namespace R7.News.Data
 {
     public class NewsDataProvider: Dal2DataProvider
     {

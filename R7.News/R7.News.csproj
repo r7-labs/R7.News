@@ -88,7 +88,6 @@
     <Compile Include="Components\NewsController.cs" />
     <Compile Include="Models\INewsEntry.cs" />
     <Compile Include="Components\CacheHelper.cs" />
-    <Compile Include="Components\NewsDataProvider.cs" />
     <Compile Include="Models\IModuleNewsEntry.cs" />
     <Compile Include="Models\INewsEntryModuleRule.cs" />
     <Compile Include="Components\NewsConfig.cs" />
@@ -121,6 +120,7 @@
     <Compile Include="Controls\BadgeList.ascx.cs">
       <DependentUpon>BadgeList.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Data\NewsDataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

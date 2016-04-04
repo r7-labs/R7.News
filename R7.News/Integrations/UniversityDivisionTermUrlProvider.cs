@@ -28,6 +28,7 @@ using DotNetNuke.Common.Utilities;
 using System.Web.Caching;
 using R7.News.Components;
 using R7.News.Providers;
+using R7.News.Data;
 
 namespace R7.News.Integrations
 {
