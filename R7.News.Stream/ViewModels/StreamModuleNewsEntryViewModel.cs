@@ -34,13 +34,13 @@ using R7.News.Controls;
 
 namespace R7.News.Stream.ViewModels
 {
-    public class StreamModuleNewsEntryViewModel: IModuleNewsEntry
+    public class StreamModuleNewsEntryViewModel: INewsEntry
     {
         protected ViewModelContext<StreamSettings> Context;
 
-        protected IModuleNewsEntry NewsEntry;
+        protected INewsEntry NewsEntry;
 
-        public StreamModuleNewsEntryViewModel (IModuleNewsEntry newsEntry, ViewModelContext<StreamSettings> context)
+        public StreamModuleNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context)
         {
             NewsEntry = newsEntry;
             Context = context;
@@ -174,18 +174,6 @@ namespace R7.News.Stream.ViewModels
             set {}
         }
 
-        public int? ModuleId
-        {
-            get { return NewsEntry.ModuleId; }
-            set {}
-        }
-
-        public int? Visibility
-        {
-            get { return NewsEntry.Visibility; }
-            set {}
-        }
-
         #endregion
 
         public string ImageUrl
@@ -258,19 +246,6 @@ namespace R7.News.Stream.ViewModels
                                     "Visibility_NotPublished.Format", Context.LocalResourceFile), NewsEntry.StartDate)
                             });
                         }
-                    }
-
-                    if (NewsEntry.GetNewsEntryVisibility () == NewsEntryVisibility.Hidden) {
-                        badges.Add (new Badge {
-                            CssClass = "is-hidden",
-                            Text = Localization.GetString ("Visibility_Hidden.Text", Context.LocalResourceFile)
-                        });
-                    }
-                    else if (NewsEntry.GetNewsEntryVisibility () == NewsEntryVisibility.DefaultHidden) {
-                        badges.Add (new Badge {
-                            CssClass = "default-hidden",
-                            Text = Localization.GetString ("Visibility_DefaultHidden.Text", Context.LocalResourceFile)
-                        });
                     }
 
                     return badges;

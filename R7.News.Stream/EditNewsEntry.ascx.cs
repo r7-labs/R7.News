@@ -39,7 +39,7 @@ namespace R7.News.Stream
 {
     public enum EditNewsEntryTab { Common, Sources, Advanced };
 
-    public partial class EditNewsEntry : EditPortalModuleBase<ModuleNewsEntryInfo,int>
+    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
     {
         #region Properties
 
@@ -99,10 +99,6 @@ namespace R7.News.Stream
             pickerImage.FolderPath = NewsConfig.Instance.DefaultImagesPath;
             pickerImage.FileFilter = Globals.glbImageFileTypes;
 
-            radioVisibility.DataSource = EnumViewModel<NewsEntryVisibility>.GetValues (ViewModelContext, false);
-            radioVisibility.DataBind ();
-            radioVisibility.SelectedIndex = 0;
-
             // fill weight comboboxes, -1 allow to create hidden news
             for (var i = -1; i <= NewsConfig.Instance.NewsEntry.MaxWeight; i++) {
                 comboThematicWeight.Items.Add (i.ToString ());
@@ -155,10 +151,10 @@ namespace R7.News.Stream
             buttonUpdate.Text = LocalizeString ("Add.Text");
         }
 
-        protected override void LoadItem (ModuleNewsEntryInfo item)
+        protected override void LoadItem (NewsEntryInfo item)
         {
             // load also content item
-            item = (ModuleNewsEntryInfo) item.WithContentItem ();
+            item = (NewsEntryInfo) item.WithContentItem ();
 
             var image = item.ContentItem.Images.FirstOrDefault ();
             if (image != null) {
@@ -187,8 +183,6 @@ namespace R7.News.Stream
             comboThematicWeight.SelectByValue (item.ThematicWeight);
             comboStructuralWeight.SelectByValue (item.StructuralWeight);
 
-            radioVisibility.SelectByValue (item.NewsEntryVisibility);
-
             ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
             ctlAudit.LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString ();
             ctlAudit.CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName;
@@ -199,7 +193,7 @@ namespace R7.News.Stream
 
         private List<IFileInfo> images;
 
-        protected override void BeforeUpdateItem (ModuleNewsEntryInfo item)
+        protected override void BeforeUpdateItem (NewsEntryInfo item)
         {
             if (ItemId == null) {
                 images = new List<IFileInfo> ();
@@ -242,30 +236,28 @@ namespace R7.News.Stream
             item.ThematicWeight = int.Parse (comboThematicWeight.SelectedValue);
             item.StructuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
 
-            item.NewsEntryVisibility = (NewsEntryVisibility) Enum.Parse (typeof (NewsEntryVisibility), radioVisibility.SelectedValue);
-
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
                 item.AgentModuleId = ModuleId;
             }   
         }
 
-        protected override ModuleNewsEntryInfo GetItem (int itemId)
+        protected override NewsEntryInfo GetItem (int itemId)
         {
-            return NewsRepository.Instance.GetModuleNewsEntry (itemId, ModuleId);
+            return NewsRepository.Instance.GetNewsEntry (itemId, PortalId);
         }
 
-        protected override int AddItem (ModuleNewsEntryInfo item)
+        protected override int AddItem (NewsEntryInfo item)
         {
-            NewsRepository.Instance.AddModuleNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
+            NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
             return item.EntryId;
         }
 
-        protected override void UpdateItem (ModuleNewsEntryInfo item)
+        protected override void UpdateItem (NewsEntryInfo item)
         {
-            NewsRepository.Instance.UpdateModuleNewsEntry (item, termsTerms.Terms, ModuleId, TabId);
+            NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms, ModuleId, TabId);
         }
 
-        protected override void DeleteItem (ModuleNewsEntryInfo item)
+        protected override void DeleteItem (NewsEntryInfo item)
         {
             NewsRepository.Instance.DeleteNewsEntry (item);
         }

@@ -23,7 +23,7 @@ BEGIN
         DueDate datetime NULL,
         SortIndex int NOT NULL DEFAULT ((0)),
         IsSticky bit NOT NULL DEFAULT ((0)),
-        ThematicWeight NOT NULL,
+        ThematicWeight int NOT NULL,
         StructuralWeight int NOT NULL
         CONSTRAINT [PK_{objectQualifier}r7_News] PRIMARY KEY CLUSTERED (EntryID)
         CONSTRAINT [FK_{objectQualifier}r7_News_Portals] FOREIGN KEY (PortalID)
@@ -41,24 +41,6 @@ BEGIN
 
     CREATE NONCLUSTERED INDEX [IX_{objectQualifier}_r7_News_ContentItemID] 
         ON {databaseOwner}[{objectQualifier}r7_News] (ContentItemID)
-END
-GO
-
-IF NOT EXISTS (select * from sys.objects where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News_ModuleRules]') and type in (N'U'))
-BEGIN
-    CREATE TABLE {databaseOwner}[{objectQualifier}r7_News_ModuleRules]
-    (
-        RuleID bigint NOT NULL IDENTITY (1, 1),
-        EntryID int NOT NULL,
-        ModuleID int NOT NULL,
-        Visibility int NOT NULL DEFAULT ((0))
-        CONSTRAINT [PK_{objectQualifier}r7_News_ModuleRules] PRIMARY KEY CLUSTERED (RuleID)
-        CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_News] FOREIGN KEY (EntryID)
-            REFERENCES {databaseOwner}[{objectQualifier}r7_News] (EntryID) ON DELETE CASCADE,
-        CONSTRAINT [FK_{objectQualifier}r7_News_ModuleRules_Modules] FOREIGN KEY (ModuleID)
-            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE CASCADE,
-        CONSTRAINT [UN_{objectQualifier}r7_News_ModuleRules] UNIQUE NONCLUSTERED (EntryID, ModuleID)
-    )
 END
 GO
 
@@ -90,29 +72,7 @@ IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwne
     DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
 GO
 
-IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntries]') and type in (N'P'))
-    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntries]
-GO
-
-IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntriesByTerms]') and type in (N'P'))
-    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntriesByTerms]
-GO
-
 -- Create stored procedures
-
-CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntry]
-    @entryId int,
-    @moduleId int
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
-        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
-            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
-        WHERE NE.EntryID = @entryId
-END
-GO
 
 CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]
     @moduleId int,
@@ -125,28 +85,12 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+    SELECT DISTINCT NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
             ON NE.ContentItemID = CI.ContentItemID
         WHERE NE.PortalID = @portalId
             AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
                 OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
-END
-GO
-
-CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntries]
-    @moduleId int,
-    @portalId int
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
-        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
-            ON NE.ContentItemID = CI.ContentItemID
-        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
-            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
-        WHERE NE.PortalID = @portalId
 END
 GO
 
@@ -181,74 +125,14 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+    SELECT DISTINCT NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
             ON NE.ContentItemID = CI.ContentItemID
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
             ON CI.ContentItemID = CIT.ContentItemID 
-        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
-            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
         WHERE NE.PortalID = @portalId
             AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
                 OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
-            AND (CIT.TermID = @term1
-            OR CIT.TermID = @term2
-            OR CIT.TermID = @term3
-            OR CIT.TermID = @term4
-            OR CIT.TermID = @term5
-            OR CIT.TermID = @term6
-            OR CIT.TermID = @term7
-            OR CIT.TermID = @term8
-            OR CIT.TermID = @term9
-            OR CIT.TermID = @term10
-            OR CIT.TermID = @term11
-            OR CIT.TermID = @term12
-            OR CIT.TermID = @term13
-            OR CIT.TermID = @term14
-            OR CIT.TermID = @term15
-            OR CIT.TermID = @term16
-            OR CIT.TermID = @term17
-            OR CIT.TermID = @term18
-            OR CIT.TermID = @term19
-            OR CIT.TermID = @term20)
-END
-GO
-
-CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetModuleNewsEntriesByTerms]
-    @moduleId int,
-    @portalId int,
-    @term1 int,
-    @term2 int = NULL,
-    @term3 int = NULL,
-    @term4 int = NULL,
-    @term5 int = NULL,
-    @term6 int = NULL,
-    @term7 int = NULL,
-    @term8 int = NULL,
-    @term9 int = NULL,
-    @term10 int = NULL,
-    @term11 int = NULL,
-    @term12 int = NULL,
-    @term13 int = NULL,
-    @term14 int = NULL,
-    @term15 int = NULL,
-    @term16 int = NULL,
-    @term17 int = NULL,
-    @term18 int = NULL,
-    @term19 int = NULL,
-    @term20 int = NULL
-AS
-BEGIN
-    SET NOCOUNT ON;
-
-    SELECT DISTINCT NE.*, NEMR.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
-        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
-            ON NE.ContentItemID = CI.ContentItemID
-        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
-            ON CI.ContentItemID = CIT.ContentItemID 
-        LEFT OUTER JOIN {databaseOwner}[{objectQualifier}r7_News_ModuleRules] AS NEMR
-            ON NE.EntryID = NEMR.EntryID AND NEMR.ModuleID = @moduleId
-        WHERE NE.PortalID = @portalId
             AND (CIT.TermID = @term1
             OR CIT.TermID = @term2
             OR CIT.TermID = @term3

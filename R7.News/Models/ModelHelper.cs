@@ -48,12 +48,6 @@ namespace R7.News.Models
             return (startDate != null)? startDate.Value : createdOnDate;
         }
 
-        public static bool IsVisible (NewsEntryVisibility visibility, bool showDefaultHidden)
-        {
-            return visibility == NewsEntryVisibility.Shown ||
-                (visibility == NewsEntryVisibility.DefaultHidden && showDefaultHidden);
-        }
-
         public static bool IsVisible (int thematicWeight, int structuralWeight, 
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
         {

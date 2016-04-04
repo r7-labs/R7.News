@@ -13,7 +13,6 @@ namespace R7.News.Stream
     public partial class ViewStream
     {
         protected Panel panelStream;
-        protected CheckBox checkShowDefaultHidden;
         protected ListView listStream;
         protected PagingControl pagerTop;
         protected PagingControl pagerBottom;

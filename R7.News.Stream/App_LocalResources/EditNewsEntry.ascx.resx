@@ -111,31 +111,13 @@
     <data name="labelStructuralWeight.Help" xml:space="preserve">
         <value>Select news entry structural weight. Using this value, each Stream module will decide to display (or not) the news entry according to the module structural weight filter settings.</value>
     </data>
-    <data name="labelVisibility.Text" xml:space="preserve">
-        <value>Visibility:</value>
-    </data>
-    <data name="labelVisibility.Help" xml:space="preserve">
-        <value>Set news entry visibility in the current module. It may be visible (default), hidden or hidden by default.</value>
-    </data>
     <data name="Common.Tab" xml:space="preserve">
         <value>Common</value>
-    </data>
-    <data name="Module.Tab" xml:space="preserve">
-        <value>Module</value>
     </data>
     <data name="Sources.Tab" xml:space="preserve">
         <value>Sources</value>
     </data>
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Advanced</value>
-    </data>
-    <data name="NewsEntryVisibility_Shown.Text" xml:space="preserve">
-        <value>Show</value>
-    </data>
-    <data name="NewsEntryVisibility_Hidden.Text" xml:space="preserve">
-        <value>Hide Always</value>
-    </data>
-    <data name="NewsEntryVisibility_DefaultHidden.Text" xml:space="preserve">
-        <value>Hide by Default</value>
     </data>
 </root>

@@ -15,11 +15,3 @@
 .news-stream .visibility-badges .badge.expired {
     background-color:#c33
 }
-
-.news-stream .visibility-badges .badge.is-hidden {
-    background-color:#333
-}
-
-.news-stream .visibility-badges .badge.default-hidden {
-    background-color:#ccc
-}

@@ -88,8 +88,6 @@
     <Compile Include="Components\NewsController.cs" />
     <Compile Include="Models\INewsEntry.cs" />
     <Compile Include="Components\CacheHelper.cs" />
-    <Compile Include="Models\IModuleNewsEntry.cs" />
-    <Compile Include="Models\INewsEntryModuleRule.cs" />
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />
@@ -106,16 +104,10 @@
     </Compile>
     <Compile Include="Controls\ViewModels\TermLinksViewModel.cs" />
     <Compile Include="ViewModels\ViewModelContext.cs" />
-    <Compile Include="Models\IModuleRule.cs" />
-    <Compile Include="Models\ModuleNewsEntryExtensions.cs" />
-    <Compile Include="Data\ModuleNewsEntryInfo.cs" />
-    <Compile Include="Data\ModuleRuleInfo.cs" />
     <Compile Include="Data\NewsEntryInfo.cs" />
-    <Compile Include="Data\NewsEntryModuleRuleInfo.cs" />
     <Compile Include="Data\NewsRepository.cs" />
     <Compile Include="Data\NewsSourceInfo.cs" />
     <Compile Include="Data\NewsSourceRepository.cs" />
-    <Compile Include="Models\NewsEntryVisibility.cs" />
     <Compile Include="Models\ModelHelper.cs" />
     <Compile Include="Controls\BadgeList.ascx.cs">
       <DependentUpon>BadgeList.ascx</DependentUpon>

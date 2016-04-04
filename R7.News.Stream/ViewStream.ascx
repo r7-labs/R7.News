@@ -5,10 +5,6 @@
 <%@ Import Namespace="System.Web" %>
 
 <asp:Panel id="panelStream" runat="server">
-
-    <label class="checkbox-inline"><asp:CheckBox id="checkShowDefaultHidden" runat="server" AutoPostBack="true" OnCheckedChanged="checkShowDefaultHidden_CheckedChanged" />
-        <%: LocalizeString ("checkShowDefaultHidden.Text") %>
-    </label>
     <dnn:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
@@ -43,7 +39,6 @@
                     AgentModuleId: <%# Eval ("AgentModuleId") %><br />
                     LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
                     LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />    
-                    Visibility: <%# Eval ("Visibility") %><br />
                     Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
                 </div>
             </div>

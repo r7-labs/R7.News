@@ -12,7 +12,6 @@
     <div id="newsentry-tabs">
         <ul class="dnnAdminTabNav dnnClear">
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
-            <li><a href="#newsentry-module-tab"><%= LocalizeString("Module.Tab") %></a></li>
             <li><a href="#newsentry-sources-tab"><%= LocalizeString("Sources.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
         </ul>
@@ -33,26 +32,6 @@
                 <div class="dnnFormItem">
                     <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
                     <dnn:TermsSelector id="termsTerms" runat="server" />
-                </div>
-            </fieldset>
-        </div>
-        <div id="newsentry-module-tab">
-            <fieldset>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
-                    <asp:DropDownList id="comboThematicWeight" runat="server" />
-                </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
-                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
-                </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelVisibility" runat="server" ControlName="radioVisibility" />
-                    <asp:RadioButtonList id="radioVisibility" runat="server"
-                        RepeatDirection="Horizontal"
-                        DataTextField="ValueLocalized"
-                        DataValueField="Value"
-                    />
                 </div>
             </fieldset>
         </div>
@@ -93,6 +72,14 @@
                 <div class="dnnFormItem">
                     <dnn:Label id="labelEndDate" runat="server" ControlName="datetimeEndDate" />
                     <dnn:DnnDateTimePicker id="datetimeEndDate" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
+                    <asp:DropDownList id="comboThematicWeight" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
+                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
                 </div>
                <div class="dnnFormItem">
                     <dnn:Label id="labelSortIndex" runat="server" ControlName="textSortIndex" />

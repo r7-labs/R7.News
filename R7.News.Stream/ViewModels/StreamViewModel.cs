@@ -39,24 +39,24 @@ namespace R7.News.Stream.ViewModels
         {
         }
 
-        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize, bool showDefaultHidden)
+        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {
             if (!Module.IsEditable && pageIndex == 0 && pageSize == Settings.PageSize) {
-                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId 
-                    + "&PageIndex=0&PageSize=" + pageSize + "&ShowDefaultHidden=" + showDefaultHidden;
+                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId
+                    + "&PageIndex=0&PageSize=" + pageSize;
                 
                 return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                    c => GetPageInternal (pageIndex, pageSize, showDefaultHidden)
+                    c => GetPageInternal (pageIndex, pageSize)
                 );
             }
 
-            return GetPageInternal (pageIndex, pageSize, showDefaultHidden);
+            return GetPageInternal (pageIndex, pageSize);
         }
 
-        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool showDefaultHidden)
+        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize)
         {
-            IEnumerable<ModuleNewsEntryInfo> baseItems;
+            IEnumerable<NewsEntryInfo> baseItems;
 
             // check for pageIndex < 0
             if (pageIndex < 0) {
@@ -64,11 +64,17 @@ namespace R7.News.Stream.ViewModels
             }
 
             if (Settings.ShowAllNews) {
-                baseItems = NewsRepository.Instance.GetModuleNewsEntries (Module.ModuleId, Module.PortalId);
+                baseItems = NewsRepository.Instance.GetNewsEntries (Module.ModuleId, Module.PortalId,
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                );
             }
             else {
-                baseItems = NewsRepository.Instance.GetModuleNewsEntriesByTerms (Module.ModuleId, 
-                    Module.PortalId, Settings.IncludeTerms);
+                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (Module.ModuleId, Module.PortalId, 
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                    Settings.IncludeTerms
+                );
             }
 
             // check for no data available
@@ -77,8 +83,10 @@ namespace R7.News.Stream.ViewModels
             }
 
             // get only published items
-            IList<ModuleNewsEntryInfo> items = baseItems
-                .Where (ne => (ne.IsPublished () && ne.IsVisible (showDefaultHidden)) || Module.IsEditable)
+            IList<NewsEntryInfo> items = baseItems
+                .Where (ne => (ne.IsPublished () && ne.IsVisible (
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) || Module.IsEditable)
                 .ToList ();
             
             // check for no data available
