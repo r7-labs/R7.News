@@ -20,24 +20,26 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using DotNetNuke.Common;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.R7.Entities.Modules;
-using R7.News.Models;
-using R7.News.Data;
-using R7.News.Components;
+using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.R7;
+using DotNetNuke.R7.Entities.Modules;
 using DotNetNuke.R7.ViewModels;
+using DotNetNuke.Services.FileSystem;
+using R7.News.Components;
+using R7.News.ControlExtensions;
+using R7.News.Data;
+using R7.News.Models;
+using R7.News.Stream.Components;
+using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public enum EditNewsEntryTab { Common, Sources, Advanced };
+    public enum EditNewsEntryTab { Common, Citation, Advanced };
 
     public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
     {
@@ -61,10 +63,17 @@ namespace R7.News.Stream
                         ViewState ["SelectedTab"] = EditNewsEntryTab.Advanced;
                         return EditNewsEntryTab.Advanced;
                     }
+
                     if (eventTarget.Contains ("$" + comboNewsSourceProvider.ID)) {
-                        // comboNewsSourceProvider control is on Sources tab
-                        ViewState ["SelectedTab"] = EditNewsEntryTab.Sources;
-                        return EditNewsEntryTab.Sources;
+                        // comboNewsSourceProvider control is on Citation tab
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.Citation;
+                        return EditNewsEntryTab.Citation;
+                    }
+
+                    if (eventTarget.Contains ("$" + buttonGetModules.ID)) {
+                        // buttonGetModules control is on Citation tab
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.Citation;
+                        return EditNewsEntryTab.Citation;
                     }
                 }
                     
@@ -108,6 +117,9 @@ namespace R7.News.Stream
             // set default news entry weight
             comboThematicWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultThematicWeight);
             comboStructuralWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultStructuralWeight);
+
+            // localize column headers in the gridview
+            gridModules.LocalizeColumnHeaders (".Column", LocalResourceFile);
         }
 
         protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
@@ -116,6 +128,29 @@ namespace R7.News.Stream
             if (IsPostBack) {
                 UpdateNewsSources ();
             }
+        }
+
+        protected void buttonGetModules_Click (object sender, EventArgs e)
+        {
+            var thematicWeight = int.Parse (comboThematicWeight.SelectedValue);
+            var structuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
+            var terms = termsTerms.Terms;
+
+            gridModules.DataSource = GetStreamModules (thematicWeight, structuralWeight, terms);
+            gridModules.DataBind ();
+        }
+
+        // REVIEW: Move to business logic layer
+        protected IEnumerable<StreamModuleViewModel> GetStreamModules (int thematicWeight, int structuralWeight, IList<Term> terms)
+        {
+            var moduleController = new ModuleController ();
+            return moduleController.GetModulesByDefinition (PortalId, "R7.News.Stream")
+                .Cast<ModuleInfo> ()
+                .Where (m => !m.IsDeleted)
+                .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (new StreamSettings (m), 
+                    thematicWeight, structuralWeight, terms))
+                .Select (m => new StreamModuleViewModel (m, new StreamSettings (m), ViewModelContext, thematicWeight, structuralWeight, terms))
+                .OrderBy (m => m.ModuleTitle);
         }
 
         protected void UpdateNewsSources ()

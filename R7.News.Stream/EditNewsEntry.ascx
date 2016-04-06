@@ -12,7 +12,7 @@
     <div id="newsentry-tabs">
         <ul class="dnnAdminTabNav dnnClear">
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
-            <li><a href="#newsentry-sources-tab"><%= LocalizeString("Sources.Tab") %></a></li>
+            <li><a href="#newsentry-terms-and-weighs-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
         </ul>
         <div id="newsentry-common-tab">
@@ -29,14 +29,41 @@
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
                     <dnn:TextEditor id="textDescription" runat="server" />
                 </div>
+            </fieldset>
+        </div>
+        <div id="newsentry-terms-and-weighs-tab">
+            <fieldset>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
                     <dnn:TermsSelector id="termsTerms" runat="server" />
                 </div>
-            </fieldset>
-        </div>
-        <div id="newsentry-sources-tab">
-            <fieldset>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
+                    <asp:DropDownList id="comboThematicWeight" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
+                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelModules" runat="server" ControlName="buttonGetModules" />
+                    <asp:LinkButton id="buttonGetModules" runat="server" resourcekey="buttonGetModules.Text" CssClass="dnnSecondaryAction"
+                        OnClick="buttonGetModules_Click" />
+                </div>
+                <div class="dnnFormItem">
+                    <div class="dnnLabel"></div>
+                    <asp:GridView id="gridModules" runat="server" AutoGenerateColumns="false"
+                            UseAccessibleHeader="true" CssClass="dnnGrid" GridLines="None">
+                        <HeaderStyle CssClass="dnnGridHeader" />
+                        <RowStyle CssClass="dnnGridItem" />
+                        <AlternatingRowStyle CssClass="dnnGridAltItem" />
+                        <Columns>
+                            <asp:BoundField DataField="ModuleId" Visible="false" />
+                            <asp:BoundField DataField="ModuleLink" HeaderText="Module" HtmlEncode="false" />
+                            <asp:BoundField DataField="PassesByString" HeaderText="PassesBy" />
+                        </Columns>
+                    </asp:GridView>
+                </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelNewsSourceProvider" runat="server" ControlName="comboNewSourceProvider" />
                     <asp:DropDownList id="comboNewsSourceProvider" runat="server" AutoPostBack="true"
@@ -74,14 +101,6 @@
                     <dnn:DnnDateTimePicker id="datetimeEndDate" runat="server" />
                 </div>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
-                    <asp:DropDownList id="comboThematicWeight" runat="server" />
-                </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
-                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
-                </div>
-               <div class="dnnFormItem">
                     <dnn:Label id="labelSortIndex" runat="server" ControlName="textSortIndex" />
                     <asp:TextBox id="textSortIndex" runat="server" Value="0" />
                     <asp:RegularExpressionValidator runat="server" resourcekey="SortIndex.Invalid"

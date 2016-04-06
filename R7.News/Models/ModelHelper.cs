@@ -20,6 +20,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using DotNetNuke.Entities.Content.Taxonomy;
 
 namespace R7.News.Models
 {
@@ -51,9 +54,25 @@ namespace R7.News.Models
         public static bool IsVisible (int thematicWeight, int structuralWeight, 
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
         {
-            return (thematicWeight >= minThematicWeight && thematicWeight <= maxThematicWeight)
-                || (structuralWeight >= minStructuralWeight && structuralWeight <= maxStructuralWeight);
+            return IsThematicVisible (thematicWeight, minThematicWeight, maxThematicWeight)
+                || IsStructuralVisible (structuralWeight, minStructuralWeight, maxStructuralWeight);
+        }
+
+        public static bool IsThematicVisible (int thematicWeight, int minThematicWeight, int maxThematicWeight)
+        {
+            return thematicWeight >= minThematicWeight && thematicWeight <= maxThematicWeight;
+        }
+
+        public static bool IsStructuralVisible (int structuralWeight, int minStructuralWeight, int maxStructuralWeight)
+        {
+            return structuralWeight >= minStructuralWeight && structuralWeight <= maxStructuralWeight;
+        }
+
+        public static bool IsTermsOverlaps (IEnumerable<Term> terms1, IEnumerable<Term> terms2)
+        {
+            var terms = terms1.Join (terms2, t1 => t1.TermId, t2 => t2.TermId, (t1, t2) => t1).DefaultIfEmpty ();
+
+            return terms != null;
         }
     }
 }
-

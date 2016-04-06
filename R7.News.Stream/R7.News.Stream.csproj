@@ -59,6 +59,7 @@
   <ItemGroup>
     <Folder Include="js\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -102,6 +103,7 @@
     <Compile Include="ViewModels\StreamModuleNewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamViewModel.cs" />
     <Compile Include="ViewModels\StreamModuleNewsEntryViewModelPage.cs" />
+    <Compile Include="ViewModels\StreamModuleViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

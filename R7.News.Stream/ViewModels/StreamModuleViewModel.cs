@@ -1,5 +1,5 @@
 ﻿//
-//  StreamModuleInfo.cs
+//  StreamModuleViewModel.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,23 +20,111 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using DotNetNuke.Common;
+using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.R7;
+using DotNetNuke.R7.ViewModels;
+using DotNetNuke.Services.Localization;
+using R7.News.Models;
+using R7.News.Stream.Components;
 
-namespace R7.News.Stream.Models
+namespace R7.News.Stream.ViewModels
 {
-    public class StreamModuleInfo
+    public class StreamModuleViewModel
     {
-        public int ModuleId { get; set; }
+        protected ViewModelContext Context;
 
-        public int TabId { get; set; }
+        protected ModuleInfo Module;
 
-        public string ModuleTitle { get; set; }
+        protected int NewsEntry_ThematicWeight;
 
-        public int MinThematicWeight { get; set; }
+        protected int NewsEntry_StructuralWeight;
 
-        public int MaxThematicWeight { get; set; }
+        protected IList<Term> NewsEntry_Terms;
 
-        public int MinStructuralWeight { get; set; }
+        protected StreamSettings Settings;
 
-        public int MaxStructuralWeight { get; set; }
+        #region Bindable properites
+
+        public int ModuleId
+        { 
+            get { return Module.ModuleID; }
+        }
+
+        public string ModuleTitle
+        { 
+            get { return Module.ModuleTitle; }
+        }
+
+        public string ModuleLink
+        { 
+            get 
+            { 
+                return string.Format ("<a href=\"{1}\" target=\"_blank\">{0}</a>", ModuleTitle,
+                    Globals.NavigateURL (Module.TabID) + "#" + ModuleId
+                );
+            }
+        }
+
+        public string PassesByString
+        {
+            get { return GetPassesByString (); }
+        }
+
+        #endregion
+
+        public StreamModuleViewModel (ModuleInfo module, StreamSettings settings, ViewModelContext context, int newsEntryThematicWeight, int newsEntryStructuralWeight, 
+            IList<Term> newsEntryTerms)
+        {
+            Module = module;
+            Settings = settings;
+            Context = context;
+
+            NewsEntry_ThematicWeight = newsEntryThematicWeight;
+            NewsEntry_StructuralWeight = newsEntryStructuralWeight;
+            NewsEntry_Terms = newsEntryTerms;
+        }
+
+        public static bool IsNewsEntryWillBePassedByModule (StreamSettings settings, int thematicWeight, int structuralWeight, IList<Term> terms)
+        {
+            if (ModelHelper.IsThematicVisible (thematicWeight, settings.MinThematicWeight, settings.MaxThematicWeight)) {
+                return true;
+            }
+
+            if (ModelHelper.IsStructuralVisible (structuralWeight, settings.MinStructuralWeight, settings.MaxStructuralWeight)) {
+                return true;
+            }
+
+            if (settings.ShowAllNews) {
+                return true;
+            }
+
+            return ModelHelper.IsTermsOverlaps (terms, settings.IncludeTerms);
+        }
+
+        protected string GetPassesByString ()
+        {
+            var passesBy = new Collection<string> ();
+
+            if (ModelHelper.IsThematicVisible (NewsEntry_ThematicWeight, Settings.MinThematicWeight, Settings.MaxThematicWeight)) {
+                passesBy.Add (Localization.GetString ("PassesByThematicWeight.Text", Context.LocalResourceFile));
+            }
+
+            if (ModelHelper.IsStructuralVisible (NewsEntry_StructuralWeight, Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) {
+                passesBy.Add (Localization.GetString ("PassesByStructuralWeight.Text", Context.LocalResourceFile));
+            }
+
+            if (Settings.ShowAllNews) {
+                passesBy.Add (Localization.GetString ("PassesByShowAllSetting.Text", Context.LocalResourceFile));
+            }
+            else if (ModelHelper.IsTermsOverlaps (NewsEntry_Terms, Settings.IncludeTerms)) {
+                passesBy.Add (Localization.GetString ("PassesByTerms.Text", Context.LocalResourceFile));
+            }
+
+            return TextUtils.FormatList (", ", passesBy); 
+        }
     }
 }

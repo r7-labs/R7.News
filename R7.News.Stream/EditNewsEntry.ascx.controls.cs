@@ -28,5 +28,7 @@ namespace R7.News.Stream
         protected DnnUrlControl urlUrl;
         protected DropDownList comboThematicWeight;
         protected DropDownList comboStructuralWeight;
+        protected LinkButton buttonGetModules;
+        protected GridView gridModules;
     }
 }

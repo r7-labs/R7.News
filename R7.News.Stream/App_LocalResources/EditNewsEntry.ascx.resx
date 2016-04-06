@@ -110,14 +110,41 @@
     </data>
     <data name="labelStructuralWeight.Help" xml:space="preserve">
         <value>Select news entry structural weight. Using this value, each Stream module will decide to display (or not) the news entry according to the module structural weight filter settings.</value>
+    </data>    
+    <data name="labelModules.Text" xml:space="preserve">
+        <value>Modules:</value>
+    </data>
+    <data name="labelModules.Help" xml:space="preserve">
+        <value>Click "Get Modules" button to load list of Stream modules, in which news entry will be shown according to the selected terms and current thematic and structural weights.</value>
+    </data>
+    <data name="buttonGetModules.Text" xml:space="preserve">
+        <value>Get Modules</value>
     </data>
     <data name="Common.Tab" xml:space="preserve">
         <value>Common</value>
     </data>
-    <data name="Sources.Tab" xml:space="preserve">
-        <value>Sources</value>
+    <data name="TermsAndWeights.Tab" xml:space="preserve">
+        <value>Terms &amp; Weights</value>
     </data>
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Advanced</value>
+    </data>
+    <data name="Module.Column" xml:space="preserve">
+        <value>Module</value>
+    </data>
+    <data name="PassesBy.Column" xml:space="preserve">
+        <value>Passed by</value>
+    </data>
+    <data name="PassesByThematicWeight.Text" xml:space="preserve">
+        <value>by thematic weight</value>
+    </data>
+    <data name="PassesByStructuralWeight.Text" xml:space="preserve">
+        <value>by structural weight</value>
+    </data>
+    <data name="PassesByShowAllSetting.Text" xml:space="preserve">
+        <value>by "Show All" setting</value>
+    </data>
+    <data name="PassesByTerms.Text" xml:space="preserve">
+        <value>by terms</value>
     </data>
 </root>
