@@ -12,11 +12,11 @@ ETA for main features is about the last quarter of 2016.
 * Cast any page into news article by placing news agent module.
 * Streamline new articles creation by adding news agent module to the page template.
 * Keep news article page settings in sync with corresponding news entry properties.
-* Share news between portals in the same portal group.
 * Export news into RSS/Atoms feeds.
 
 ## Future releases could also include:
 
+* News sharing between portals in the same portal group.
 * JavaScript object to access news entry properties in the skin.
 * Content workflow (at least Draft/Publish).
 * Comments and ratings (via separate module).
