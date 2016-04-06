@@ -69,6 +69,7 @@
     <Folder Include="Controls\ViewModels\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Data\" />
+    <Folder Include="ControlExtensions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -113,6 +114,7 @@
       <DependentUpon>BadgeList.ascx</DependentUpon>
     </Compile>
     <Compile Include="Data\NewsDataProvider.cs" />
+    <Compile Include="ControlExtensions\GridViewExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
