@@ -138,18 +138,6 @@ namespace R7.News.Agent.ViewModels
             set { }
         }
 
-        public int? SourceId
-        {
-            get { return NewsEntry.SourceId; }
-            set {}
-        }
-
-        public int? SourceItemId
-        {
-            get { return NewsEntry.SourceItemId; }
-            set {}
-        }
-
         public ContentItem ContentItem
         {
             get { return NewsEntry.ContentItem; }
@@ -159,12 +147,6 @@ namespace R7.News.Agent.ViewModels
         public ModuleInfo AgentModule
         {
             get { return NewsEntry.AgentModule; }
-            set {}
-        }
-
-        public INewsSource Source
-        {
-            get { return NewsEntry.Source; }
             set {}
         }
 

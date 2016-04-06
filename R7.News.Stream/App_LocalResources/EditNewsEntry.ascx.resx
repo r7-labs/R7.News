@@ -75,18 +75,6 @@
     <data name="labelTerms.Help" xml:space="preserve">
         <value>Select news entry terms.</value>
     </data>
-    <data name="labelNewsSourceProvider.Text" xml:space="preserve">
-        <value>News Source Provider:</value>
-    </data>
-    <data name="labelNewsSourceProvider.Help" xml:space="preserve">
-        <value>Select a news source provider.</value>
-    </data>
-    <data name="labelNewsSource.Text" xml:space="preserve">
-        <value>News Source:</value>
-    </data>
-    <data name="labelNewsSource.Help" xml:space="preserve">
-        <value>Select a news source for this news entry.</value>
-    </data>
     <data name="labelImage.Text" xml:space="preserve">
         <value>Image:</value>
     </data>

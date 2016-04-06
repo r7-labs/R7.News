@@ -64,19 +64,6 @@ namespace R7.News.Models
             }
         }
 
-        public static INewsEntry WithNewsSource (this INewsEntry newsEntry)
-        {
-            newsEntry.Source = NewsSourceRepository.Instance.GetSource (newsEntry.SourceId, newsEntry.SourceItemId);
-            return newsEntry;
-        }
-
-        public static IEnumerable<INewsEntry> WithNewsSources (this IEnumerable<INewsEntry> newsEntries)
-        {
-            foreach (var newsEntry in newsEntries) {
-                yield return newsEntry.WithNewsSource ();
-            }
-        }
-
         public static INewsEntry WithAgentModule (this INewsEntry newsEntry, ModuleController moduleController)
         {
             if (newsEntry.AgentModuleId != null) {

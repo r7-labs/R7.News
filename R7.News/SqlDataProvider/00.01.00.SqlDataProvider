@@ -12,8 +12,6 @@ BEGIN
         PortalID int NOT NULL,
         ContentItemID int NOT NULL,
         AgentModuleID int NULL,
-        SourceID int NULL,
-        SourceItemID int NULL,
         Title nvarchar (255) NOT NULL,
         Description nvarchar (max) NULL,
         Url nvarchar (255) NULL,
@@ -31,9 +29,7 @@ BEGIN
         CONSTRAINT [FK_{objectQualifier}r7_News_ContentItems] FOREIGN KEY (ContentItemID)
             REFERENCES {databaseOwner}[{objectQualifier}ContentItems] (ContentItemID) ON DELETE CASCADE,
         CONSTRAINT [FK_{objectQualifier}r7_News_AgentModules] FOREIGN KEY (AgentModuleID)
-            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE SET NULL,
-        CONSTRAINT [FK_{objectQualifier}r7_News_Sources] FOREIGN KEY (SourceID)
-            REFERENCES {databaseOwner}[{objectQualifier}r7_News_Sources] (SourceID) ON DELETE SET NULL
+            REFERENCES {databaseOwner}[{objectQualifier}Modules] (ModuleID) ON DELETE SET NULL
     )
 
     CREATE NONCLUSTERED INDEX [IX_{objectQualifier}_r7_News_PortalID] 
@@ -41,24 +37,6 @@ BEGIN
 
     CREATE NONCLUSTERED INDEX [IX_{objectQualifier}_r7_News_ContentItemID] 
         ON {databaseOwner}[{objectQualifier}r7_News] (ContentItemID)
-END
-GO
-
-IF NOT EXISTS (select * from sys.objects where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News_Sources]') and type in (N'U'))
-BEGIN
-    CREATE TABLE {databaseOwner}[{objectQualifier}r7_News_Sources]
-    (
-        SourceID int NOT NULL IDENTITY (1, 1),
-        Title nvarchar (255) NULL, 
-        Url nvarchar (255) NULL,
-        Assembly nvarchar (255) NULL,
-        Type nvarchar (255) NULL,
-        IsEnabled bit NOT NULL DEFAULT ((1))
-        CONSTRAINT [PK_{objectQualifier}r7_News_Sources] PRIMARY KEY CLUSTERED (SourceID)
-    )
-
-    INSERT INTO {databaseOwner}[{objectQualifier}r7_News_Sources] (Title, Assembly, Type) 
-        VALUES (N'Divisions from R7.University', NULL, N'R7.News.Integrations.UniversityDivisionNewsSourceProvider')
 END
 GO
 

@@ -149,7 +149,6 @@ namespace R7.News.Data
                         minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                    .WithNewsSources ()
                     .Cast<NewsEntryInfo> ();
         }
 
@@ -175,7 +174,6 @@ namespace R7.News.Data
                         minStructuralWeight, maxStructuralWeight, terms.Select (t => t.TermId).ToArray ())
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                    .WithNewsSources ()
                     .Cast<NewsEntryInfo> ();
         }
 
@@ -193,7 +191,6 @@ namespace R7.News.Data
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
                 // .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                .WithNewsSources ()
                 .Cast<NewsEntryInfo> ();
         }
     }

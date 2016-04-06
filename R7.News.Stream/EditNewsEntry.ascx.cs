@@ -39,7 +39,7 @@ using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public enum EditNewsEntryTab { Common, Citation, Advanced };
+    public enum EditNewsEntryTab { Common, TermsAndWeights, Advanced };
 
     public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
     {
@@ -64,16 +64,10 @@ namespace R7.News.Stream
                         return EditNewsEntryTab.Advanced;
                     }
 
-                    if (eventTarget.Contains ("$" + comboNewsSourceProvider.ID)) {
-                        // comboNewsSourceProvider control is on Citation tab
-                        ViewState ["SelectedTab"] = EditNewsEntryTab.Citation;
-                        return EditNewsEntryTab.Citation;
-                    }
-
                     if (eventTarget.Contains ("$" + buttonGetModules.ID)) {
                         // buttonGetModules control is on Citation tab
-                        ViewState ["SelectedTab"] = EditNewsEntryTab.Citation;
-                        return EditNewsEntryTab.Citation;
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.TermsAndWeights;
+                        return EditNewsEntryTab.TermsAndWeights;
                     }
                 }
                     
@@ -94,17 +88,6 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            var newsSourceProviders = NewsSourceRepository.Instance.GetSelfSources ();
-            newsSourceProviders.Insert (0, new NewsSourceInfo { 
-                SourceId = Null.NullInteger, 
-                Title = LocalizeString ("NotSelected.Text")
-            });
-
-            comboNewsSourceProvider.DataSource = newsSourceProviders;
-            comboNewsSourceProvider.DataBind ();
-
-            UpdateNewsSources ();
-
             pickerImage.FolderPath = NewsConfig.Instance.DefaultImagesPath;
             pickerImage.FileFilter = Globals.glbImageFileTypes;
 
@@ -120,14 +103,6 @@ namespace R7.News.Stream
 
             // localize column headers in the gridview
             gridModules.LocalizeColumnHeaders (".Column", LocalResourceFile);
-        }
-
-        protected void comboNewsSourceProvider_SelectedIndexChanged (object sender, EventArgs e)
-        {
-            // disable handler when loading item
-            if (IsPostBack) {
-                UpdateNewsSources ();
-            }
         }
 
         protected void buttonGetModules_Click (object sender, EventArgs e)
@@ -151,23 +126,6 @@ namespace R7.News.Stream
                     thematicWeight, structuralWeight, terms))
                 .Select (m => new StreamModuleViewModel (m, new StreamSettings (m), ViewModelContext, thematicWeight, structuralWeight, terms))
                 .OrderBy (m => m.ModuleTitle);
-        }
-
-        protected void UpdateNewsSources ()
-        {
-            var sourceId = TypeUtils.ParseToNullable<int> (comboNewsSourceProvider.SelectedValue);
-
-            var newsSources = NewsSourceRepository.Instance.GetSources (sourceId)
-                .OrderBy (ns => ns.Title)
-                .ToList ();
-            
-            newsSources.Insert (0, new NewsSourceInfo { 
-                SourceItemId = Null.NullInteger, 
-                Title = LocalizeString ("NotSelected.Text")
-            });
-
-            comboNewsSource.DataSource = newsSources;
-            comboNewsSource.DataBind ();
         }
 
         #region Implemented abstract and overriden members of EditPortalModuleBase
@@ -208,10 +166,6 @@ namespace R7.News.Stream
             termsTerms.PortalId = PortalId;
             termsTerms.Terms = item.ContentItem.Terms;
             termsTerms.DataBind ();
-
-            comboNewsSourceProvider.SelectByValue (item.SourceId);
-            UpdateNewsSources ();
-            comboNewsSource.SelectByValue (item.SourceItemId);
 
             urlUrl.Url = item.Url;
 
@@ -262,9 +216,6 @@ namespace R7.News.Stream
             item.StartDate = datetimeStartDate.SelectedDate;
             item.EndDate = datetimeEndDate.SelectedDate;
             item.PortalId = PortalId;
-
-            item.SourceId = TypeUtils.ParseToNullable<int> (comboNewsSourceProvider.SelectedValue);
-            item.SourceItemId = TypeUtils.ParseToNullable<int> (comboNewsSource.SelectedValue);
 
             item.Url = urlUrl.Url;
 

@@ -14,3 +14,5 @@ GO
 
 DROP TABLE {databaseOwner}[{objectQualifier}r7_News]
 GO
+
+-- TODO: Drop stored procedures here

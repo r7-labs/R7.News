@@ -64,21 +64,6 @@
                         </Columns>
                     </asp:GridView>
                 </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelNewsSourceProvider" runat="server" ControlName="comboNewSourceProvider" />
-                    <asp:DropDownList id="comboNewsSourceProvider" runat="server" AutoPostBack="true"
-                        OnSelectedIndexChanged="comboNewsSourceProvider_SelectedIndexChanged"
-                        DataValueField="SourceId"
-                        DataTextField="Title"
-                    />
-                </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelNewsSource" runat="server" ControlName="comboNewsSource" />
-                    <asp:DropDownList id="comboNewsSource" runat="server" 
-                        DataValueField="SourceItemId"
-                        DataTextField="Title"
-                    />
-                </div>
             </fieldset>
         </div>
         <div id="newsentry-advanced-tab">

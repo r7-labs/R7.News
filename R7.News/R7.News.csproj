@@ -92,12 +92,9 @@
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />
-    <Compile Include="Models\INewsSource.cs" />
-    <Compile Include="Integrations\UniversityDivisionNewsSourceProvider.cs" />
     <Compile Include="Integrations\UniversityDivisionTermUrlProvider.cs" />
     <Compile Include="Integrations\UniversityDivisionInfo.cs" />
     <Compile Include="Providers\ITermUrlProvider.cs" />
-    <Compile Include="Providers\INewsSourceProvider.cs" />
     <Compile Include="Providers\DescriptionTermUrlProvider.cs" />
     <Compile Include="Providers\TermUrlManager.cs" />
     <Compile Include="Controls\TermLinks.ascx.cs">
@@ -107,8 +104,6 @@
     <Compile Include="ViewModels\ViewModelContext.cs" />
     <Compile Include="Data\NewsEntryInfo.cs" />
     <Compile Include="Data\NewsRepository.cs" />
-    <Compile Include="Data\NewsSourceInfo.cs" />
-    <Compile Include="Data\NewsSourceRepository.cs" />
     <Compile Include="Models\ModelHelper.cs" />
     <Compile Include="Controls\BadgeList.ascx.cs">
       <DependentUpon>BadgeList.ascx</DependentUpon>

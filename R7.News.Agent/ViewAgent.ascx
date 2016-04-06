@@ -67,8 +67,7 @@
                 EntryId: <%# Eval ("EntryId") %><br />
                 AgentModuleId: <%# Eval ("AgentModuleId") %><br />
                 LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
-                LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %><br />    
-                Source: <%# Eval ("Source.Title") %>, Url: <%# Eval ("Source.Url") %>
+                LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %>
             </div>
         </div>
     </ItemTemplate>

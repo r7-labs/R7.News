@@ -63,10 +63,6 @@ namespace R7.News.Data
 
         public bool IsSticky { get; set; }
 
-        public int? SourceId { get; set; }
-
-        public int? SourceItemId { get; set; }
-
         public int ThematicWeight { get; set; }
 
         public int StructuralWeight { get; set; }
@@ -76,9 +72,6 @@ namespace R7.News.Data
 
         [IgnoreColumn]
         public ModuleInfo AgentModule { get; set; }
-
-        [IgnoreColumn]
-        public INewsSource Source { get; set; }
 
         [IgnoreColumn]
         public ICollection<INewsEntry> Group { get; set; }

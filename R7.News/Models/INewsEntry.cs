@@ -59,17 +59,9 @@ namespace R7.News.Models
 
         int StructuralWeight { get; set; }
 
-        // REVIEW: News without sources?
-        int? SourceId { get; set; }
-
-        // REVIEW: Non-integer item id? SourceItemKey
-        int? SourceItemId { get; set; }
-
         ContentItem ContentItem { get; set; }
 
         ModuleInfo AgentModule { get; set; }
-
-        INewsSource Source { get; set; }
 
         ICollection<INewsEntry> Group { get; set; }
     }
