@@ -212,8 +212,9 @@ namespace R7.News.Stream.ViewModels
             { 
                 if (Context.Module.IsEditable) {
                     var badges = new List<Badge> ();
+                    var now = DateTime.Now;
 
-                    if (!NewsEntry.IsPublished ()) {
+                    if (!NewsEntry.IsPublished (now)) {
                         if (NewsEntry.HasBeenExpired ()) {
                             badges.Add (new Badge {
                                 CssClass = "expired",

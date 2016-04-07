@@ -102,10 +102,11 @@ namespace R7.News.Agent
                 panelAddDefaultEntry.Visible = true;
             }
             else {
+                var now = DateTime.Now;
 
                 // create viewmodels
                 var viewModels = items
-                    .Where (ne => ne.IsPublished () || IsEditable)
+                    .Where (ne => ne.IsPublished (now) || IsEditable)
                     .OrderByDescending (ne => ne.EntryId == GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
@@ -189,10 +190,11 @@ namespace R7.News.Agent
 
             // show grouped news
             var listGroup = (ListView) e.Item.FindControl ("listGroup");
+            var now = DateTime.Now;
 
             if (item.Group != null && item.Group.Count > 0) {
                 listGroup.DataSource = item.Group
-                    .Where (ne => ne.IsPublished () || IsEditable)
+                    .Where (ne => ne.IsPublished (now) || IsEditable)
                     .OrderByDescending (ne => ne.PublishedOnDate ())
                     .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
                 listGroup.DataBind ();

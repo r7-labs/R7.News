@@ -4,15 +4,37 @@
 
 -- Drop tables
 
-ALTER TABLE {databaseOwner}[{objectQualifier}r7_News 
-    DROP CONSTRAINT [FK_{objectQualifier}r7_News_Portals]
+IF EXISTS (select * from sys.objects where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News]') and type in (N'U'))
+BEGIN
+    -- Drop constraints
+    ALTER TABLE {databaseOwner}[{objectQualifier}r7_News 
+        DROP CONSTRAINT [FK_{objectQualifier}r7_News_Portals]
+    ALTER TABLE {databaseOwner}[{objectQualifier}r7_News] 
+        DROP CONSTRAINT [FK_{objectQualifier}r7_News_ContentItems]
+    ALTER TABLE {databaseOwner}[{objectQualifier}r7_News] 
+        DROP CONSTRAINT [FK_{objectQualifier}r7_News_AgentModules]
+
+    -- Drop table
+    DROP TABLE {databaseOwner}[{objectQualifier}r7_News]
+END
 GO
 
-ALTER TABLE {databaseOwner}[{objectQualifier}r7_News] 
-    DROP CONSTRAINT [FK_{objectQualifier}r7_News_ContentItems]
+-- Drop stored procedures
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries]
 GO
 
-DROP TABLE {databaseOwner}[{objectQualifier}r7_News]
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesCount]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesCount]
 GO
 
--- TODO: Drop stored procedures here
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms]
+GO
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTermsCount]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTermsCount]
+GO
+
+-- TODO: Remove news content type and content items

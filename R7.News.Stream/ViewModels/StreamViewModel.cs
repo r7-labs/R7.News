@@ -41,20 +41,73 @@ namespace R7.News.Stream.ViewModels
 
         public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {
-            if (!Module.IsEditable && pageIndex == 0 && pageSize == Settings.PageSize) {
+            var checkNow = !Module.IsEditable;
+            var now = DateTime.Now;
+
+            // REVIEW: Should 'now' value be used in the cache key? 
+            // var today = DateTime.Today; 
+            // var now = today + new TimeSpan (today.Hour, 0, 0);
+
+            // REVIEW: Check for sorting options also
+            if (pageIndex == 0 && pageSize == Settings.PageSize) {
+                
+                // we cache viewmodels for first page, so there are no need to implement caching
+                // in the GetNewsEntries..._Count and GetNewsEntries..._FirstPage repository methods
+
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId
-                    + "&PageIndex=0&PageSize=" + pageSize;
+                    + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
                 
                 return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
-                    c => GetPageInternal (pageIndex, pageSize)
+                    c => GetFirstPageInternal (pageSize, checkNow, now)
                 );
             }
 
-            return GetPageInternal (pageIndex, pageSize);
+            return GetPageInternal (pageIndex, pageSize, checkNow, now);
         }
 
-        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize)
+        protected StreamModuleNewsEntryViewModelPage GetFirstPageInternal (int pageSize, bool checkNow, DateTime now)
+        {
+            IEnumerable<NewsEntryInfo> baseItems;
+            int baseItemsCount;
+
+            if (Settings.ShowAllNews) {
+                baseItemsCount = NewsRepository.Instance.GetNewsEntries_Count (
+                    Module.PortalId, checkNow, now,
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                );
+
+                baseItems = NewsRepository.Instance.GetNewsEntries_FirstPage (
+                    Module.PortalId, pageSize, checkNow, now,
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                );
+            }
+            else {
+                baseItemsCount = NewsRepository.Instance.GetNewsEntriesByTerms_Count (
+                    Module.PortalId, checkNow, now,
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                    Settings.IncludeTerms
+                );
+
+                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms_FirstPage (
+                    Module.PortalId, pageSize, checkNow, now,
+                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
+                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                    Settings.IncludeTerms
+                );
+            } 
+
+            return new StreamModuleNewsEntryViewModelPage (
+                baseItemsCount,
+                baseItems.Select (ne => new StreamModuleNewsEntryViewModel (ne, this))
+                .ToList ()
+            );
+        }
+
+        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool checkNow, DateTime now)
         {
             IEnumerable<NewsEntryInfo> baseItems;
 
@@ -70,7 +123,7 @@ namespace R7.News.Stream.ViewModels
                 );
             }
             else {
-                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (Module.ModuleId, Module.PortalId, 
+                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (Module.ModuleId, Module.PortalId,
                     Settings.MinThematicWeight, Settings.MaxThematicWeight, 
                     Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
                     Settings.IncludeTerms
@@ -84,9 +137,7 @@ namespace R7.News.Stream.ViewModels
 
             // get only published items
             IList<NewsEntryInfo> items = baseItems
-                .Where (ne => (ne.IsPublished () && ne.IsVisible (
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) || Module.IsEditable)
+                .Where (ne => !checkNow || ne.IsPublished (now))
                 .ToList ();
             
             // check for no data available
@@ -110,7 +161,5 @@ namespace R7.News.Stream.ViewModels
                     .ToList ()
             );
         }
-
     }
 }
-

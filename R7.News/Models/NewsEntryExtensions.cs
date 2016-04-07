@@ -133,9 +133,9 @@ namespace R7.News.Models
             }
         }
 
-        public static bool IsPublished (this INewsEntry newsEntry)
+        public static bool IsPublished (this INewsEntry newsEntry, DateTime now)
         {
-            return ModelHelper.IsPublished (newsEntry.StartDate, newsEntry.EndDate);
+            return ModelHelper.IsPublished (now, newsEntry.StartDate, newsEntry.EndDate);
         }
 
         public static bool WillBePublished (this INewsEntry newsEntry)
