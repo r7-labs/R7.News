@@ -82,7 +82,6 @@
                         <businessControllerClass>R7.News.Stream.Components.StreamController</businessControllerClass>
                         <supportedFeatures>
                             <!-- <supportedFeature type="Portable" /> -->
-                            <!-- <supportedFeature type="Searchable" /> -->
                         </supportedFeatures>
                         <moduleDefinitions>
                             <moduleDefinition>
@@ -162,7 +161,6 @@
                         <businessControllerClass>R7.News.Agent.Components.AgentController</businessControllerClass>
                         <supportedFeatures>
                             <!-- <supportedFeature type="Portable" /> -->
-                            <!-- <supportedFeature type="Searchable" /> -->
                         </supportedFeatures>
                         <moduleDefinitions>
                             <moduleDefinition>

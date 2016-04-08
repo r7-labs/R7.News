@@ -30,15 +30,14 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.R7.Entities.Modules;
+using DotNetNuke.R7.ViewModels;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
-using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
-using R7.News.ViewModels;
 
 namespace R7.News.Agent
 {
@@ -92,7 +91,7 @@ namespace R7.News.Agent
 
         protected void Bind ()
         {
-            var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId);
+            var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
 
             // check if we have some content to display, 
             // otherwise display a message for module editors.

@@ -135,7 +135,7 @@ namespace R7.News.Data
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesInternal (portalId, 
                     minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
             );
@@ -180,7 +180,7 @@ namespace R7.News.Data
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByTermsInternal (portalId, 
                     minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight, terms)
             );
@@ -223,11 +223,11 @@ namespace R7.News.Data
                 .Cast<NewsEntryInfo> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId)
+        public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId, int portalId)
         {
             var cacheKey = NewsCacheKeyPrefix + "AgentModuleId=" + moduleId;
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
-                new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
+                new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByAgentInternal (moduleId)
             );
         }
