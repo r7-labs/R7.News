@@ -84,7 +84,7 @@ namespace R7.News.Stream.Components
 
         public int MaxThematicWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", NewsConfig.Instance.NewsEntry.MaxWeight); }
+            get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MaxThematicWeight", value); }
         }
 
@@ -96,7 +96,7 @@ namespace R7.News.Stream.Components
 
         public int MaxStructuralWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MaxStructuralWeight", NewsConfig.Instance.NewsEntry.MaxWeight); }
+            get { return ReadSetting<int> ("r7_News_Stream_MaxStructuralWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> ("r7_News_Stream_MaxStructuralWeight", value); }
         }
 

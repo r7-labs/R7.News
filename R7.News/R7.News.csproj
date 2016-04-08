@@ -57,7 +57,7 @@
     </Reference>
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="DotNetNuke.R7">
-      <HintPath>..\packages\DotNetNuke.R7.0.6.0-alpha\lib\net45\DotNetNuke.R7.dll</HintPath>
+      <HintPath>..\packages\DotNetNuke.R7.0.6.0-alpha2\lib\net45\DotNetNuke.R7.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +67,6 @@
     <Folder Include="Providers\" />
     <Folder Include="Controls\" />
     <Folder Include="Controls\ViewModels\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Data\" />
     <Folder Include="ControlExtensions\" />
   </ItemGroup>
@@ -101,7 +100,6 @@
       <DependentUpon>TermLinks.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewModels\TermLinksViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelContext.cs" />
     <Compile Include="Data\NewsEntryInfo.cs" />
     <Compile Include="Data\NewsRepository.cs" />
     <Compile Include="Models\ModelHelper.cs" />

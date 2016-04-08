@@ -31,7 +31,6 @@ using R7.News.Controls;
 using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
-using R7.News.ViewModels;
 using PagingControlMode = DotNetNuke.R7.PagingControlMode;
 
 namespace R7.News.Stream

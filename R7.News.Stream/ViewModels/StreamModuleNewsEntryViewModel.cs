@@ -21,16 +21,15 @@
 
 using System;
 using System.Collections.Generic;
-using R7.News.Models;
-using R7.News.Data;
-using DotNetNuke.Entities.Content;
-using DotNetNuke.R7;
 using DotNetNuke.Common;
+using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.R7;
+using DotNetNuke.R7.ViewModels;
 using DotNetNuke.Services.Localization;
-using R7.News.Stream.Components;
-using R7.News.ViewModels;
 using R7.News.Controls;
+using R7.News.Models;
+using R7.News.Stream.Components;
 
 namespace R7.News.Stream.ViewModels
 {

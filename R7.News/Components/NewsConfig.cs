@@ -41,32 +41,34 @@ namespace R7.News.Components
 
         public static NewsPortalConfig Instance
         {
-            get {
-                var portalId = PortalSettings.Current.PortalId;
+            get { return GetInstance (PortalSettings.Current.PortalId); }
+        }
 
-                var lazyPortalConfig = portalConfigs.GetOrAdd (portalId, newKey => 
-                    new Lazy<NewsPortalConfig> (() => {
+        public static NewsPortalConfig GetInstance (int portalId)
+        {
+            var lazyPortalConfig = portalConfigs.GetOrAdd (portalId, newKey => 
+                new Lazy<NewsPortalConfig> (() => {
 
-                        var portalConfigFile = Path.Combine (PortalSettings.Current.HomeDirectoryMapPath, "R7.News.yml");
+                    var portalSettings = new PortalSettings (portalId);
+                    var portalConfigFile = Path.Combine (portalSettings.HomeDirectoryMapPath, "R7.News.yml");
 
-                        // ensure portal config file exists
-                        if (!File.Exists (portalConfigFile)) {
-                            File.Copy (Path.Combine (Globals.ApplicationMapPath, "DesktopModules\\R7.News\\R7.News\\R7.News.yml"), 
-                                portalConfigFile);
-                        }
-
-                        using (var configReader = new StringReader (File.ReadAllText (portalConfigFile))) {
-                            var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
-                            var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
-
-                            LoadTermUrlProviders (portalConfig);
-                            return portalConfig;
-                        }
+                    // ensure portal config file exists
+                    if (!File.Exists (portalConfigFile)) {
+                        File.Copy (Path.Combine (Globals.ApplicationMapPath, "DesktopModules\\R7.News\\R7.News\\R7.News.yml"), 
+                            portalConfigFile);
                     }
-                 ));
-                
-                return lazyPortalConfig.Value;
-            }
+
+                    using (var configReader = new StringReader (File.ReadAllText (portalConfigFile))) {
+                        var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
+                        var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
+
+                        LoadTermUrlProviders (portalConfig);
+                        return portalConfig;
+                    }
+                }
+            ));
+
+            return lazyPortalConfig.Value;
         }
 
         #endregion
