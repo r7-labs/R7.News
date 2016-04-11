@@ -29,7 +29,8 @@
                         <%# Eval ("Title") %>
                     </h3>
                     <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-                    <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+                    <p class="small" style="color:gray"><span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
+                    <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     <p>
                         <news:TermLinks id="termLinks" runat="server" />
@@ -49,7 +50,8 @@
                                         OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
                                 </h4>
                                 <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-                                <p class="small" style="color:gray"><%# Eval ("PublishedOnDateString") %> - <%# Eval ("CreatedByUserName") %></p>
+                                <p class="small" style="color:gray"><span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
+                                <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
                             <div style="display:table-row">
                                 <div style="display:table-cell">
                                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>'
