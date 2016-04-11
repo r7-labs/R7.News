@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Search.Entities;
 using R7.News.Data;
@@ -30,13 +31,32 @@ using R7.News.Models;
 
 namespace R7.News.Stream.Components
 {
-    public partial class StreamController : ModuleSearchBase
+    public class StreamController : ModuleSearchBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="R7.News.Stream.Components.StreamController"/> class.
         /// </summary>
         public StreamController () : base ()
-        { 
+        {
+        }
+
+        protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId, int portalId, 
+            int minThematicWeight, int maxThematicWeight, 
+            int minStructuralWeight, int maxStructuralWeight,
+            bool showAllNews, List<Term> includeTerms)
+        {
+            if (showAllNews) {
+                return NewsRepository.Instance.GetNewsEntries (moduleId, portalId,
+                    minThematicWeight, maxThematicWeight,
+                    minStructuralWeight, maxStructuralWeight
+                );
+            }
+
+            return NewsRepository.Instance.GetNewsEntriesByTerms (moduleId, portalId,
+                minThematicWeight, maxThematicWeight,
+                minStructuralWeight, maxStructuralWeight,
+                includeTerms
+            );
         }
 
         #region ModuleSearchBase implementaion
@@ -47,20 +67,10 @@ namespace R7.News.Stream.Components
             var settings = new StreamSettings (moduleInfo);
 
             // get news entries
-            IEnumerable<NewsEntryInfo> newsEntries;
-            if (settings.ShowAllNews) {
-                newsEntries = NewsRepository.Instance.GetNewsEntries (moduleInfo.ModuleID, moduleInfo.PortalID,
-                    settings.MinThematicWeight, settings.MaxThematicWeight,
-                    settings.MinStructuralWeight, settings.MaxStructuralWeight
-                );
-            }
-            else {
-                newsEntries = NewsRepository.Instance.GetNewsEntriesByTerms (moduleInfo.ModuleID, moduleInfo.PortalID,
-                    settings.MinThematicWeight, settings.MaxThematicWeight,
-                    settings.MinStructuralWeight, settings.MaxStructuralWeight, 
-                    settings.IncludeTerms
-                );
-            }
+            var newsEntries = GetNewsEntries (moduleInfo.ModuleID, moduleInfo.PortalID,
+                settings.MinThematicWeight, settings.MaxThematicWeight,
+                settings.MinStructuralWeight, settings.MaxStructuralWeight,
+                settings.ShowAllNews, settings.IncludeTerms);
 
             // create search documents
             foreach (var newsEntry in newsEntries)

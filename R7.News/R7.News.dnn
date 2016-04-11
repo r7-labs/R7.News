@@ -80,9 +80,7 @@
                         <moduleName>R7.News.Stream</moduleName>
                         <foldername>R7.News.Stream</foldername>
                         <businessControllerClass>R7.News.Stream.Components.StreamController</businessControllerClass>
-                        <supportedFeatures>
-                            <!-- <supportedFeature type="Portable" /> -->
-                        </supportedFeatures>
+                        <supportedFeatures />
                         <moduleDefinitions>
                             <moduleDefinition>
                                 <friendlyName>R7.News.Stream</friendlyName>
