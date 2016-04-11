@@ -119,7 +119,7 @@ namespace R7.News.Stream
         protected IEnumerable<StreamModuleViewModel> GetStreamModules (int thematicWeight, int structuralWeight, IList<Term> terms)
         {
             var moduleController = new ModuleController ();
-            return moduleController.GetModulesByDefinition (PortalId, "R7.News.Stream")
+            return moduleController.GetModulesByDefinition (PortalId, Const.StreamModuleDefinitionName)
                 .Cast<ModuleInfo> ()
                 .Where (m => !m.IsDeleted)
                 .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (new StreamSettings (m), 
@@ -222,7 +222,7 @@ namespace R7.News.Stream
             item.ThematicWeight = int.Parse (comboThematicWeight.SelectedValue);
             item.StructuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
 
-            if (ModuleConfiguration.ModuleDefinition.DefinitionName == "R7.News.Agent") {
+            if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
                 item.AgentModuleId = ModuleId;
             }   
         }

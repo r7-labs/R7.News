@@ -26,6 +26,10 @@ namespace R7.News.Components
     public static class Const
     {
         public const string Prefix = "r7_News";
+
+        public const string AgentModuleDefinitionName = "R7.News.Agent";
+
+        public const string StreamModuleDefinitionName = "R7.News.Stream";
     }
 }
 
