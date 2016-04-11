@@ -45,7 +45,9 @@ namespace R7.News.Data
 
         #endregion
 
-        public const string NewsCacheKeyPrefix = "//r7_News?";
+        public const string NewsCacheKeyPrefix = "//" + Const.Prefix + "?";
+
+        protected const string SpNamePrefix = Const.Prefix + "_";
 
         public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
         {
@@ -145,7 +147,7 @@ namespace R7.News.Data
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
-                "r7_News_GetNewsEntries", portalId, 
+                SpNamePrefix + "GetNewsEntries", portalId, 
                         minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
@@ -155,7 +157,7 @@ namespace R7.News.Data
         public int GetNewsEntries_Count (int portalId, bool checkNow, DateTime now,
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
         {
-            return NewsDataProvider.Instance.ExecuteSpScalar<int> ("r7_News_GetNewsEntries_Count", 
+            return NewsDataProvider.Instance.ExecuteSpScalar<int> (SpNamePrefix + "GetNewsEntries_Count", 
                 portalId, checkNow, now,
                 minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight
             );
@@ -165,7 +167,7 @@ namespace R7.News.Data
             int pageSize, bool checkNow, DateTime now, 
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
         {
-            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> ("r7_News_GetNewsEntries_FirstPage",
+            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntries_FirstPage",
                     portalId, pageSize, checkNow, now,
                     minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
                 .WithContentItems ()
@@ -191,7 +193,7 @@ namespace R7.News.Data
             IList<Term> terms)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
-                "r7_News_GetNewsEntriesByTerms", portalId, minThematicWeight, maxThematicWeight, 
+                SpNamePrefix + "GetNewsEntriesByTerms", portalId, minThematicWeight, maxThematicWeight, 
                         minStructuralWeight, maxStructuralWeight, terms.Select (t => t.TermId).ToArray ())
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
@@ -202,7 +204,7 @@ namespace R7.News.Data
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
             IList<Term> terms)
         {
-            return NewsDataProvider.Instance.ExecuteSpScalar<int> ("r7_News_GetNewsEntriesByTerms_Count", 
+            return NewsDataProvider.Instance.ExecuteSpScalar<int> (SpNamePrefix + "GetNewsEntriesByTerms_Count", 
                 portalId, checkNow, now,
                 minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight, 
                 terms.Select (t => t.TermId).ToArray ()
@@ -214,7 +216,7 @@ namespace R7.News.Data
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
             IList<Term> terms)
         {
-            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> ("r7_News_GetNewsEntriesByTerms_FirstPage",
+            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (Const.Prefix + "_GetNewsEntriesByTerms_FirstPage",
                     portalId, pageSize, checkNow, now,
                     minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight,
                     terms.Select (t => t.TermId).ToArray ())

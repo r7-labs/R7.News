@@ -36,6 +36,8 @@ namespace R7.News.Stream.Components
     /// </summary>
     public class StreamSettings : SettingsWrapper
     {
+        protected const string SettingPrefix = Const.Prefix + "_Stream";
+
         public StreamSettings ()
         {
         }
@@ -56,7 +58,7 @@ namespace R7.News.Stream.Components
             { 
                 var termController = new TermController ();
 
-                return ReadSetting<string> ("r7_News_Stream_IncludeTerms", string.Empty)
+                return ReadSetting<string> (SettingPrefix + "IncludeTerms", string.Empty)
                     .Split (new [] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select (ti => termController.GetTerm (int.Parse (ti)))
                     .ToList ();
@@ -64,40 +66,40 @@ namespace R7.News.Stream.Components
 
             set
             {
-                WriteModuleSetting<string> ("r7_News_Stream_IncludeTerms", 
+                WriteModuleSetting<string> (SettingPrefix + "IncludeTerms", 
                     TextUtils.FormatList (";", value.Select (t => t.TermId)));
             }
         }
 
         public bool ShowAllNews
         {
-            get { return ReadSetting<bool> ("r7_News_Stream_ShowAllNews", false); }
-            set { WriteModuleSetting<bool> ("r7_News_Stream_ShowAllNews", value); }
+            get { return ReadSetting<bool> (SettingPrefix + "ShowAllNews", false); }
+            set { WriteModuleSetting<bool> (SettingPrefix + "ShowAllNews", value); }
         }
 
         // REVIEW: Separate config settings for weight filters
         public int MinThematicWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MinThematicWeight", 0); }
-            set { WriteModuleSetting<int> ("r7_News_Stream_MinThematicWeight", value); }
+            get { return ReadSetting<int> (SettingPrefix + "MinThematicWeight", 0); }
+            set { WriteModuleSetting<int> (SettingPrefix + "MinThematicWeight", value); }
         }
 
         public int MaxThematicWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MaxThematicWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
-            set { WriteModuleSetting<int> ("r7_News_Stream_MaxThematicWeight", value); }
+            get { return ReadSetting<int> (SettingPrefix + "MaxThematicWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
+            set { WriteModuleSetting<int> (SettingPrefix + "MaxThematicWeight", value); }
         }
 
         public int MinStructuralWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MinStructuralWeight", 0); }
-            set { WriteModuleSetting<int> ("r7_News_Stream_MinStructuralWeight", value); }
+            get { return ReadSetting<int> (SettingPrefix + "MinStructuralWeight", 0); }
+            set { WriteModuleSetting<int> (SettingPrefix + "MinStructuralWeight", value); }
         }
 
         public int MaxStructuralWeight
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MaxStructuralWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
-            set { WriteModuleSetting<int> ("r7_News_Stream_MaxStructuralWeight", value); }
+            get { return ReadSetting<int> (SettingPrefix + "MaxStructuralWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
+            set { WriteModuleSetting<int> (SettingPrefix + "MaxStructuralWeight", value); }
         }
 
         #endregion
@@ -106,39 +108,39 @@ namespace R7.News.Stream.Components
 
         public bool UseShowMore
         {
-            get { return ReadSetting<bool> ("r7_News_Stream_UseShowMore", false); }
-            set { WriteTabModuleSetting<bool> ("r7_News_Stream_UseShowMore", value); }
+            get { return ReadSetting<bool> (SettingPrefix + "UseShowMore", false); }
+            set { WriteTabModuleSetting<bool> (SettingPrefix + "UseShowMore", value); }
         }
 
         public bool ShowTopPager
         {
-            get { return ReadSetting<bool> ("r7_News_Stream_ShowTopPager", true); }
-            set { WriteTabModuleSetting<bool> ("r7_News_Stream_ShowTopPager", value); }
+            get { return ReadSetting<bool> (SettingPrefix + "ShowTopPager", true); }
+            set { WriteTabModuleSetting<bool> (SettingPrefix + "ShowTopPager", value); }
         }
 
         public bool ShowBottomPager
         {
-            get { return ReadSetting<bool> ("r7_News_Stream_ShowBottomPager", true); }
-            set { WriteTabModuleSetting<bool> ("r7_News_Stream_ShowBottomPager", value); }
+            get { return ReadSetting<bool> (SettingPrefix + "ShowBottomPager", true); }
+            set { WriteTabModuleSetting<bool> (SettingPrefix + "ShowBottomPager", value); }
         }
 
         public int PageSize
         {
-            get { return ReadSetting<int> ("r7_News_Stream_PageSize", 3); }
-            set { WriteTabModuleSetting<int> ("r7_News_Stream_PageSize", value); }
+            get { return ReadSetting<int> (SettingPrefix + "PageSize", 3); }
+            set { WriteTabModuleSetting<int> (SettingPrefix + "PageSize", value); }
         }
 
         public int MaxPageLinks
         {
-            get { return ReadSetting<int> ("r7_News_Stream_MaxPageLinks", 3); }
-            set { WriteTabModuleSetting<int> ("r7_News_Stream_MaxPageLinks", value); }
+            get { return ReadSetting<int> (SettingPrefix +  "MaxPageLinks", 3); }
+            set { WriteTabModuleSetting<int> (SettingPrefix + "MaxPageLinks", value); }
         }
 
         public int ThumbnailWidth
         {
             // TODO: Get default thumbnail width from config
-            get { return ReadSetting<int> ("r7_News_Stream_ThumbnailWidth", 192); }
-            set { WriteTabModuleSetting<int> ("r7_News_Stream_ThumbnailWidth", value); }
+            get { return ReadSetting<int> (SettingPrefix + "ThumbnailWidth", 192); }
+            set { WriteTabModuleSetting<int> (SettingPrefix + "ThumbnailWidth", value); }
         }
 
         #endregion

@@ -34,7 +34,7 @@ namespace R7.News.Integrations
 {
     public class UniversityDivisionTermUrlProvider: ITermUrlProvider
     {
-        private const string cacheKey = "r7_NewsTermUrls_UniversityDivisions";
+        private const string cacheKey = Const.Prefix + "_TermUrls_UniversityDivisions";
 
         #region ITermUrlProvider implementation
 

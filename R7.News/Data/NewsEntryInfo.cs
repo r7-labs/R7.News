@@ -26,10 +26,11 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using R7.News.Models;
+using R7.News.Components;
 
 namespace R7.News.Data
 {
-    [TableName ("r7_News")]
+    [TableName (Const.Prefix)]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
     // [Cacheable ("r7_News", CacheItemPriority.Default, 20)]

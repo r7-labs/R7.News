@@ -35,6 +35,7 @@ using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Search.Entities;
 using R7.News.Data;
 using R7.News.Models;
+using R7.News.Components;
 
 namespace R7.News.Agent.Components
 {
@@ -70,7 +71,7 @@ namespace R7.News.Agent.Components
                         Body = HtmlUtils.ConvertToText (newsEntry.Description),
                         Tags = newsEntry.ContentItem.Terms.Select (t => t.Name),
                         ModifiedTimeUtc = newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime (),
-                        UniqueKey = string.Format ("r7_News_{0}", newsEntry.EntryId),
+                        UniqueKey = string.Format (Const.Prefix + "_{0}", newsEntry.EntryId),
                         Url = string.Format ("/Default.aspx?tabid={0}#{1}", moduleInfo.TabID, moduleInfo.ModuleID),
                         IsActive = newsEntry.IsPublished (now)
                     });

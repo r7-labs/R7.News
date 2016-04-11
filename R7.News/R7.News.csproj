@@ -112,6 +112,7 @@
     <Compile Include="Data\XmlNewsEntryInfo.cs" />
     <Compile Include="Integrations\AnnoView\Importer.cs" />
     <Compile Include="Integrations\AnnoView\AnnouncementInfo.cs" />
+    <Compile Include="Components\Const.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

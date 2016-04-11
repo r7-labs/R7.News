@@ -23,6 +23,7 @@ using System;
 using DotNetNuke.UI.Modules;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.R7.Entities.Modules;
+using R7.News.Components;
 
 namespace R7.News.Agent.Components
 {
@@ -31,6 +32,8 @@ namespace R7.News.Agent.Components
     /// </summary>
     public class AgentSettings : SettingsWrapper
     {
+        protected const string SettingPrefix = Const.Prefix + "_Stream";
+
         public AgentSettings ()
         {
         }
@@ -47,8 +50,8 @@ namespace R7.News.Agent.Components
 
         public bool EnableGrouping
         {
-            get { return ReadSetting<bool> ("r7_News_Agent_EnableGrouping", false); }
-            set { WriteTabModuleSetting<bool> ("r7_News_Agent_EnableGrouping", value); }
+            get { return ReadSetting<bool> (SettingPrefix + "EnableGrouping", false); }
+            set { WriteTabModuleSetting<bool> (SettingPrefix + "EnableGrouping", value); }
         }
 
         #endregion
