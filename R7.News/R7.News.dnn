@@ -160,7 +160,7 @@
                         <foldername>R7.News.Agent</foldername>
                         <businessControllerClass>R7.News.Agent.Components.AgentController</businessControllerClass>
                         <supportedFeatures>
-                            <!-- <supportedFeature type="Portable" /> -->
+                            <supportedFeature type="Portable" />
                         </supportedFeatures>
                         <moduleDefinitions>
                             <moduleDefinition>

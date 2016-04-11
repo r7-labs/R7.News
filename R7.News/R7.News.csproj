@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Data\NewsDataProvider.cs" />
     <Compile Include="ControlExtensions\GridViewExtensions.cs" />
+    <Compile Include="Data\XmlNewsEntryInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
