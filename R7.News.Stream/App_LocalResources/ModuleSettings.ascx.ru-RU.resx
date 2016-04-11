@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>Настройки модуля R7.News.Stream</value>
+        <value>Настройки R7.News.Stream</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
-        <value>О настройках модуля R7.News.Stream</value>
+        <value>О настройках R7.News.Stream</value>
     </data>
     <data name="labelIncludeTerms.Text" xml:space="preserve">
         <value>Показывать новости с метками:</value>
@@ -13,7 +13,7 @@
         <value>Выберите метки новостей, которые будут отображаться данным модулем.</value>
     </data>
     <data name="labelShowAllNews.Text" xml:space="preserve">
-        <value>Показывать все новости:</value>
+        <value>Не использовать метки:</value>
     </data>
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>Если отмечено, модуль будет отображать все новости сайта, игнорируя настройку 'Показывать новости с метками'.</value>
@@ -79,7 +79,7 @@
         <value>Задайте максимальное число ссылок на страницы в переключателе страниц.</value>
     </data>
     <data name="MaxPageLinks.Required" xml:space="preserve">
-        <value>Укажите максимальное число ссылок в переключателе.</value>
+        <value>Укажите максимальное число ссылок в переключателе страниц.</value>
     </data>
     <data name="MaxPageLinks.Invalid" xml:space="preserve">
         <value>Максимальное число ссылок в переключателе должно быть целым числом от 1 до 100.</value>
