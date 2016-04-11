@@ -18,16 +18,82 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using DotNetNuke.Common;
+using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Services.FileSystem;
+using R7.News.Data;
+using R7.News.Components;
 
 namespace R7.News.Integrations.AnnoView
 {
-    public static class Importer
+    public class Importer
     {
-        public void Import (int portalId)
+        /// <summary>
+        /// Imports news from AnnoView modules on specifed portal to R7.News
+        /// </summary>
+        /// <param name="moduleId">Module identifier.</param>
+        /// <param name="tabId">Tab identifier.</param>
+        /// <param name="portalId">Portal identifier.</param>
+        public int Import (int moduleId, int tabId, int portalId)
         {
+            var itemsImported = 0;
 
+            var announcements = NewsDataProvider.Instance.GetObjects<AnnouncementInfo> ();
+            if (announcements != null) {
+                
+                var moduleController = new ModuleController ();
+                var tabController = new TabController ();
+                var termController = new TermController ();
 
+                foreach (var announcement in announcements) {
+                    var module = moduleController.GetModule (announcement.ModuleId);
+                    if (module.PortalID == portalId) {
+
+                        // fill news entry
+                        var newsEntry = new NewsEntryInfo {
+                            Title = announcement.Title,
+                            Description = announcement.Description,
+                            StartDate = announcement.PublishDate,
+                            EndDate = announcement.ExpireDate,
+                            Url = announcement.Url,
+                            PortalId = portalId,
+                            ThematicWeight = NewsConfig.GetInstance (portalId).NewsEntry.MaxWeight,
+                            StructuralWeight = NewsConfig.GetInstance (portalId).NewsEntry.MaxWeight
+                        };
+                            
+                        // fill image
+                        var images = new List<IFileInfo> ();
+                        if (Globals.GetURLType (announcement.ImageSource) == TabType.File) {
+                            var imageFileId = int.Parse (announcement.ImageSource.Substring (announcement.ImageSource.IndexOf ("=") + 1));
+                            var image = FileManager.Instance.GetFile (imageFileId);
+                            if (image != null) {
+                                images.Add (image);
+                            }
+                        }
+
+                        // fill terms
+                        var terms = new List<Term> ();
+                        if (Globals.GetURLType (announcement.ImageSource) == TabType.Tab) {
+                            var tab = tabController.GetTab (int.Parse (announcement.Url), portalId);
+                            if (tab != null) {
+                                terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                            }
+                        }
+
+                        // create news entry
+                        NewsRepository.Instance.AddNewsEntry (newsEntry, terms, images, moduleId, tabId);
+                        itemsImported++;
+                    }
+                }
+            }
+        
+            return itemsImported;
         }
     }
 }

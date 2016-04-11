@@ -36,6 +36,11 @@
                 Type="Integer" MinimumValue="1" MaximumValue="4096"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="ThumbnailWidth.Invalid" />
         </div>
+        <hr />
+        <div class="dnnFormItem">
+            <div class="dnnLabel"></div>
+            <asp:LinkButton id="buttonImport" runat="server" CssClass="dnnSecondaryAction" OnClick="buttonImport_Click" Text="Import" />
+        </div>
     </fieldset>
     <h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionPagination.Text") %></a></h2>
     <fieldset>

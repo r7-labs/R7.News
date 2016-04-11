@@ -18,15 +18,42 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
+using DotNetNuke.ComponentModel.DataAnnotations;
 
 namespace R7.News.Integrations.AnnoView
 {
-    public class AnnouncementInfo
+    [TableName ("Announcements")]
+    internal class AnnouncementInfo
     {
-        public AnnouncementInfo ()
-        {
-        }
+        #region Properties
+
+        public int ItemId { get; set; }
+
+        public int ModuleId { get; set; }
+
+        public bool Export { get; set; }
+
+        public string ImageSource { get; set; }
+
+        public int ViewOrder { get; set; }
+
+        public string Url { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public int CreatedByUser { get; set; }
+
+        public DateTime PublishDate { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime ExpireDate { get; set; }
+
+        #endregion
     }
 }
 

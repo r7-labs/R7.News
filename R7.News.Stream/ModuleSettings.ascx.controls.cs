@@ -22,5 +22,6 @@ namespace R7.News.Stream
         protected DropDownList comboMaxThematicWeight;
         protected DropDownList comboMinStructuralWeight;
         protected DropDownList comboMaxStructuralWeight;
+        protected LinkButton buttonImport;
     }
 }
