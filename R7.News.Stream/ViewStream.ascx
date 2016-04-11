@@ -48,11 +48,6 @@
         </ItemSeparatorTemplate>
     </asp:ListView>
     <hr />
-    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-default" OnClick="buttonShowMore_Click" />
     <dnn:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
+    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-default btn-block" OnClick="buttonShowMore_Click" />
 </asp:Panel>
-
-<hr />
-<h2>Config:</h2>
-DataCacheTime: <%: R7.News.Components.NewsConfig.Instance.DataCacheTime %><br />
-DefaultImagePath: <%: R7.News.Components.NewsConfig.Instance.DefaultImagesPath %><br />
