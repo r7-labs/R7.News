@@ -24,7 +24,6 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 
 namespace R7.News.Integrations
 {
-    // TODO: Move to separate assembly?
     [TableName ("University_Divisions")]
     [PrimaryKey ("DivisionID", AutoIncrement = false)]
     public class UniversityDivisionInfo
