@@ -32,6 +32,10 @@ namespace R7.News.Components
 
         public string DefaultImagesPath { get; set; }
 
+        public StreamModuleConfig StreamModule { get; set; }
+
+        public AgentModuleConfig AgentModule { get; set; }
+
         public NewsEntryConfig NewsEntry { get; set; }
 
         #region TermUrlProviders
@@ -60,5 +64,17 @@ namespace R7.News.Components
         public int DefaultThematicWeight { get; set; }
 
         public int DefaultStructuralWeight { get; set; }
+    }
+
+    public class StreamModuleConfig
+    {
+        public int DefaultThumbnailWidth { get; set; }
+    }
+
+    public class AgentModuleConfig
+    {
+        public int DefaultThumbnailWidth { get; set; }
+
+        public int DefaultGroupThumbnailWidth { get; set; }
     }
 }

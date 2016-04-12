@@ -146,12 +146,12 @@ namespace R7.News.Agent.ViewModels
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: 555); }
+            get { return NewsEntry.GetImageUrl (width: Context.Settings.ThumbnailWidth); }
         }
 
         public string GroupImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: 133); }
+            get { return NewsEntry.GetImageUrl (width: Context.Settings.GroupThumbnailWidth); }
         }
 
         public string TitleLink

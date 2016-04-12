@@ -2,6 +2,13 @@
 
 default-images-path: images
 
+stream-module:
+  default-thumbnail-width: 197
+
+agent-module:
+  default-thumbnail-width: 555
+  default-group-thumbnail-width: 133
+
 news-entry:
   max-weight: 10
   default-thematic-weight: 10

@@ -138,8 +138,11 @@ namespace R7.News.Stream.Components
 
         public int ThumbnailWidth
         {
-            // TODO: Get default thumbnail width from config
-            get { return ReadSetting<int> (SettingPrefix + "ThumbnailWidth", 192); }
+            get 
+            { 
+                return ReadSetting<int> (SettingPrefix + "ThumbnailWidth", 
+                    NewsConfig.GetInstance (PortalId).StreamModule.DefaultThumbnailWidth); 
+            }
             set { WriteTabModuleSetting<int> (SettingPrefix + "ThumbnailWidth", value); }
         }
 
