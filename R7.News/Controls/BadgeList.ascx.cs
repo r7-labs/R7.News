@@ -52,7 +52,7 @@ namespace R7.News.Controls
 
         public List<Badge> DataSource { get; set; }
 
-        // public string CssClass { get; set; }
+        public string CssClass { get; set; }
 
         public string BadgeCssClass { get; set; }
 
