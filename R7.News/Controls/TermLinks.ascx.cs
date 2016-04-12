@@ -42,6 +42,8 @@ namespace R7.News.Controls
 
         #region Public properties
 
+        public string CssClass { get; set; }
+
         public List<Term> DataSource { get; set; }
 
         public PortalModuleBase Module { get; set; }

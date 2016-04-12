@@ -14,3 +14,7 @@
 .news-agent .visibility-badges .badge.expired {
     background-color:#c33
 }
+
+.news-agent .term-links span.glyphicon {
+    color:gray
+}

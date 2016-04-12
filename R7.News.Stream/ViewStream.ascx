@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <p>
-                    <news:TermLinks id="termLinks" runat="server" />
+                    <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                 </p>
             </div>
         </ItemTemplate>

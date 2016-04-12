@@ -15,3 +15,7 @@
 .news-stream .visibility-badges .badge.expired {
     background-color:#c33
 }
+
+.news-stream .term-links span.glyphicon {
+    color:gray
+}

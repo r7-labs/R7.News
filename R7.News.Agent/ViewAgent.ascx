@@ -33,7 +33,7 @@
                     <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     <p>
-                        <news:TermLinks id="termLinks" runat="server" />
+                        <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                     </p>
                     <asp:ListView id="listGroup" DataKeyNames="EntryId" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
