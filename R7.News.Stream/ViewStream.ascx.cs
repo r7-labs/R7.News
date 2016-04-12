@@ -65,43 +65,32 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            if (Settings.UseShowMore) {
-                buttonShowMore.Visible = true;
+            buttonShowMore.Visible = Settings.UseShowMore;
 
-                // hide paging controls
-                pagerTop.Visible = false;
-                pagerBottom.Visible = false;
+            // setup top paging control
+            if (Settings.ShowTopPager) {
+                pagerTop.CurrentPage = CurrentPage;
+                pagerTop.TabID = TabId;
+                pagerTop.PageSize = PageSize;
+                pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
+                pagerTop.Mode = PagingControlMode.PostBack;
+                pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
             }
             else {
+                pagerTop.Visible = false;
+            }
 
-                // hide "show more" button
-                buttonShowMore.Visible = false;
-
-                // setup top paging control
-                if (Settings.ShowTopPager) {
-                    pagerTop.CurrentPage = CurrentPage;
-                    pagerTop.TabID = TabId;
-                    pagerTop.PageSize = Settings.PageSize;
-                    pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
-                    pagerTop.Mode = PagingControlMode.PostBack;
-                    pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
-                }
-                else {
-                    pagerTop.Visible = false;
-                }
-
-                // setup bottom paging control
-                if (Settings.ShowBottomPager) {
-                    pagerBottom.CurrentPage = CurrentPage;
-                    pagerBottom.TabID = TabId;
-                    pagerBottom.PageSize = Settings.PageSize;
-                    pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
-                    pagerBottom.Mode = PagingControlMode.PostBack;
-                    pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
-                }
-                else {
-                    pagerBottom.Visible = false;
-                }
+            // setup bottom paging control
+            if (Settings.ShowBottomPager) {
+                pagerBottom.CurrentPage = CurrentPage;
+                pagerBottom.TabID = TabId;
+                pagerBottom.PageSize = PageSize;
+                pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
+                pagerBottom.Mode = PagingControlMode.PostBack;
+                pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
+            }
+            else {
+                pagerBottom.Visible = false;
             }
         }
 
@@ -116,7 +105,7 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
                     
-                    var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
+                    var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
 
                     ToggleStreamControls (page.TotalItems);
 
@@ -138,12 +127,14 @@ namespace R7.News.Stream
                 panelStream.Visible = true;
 
                 // setup paging controls
+                pagerTop.PageSize = PageSize;
+                pagerBottom.PageSize = PageSize;
                 pagerTop.TotalRecords = totalItems;
                 pagerBottom.TotalRecords = totalItems;
 
-                var showPager = totalItems > PageSize && !Settings.UseShowMore;
-                pagerTop.Visible = showPager && Settings.ShowTopPager;
-                pagerBottom.Visible = showPager && Settings.ShowBottomPager;
+                var canShowPager = totalItems > PageSize;
+                pagerTop.Visible = canShowPager && Settings.ShowTopPager;
+                pagerBottom.Visible = canShowPager && Settings.ShowBottomPager;
             }
             else {
                 panelStream.Visible = false;
@@ -160,7 +151,7 @@ namespace R7.News.Stream
 
             CurrentPage = pagingControl.CurrentPage;
 
-            var page = ViewModel.GetPage (CurrentPage - 1, Settings.PageSize);
+            var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
 
             // sync paging controls
             if (pagingControl == pagerTop) {
@@ -181,6 +172,8 @@ namespace R7.News.Stream
 
         protected void buttonShowMore_Click (object sender, EventArgs e)
         {
+            // set current page to 1 and increase page size
+            CurrentPage = 1;
             PageSize = PageSize + Settings.PageSize;
 
             var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
