@@ -227,7 +227,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT COUNT (*) FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+    SELECT COUNT (DISTINCT NE.EntryID) FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
             ON NE.ContentItemID = CI.ContentItemID
         INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
