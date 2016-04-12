@@ -35,12 +35,6 @@
                 <p>
                     <news:TermLinks id="termLinks" runat="server" />
                 </p>
-                <div class="small">
-                    EntryId: <%# Eval ("EntryId") %><br />
-                    AgentModuleId: <%# Eval ("AgentModuleId") %><br />
-                    LastModifiedOnDate: <%# Eval ("ContentItem.LastModifiedOnDate") %><br />
-                    LastModifiedByUserID: <%# Eval ("ContentItem.LastModifiedByUserID") %>
-                </div>
             </div>
         </ItemTemplate>
         <ItemSeparatorTemplate>
