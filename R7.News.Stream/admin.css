@@ -22,6 +22,13 @@
     max-width:445px   
 }
 
+/* make modules grid scrollable */
+#newsentry-terms-and-weigths-tab table.grid-modules {
+    display:inline-block;
+    max-height:10em;
+    overflow:auto
+}
+
 /* Adjust terms dropdown bottom margin */
 #news-stream-settings .dnnFormItem > .RadComboBox_Default {
     margin-bottom:0
@@ -31,3 +38,4 @@
 #news-stream-settings .dnnFormItem input[type="checkbox"] + span {
     margin-bottom:18px
 }
+

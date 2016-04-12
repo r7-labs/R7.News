@@ -12,7 +12,7 @@
     <div id="newsentry-tabs">
         <ul class="dnnAdminTabNav dnnClear">
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
-            <li><a href="#newsentry-terms-and-weighs-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
+            <li><a href="#newsentry-terms-and-weigths-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
             <li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
         </ul>
@@ -32,7 +32,7 @@
                 </div>
             </fieldset>
         </div>
-        <div id="newsentry-terms-and-weighs-tab">
+        <div id="newsentry-terms-and-weigths-tab">
             <fieldset>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
@@ -54,7 +54,7 @@
                 <div class="dnnFormItem">
                     <div class="dnnLabel"></div>
                     <asp:GridView id="gridModules" runat="server" AutoGenerateColumns="false"
-                            UseAccessibleHeader="true" CssClass="dnnGrid" GridLines="None">
+                            UseAccessibleHeader="true" CssClass="dnnGrid grid-modules" GridLines="None">
                         <HeaderStyle CssClass="dnnGridHeader" />
                         <RowStyle CssClass="dnnGridItem" />
                         <AlternatingRowStyle CssClass="dnnGridAltItem" />
