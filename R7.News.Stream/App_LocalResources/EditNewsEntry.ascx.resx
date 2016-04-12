@@ -51,15 +51,6 @@
     <data name="labelEndDate.Help" xml:space="preserve">
         <value>Enter the end date and time of publication for the news entry.</value>
     </data>
-    <data name="labelSortIndex.Text" xml:space="preserve">
-        <value>Sort Index:</value>
-    </data>
-    <data name="labelSortIndex.Help" xml:space="preserve">
-        <value></value>
-    </data>
-    <data name="SortIndex.Invalid" xml:space="preserve">
-        <value>Sort index must be an integer number.</value>
-    </data>
     <data name="labelTerms.Text" xml:space="preserve">
         <value>Terms:</value>
     </data>

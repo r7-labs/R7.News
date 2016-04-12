@@ -20,7 +20,6 @@ namespace R7.News.Stream
         protected DnnDateTimePicker datetimeDueDate;
         protected DnnDateTimePicker datetimeStartDate;
         protected DnnDateTimePicker datetimeEndDate;
-        protected TextBox textSortIndex;
         protected TermsSelector termsTerms;
         protected DnnFilePickerUploader pickerImage;
         protected DnnUrlControl urlUrl;

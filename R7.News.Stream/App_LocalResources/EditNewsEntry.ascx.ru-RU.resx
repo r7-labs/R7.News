@@ -51,15 +51,6 @@
     <data name="labelEndDate.Help" xml:space="preserve">
         <value>Введите дату окончания публикации новости.</value>
     </data>
-    <data name="labelSortIndex.Text" xml:space="preserve">
-        <value>Индекс сортировки:</value>
-    </data>
-    <data name="labelSortIndex.Help" xml:space="preserve">
-        <value></value>
-    </data>
-    <data name="SortIndex.Invalid" xml:space="preserve">
-        <value>Индекс сортировки должен быть целым числом.</value>
-    </data>
     <data name="labelTerms.Text" xml:space="preserve">
         <value>Метки:</value>
     </data>

@@ -51,10 +51,6 @@ namespace R7.News.Models
 
         string Description { get; set; }
 
-        int SortIndex { get; set; }
-
-        bool IsSticky { get; set; }
-
         int ThematicWeight { get; set; }
 
         int StructuralWeight { get; set; }

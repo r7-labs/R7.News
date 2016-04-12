@@ -112,18 +112,6 @@ namespace R7.News.Agent.ViewModels
             set {}
         }
 
-        public int SortIndex
-        {
-            get { return NewsEntry.SortIndex; }
-            set {}
-        }
-
-        public bool IsSticky
-        {
-            get { return NewsEntry.IsSticky; }
-            set {}
-        }
-
         public int ThematicWeight
         { 
             get { return NewsEntry.ThematicWeight; }

@@ -60,10 +60,6 @@ namespace R7.News.Data
 
         public string Description { get; set; }
 
-        public int SortIndex { get; set; }
-
-        public bool IsSticky { get; set; }
-
         public int ThematicWeight { get; set; }
 
         public int StructuralWeight { get; set; }

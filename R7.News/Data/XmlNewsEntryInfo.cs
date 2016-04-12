@@ -124,18 +124,6 @@ namespace R7.News.Data
             set { @This.Description = value; }
         }
 
-        public int SortIndex
-        {
-            get { return @This.SortIndex; }
-            set { @This.SortIndex = value; }
-        }
-
-        public bool IsSticky
-        {
-            get { return @This.IsSticky; }
-            set { @This.IsSticky = value; }
-        }
-
         public int ThematicWeight
         {
             get { return @This.ThematicWeight; }

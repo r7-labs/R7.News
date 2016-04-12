@@ -19,8 +19,6 @@ BEGIN
         EndDate datetime NULL,
         ThresholdDate datetime NULL,
         DueDate datetime NULL,
-        SortIndex int NOT NULL DEFAULT ((0)),
-        IsSticky bit NOT NULL DEFAULT ((0)),
         ThematicWeight int NOT NULL,
         StructuralWeight int NOT NULL
         CONSTRAINT [PK_{objectQualifier}r7_News] PRIMARY KEY CLUSTERED (EntryID)

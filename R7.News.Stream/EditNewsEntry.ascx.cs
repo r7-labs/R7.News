@@ -157,7 +157,6 @@ namespace R7.News.Stream
 
             textTitle.Text = item.Title;
             textDescription.Text = item.Description;
-            textSortIndex.Text = item.SortIndex.ToString ();
 
             datetimeThresholdDate.SelectedDate = item.ThresholdDate;
             datetimeDueDate.SelectedDate = item.DueDate;
@@ -234,7 +233,6 @@ namespace R7.News.Stream
             // fill the object
             item.Title = textTitle.Text.Trim ();
             item.Description = textDescription.Text.Trim ();
-            item.SortIndex = int.Parse (textSortIndex.Text);
 
             item.ThresholdDate = datetimeThresholdDate.SelectedDate;
             item.DueDate = datetimeDueDate.SelectedDate;
