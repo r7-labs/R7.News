@@ -22,6 +22,7 @@
 using System;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.R7.ViewModels;
 using R7.News.Providers;
 
@@ -47,7 +48,21 @@ namespace R7.News.Controls.ViewModels
         {
             get
             {
-                return Globals.LinkClick (TermUrlManager.GetUrl (Term), Context.Module.TabId, Context.Module.ModuleId);
+                var url = TermUrlManager.GetUrl (Term);
+                if (!string.IsNullOrEmpty (url)) {
+                    int tabId;
+                    if (int.TryParse (url, out tabId)) {
+                        // url contains tabId
+                        return Globals.NavigateURL (tabId);
+                    }
+
+                    // url of another type
+                    return Globals.LinkClick (url, Context.Module.TabId, Context.Module.ModuleId);
+                }
+
+                // REVIEW: SearchTabId could be undefined
+                // return term search link
+                return Globals.NavigateURL (PortalSettings.Current.SearchTabId) + "?Tag=" + Term.Name;
             }
         }
 
