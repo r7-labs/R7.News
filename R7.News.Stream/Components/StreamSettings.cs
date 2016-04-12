@@ -36,7 +36,7 @@ namespace R7.News.Stream.Components
     /// </summary>
     public class StreamSettings : SettingsWrapper
     {
-        protected const string SettingPrefix = Const.Prefix + "_Stream";
+        protected const string SettingPrefix = Const.Prefix + "_Stream_";
 
         public StreamSettings ()
         {

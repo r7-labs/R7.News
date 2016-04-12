@@ -32,7 +32,7 @@ namespace R7.News.Agent.Components
     /// </summary>
     public class AgentSettings : SettingsWrapper
     {
-        protected const string SettingPrefix = Const.Prefix + "_Stream";
+        protected const string SettingPrefix = Const.Prefix + "_Agent_";
 
         public AgentSettings ()
         {

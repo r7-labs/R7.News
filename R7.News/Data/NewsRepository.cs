@@ -216,7 +216,7 @@ namespace R7.News.Data
             int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
             IList<Term> terms)
         {
-            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (Const.Prefix + "_GetNewsEntriesByTerms_FirstPage",
+            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntriesByTerms_FirstPage",
                     portalId, pageSize, checkNow, now,
                     minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight,
                     terms.Select (t => t.TermId).ToArray ())
