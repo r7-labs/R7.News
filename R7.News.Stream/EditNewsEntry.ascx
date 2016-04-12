@@ -18,12 +18,12 @@
         <div id="newsentry-common-tab">
             <fieldset>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelImage" runat="server" ControlName="pickerImage" />
-                    <dnn:Picker id="pickerImage" runat="server" />
-                </div>
-                <div class="dnnFormItem">
                     <dnn:Label id="labelTitle" runat="server" ControlName="textTitle" />
                     <asp:TextBox id="textTitle" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelImage" runat="server" ControlName="pickerImage" />
+                    <dnn:Picker id="pickerImage" runat="server" />
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />

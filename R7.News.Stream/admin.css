@@ -1,2 +1,17 @@
-﻿/* Place CSS for edit / settings controls here */
+﻿/* Description texteditor: show label and radiogroup in one line */
+#newsentry-common-tab .dnnTextEditor.dnnClear {
+    clear:none
+}
 
+/* Description texteditor: hide Editor label */
+#newsentry-common-tab .dnnTextEditor .dnnLabel {
+    display:none
+}
+
+/* Title, Description: override textbox and text editor (in basic mode) width */
+#newsentry-common-tab .dnnFormItem input[type="text"],
+#newsentry-common-tab .dnnFormItem textarea {
+    width:97%;
+    max-width:inherit;
+    margin-top:8px;
+}
