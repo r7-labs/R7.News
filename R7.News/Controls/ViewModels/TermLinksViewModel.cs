@@ -25,6 +25,7 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.R7.ViewModels;
 using R7.News.Providers;
+using DotNetNuke.Common.Utilities;
 
 namespace R7.News.Controls.ViewModels
 {
@@ -60,9 +61,14 @@ namespace R7.News.Controls.ViewModels
                     return Globals.LinkClick (url, Context.Module.TabId, Context.Module.ModuleId);
                 }
 
-                // REVIEW: SearchTabId could be undefined
-                // return term search link
-                return Globals.NavigateURL (PortalSettings.Current.SearchTabId) + "?Tag=" + Term.Name;
+                var searchTabId = PortalSettings.Current.SearchTabId;
+                if (!Null.IsNull (searchTabId)) {
+                    // return term search link
+                    return Globals.NavigateURL (searchTabId) + "?Tag=" + Term.Name;
+                }
+
+                // TODO: Should not display hyperlink at all
+                return string.Empty;
             }
         }
 
