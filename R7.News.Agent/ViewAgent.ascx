@@ -5,7 +5,7 @@
 
 <asp:Panel id="panelAddDefaultEntry" runat="server" Visible="false" CssClass="dnnFormMessage dnnFormInfo">
     <asp:LinkButton id="buttonAddFromTabData" runat="server" resourcekey="buttonAddFromTabData.Text"
-        CssClass="dnnSecondaryAction dnnRight" Style="position:relative;top:-.5em" OnClick="buttonAddFromTabData_Click" />
+        CssClass="dnnSecondaryAction dnnRight button-add-from-tab-data" OnClick="buttonAddFromTabData_Click" />
     <%: LocalizeString ("NothingToDisplay.Text") %>
 </asp:Panel>
 <asp:ListView id="listAgent" DataKeyNames="EntryId" runat="server" OnItemDataBound="listAgent_ItemDataBound">
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
-                        CssClass="img img-rounded img-responsive" Style="margin-bottom:1em" />
+                        CssClass="img img-rounded img-responsive" />
                 </div>
                 <div class="col-sm-6">
                     <h3 style="margin-top:0">
@@ -28,36 +28,40 @@
                         </asp:HyperLink>
                         <%# Eval ("Title") %>
                     </h3>
-                    <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-                    <p class="small" style="color:gray"><span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
-                    <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
-                    <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                    <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+                    <p class="news-entry-info">
+                        <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
+                        <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
                     <p>
-                        <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
-                    </p>
+                    <div class="news-entry-description">
+                        <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                    </div>
+                    <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                     <asp:ListView id="listGroup" DataKeyNames="EntryId" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
-                            <div runat="server">
+                            <div runat="server" class="list-group">
                                 <div runat="server" id="itemPlaceholder"></div>
                             </div>
                         </LayoutTemplate>
                         <ItemTemplate>
-                                <h4>
-                                    <asp:HyperLink id="linkEdit" runat="server">
-                                        <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
-                                    </asp:HyperLink>
-                                    <asp:LinkButton id="buttonTitle" runat="server" Text='<%# Eval ("Title") %>' 
-                                        OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
-                                </h4>
-                                <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-                                <p class="small" style="color:gray"><span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
-                                <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
-                            <div style="display:table-row">
-                                <div style="display:table-cell">
-                                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>'
-                                        CssClass="img" Style="margin-bottom:1em;margin-right:1em" />
+                            <h4>
+                                <asp:HyperLink id="linkEdit" runat="server">
+                                    <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
+                                </asp:HyperLink>
+                                <asp:LinkButton id="buttonTitle" runat="server" Text='<%# Eval ("Title") %>' 
+                                    OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
+                            </h4>
+                            <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+                            <p class="news-entry-info">
+                                <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %>
+                                <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %>
+                            </p>
+                            <div class="news-entry-main-row">
+                                <div>
+                                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>' 
+                                        CssClass="img news-entry-image" />
                                 </div>
-                                <div style="display:table-cell;vertical-align:top;font-size:small">
+                                <div class="news-entry-description">
                                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                                 </div>
                             </div>

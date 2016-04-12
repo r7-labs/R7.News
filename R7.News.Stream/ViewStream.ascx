@@ -20,15 +20,17 @@
                     </asp:HyperLink>
                     <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
                 </h3>
-                <news:BadgeList id="listBadges" runat="server" BadgeCssClass="badge" />
-                <p class="small" style="color:gray"><span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %> 
-                <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Eval ("CreatedByUserName") %></p>
-                <div class="row">
+                <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+                <p class="news-entry-info">
+                    <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %> 
+                    <span class="glyphicon glyphicon-user"></span> <%# Eval ("CreatedByUserName") %>
+                </p>
+                <div class="row news-entry-main-row">
                     <div class="col-sm-4">
                         <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
-                            CssClass="img img-rounded img-responsive" Style="margin-bottom:1em" />
+                            CssClass="img img-rounded img-responsive news-entry-image" />
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8 news-entry-description">
                        <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     </div>
                 </div>

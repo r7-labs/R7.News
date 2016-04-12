@@ -1,6 +1,7 @@
 ﻿
 .news-stream .visibility-badges {
-    margin-left:inherit
+    margin-left:inherit;
+    font-size:85%
 }
 
 .news-stream .visibility-badges .badge {
@@ -16,6 +17,19 @@
     background-color:#c33
 }
 
+.news-stream .term-links {
+    font-size:85%
+}
+
 .news-stream .term-links span.glyphicon {
     color:gray
+}
+
+.news-stream .news-entry-info {
+    color:gray;
+    font-size:85%
+}
+
+.news-stream .news-entry-info .glyphicon-user {
+    margin-left:1em
 }

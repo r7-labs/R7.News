@@ -2,7 +2,7 @@
 <div class="<%: CssClass %>">
     <asp:ListView id="listTermLinks" runat="server" DataKeyNames="TermId">
         <LayoutTemplate>
-            <ul runat="server" class="list-inline small" style="margin-left:inherit">
+            <ul runat="server" class="list-inline" style="margin-left:inherit">
                 <li runat="server" id="itemPlaceholder"></li>
             </ul>
         </LayoutTemplate>
