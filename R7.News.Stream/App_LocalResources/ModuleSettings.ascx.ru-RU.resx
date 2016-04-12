@@ -13,7 +13,7 @@
         <value>Выберите метки новостей, которые будут отображаться данным модулем.</value>
     </data>
     <data name="labelShowAllNews.Text" xml:space="preserve">
-        <value>Не использовать метки:</value>
+        <value>Не учитывать метки?</value>
     </data>
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>Если отмечено, модуль будет отображать все новости сайта, игнорируя настройку 'Показывать новости с метками'.</value>

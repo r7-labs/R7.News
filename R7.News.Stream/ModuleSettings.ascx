@@ -8,12 +8,12 @@
     <h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionBasic.Text") %></a></h2>
     <fieldset>
         <div class="dnnFormItem">
-            <dnn:Label id="labelShowAllNews" runat="server" ControlName="checkShowAllNews" />
-            <asp:CheckBox id="checkShowAllNews" runat="server" />
-        </div>
-        <div class="dnnFormItem">
             <dnn:Label id="labelIncludeTerms" runat="server" ControlName="termsIncludeTerms" />
             <dnn:TermsSelector id="termsIncludeTerms" runat="server" />
+        </div>
+        <div class="dnnFormItem">
+            <dnn:Label id="labelShowAllNews" runat="server" ControlName="checkShowAllNews" />
+            <asp:CheckBox id="checkShowAllNews" runat="server" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelThematicWeightFilter" runat="server" ControlName="comboMinThematicWeight" />

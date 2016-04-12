@@ -21,3 +21,13 @@
     width:45%;
     max-width:445px   
 }
+
+/* Adjust terms dropdown bottom margin */
+#news-stream-settings .dnnFormItem > .RadComboBox_Default {
+    margin-bottom:0
+}
+
+/* Adjust checkbox bottom margin */
+#news-stream-settings .dnnFormItem input[type="checkbox"] + span {
+    margin-bottom:18px
+}

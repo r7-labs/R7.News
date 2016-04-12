@@ -13,7 +13,7 @@
         <value>Select the terms for news entries to display by the module.</value>
     </data>
     <data name="labelShowAllNews.Text" xml:space="preserve">
-        <value>Don't use terms:</value>
+        <value>Ignore Terms?</value>
     </data>
     <data name="labelShowAllNews.Help" xml:space="preserve">
         <value>If checked, module will show all site news, ignoring 'IncludeTerms' setting.</value>
