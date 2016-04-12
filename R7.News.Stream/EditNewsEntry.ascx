@@ -116,7 +116,7 @@
     <ul class="dnnActions dnnClear">
         <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>
         <li><asp:LinkButton id="buttonDelete" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdDelete" /></li>
-        <li><asp:HyperLink id="linkCancel" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdCancel" Style="margin-left:2em" /></li>
+        <li><asp:HyperLink id="linkCancel" runat="server" CssClass="dnnSecondaryAction cancel-action" ResourceKey="cmdCancel" /></li>
     </ul>
 </div>
 <input id="hiddenSelectedTab" type="hidden" value="<%= (int) SelectedTab %>" />

@@ -9,23 +9,23 @@
     <fieldset>
         <div class="dnnFormItem">
             <dnn:Label id="labelIncludeTerms" runat="server" ControlName="termsIncludeTerms" />
-            <dnn:TermsSelector id="termsIncludeTerms" runat="server" />
+            <dnn:TermsSelector id="termsIncludeTerms" CssClass="terms-include-terms" runat="server" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelShowAllNews" runat="server" ControlName="checkShowAllNews" />
-            <asp:CheckBox id="checkShowAllNews" runat="server" />
+            <asp:CheckBox id="checkShowAllNews" runat="server" CssClass="check-show-all-news" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelThematicWeightFilter" runat="server" ControlName="comboMinThematicWeight" />
-            <asp:DropDownList id="comboMinThematicWeight" runat="server" Style="width:auto" />
-            <span style="padding-right:.5em;padding-left:.5em">&ndash;</span>
-            <asp:DropDownList id="comboMaxThematicWeight" runat="server" Style="width:auto" />
+            <asp:DropDownList id="comboMinThematicWeight" runat="server" CssClass="dnnSmallSizeComboBox" />
+            <span>&ndash;</span>
+            <asp:DropDownList id="comboMaxThematicWeight" runat="server" CssClass="dnnSmallSizeComboBox" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelStructuralWeightFilter" runat="server" ControlName="comboMinStructuralWeight" />
-            <asp:DropDownList id="comboMinStructuralWeight" runat="server" Style="width:auto" />
-            <span style="padding-right:.5em;padding-left:.5em">&ndash;</span>
-            <asp:DropDownList id="comboMaxStructuralWeight" runat="server" Style="width:auto" />
+            <asp:DropDownList id="comboMinStructuralWeight" runat="server" CssClass="dnnSmallSizeComboBox" />
+            <span>&ndash;</span>
+            <asp:DropDownList id="comboMaxStructuralWeight" runat="server" CssClass="dnnSmallSizeComboBox" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />

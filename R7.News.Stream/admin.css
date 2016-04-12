@@ -1,4 +1,11 @@
-﻿/* Description texteditor: show label and radiogroup in one line */
+﻿/* Fix dnnSmallSizeComboBox not applied to select */
+select.dnnSmallSizeComboBox {
+    width:100px!important;
+    margin-right:10px;
+    display:inline-block
+}
+
+/* Description texteditor: show label and radiogroup in one line */
 #newsentry-common-tab .dnnTextEditor.dnnClear {
     clear:none
 }
@@ -29,13 +36,20 @@
     overflow:auto
 }
 
+#edit-newsentry .dnnSecondaryAction.cancel-action {
+    margin-left:2em
+}
+
 /* Adjust terms dropdown bottom margin */
-#news-stream-settings .dnnFormItem > .RadComboBox_Default {
+#news-stream-settings .dnnFormItem .terms-include-terms {
     margin-bottom:0
 }
 
 /* Adjust checkbox bottom margin */
-#news-stream-settings .dnnFormItem input[type="checkbox"] + span {
+#news-stream-settings .dnnFormItem .check-show-all-news {
     margin-bottom:18px
 }
 
+#news-stream-settings .dnnSmallSizeComboBox + span {
+    margin-right:10px
+}
