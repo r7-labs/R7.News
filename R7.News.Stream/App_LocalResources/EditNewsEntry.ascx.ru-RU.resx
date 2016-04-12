@@ -21,6 +21,12 @@
     <data name="labelTitle.Help" xml:space="preserve">
         <value>Введите заголовок новости.</value>
     </data>
+    <data name="Title.Required" xml:space="preserve">
+        <value>Пожалуйста, введите заголовок новости.</value>
+    </data>
+    <data name="Title.MaxLength" xml:space="preserve">
+        <value>Длина поля Заголовок не должна превышать 255 символов.</value>
+    </data>
     <data name="labelDescription.Text" xml:space="preserve">
         <value>Описание:</value>
     </data>

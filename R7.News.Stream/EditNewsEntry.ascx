@@ -18,9 +18,14 @@
         </ul>
         <div id="newsentry-common-tab">
             <fieldset>
-                <div class="dnnFormItem">
+                <div class="dnnFormItem dnnFormRequired">
                     <dnn:Label id="labelTitle" runat="server" ControlName="textTitle" />
                     <asp:TextBox id="textTitle" runat="server" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="textTitle" 
+                        CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="Title.Required" />
+                    <asp:RegularExpressionValidator runat="server"
+                        ControlToValidate="textTitle" ValidationExpression="[\s\S]{0,255}"
+                        CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="Title.MaxLength" />
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelImage" runat="server" ControlName="pickerImage" />

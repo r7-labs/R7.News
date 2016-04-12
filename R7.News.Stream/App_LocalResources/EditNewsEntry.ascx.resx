@@ -21,6 +21,12 @@
     <data name="labelTitle.Help" xml:space="preserve">
         <value>Enter the title for news entry.</value>
     </data>
+    <data name="Title.Required" xml:space="preserve">
+        <value>Please enter news title.</value>
+    </data>
+    <data name="Title.MaxLength" xml:space="preserve">
+        <value>The length of Title field must be 255 characters or less.</value>
+    </data>
     <data name="labelDescription.Text" xml:space="preserve">
         <value>Description:</value>
     </data>
