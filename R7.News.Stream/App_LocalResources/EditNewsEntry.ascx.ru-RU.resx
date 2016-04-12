@@ -96,6 +96,12 @@
     <data name="labelModules.Help" xml:space="preserve">
         <value>Нажмите кнопку "Показать модули", чтобы загрузить список модулей Stream, в которых новость будет отображаться в зависимости от выбранных меток и текущих значений тематического и структурного весов.</value>
     </data>
+    <data name="labelAudit.Text" xml:space="preserve">
+        <value>Данные аудита:</value>
+    </data>
+    <data name="labelAudit.Help" xml:space="preserve">
+        <value>Данные аудита новости.</value>
+    </data>
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Показать модули</value>
     </data>
@@ -107,6 +113,9 @@
     </data>
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Расширенные</value>
+    </data>
+    <data name="Audit.Tab" xml:space="preserve">
+        <value>Аудит</value>
     </data>
     <data name="Module.Column" xml:space="preserve">
         <value>Модуль</value>

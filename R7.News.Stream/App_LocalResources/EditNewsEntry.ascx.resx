@@ -96,6 +96,12 @@
     <data name="labelModules.Help" xml:space="preserve">
         <value>Click "Get Modules" button to load list of Stream modules, in which news entry will be shown according to the selected terms and current thematic and structural weights.</value>
     </data>
+    <data name="labelAudit.Text" xml:space="preserve">
+        <value>Audit Data:</value>
+    </data>
+    <data name="labelAudit.Help" xml:space="preserve">
+        <value>Audit data for the news entry.</value>
+    </data>
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Get Modules</value>
     </data>
@@ -107,6 +113,9 @@
     </data>
     <data name="Advanced.Tab" xml:space="preserve">
         <value>Advanced</value>
+    </data>
+    <data name="Audit.Tab" xml:space="preserve">
+        <value>Audit</value>
     </data>
     <data name="Module.Column" xml:space="preserve">
         <value>Module</value>

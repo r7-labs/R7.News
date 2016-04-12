@@ -14,6 +14,7 @@
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
             <li><a href="#newsentry-terms-and-weighs-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
+            <li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
         </ul>
         <div id="newsentry-common-tab">
             <fieldset>
@@ -104,13 +105,20 @@
                 </div>
             </fieldset>
         </div>
+        <div id="newsentry-audit-tab">
+            <fieldset>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" /> 
+                    <dnn:Audit id="ctlAudit" runat="server" />
+                </div>
+            </fieldset>
+        </div>
     </div>
     <ul class="dnnActions dnnClear">
         <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>
         <li><asp:LinkButton id="buttonDelete" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdDelete" /></li>
         <li><asp:HyperLink id="linkCancel" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdCancel" Style="margin-left:2em" /></li>
     </ul>
-    <dnn:Audit id="ctlAudit" runat="server" />
 </div>
 <input id="hiddenSelectedTab" type="hidden" value="<%= (int) SelectedTab %>" />
 <script type="text/javascript">

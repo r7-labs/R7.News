@@ -13,5 +13,11 @@
 #newsentry-common-tab .dnnFormItem textarea {
     width:97%;
     max-width:inherit;
-    margin-top:8px;
+    margin-top:8px
+}
+
+#newsentry-audit-tab .dnnModuleAuditControl {
+    display:inline-block;
+    width:45%;
+    max-width:445px   
 }

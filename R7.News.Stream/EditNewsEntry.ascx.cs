@@ -36,6 +36,7 @@ using R7.News.Data;
 using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
+using R7.News.Stream.Data;
 
 namespace R7.News.Stream
 {
@@ -172,12 +173,36 @@ namespace R7.News.Stream
             comboThematicWeight.SelectByValue (item.ThematicWeight);
             comboStructuralWeight.SelectByValue (item.StructuralWeight);
 
-            ctlAudit.CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString ();
-            ctlAudit.LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString ();
-            ctlAudit.CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName;
-            ctlAudit.LastModifiedByUser = item.ContentItem.LastModifiedByUser (PortalId).DisplayName;
+            var auditData = new AuditData {
+                CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString (),
+                LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString (),
+                CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName,
+                LastModifiedByUser = item.ContentItem.LastModifiedByUser (PortalId).DisplayName
+            };
+
+            // bind audit control and store data to the viewstate
+            BindAuditControl (auditData);
+            ViewState ["AuditData"] = auditData;
 
             buttonUpdate.Text = LocalizeString ("Update.Text");
+        }
+
+        protected override void PostBack ()
+        {
+            // try get audit data from viewstate
+            var objAuditData = ViewState ["AuditData"];
+            if (objAuditData != null) {
+                // bind audit control from stored data
+                BindAuditControl ((AuditData) objAuditData);
+            }
+        }
+
+        protected void BindAuditControl (AuditData auditData)
+        {
+            ctlAudit.CreatedDate = auditData.CreatedDate;
+            ctlAudit.LastModifiedDate = auditData.LastModifiedDate;
+            ctlAudit.CreatedByUser = auditData.CreatedByUser;
+            ctlAudit.LastModifiedByUser = auditData.LastModifiedByUser;
         }
 
         private List<IFileInfo> images;
