@@ -20,20 +20,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml;
 using System.Linq;
-using System.Runtime.InteropServices;
-using DotNetNuke.Collections;
-using DotNetNuke.Data;
-using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Services.Search;
-using DotNetNuke.Services.Search.Entities;
 using DotNetNuke.Entities.Content;
-using DotNetNuke.Entities.Content.Workflow.Actions;
-using DotNetNuke.R7;
+using DotNetNuke.Entities.Modules;
 
 namespace R7.News.Components
 {

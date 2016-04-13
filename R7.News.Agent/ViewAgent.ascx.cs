@@ -29,10 +29,11 @@ using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Entities.Tabs;
-using DotNetNuke.R7.Entities.Modules;
-using DotNetNuke.R7.ViewModels;
+using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
+using R7.DotNetNuke.Extensions.Entities.Modules;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
 using R7.News.Controls;
@@ -136,7 +137,7 @@ namespace R7.News.Agent
                     IconController.IconURL ("Add"), 
                     EditUrl ("EditNewsEntry"),
                     false, 
-                    DotNetNuke.Security.SecurityAccessLevel.Edit,
+                    SecurityAccessLevel.Edit,
                     true, 
                     false
                 );

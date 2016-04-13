@@ -22,10 +22,10 @@
 using System;
 using System.Data;
 using System.Linq;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.R7.Data;
-using DotNetNuke.Data;
+using R7.DotNetNuke.Extensions.Data;
 
 namespace R7.News.Data
 {

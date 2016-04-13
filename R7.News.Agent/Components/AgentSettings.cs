@@ -20,9 +20,9 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DotNetNuke.UI.Modules;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.R7.Entities.Modules;
+using DotNetNuke.UI.Modules;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.News.Components;
 
 namespace R7.News.Agent.Components

@@ -20,15 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Collections.Generic;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Controls.ViewModels;
-using DotNetNuke.R7.ViewModels;
 
 namespace R7.News.Controls
 {

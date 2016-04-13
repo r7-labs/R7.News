@@ -20,13 +20,13 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.UI.Modules;
-using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.R7;
-using DotNetNuke.R7.Entities.Modules;
+using R7.DotNetNuke.Extensions.Modules;
+using R7.DotNetNuke.Extensions.Utilities;
 using R7.News.Components;
 
 namespace R7.News.Stream.Components

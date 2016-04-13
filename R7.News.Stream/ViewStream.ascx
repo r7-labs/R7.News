@@ -1,11 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
-<%@ Register TagPrefix="dnn" Assembly="DotNetNuke.R7" Namespace="DotNetNuke.R7" %>
+<%@ Register TagPrefix="r7" Assembly="R7.DotNetNuke.Extensions" Namespace="R7.DotNetNuke.Extensions.Controls" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:Panel id="panelStream" runat="server">
-    <dnn:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
+    <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
             <div runat="server" class="news-stream">
@@ -44,6 +44,6 @@
         </ItemSeparatorTemplate>
     </asp:ListView>
     <hr />
-    <dnn:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
+    <r7:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-default btn-block" OnClick="buttonShowMore_Click" />
 </asp:Panel>

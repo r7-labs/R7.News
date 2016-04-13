@@ -25,9 +25,9 @@ using System.Collections.ObjectModel;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.R7;
-using DotNetNuke.R7.ViewModels;
 using DotNetNuke.Services.Localization;
+using R7.DotNetNuke.Extensions.Utilities;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Models;
 using R7.News.Stream.Components;
 

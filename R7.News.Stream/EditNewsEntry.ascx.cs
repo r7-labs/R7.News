@@ -23,20 +23,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.R7;
-using DotNetNuke.R7.Entities.Modules;
-using DotNetNuke.R7.ViewModels;
 using DotNetNuke.Services.FileSystem;
+using R7.DotNetNuke.Extensions.ControlExtensions;
+using R7.DotNetNuke.Extensions.Modules;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Components;
 using R7.News.ControlExtensions;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Stream.Components;
-using R7.News.Stream.ViewModels;
 using R7.News.Stream.Data;
+using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {

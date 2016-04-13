@@ -56,8 +56,8 @@
       <HintPath>..\packages\YamlDotNet.3.8.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Serialization" />
-    <Reference Include="DotNetNuke.R7">
-      <HintPath>..\packages\DotNetNuke.R7.0.6.0-alpha2\lib\net45\DotNetNuke.R7.dll</HintPath>
+    <Reference Include="R7.DotNetNuke.Extensions">
+      <HintPath>..\packages\R7.DotNetNuke.Extensions.0.7.0-alpha-2\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

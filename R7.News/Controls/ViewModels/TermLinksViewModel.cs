@@ -21,11 +21,11 @@
 
 using System;
 using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.R7.ViewModels;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Providers;
-using DotNetNuke.Common.Utilities;
 
 namespace R7.News.Controls.ViewModels
 {
