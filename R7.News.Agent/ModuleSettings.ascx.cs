@@ -37,6 +37,8 @@ namespace R7.News.Agent
             try {
                 if (!IsPostBack) {
                     checkEnableGrouping.Checked = Settings.EnableGrouping;
+                    textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
+                    textGroupThumbnailWidth.Text = Settings.GroupThumbnailWidth.ToString ();
                 }
             }
             catch (Exception ex) {
@@ -51,6 +53,8 @@ namespace R7.News.Agent
         {
             try {
                 Settings.EnableGrouping = checkEnableGrouping.Checked;
+                Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
+                Settings.GroupThumbnailWidth = int.Parse (textGroupThumbnailWidth.Text);
 
                 ModuleController.SynchronizeModule (ModuleId);
             }

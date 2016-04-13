@@ -34,7 +34,7 @@
         <value>Ширина миниатюры:</value>
     </data>
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
-        <value>Устанавливает ширину в пикселах генерируемой миниатюры изображения.</value>
+        <value>Задайте ширину в пикселах генерируемых миниатюр изображений.</value>
     </data>
     <data name="ThumbnailWidth.Required" xml:space="preserve">
         <value>Укажите ширину миниатюры.</value>

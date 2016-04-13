@@ -34,7 +34,7 @@
         <value>Thumbnail Width:</value>
     </data>
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
-        <value>Set width in px for generated thumbnail image.</value>
+        <value>Set width in px for generated thumbnail images.</value>
     </data>
     <data name="ThumbnailWidth.Required" xml:space="preserve">
         <value>Thumbnail width is required.</value>

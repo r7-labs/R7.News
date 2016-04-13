@@ -54,7 +54,6 @@ namespace R7.News.Agent.Components
             set { WriteTabModuleSetting<bool> (SettingPrefix + "EnableGrouping", value); }
         }
 
-        // TODO: Add UI
         public int ThumbnailWidth
         {
             get 
@@ -65,7 +64,6 @@ namespace R7.News.Agent.Components
             set { WriteTabModuleSetting<int> (SettingPrefix + "ThumbnailWidth", value); }
         }
 
-        // TODO: Add UI
         public int GroupThumbnailWidth
         {
             get 

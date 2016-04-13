@@ -11,5 +11,7 @@ namespace R7.News.Agent
     public partial class ModuleSettings
     {
         protected CheckBox checkEnableGrouping;
+        protected TextBox textThumbnailWidth;
+        protected TextBox textGroupThumbnailWidth;
     }
 }
