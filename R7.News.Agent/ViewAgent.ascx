@@ -17,11 +17,11 @@
     <ItemTemplate>
         <div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="<%# Eval ("FirstColumnContainerCssClass") %>">
                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
                         CssClass="img img-rounded img-responsive" />
                 </div>
-                <div class="col-sm-6">
+                <div class="<%# Eval ("SecondColumnContainerCssClass") %>">
                     <h3 style="margin-top:0">
                         <asp:HyperLink id="linkEdit" runat="server">
                             <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />

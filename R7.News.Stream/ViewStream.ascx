@@ -26,11 +26,11 @@
                     <span class="glyphicon glyphicon-user"></span> <%# Eval ("CreatedByUserName") %>
                 </p>
                 <div class="row news-entry-main-row">
-                    <div class="col-sm-4">
+                    <div class="<%# Eval ("ImageContainerCssClass") %>">
                         <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
                             CssClass="img img-rounded img-responsive news-entry-image" />
                     </div>
-                    <div class="col-sm-8 news-entry-description">
+                    <div class="<%# Eval ("DescriptionContainerCssClass") %> news-entry-description">
                        <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
                     </div>
                 </div>

@@ -228,6 +228,16 @@ namespace R7.News.Agent.ViewModels
                 return null;
             }
         }
+
+        public string FirstColumnContainerCssClass
+        {
+            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "hidden"; }
+        }
+
+        public string SecondColumnContainerCssClass
+        {
+            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "col-sm-12"; }
+        }
     }
 }
 
