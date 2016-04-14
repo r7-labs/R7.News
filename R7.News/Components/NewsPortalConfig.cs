@@ -32,6 +32,8 @@ namespace R7.News.Components
 
         public string DefaultImagesPath { get; set; }
 
+        public PermalinkMode PermalinkMode { get; set; }
+
         public StreamModuleConfig StreamModule { get; set; }
 
         public AgentModuleConfig AgentModule { get; set; }
@@ -77,4 +79,6 @@ namespace R7.News.Components
 
         public int DefaultGroupThumbnailWidth { get; set; }
     }
+
+    public enum PermalinkMode { Friendly, Raw }
 }

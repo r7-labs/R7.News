@@ -2,6 +2,9 @@
 
 default-images-path: images
 
+# possible values: Friendly, Raw
+permalink-mode: Friendly
+
 stream-module:
   default-thumbnail-width: 262
 

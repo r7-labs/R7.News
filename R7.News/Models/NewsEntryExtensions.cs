@@ -73,6 +73,15 @@ namespace R7.News.Models
             return newsEntry;
         }
 
+        public static INewsEntry WithAgentModuleOnce (this INewsEntry newsEntry, ModuleController moduleController)
+        {
+            if (newsEntry.AgentModuleId != null && newsEntry.AgentModule == null) {
+                newsEntry.AgentModule = moduleController.GetModule (newsEntry.AgentModuleId.Value);
+            }
+
+            return newsEntry;
+        }
+
         public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries, ModuleController moduleController)
         {
             foreach (var newsEntry in newsEntries) {
@@ -158,6 +167,26 @@ namespace R7.News.Models
         {
             return ModelHelper.IsVisible (newsEntry.ThematicWeight, newsEntry.StructuralWeight, 
                 minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight);
+        }
+
+        public static string GetPermalinkFriendly (this INewsEntry newsEntry, ModuleController moduleController, int moduleId, int tabId)
+        {
+            if (newsEntry.AgentModuleId != null) {
+                return Globals.NavigateURL (newsEntry.WithAgentModuleOnce (moduleController).AgentModule.TabID);
+            }
+
+            return Globals.NavigateURL (tabId, "entry", "mid", moduleId.ToString (), "entryid", newsEntry.EntryId.ToString ()); 
+        }
+
+        public static string GetPermalinkRaw (this INewsEntry newsEntry, ModuleController moduleController, PortalAliasInfo portalAlias, int moduleId, int tabId)
+        {
+            if (newsEntry.AgentModuleId != null) {
+                return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" 
+                    + newsEntry.WithAgentModuleOnce (moduleController).AgentModule.TabID);
+            }
+
+            return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + tabId
+                + "&mid=" + moduleId + "&ctl=entry&entryid=" + newsEntry.EntryId);
         }
     }
 }

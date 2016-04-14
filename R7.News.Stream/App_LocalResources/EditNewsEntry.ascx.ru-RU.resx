@@ -99,6 +99,12 @@
     <data name="labelAudit.Help" xml:space="preserve">
         <value>Данные аудита новости.</value>
     </data>
+    <data name="labelPermalink.Text" xml:space="preserve">
+        <value>Постоянная ссылка:</value>
+    </data>
+    <data name="labelPermalink.Help" xml:space="preserve">
+        <value>Отсюда Вы можете скопировать постоянную ссылку на новость.</value>
+    </data>
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Показать модули</value>
     </data>

@@ -105,6 +105,10 @@
         <div id="newsentry-audit-tab">
             <fieldset>
                 <div class="dnnFormItem">
+                    <dnn:Label id="labelPermalink" runat="server" ControlName="textPermalink" /> 
+                    <asp:TextBox id="textPermalink" runat="server" ReadOnly="true" />
+                </div>
+                <div class="dnnFormItem">
                     <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" /> 
                     <dnn:Audit id="ctlAudit" runat="server" />
                 </div>

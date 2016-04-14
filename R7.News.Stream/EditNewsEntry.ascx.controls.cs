@@ -27,5 +27,6 @@ namespace R7.News.Stream
         protected DropDownList comboStructuralWeight;
         protected LinkButton buttonGetModules;
         protected GridView gridModules;
+        protected TextBox textPermalink;
     }
 }
