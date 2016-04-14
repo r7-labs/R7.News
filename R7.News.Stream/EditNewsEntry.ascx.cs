@@ -91,15 +91,11 @@ namespace R7.News.Stream
             pickerImage.FolderPath = NewsConfig.Instance.DefaultImagesPath;
             pickerImage.FileFilter = Globals.glbImageFileTypes;
 
-            // fill weight comboboxes, -1 allow to create hidden news
-            for (var i = -1; i <= NewsConfig.Instance.NewsEntry.MaxWeight; i++) {
-                comboThematicWeight.Items.Add (i.ToString ());
-                comboStructuralWeight.Items.Add (i.ToString ());
-            }
-
-            // set default news entry weight
-            comboThematicWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultThematicWeight);
-            comboStructuralWeight.SelectByValue (NewsConfig.Instance.NewsEntry.DefaultStructuralWeight);
+            // setup weight sliders
+            sliderThematicWeight.Attributes.Add ("data-max", NewsConfig.Instance.NewsEntry.MaxWeight.ToString ());
+            sliderStructuralWeight.Attributes.Add ("data-max", NewsConfig.Instance.NewsEntry.MaxWeight.ToString ());
+            sliderThematicWeight.Text = NewsConfig.Instance.NewsEntry.DefaultThematicWeight.ToString ();
+            sliderStructuralWeight.Text = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight.ToString ();
 
             // localize column headers in the gridview
             gridModules.LocalizeColumnHeaders (".Column", LocalResourceFile);
@@ -107,8 +103,8 @@ namespace R7.News.Stream
 
         protected void buttonGetModules_Click (object sender, EventArgs e)
         {
-            var thematicWeight = int.Parse (comboThematicWeight.SelectedValue);
-            var structuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
+            var thematicWeight = int.Parse (sliderThematicWeight.Text);
+            var structuralWeight = int.Parse (sliderStructuralWeight.Text);
             var terms = termsTerms.Terms;
 
             gridModules.DataSource = GetStreamModules (thematicWeight, structuralWeight, terms);
@@ -172,8 +168,9 @@ namespace R7.News.Stream
                 item.GetPermalinkFriendly (NewsDataProvider.Instance.ModuleController, ModuleId, TabId) :
                 item.GetPermalinkRaw (NewsDataProvider.Instance.ModuleController, PortalAlias, ModuleId, TabId);
 
-            comboThematicWeight.SelectByValue (item.ThematicWeight);
-            comboStructuralWeight.SelectByValue (item.StructuralWeight);
+            // REVIEW: Check for max value?
+            sliderThematicWeight.Text = item.ThematicWeight.ToString ();
+            sliderStructuralWeight.Text = item.StructuralWeight.ToString ();
 
             var auditData = new AuditData {
                 CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString (),
@@ -245,8 +242,8 @@ namespace R7.News.Stream
 
             item.Url = urlUrl.Url;
 
-            item.ThematicWeight = int.Parse (comboThematicWeight.SelectedValue);
-            item.StructuralWeight = int.Parse (comboStructuralWeight.SelectedValue);
+            item.ThematicWeight = int.Parse (sliderThematicWeight.Text);
+            item.StructuralWeight = int.Parse (sliderStructuralWeight.Text);
 
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
                 item.AgentModuleId = ModuleId;

@@ -23,8 +23,8 @@ namespace R7.News.Stream
         protected TermsSelector termsTerms;
         protected DnnFilePickerUploader pickerImage;
         protected DnnUrlControl urlUrl;
-        protected DropDownList comboThematicWeight;
-        protected DropDownList comboStructuralWeight;
+        protected TextBox sliderThematicWeight;
+        protected TextBox sliderStructuralWeight;
         protected LinkButton buttonGetModules;
         protected GridView gridModules;
         protected TextBox textPermalink;

@@ -44,12 +44,12 @@
                     <dnn:TermsSelector id="termsTerms" runat="server" />
                 </div>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="comboThematicWeight" />
-                    <asp:DropDownList id="comboThematicWeight" runat="server" />
+                    <dnn:Label id="labelThematicWeight" runat="server" ControlName="sliderThematicWeight" />
+                    <asp:TextBox id="sliderThematicWeight" runat="server" CssClass="dnnSliderInput" />
                 </div>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="comboStructuralWeight" />
-                    <asp:DropDownList id="comboStructuralWeight" runat="server" />
+                    <dnn:Label id="labelStructuralWeight" runat="server" ControlName="sliderStructuralWeight" />
+                    <asp:TextBox id="sliderStructuralWeight" runat="server" CssClass="dnnSliderInput" />
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelModules" runat="server" ControlName="buttonGetModules" />
@@ -127,8 +127,10 @@
     function setupModule() {
         var selectedTab = document.getElementById("hiddenSelectedTab").value;
         $("#newsentry-tabs").dnnTabs({selected: selectedTab});
+        $("#newsentry-tabs .dnnSliderInput").each(function(){
+            $(this).dnnSliderInput({min: -1, max: this.getAttribute ("data-max")});
+        });
     };
-
     $(document).ready(function() {
         setupModule();
         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function() {
