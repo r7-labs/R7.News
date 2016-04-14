@@ -77,13 +77,21 @@ namespace R7.News.Integrations.AnnoView
                             }
                         }
 
+                        // try get tab
+                        TabInfo tab;
+                        if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
+                            // get link target tab
+                            tab = tabController.GetTab (int.Parse (announcement.Url), portalId);
+                        }
+                        else {
+                            // get module tab
+                            tab = tabController.GetTab (module.TabID, portalId);
+                        }
+
                         // fill terms
                         var terms = new List<Term> ();
-                        if (Globals.GetURLType (announcement.ImageSource) == TabType.Tab) {
-                            var tab = tabController.GetTab (int.Parse (announcement.Url), portalId);
-                            if (tab != null) {
-                                terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
-                            }
+                        if (tab != null) {
+                            terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
                         }
 
                         // create news entry
