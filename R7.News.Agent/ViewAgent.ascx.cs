@@ -96,10 +96,15 @@ namespace R7.News.Agent
 
             // check if we have some content to display, 
             // otherwise display a message for module editors.
-            if ((items == null || !items.Any ()) && IsEditable) {
-
+            if (items == null || !items.Any ()) {
                 // show panel with add button
-                panelAddDefaultEntry.Visible = true;
+                if (IsEditable) {
+                    panelAddDefaultEntry.Visible = true;
+                }
+                else {
+                    // hide module from non-editors
+                    ContainerControl.Visible = false;
+                }
             }
             else {
                 var now = DateTime.Now;

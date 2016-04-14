@@ -6,6 +6,9 @@
     <data name="ModuleHelp.Text" xml:space="preserve"> 
         <value>&lt;P&gt; Модуль R7.News.Stream&lt;/P&gt;</value>
     </data>
+    <data name="NothingToDisplay.Text" xml:space="preserve">
+        <value>Нечего отображать, добавьте новости или измените настройки модуля.</value>
+    </data>
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Показать еще</value>
     </data>

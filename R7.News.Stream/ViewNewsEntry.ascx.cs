@@ -33,7 +33,6 @@ using R7.News.Data;
 using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
-using DotNetNuke.UI.Containers;
 
 namespace R7.News.Stream
 {

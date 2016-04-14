@@ -125,6 +125,7 @@ namespace R7.News.Stream
         protected void ToggleStreamControls (int totalItems)
         {
             if (totalItems > 0) {
+                // show module content
                 panelStream.Visible = true;
 
                 // setup paging controls
@@ -138,10 +139,15 @@ namespace R7.News.Stream
                 pagerBottom.Visible = canShowPager && Settings.ShowBottomPager;
             }
             else {
-                panelStream.Visible = false;
-
                 if (IsEditable) {
+                    // hide module content
+                    panelStream.Visible = false;
+                    // display message for editors
                     this.Message ("NothingToDisplay.Text", MessageType.Info, true);
+                }
+                else {
+                    // hide module from non-editors
+                    ContainerControl.Visible = false;
                 }
             }
         }

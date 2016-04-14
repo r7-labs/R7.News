@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="NothingToDisplay.Text" xml:space="preserve">
-        <value>Nothing to display, add some items.</value>
-    </data>
     <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
     </data>
