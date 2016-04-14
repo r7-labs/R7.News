@@ -90,38 +90,34 @@ namespace R7.News.Stream.ViewModels
 
         public static bool IsNewsEntryWillBePassedByModule (StreamSettings settings, int thematicWeight, int structuralWeight, IList<Term> terms)
         {
-            if (ModelHelper.IsThematicVisible (thematicWeight, settings.MinThematicWeight, settings.MaxThematicWeight)) {
-                return true;
+            return (settings.ShowAllNews || ModelHelper.IsTermsOverlaps (terms, settings.IncludeTerms)) 
+                && ModelHelper.IsVisible (thematicWeight, structuralWeight, 
+                    settings.MinThematicWeight, settings.MaxThematicWeight,
+                    settings.MinStructuralWeight, settings.MaxStructuralWeight
+                );
             }
-
-            if (ModelHelper.IsStructuralVisible (structuralWeight, settings.MinStructuralWeight, settings.MaxStructuralWeight)) {
-                return true;
-            }
-
-            if (settings.ShowAllNews) {
-                return true;
-            }
-
-            return ModelHelper.IsTermsOverlaps (terms, settings.IncludeTerms);
-        }
 
         protected string GetPassesByString ()
         {
             var passesBy = new Collection<string> ();
 
-            if (ModelHelper.IsThematicVisible (NewsEntry_ThematicWeight, Settings.MinThematicWeight, Settings.MaxThematicWeight)) {
-                passesBy.Add (Localization.GetString ("PassesByThematicWeight.Text", Context.LocalResourceFile));
-            }
-
-            if (ModelHelper.IsStructuralVisible (NewsEntry_StructuralWeight, Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) {
-                passesBy.Add (Localization.GetString ("PassesByStructuralWeight.Text", Context.LocalResourceFile));
-            }
-
+            var passesByTerms = false;
             if (Settings.ShowAllNews) {
                 passesBy.Add (Localization.GetString ("PassesByShowAllSetting.Text", Context.LocalResourceFile));
+                passesByTerms = true;
             }
             else if (ModelHelper.IsTermsOverlaps (NewsEntry_Terms, Settings.IncludeTerms)) {
                 passesBy.Add (Localization.GetString ("PassesByTerms.Text", Context.LocalResourceFile));
+                passesByTerms = true;
+            }
+
+            if (passesByTerms) {
+                if (ModelHelper.IsThematicVisible (NewsEntry_ThematicWeight, Settings.MinThematicWeight, Settings.MaxThematicWeight)) {
+                    passesBy.Add (Localization.GetString ("PassesByThematicWeight.Text", Context.LocalResourceFile));
+                }
+                if (ModelHelper.IsStructuralVisible (NewsEntry_StructuralWeight, Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) {
+                    passesBy.Add (Localization.GetString ("PassesByStructuralWeight.Text", Context.LocalResourceFile));
+                }
             }
 
             return TextUtils.FormatList (", ", passesBy); 

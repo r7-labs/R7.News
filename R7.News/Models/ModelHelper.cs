@@ -69,9 +69,9 @@ namespace R7.News.Models
 
         public static bool IsTermsOverlaps (IEnumerable<Term> terms1, IEnumerable<Term> terms2)
         {
-            var terms = terms1.Join (terms2, t1 => t1.TermId, t2 => t2.TermId, (t1, t2) => t1).DefaultIfEmpty ();
+            var terms = terms1.Join (terms2, t1 => t1.TermId, t2 => t2.TermId, (t1, t2) => t1);
 
-            return terms != null;
+            return terms != null && terms.Any ();
         }
     }
 }
