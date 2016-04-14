@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Import Namespace="System.Web" %>
 
-<asp:FormView id="formNewsEntry" CssClass="news-stream" runat="server" OnDataBound="formNewsEntry_DataBound">
+<asp:FormView id="formNewsEntry" CssClass="news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
     <ItemTemplate>
         <div>
             <h3>
@@ -20,7 +20,7 @@
             <div class="row news-entry-main-row">
                 <div class="<%# Eval ("ImageContainerCssClass") %>">
                     <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
-                        CssClass="img img-rounded img-responsive news-entry-image" />
+                        CssClass="img img-rounded news-entry-image" />
                 </div>
                 <div class="<%# Eval ("DescriptionContainerCssClass") %> news-entry-description">
                    <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
