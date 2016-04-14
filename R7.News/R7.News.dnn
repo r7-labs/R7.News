@@ -99,6 +99,17 @@
                                         <viewOrder>0</viewOrder>
                                     </moduleControl>
                                     <moduleControl>
+                                        <controlKey>Entry</controlKey>
+                                        <controlSrc>DesktopModules/R7.News/R7.News.Stream/ViewNewsEntry.ascx</controlSrc>
+                                        <controlTitle>View News Entry</controlTitle>
+                                        <controlType>View</controlType>
+                                        <iconFile />
+                                        <helpUrl />
+                                        <supportsPartialRendering>False</supportsPartialRendering>
+                                        <supportsPopUps>False</supportsPopUps>
+                                        <viewOrder>0</viewOrder>
+                                    </moduleControl>
+                                    <moduleControl>
                                         <controlKey>Settings</controlKey>
                                         <controlSrc>DesktopModules/R7.News/R7.News.Stream/ModuleSettings.ascx</controlSrc>
                                         <supportsPartialRendering>False</supportsPartialRendering>

@@ -68,6 +68,7 @@
     <Content Include="EditNewsEntry.ascx" />
     <Content Include="ViewStream.ascx" />
     <Content Include="ModuleSettings.ascx" />
+    <Content Include="ViewNewsEntry.ascx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -77,6 +78,10 @@
     <None Include="App_LocalResources\ViewStream.ascx.ru-RU.resx" />
     <None Include="App_LocalResources\ModuleSettings.ascx.resx" />
     <None Include="App_LocalResources\ModuleSettings.ascx.ru-RU.resx" />
+    <None Include="App_LocalResources\ViewNewsEntry.ascx.resx" />
+    <None Include="App_LocalResources\ViewNewsEntry.ascx.ru-RU.resx" />
+    <None Include="App_LocalResources\SharedResources.resx" />
+    <None Include="App_LocalResources\SharedResources.ru-RU.resx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditNewsEntry.ascx.cs">
@@ -105,6 +110,12 @@
     <Compile Include="ViewModels\StreamModuleNewsEntryViewModelPage.cs" />
     <Compile Include="ViewModels\StreamModuleViewModel.cs" />
     <Compile Include="Data\AuditData.cs" />
+    <Compile Include="ViewNewsEntry.ascx.cs">
+      <DependentUpon>ViewNewsEntry.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewNewsEntry.ascx.controls.cs">
+      <DependentUpon>ViewNewsEntry.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

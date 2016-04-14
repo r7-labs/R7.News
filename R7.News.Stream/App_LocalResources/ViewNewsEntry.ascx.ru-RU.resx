@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="ControlTitle_entry.Text" xml:space="preserve">
+        <value>Просмотр новости:</value>
+    </data>
+    <data name="NewsEntryNotFound.Text" xml:space="preserve">
+        <value>Новость не найдена.</value>
+    </data>
+</root>

@@ -53,7 +53,9 @@ namespace R7.News.Data
         {
             var newsEntry = NewsDataProvider.Instance.Get<NewsEntryInfo> (entryId, portalId);
             if (newsEntry != null) {
-                return (NewsEntryInfo) newsEntry.WithContentItem ();
+                return (NewsEntryInfo) newsEntry
+                    .WithAgentModule (NewsDataProvider.Instance.ModuleController)
+                    .WithContentItem ();
             }
 
             return null;

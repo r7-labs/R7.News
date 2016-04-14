@@ -6,21 +6,6 @@
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>&lt;P&gt;A R7.News.Stream module&lt;/P&gt;</value>
     </data>
-    <data name="DefaultContent.Text" xml:space="preserve">
-        <value>Here is some sample content</value>
-    </data>
-    <data name="NothingToDisplay.Text" xml:space="preserve">
-        <value>Nothing to display, add some items.</value>
-    </data>
-    <data name="PublishedOnDate.Format" xml:space="preserve">
-        <value>dd MMM yyyy</value>
-    </data>
-    <data name="Visibility_NotPublished.Format" xml:space="preserve">
-        <value>Will be Published: {0}</value>
-    </data>
-    <data name="Visibility_Expired.Format" xml:space="preserve">
-        <value>Expired: {0}</value>
-    </data>
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Show More</value>
     </data>
