@@ -324,30 +324,3 @@ BEGIN
         ORDER BY CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END DESC
 END
 GO
-
-/*
--- Create functions
-CREATE FUNCTION dbo.[r7_News_PublishedOnDate] (
-    @startDate datetime,
-    @endDate datetime,
-    @createdOnDate datetime
-)
-RETURNS datetime
-AS
-BEGIN
-    RETURN (CASE WHEN @startDate IS NOT NULL THEN @startDate ELSE @createdOnDate END)
-END
-GO
-
-CREATE FUNCTION dbo.[r7_News_IsPublished] (
-    @now datetime,
-    @startDate datetime,
-    @endDate datetime
-)
-RETURNS bit
-AS
-BEGIN
-    RETURN ((@startDate IS NULL OR @now >= @startDate) AND (@endDate IS NULL OR @now < @endDate))
-END
-GO
-*/

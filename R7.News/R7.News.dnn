@@ -11,8 +11,9 @@
             </owner>
             <license src="license.htm" />
             <releaseNotes src="releaseNotes.htm" />
+            <azureCompatible>true</azureCompatible>
             <dependencies>
-                <dependency type="CoreVersion">07.04.00</dependency>
+                <dependency type="CoreVersion">07.04.02</dependency>
                 <!-- .NET 4.5 -->
                 <dependency type="Type">System.Reflection.ReflectionContext</dependency>
                 <dependency type="managedPackage" version="0.7.0">R7.DotNetNuke.Extensions</dependency>
@@ -24,7 +25,7 @@
                 <processorCommand>UpgradeModule</processorCommand>
                 <attributes>
                     <businessControllerClass>R7.News.Components.NewsController</businessControllerClass>
-                    <upgradeVersionsList>00.01.00</upgradeVersionsList>
+                    <upgradeVersionsList>01.00.00</upgradeVersionsList>
                 </attributes>
             </eventMessage>
             <components>
@@ -32,8 +33,8 @@
                     <scripts>
                         <basePath>DesktopModules\R7.News\R7.News</basePath>
                         <script type="Install">
-                            <name>SqlDataProvider\00.01.00.SqlDataProvider</name>
-                            <version>00.01.00</version>
+                            <name>SqlDataProvider\01.00.00.SqlDataProvider</name>
+                            <version>01.00.00</version>
                         </script>
                         <script type="UnInstall">
                             <name>SqlDataProvider\Uninstall.SqlDataProvider</name>
@@ -72,8 +73,8 @@
                 <url>http://www.R7.Solutions.com/R7.News</url>
                 <email>roman.yagodin@gmail.com</email>
             </owner>
-            <license />
-            <releaseNotes />
+            <license src="license.htm" />
+            <releaseNotes src="releaseNotes.htm" />
             <dependencies />
             <components>
                 <component type="Module">
@@ -160,8 +161,8 @@
                 <url>http://www.R7.Solutions.com/R7.News</url>
                 <email>roman.yagodin@gmail.com</email>
             </owner>
-            <license />
-            <releaseNotes />
+            <license src="license.htm" />
+            <releaseNotes src="releaseNotes.htm" />
             <dependencies />
             <components>
                 <component type="Module">

@@ -80,10 +80,10 @@
     <Content Include="Controls\BadgeList.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlDataProvider\00.01.00.SqlDataProvider" />
     <None Include="SqlDataProvider\Uninstall.SqlDataProvider" />
     <None Include="R7.News.dnn" />
     <None Include="R7.News.yml" />
+    <None Include="SqlDataProvider\01.00.00.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
