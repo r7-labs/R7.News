@@ -42,14 +42,14 @@ namespace R7.News.Components
             var message = string.Format ("R7.News upgradeable actions for version {0}.)", Version);
 
             switch (Version) {
-                case "00.01.00":
+                case "01.00.00":
                     
                     var contentTypeController = new ContentTypeController ();
 
-                    if (!contentTypeController.GetContentTypes ().Any (ct => ct.ContentType == "R7_News_Entry")) {
+                    if (!contentTypeController.GetContentTypes ().Any (ct => ct.ContentType == Const.ContentType)) {
                         
                         // register new content type
-                        var contentTypeId = contentTypeController.AddContentType (new ContentType ("R7_News_Entry"));
+                        var contentTypeId = contentTypeController.AddContentType (new ContentType (Const.ContentType));
                         message += "Added content type for workflow." + Environment.NewLine;
                     
                         /*

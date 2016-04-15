@@ -26,6 +26,7 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using R7.DotNetNuke.Extensions.Data;
+using R7.News.Components;
 
 namespace R7.News.Data
 {
@@ -52,7 +53,7 @@ namespace R7.News.Data
                 if (newsContentType == null) {
                     var contentTypeController = new ContentTypeController ();
                     newsContentType = contentTypeController.GetContentTypes ()
-                        .Where (ct => ct.ContentType == "R7_News_Entry")
+                        .Where (ct => ct.ContentType == Const.ContentType)
                         .SingleOrDefault ();
                 }
 
