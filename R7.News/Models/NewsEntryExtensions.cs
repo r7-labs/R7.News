@@ -100,7 +100,7 @@ namespace R7.News.Models
             if (image != null) {
                 return Globals.AddHTTP (PortalSettings.Current.PortalAlias.HTTPAlias)
                     + "/imagehandler.ashx?fileticket=" + UrlUtils.EncryptParameter (image.FileId.ToString ()) 
-                    + "&width=" + width;
+                    + "&width=" + width + "&ext=." + image.Extension;
             }
 
             return string.Empty;
