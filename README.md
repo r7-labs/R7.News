@@ -14,7 +14,7 @@ ETA for main features is about the last quarter of 2016.
 - [ ] Keep news article page settings in sync with corresponding news entry properties.
 - [ ] Export news into RSS/Atoms feeds.
 
-## Future releases may also include:
+### Future releases may also include:
 
 * News sharing between portals inside the portal group.
 * Content workflow (at least Draft/Publish).
@@ -22,8 +22,23 @@ ETA for main features is about the last quarter of 2016.
 * JavaScript object to expose news entry properties in the skin.
 * DDRMenu integration (to display recent news in the menu).
 
-## Dependencies:
+## System requirements
 
 * DNN Platform 7.4.2 (DNN 8 support is planned)
+
+## Install
+
+1. Download and install [dependencies](#dependencies) first.
+2. Download latest install package from releases.
+3. Install it as usual from *DNN &gt; Host &gt; Extensions*.
+
+### <a name="dependencies">Dependencies</a>
+
 * [R7.DotNetNuke.Extensions](https://github.com/roman-yagodin/R7.DotNetNuke.Extensions) (base library)
 * [R7.ImageHandler](https://github.com/roman-yagodin/R7.ImageHandler) (automatic image thumbnailer)
+
+## Uninstall
+
+1. Uninstall *R7.News* library package first, this will remove all database objects and data.
+2. Then uninstall *R7.News.Agent* and *R7.News.Stream* module packages (in any order).
+3. Uninstall *R7.ImageHandler* and *R7.DotNetNuke.Extensions* library packages, if you don't need them.
