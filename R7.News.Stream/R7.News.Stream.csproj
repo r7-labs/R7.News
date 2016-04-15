@@ -105,9 +105,7 @@
     <Compile Include="ModuleSettings.ascx.controls.cs">
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\StreamModuleNewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamViewModel.cs" />
-    <Compile Include="ViewModels\StreamModuleNewsEntryViewModelPage.cs" />
     <Compile Include="ViewModels\StreamModuleViewModel.cs" />
     <Compile Include="Data\AuditData.cs" />
     <Compile Include="ViewNewsEntry.ascx.cs">
@@ -116,6 +114,8 @@
     <Compile Include="ViewNewsEntry.ascx.controls.cs">
       <DependentUpon>ViewNewsEntry.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\StreamNewsEntryViewModel.cs" />
+    <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

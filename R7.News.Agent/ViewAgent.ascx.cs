@@ -115,7 +115,7 @@ namespace R7.News.Agent
                     .OrderByDescending (ne => ne.EntryId == GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
-                    .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
 
                 // bind the data
                 listAgent.DataSource = viewModels;
@@ -161,7 +161,7 @@ namespace R7.News.Agent
         /// <param name="e"></param>
         protected void listAgent_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (AgentModuleNewsEntryViewModel) e.Item.DataItem;
+            var item = (AgentNewsEntryViewModel) e.Item.DataItem;
             
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");
@@ -197,7 +197,7 @@ namespace R7.News.Agent
                 listGroup.DataSource = item.Group
                     .Where (ne => ne.IsPublished (now) || IsEditable)
                     .OrderByDescending (ne => ne.PublishedOnDate ())
-                    .Select (ne => new AgentModuleNewsEntryViewModel (ne, ViewModelContext));
+                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
                 listGroup.DataBind ();
             }
         }
@@ -210,7 +210,7 @@ namespace R7.News.Agent
         /// <param name="e"></param>
         protected void listGroup_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (AgentModuleNewsEntryViewModel) e.Item.DataItem;
+            var item = (AgentNewsEntryViewModel) e.Item.DataItem;
 
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");

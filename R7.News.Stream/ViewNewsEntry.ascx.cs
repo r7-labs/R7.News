@@ -84,8 +84,8 @@ namespace R7.News.Stream
                     }
 
                     if (newsEntry != null) {
-                        var newsEntries = new List<StreamModuleNewsEntryViewModel> ();
-                        newsEntries.Add (new StreamModuleNewsEntryViewModel (newsEntry, ViewModelContext));
+                        var newsEntries = new List<StreamNewsEntryViewModel> ();
+                        newsEntries.Add (new StreamNewsEntryViewModel (newsEntry, ViewModelContext));
 
                         formNewsEntry.DataSource = newsEntries;
                         formNewsEntry.DataBind ();
@@ -111,7 +111,7 @@ namespace R7.News.Stream
 
         protected void formNewsEntry_DataBound (object sender, EventArgs e)
         {
-            var item = (StreamModuleNewsEntryViewModel) formNewsEntry.DataItem;
+            var item = (StreamNewsEntryViewModel) formNewsEntry.DataItem;
 
             var linkEdit = (HyperLink) formNewsEntry.FindControl ("linkEdit");
             var iconEdit = (Image) formNewsEntry.FindControl ("imageEdit");

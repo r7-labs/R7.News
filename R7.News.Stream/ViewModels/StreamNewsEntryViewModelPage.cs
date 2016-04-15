@@ -1,5 +1,5 @@
 ﻿//
-//  StreamModuleNewsEntryViewModelPage.cs
+//  StreamNewsEntryViewModelPage.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -25,18 +25,18 @@ using System.Collections.Generic;
 
 namespace R7.News.Stream.ViewModels
 {
-    public struct StreamModuleNewsEntryViewModelPage
+    public struct StreamNewsEntryViewModelPage
     {
-        public IList<StreamModuleNewsEntryViewModel> Page { get; private set; }
+        public IList<StreamNewsEntryViewModel> Page { get; private set; }
 
         public int TotalItems { get; private set; }
 
-        public static StreamModuleNewsEntryViewModelPage Empty
+        public static StreamNewsEntryViewModelPage Empty
         {
-            get { return new StreamModuleNewsEntryViewModelPage (0, null); }
+            get { return new StreamNewsEntryViewModelPage (0, null); }
         }
 
-        public StreamModuleNewsEntryViewModelPage (int totalItems, IList<StreamModuleNewsEntryViewModel> page)
+        public StreamNewsEntryViewModelPage (int totalItems, IList<StreamNewsEntryViewModel> page)
         {
             TotalItems = totalItems;
             Page = page;

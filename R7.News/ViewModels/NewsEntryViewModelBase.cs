@@ -1,5 +1,5 @@
 ﻿//
-//  AgentModuleNewsEntryViewModel.cs
+//  NewsEntryViewModelBase.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -25,20 +25,20 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
-using R7.News.Agent.Components;
 using R7.News.Controls;
 using R7.News.Models;
 
-namespace R7.News.Agent.ViewModels
+namespace R7.News.ViewModels
 {
-    public class AgentModuleNewsEntryViewModel: INewsEntry
+    public class NewsEntryViewModelBase: INewsEntry
     {
-        protected ViewModelContext<AgentSettings> Context;
+        protected ViewModelContext Context;
 
         protected INewsEntry NewsEntry;
 
-        public AgentModuleNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context)
+        public NewsEntryViewModelBase (INewsEntry newsEntry, ViewModelContext context)
         {
             NewsEntry = newsEntry;
             Context = context;
@@ -49,97 +49,97 @@ namespace R7.News.Agent.ViewModels
         public int EntryId
         {
             get { return NewsEntry.EntryId; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public int PortalId
         {
             get { return NewsEntry.PortalId; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public int ContentItemId
         {
             get { return NewsEntry.ContentItemId; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public int? AgentModuleId
         {
             get { return NewsEntry.AgentModuleId; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public string Url
         {
             get { return NewsEntry.Url; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public DateTime? StartDate
         {
             get { return NewsEntry.StartDate; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public DateTime? EndDate
         {
             get { return NewsEntry.EndDate; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public DateTime? ThresholdDate
         {
             get { return NewsEntry.ThresholdDate; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public DateTime? DueDate
         {
             get { return NewsEntry.DueDate; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public string Title
         {
             get { return NewsEntry.Title; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public string Description
         {
             get { return NewsEntry.Description; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public int ThematicWeight
         { 
             get { return NewsEntry.ThematicWeight; }
-            set { }
+            set { throw new NotImplementedException (); }
         }
 
         public int StructuralWeight
         { 
             get { return NewsEntry.StructuralWeight; }
-            set { }
+            set { throw new NotImplementedException (); }
         }
 
         public ContentItem ContentItem
         {
             get { return NewsEntry.ContentItem; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public ModuleInfo AgentModule
         {
             get { return NewsEntry.AgentModule; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         public ICollection<INewsEntry> Group
         {
             get { return NewsEntry.Group; }
-            set {}
+            set { throw new NotImplementedException (); }
         }
 
         #endregion
@@ -147,16 +147,6 @@ namespace R7.News.Agent.ViewModels
         public bool HasImage
         {
             get { return NewsEntry.GetImage () != null; }
-        }
-
-        public string ImageUrl
-        {
-            get { return NewsEntry.GetImageUrl (width: Context.Settings.ThumbnailWidth); }
-        }
-
-        public string GroupImageUrl
-        {
-            get { return NewsEntry.GetImageUrl (width: Context.Settings.GroupThumbnailWidth); }
         }
 
         public string Link
@@ -239,16 +229,5 @@ namespace R7.News.Agent.ViewModels
                 return null;
             }
         }
-
-        public string FirstColumnContainerCssClass
-        {
-            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "hidden"; }
-        }
-
-        public string SecondColumnContainerCssClass
-        {
-            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "col-sm-12"; }
-        }
     }
 }
-

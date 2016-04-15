@@ -39,7 +39,7 @@ namespace R7.News.Stream.ViewModels
         {
         }
 
-        public StreamModuleNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
+        public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {
             var checkNow = !Module.IsEditable;
             var now = DateTime.Now;
@@ -57,7 +57,7 @@ namespace R7.News.Stream.ViewModels
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId
                     + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
                 
-                return DataCache.GetCachedData<StreamModuleNewsEntryViewModelPage> (
+                return DataCache.GetCachedData<StreamNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                     c => GetFirstPageInternal (pageSize, checkNow, now)
                 );
@@ -66,7 +66,7 @@ namespace R7.News.Stream.ViewModels
             return GetPageInternal (pageIndex, pageSize, checkNow, now);
         }
 
-        protected StreamModuleNewsEntryViewModelPage GetFirstPageInternal (int pageSize, bool checkNow, DateTime now)
+        protected StreamNewsEntryViewModelPage GetFirstPageInternal (int pageSize, bool checkNow, DateTime now)
         {
             IEnumerable<NewsEntryInfo> baseItems;
             int baseItemsCount;
@@ -100,20 +100,20 @@ namespace R7.News.Stream.ViewModels
                 );
             } 
 
-            return new StreamModuleNewsEntryViewModelPage (
+            return new StreamNewsEntryViewModelPage (
                 baseItemsCount,
-                baseItems.Select (ne => new StreamModuleNewsEntryViewModel (ne, this))
+                baseItems.Select (ne => new StreamNewsEntryViewModel (ne, this))
                 .ToList ()
             );
         }
 
-        protected StreamModuleNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool checkNow, DateTime now)
+        protected StreamNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool checkNow, DateTime now)
         {
             IEnumerable<NewsEntryInfo> baseItems;
 
             // check for pageIndex < 0
             if (pageIndex < 0) {
-                return StreamModuleNewsEntryViewModelPage.Empty;
+                return StreamNewsEntryViewModelPage.Empty;
             }
 
             if (Settings.ShowAllNews) {
@@ -132,7 +132,7 @@ namespace R7.News.Stream.ViewModels
 
             // check for no data available
             if (baseItems == null || !baseItems.Any ()) {
-                return StreamModuleNewsEntryViewModelPage.Empty;
+                return StreamNewsEntryViewModelPage.Empty;
             }
 
             // get only published items
@@ -143,21 +143,21 @@ namespace R7.News.Stream.ViewModels
             // check for no data available
             var totalItems = items.Count;
             if (totalItems == 0) {
-                return StreamModuleNewsEntryViewModelPage.Empty;
+                return StreamNewsEntryViewModelPage.Empty;
             }
 
             // check for pageIndex > totalPages
             var totalPages = totalItems / pageSize + ((totalItems % pageSize == 0) ? 0 : 1);
             if (pageIndex > totalPages) {
-                return StreamModuleNewsEntryViewModelPage.Empty;
+                return StreamNewsEntryViewModelPage.Empty;
             }
 
-            return new StreamModuleNewsEntryViewModelPage (
+            return new StreamNewsEntryViewModelPage (
                 totalItems,
                 items.OrderByDescending (ne => ne.PublishedOnDate ())
                     .Skip (pageIndex * pageSize)
                     .Take (pageSize)
-                    .Select (ne => new StreamModuleNewsEntryViewModel (ne, this))
+                    .Select (ne => new StreamNewsEntryViewModel (ne, this))
                     .ToList ()
             );
         }

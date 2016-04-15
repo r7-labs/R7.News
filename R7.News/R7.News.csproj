@@ -70,6 +70,7 @@
     <Folder Include="Data\" />
     <Folder Include="ControlExtensions\" />
     <Folder Include="Integrations\AnnoView\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -113,6 +114,7 @@
     <Compile Include="Integrations\AnnoView\Importer.cs" />
     <Compile Include="Integrations\AnnoView\AnnouncementInfo.cs" />
     <Compile Include="Components\Const.cs" />
+    <Compile Include="ViewModels\NewsEntryViewModelBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

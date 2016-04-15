@@ -236,7 +236,7 @@ namespace R7.News.Stream
         /// <param name="e"></param>
         protected void listStream_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (StreamModuleNewsEntryViewModel) e.Item.DataItem;
+            var item = (StreamNewsEntryViewModel) e.Item.DataItem;
 
             var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
             var iconEdit = (Image) e.Item.FindControl ("imageEdit");
