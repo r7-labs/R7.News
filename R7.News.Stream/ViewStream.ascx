@@ -27,8 +27,11 @@
                 </p>
                 <div class="row news-entry-main-row">
                     <div class="<%# Eval ("ImageContainerCssClass") %>">
-                        <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
-                            CssClass="img img-rounded img-responsive news-entry-image" />
+                        <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Eval ("Link") %>' Visible='<%# Eval ("HasImage") %>'>
+                            <asp:Image id="imageImage" runat="server"
+                                ImageUrl='<%# Eval ("ImageUrl") %>' AlternateText='<%# Eval ("Title") %>'
+                                CssClass="img img-rounded img-responsive news-entry-image" />
+                        </asp:HyperLink>
                     </div>
                     <div class="<%# Eval ("DescriptionContainerCssClass") %> news-entry-description">
                        <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>

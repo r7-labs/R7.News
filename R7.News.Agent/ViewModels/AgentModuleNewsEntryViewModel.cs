@@ -144,6 +144,11 @@ namespace R7.News.Agent.ViewModels
 
         #endregion
 
+        public bool HasImage
+        {
+            get { return NewsEntry.GetImage () != null; }
+        }
+
         public string ImageUrl
         {
             get { return NewsEntry.GetImageUrl (width: Context.Settings.ThumbnailWidth); }
@@ -154,22 +159,28 @@ namespace R7.News.Agent.ViewModels
             get { return NewsEntry.GetImageUrl (width: Context.Settings.GroupThumbnailWidth); }
         }
 
-        public string TitleLink
+        public string Link
         {
             get
             { 
-                string url = null;
                 if (!string.IsNullOrWhiteSpace (Url)) {
-                    url = Url;
-                }
-                else {
-                    url = Context.Module.TabId.ToString ();
+                    return Globals.LinkClick (Url, Context.Module.TabId, Context.Module.ModuleId);
                 }
 
-                if (!string.IsNullOrEmpty (url)) {
-                    return string.Format ("<a href=\"{0}\">{1}</a>", 
-                        Globals.LinkClick (url, Context.Module.TabId,  Context.Module.ModuleId),
-                        Title);
+                if (AgentModule != null) {
+                    return Globals.NavigateURL (AgentModule.TabID);
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string TitleLink
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty (Link)) {
+                    return string.Format ("<a href=\"{0}\">{1}</a>", Link, Title);
                 }
 
                 return Title;

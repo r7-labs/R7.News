@@ -183,10 +183,6 @@ namespace R7.News.Agent
             listBadges.DataSource = item.Badges;
             listBadges.DataBind ();
 
-            // show image
-            var imageImage = (Image) e.Item.FindControl ("imageImage");
-            imageImage.Visible = item.GetImage () != null;
-
             // show term links
             var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
             termLinks.Module = this;
@@ -232,10 +228,6 @@ namespace R7.News.Agent
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
             listBadges.DataSource = item.Badges;
             listBadges.DataBind ();
-
-            // show image
-            var imageImage = (Image) e.Item.FindControl ("imageImage");
-            imageImage.Visible = item.GetImage () != null;
         }
 
         protected void buttonAddFromTabData_Click (object sender, EventArgs e)

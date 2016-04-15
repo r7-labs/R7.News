@@ -144,27 +144,38 @@ namespace R7.News.Stream.ViewModels
 
         #endregion
 
+        public bool HasImage
+        {
+            get { return NewsEntry.GetImage () != null; }
+        }
+
         public string ImageUrl
         {
             get { return NewsEntry.GetImageUrl (width: Context.Settings.ThumbnailWidth); }
         }
 
-        public string TitleLink
+        public string Link
         {
             get
             { 
-                string url = null;
                 if (!string.IsNullOrWhiteSpace (Url)) {
-                    url = Url;
-                }
-                else if (AgentModule != null) {
-                    url = AgentModule.TabID.ToString ();
+                    return Globals.LinkClick (Url, Context.Module.TabId, Context.Module.ModuleId);
                 }
 
-                if (!string.IsNullOrEmpty (url)) {
-                    return string.Format ("<a href=\"{0}\">{1}</a>", 
-                        Globals.LinkClick (url, Context.Module.TabId,  Context.Module.ModuleId),
-                        Title);
+                if (AgentModule != null) {
+                    return Globals.NavigateURL (AgentModule.TabID);
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string TitleLink
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty (Link)) {
+                    return string.Format ("<a href=\"{0}\">{1}</a>", Link, Title);
                 }
 
                 return Title;

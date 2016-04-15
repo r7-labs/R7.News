@@ -255,10 +255,6 @@ namespace R7.News.Stream
             listBadges.DataSource = item.Badges;
             listBadges.DataBind ();
 
-            // show image
-            var imageImage = (Image) e.Item.FindControl ("imageImage");
-            imageImage.Visible = item.GetImage () != null;
-
             // show term links
             var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
             termLinks.Module = this;

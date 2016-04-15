@@ -18,8 +18,11 @@
         <div>
             <div class="row">
                 <div class="<%# Eval ("FirstColumnContainerCssClass") %>">
-                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("ImageUrl") %>'
-                        CssClass="img img-rounded img-responsive" />
+                    <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Eval ("Link") %>' Visible='<%# Eval ("HasImage") %>'>
+                        <asp:Image id="imageImage" runat="server" 
+                            ImageUrl='<%# Eval ("ImageUrl") %>' AlternateText='<%# Eval ("Title") %>'
+                            CssClass="img img-rounded img-responsive" />
+                    </asp:HyperLink>
                 </div>
                 <div class="<%# Eval ("SecondColumnContainerCssClass") %>">
                     <h3 style="margin-top:0">
@@ -58,8 +61,11 @@
                             </p>
                             <div class="news-entry-main-row">
                                 <div>
-                                    <asp:Image id="imageImage" runat="server" ImageUrl='<%# Eval ("GroupImageUrl") %>' 
-                                        CssClass="img news-entry-image" />
+                                    <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Eval ("Link") %>' Visible='<%# Eval ("HasImage") %>'>
+                                        <asp:Image id="imageImage" runat="server" 
+                                            ImageUrl='<%# Eval ("GroupImageUrl") %>' AlternateText='<%# Eval ("Title") %>'
+                                            CssClass="img news-entry-image" />
+                                    </asp:HyperLink>
                                 </div>
                                 <div class="news-entry-description">
                                     <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
