@@ -25,6 +25,7 @@ using DotNetNuke.Services.Localization;
 
 namespace R7.News.ControlExtensions
 {
+    // TODO: Move to base library
     public static class GridViewExtensions
     {
         public static void LocalizeColumnHeaders (this GridView gv, string suffix, string resourceFile)

@@ -26,7 +26,6 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.FileSystem;
-using R7.DotNetNuke.Extensions.ControlExtensions;
 using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Components;
@@ -39,13 +38,19 @@ using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public enum EditNewsEntryTab { Common, TermsAndWeights, Advanced };
+    public enum EditNewsEntryTab
+    {
+        Common,
+        TermsAndWeights,
+        Advanced
+    }
 
     public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
     {
         #region Properties
 
         ViewModelContext viewModelContext;
+
         protected ViewModelContext ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
@@ -53,8 +58,7 @@ namespace R7.News.Stream
 
         protected EditNewsEntryTab SelectedTab
         {
-            get 
-            {
+            get {
                 // get postback initiator
                 var eventTarget = Request.Form ["__EVENTTARGET"];
                 if (!string.IsNullOrEmpty (eventTarget)) {
@@ -112,15 +116,24 @@ namespace R7.News.Stream
         }
 
         // REVIEW: Move to business logic layer
-        protected IEnumerable<StreamModuleViewModel> GetStreamModules (int thematicWeight, int structuralWeight, IList<Term> terms)
+        protected IEnumerable<StreamModuleViewModel> GetStreamModules (
+            int thematicWeight,
+            int structuralWeight,
+            IList<Term> terms)
         {
             var moduleController = new ModuleController ();
             return moduleController.GetModulesByDefinition (PortalId, Const.StreamModuleDefinitionName)
                 .Cast<ModuleInfo> ()
                 .Where (m => !m.IsDeleted)
                 .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (new StreamSettings (m), 
-                    thematicWeight, structuralWeight, terms))
-                .Select (m => new StreamModuleViewModel (m, new StreamSettings (m), ViewModelContext, thematicWeight, structuralWeight, terms))
+                thematicWeight, structuralWeight, terms))
+                .Select (m => new StreamModuleViewModel (
+                m,
+                new StreamSettings (m),
+                ViewModelContext,
+                thematicWeight,
+                structuralWeight,
+                terms))
                 .OrderBy (m => m.ModuleTitle);
         }
 

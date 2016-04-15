@@ -47,8 +47,7 @@ namespace R7.News.Controls.ViewModels
 
         public string Url
         {
-            get
-            {
+            get {
                 var url = TermUrlManager.GetUrl (Term);
                 if (!string.IsNullOrEmpty (url)) {
                     int tabId;

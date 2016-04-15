@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using YamlDotNet.Serialization;
 using System.Collections.ObjectModel;
 using R7.News.Providers;
 
@@ -80,5 +79,10 @@ namespace R7.News.Components
         public int DefaultGroupThumbnailWidth { get; set; }
     }
 
-    public enum PermalinkMode { Friendly, Raw }
+    public enum PermalinkMode
+    {
+        Friendly,
+        Raw
+
+    }
 }

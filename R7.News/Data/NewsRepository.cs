@@ -66,7 +66,11 @@ namespace R7.News.Data
             return NewsDataProvider.Instance.Get<NewsEntryInfo> (int.Parse (contentItem.ContentKey));
         }
 
-        public int AddNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images, int moduleId, int tabId)
+        public int AddNewsEntry (NewsEntryInfo newsEntry,
+                                 List<Term> terms,
+                                 List<IFileInfo> images,
+                                 int moduleId,
+                                 int tabId)
         {
             // TODO: Add value to ContentKey
             var contentItem = new ContentItem {
@@ -133,8 +137,12 @@ namespace R7.News.Data
             CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId, int portalId, 
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        public IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
+                                                          int portalId, 
+                                                          int minThematicWeight,
+                                                          int maxThematicWeight,
+                                                          int minStructuralWeight,
+                                                          int maxStructuralWeight)
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
@@ -146,18 +154,26 @@ namespace R7.News.Data
         }
 
         protected IEnumerable<NewsEntryInfo> GetNewsEntriesInternal (int portalId, 
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+                                                                     int minThematicWeight,
+                                                                     int maxThematicWeight,
+                                                                     int minStructuralWeight,
+                                                                     int maxStructuralWeight)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 SpNamePrefix + "GetNewsEntries", portalId, 
-                        minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
+                minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .Cast<NewsEntryInfo> ();
         }
 
-        public int GetNewsEntries_Count (int portalId, bool checkNow, DateTime now,
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        public int GetNewsEntries_Count (int portalId,
+                                         bool checkNow,
+                                         DateTime now,
+                                         int minThematicWeight,
+                                         int maxThematicWeight,
+                                         int minStructuralWeight,
+                                         int maxStructuralWeight)
         {
             return NewsDataProvider.Instance.ExecuteSpScalar<int> (SpNamePrefix + "GetNewsEntries_Count", 
                 portalId, checkNow, now,
@@ -166,20 +182,25 @@ namespace R7.News.Data
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntries_FirstPage (int portalId, 
-            int pageSize, bool checkNow, DateTime now, 
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+                                                                    int pageSize,
+                                                                    bool checkNow,
+                                                                    DateTime now, 
+                                                                    int minThematicWeight,
+                                                                    int maxThematicWeight,
+                                                                    int minStructuralWeight,
+                                                                    int maxStructuralWeight)
         {
             return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntries_FirstPage",
-                    portalId, pageSize, checkNow, now,
-                    minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
+                portalId, pageSize, checkNow, now,
+                minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight)
                 .WithContentItems ()
                 .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                 .Cast<NewsEntryInfo> ();
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms (int moduleId, int portalId,
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
-            IList<Term> terms)
+                                                                 int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
+                                                                 IList<Term> terms)
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
@@ -191,20 +212,20 @@ namespace R7.News.Data
         }
 
         protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int portalId, 
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
-            IList<Term> terms)
+                                                                            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
+                                                                            IList<Term> terms)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (System.Data.CommandType.StoredProcedure, 
                 SpNamePrefix + "GetNewsEntriesByTerms", portalId, minThematicWeight, maxThematicWeight, 
-                        minStructuralWeight, maxStructuralWeight, terms.Select (t => t.TermId).ToArray ())
+                minStructuralWeight, maxStructuralWeight, terms.Select (t => t.TermId).ToArray ())
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                     .Cast<NewsEntryInfo> ();
         }
 
         public int GetNewsEntriesByTerms_Count (int portalId, bool checkNow, DateTime now,
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
-            IList<Term> terms)
+                                                int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight,
+                                                IList<Term> terms)
         {
             return NewsDataProvider.Instance.ExecuteSpScalar<int> (SpNamePrefix + "GetNewsEntriesByTerms_Count", 
                 portalId, checkNow, now,
@@ -219,9 +240,9 @@ namespace R7.News.Data
             IList<Term> terms)
         {
             return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntriesByTerms_FirstPage",
-                    portalId, pageSize, checkNow, now,
-                    minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight,
-                    terms.Select (t => t.TermId).ToArray ())
+                portalId, pageSize, checkNow, now,
+                minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight,
+                terms.Select (t => t.TermId).ToArray ())
                 .WithContentItems ()
                 .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                 .Cast<NewsEntryInfo> ();
@@ -240,8 +261,13 @@ namespace R7.News.Data
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
-                // .WithAgentModules (NewsDataProvider.Instance.ModuleController)
+            // .WithAgentModules (NewsDataProvider.Instance.ModuleController)
                 .Cast<NewsEntryInfo> ();
+        }
+
+        public void RemoveModuleCache (int moduleId)
+        {
+            CacheHelper.RemoveCacheByPrefix (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + moduleId);
         }
     }
 }

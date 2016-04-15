@@ -65,9 +65,10 @@ Global
 		$6.SpacesBeforeArrayDeclarationBrackets = True
 		$6.MethodCallArgumentWrapping = WrapIfTooLong
 		$6.MethodDeclarationParameterWrapping = WrapIfTooLong
+		$6.AlignToFirstMethodDeclarationParameter = False
 		$6.IndexerDeclarationParameterWrapping = WrapIfTooLong
+		$6.AlignToFirstIndexerDeclarationParameter = False
 		$6.IndexerArgumentWrapping = WrapIfTooLong
-		$6.AlignToFirstIndexerArgument = True
 		$6.inheritsSet = Mono
 		$6.inheritsScope = text/x-csharp
 		$6.scope = text/x-csharp

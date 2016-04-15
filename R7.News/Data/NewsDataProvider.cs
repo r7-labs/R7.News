@@ -45,10 +45,10 @@ namespace R7.News.Data
         #region Properties
 
         private ContentType newsContentType;
+
         public ContentType NewsContentType
         {
-            get
-            {
+            get {
                 if (newsContentType == null) {
                     var contentTypeController = new ContentTypeController ();
                     newsContentType = contentTypeController.GetContentTypes ()
@@ -61,10 +61,10 @@ namespace R7.News.Data
         }
 
         private ContentController contentController;
+
         public ContentController ContentController
         {
-            get
-            { 
+            get { 
                 if (contentController == null) {
                     contentController = new ContentController ();
                 }
@@ -74,10 +74,10 @@ namespace R7.News.Data
         }
 
         private ModuleController moduleController;
+
         public ModuleController ModuleController
         {
-            get
-            { 
+            get { 
                 if (moduleController == null) {
                     moduleController = new ModuleController ();
                 }

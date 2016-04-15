@@ -58,11 +58,9 @@ namespace R7.News.Agent.Components
             var newsEntries = NewsRepository.Instance.GetNewsEntriesByAgent (moduleInfo.ModuleID, moduleInfo.PortalID);
 
             // create search documents
-            foreach (var newsEntry in newsEntries)
-            {
+            foreach (var newsEntry in newsEntries) {
                 var now = DateTime.Now;
-                if (newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime () > beginDateUtc.ToUniversalTime ())
-                {
+                if (newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime () > beginDateUtc.ToUniversalTime ()) {
                     searchDocs.Add (new SearchDocument {
                         PortalId = moduleInfo.PortalID,
                         AuthorUserId = newsEntry.ContentItem.CreatedByUserID,

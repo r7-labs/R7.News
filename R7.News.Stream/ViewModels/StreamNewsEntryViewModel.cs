@@ -29,7 +29,7 @@ namespace R7.News.Stream.ViewModels
 {
     public class StreamNewsEntryViewModel: NewsEntryViewModelBase
     {
-        public StreamNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context):
+        public StreamNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context) :
             base (newsEntry, context)
         {
         }

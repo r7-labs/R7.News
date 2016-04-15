@@ -35,7 +35,7 @@ namespace R7.News.Stream.ViewModels
 {
     public class StreamViewModel: ViewModelContext<StreamSettings>
     {
-        public StreamViewModel (IModuleControl module, StreamSettings settings): base (module, settings)
+        public StreamViewModel (IModuleControl module, StreamSettings settings) : base (module, settings)
         {
         }
 
@@ -55,7 +55,7 @@ namespace R7.News.Stream.ViewModels
                 // in the GetNewsEntries..._Count and GetNewsEntries..._FirstPage repository methods
 
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId
-                    + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
+                               + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
                 
                 return DataCache.GetCachedData<StreamNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
@@ -107,7 +107,11 @@ namespace R7.News.Stream.ViewModels
             );
         }
 
-        protected StreamNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, bool checkNow, DateTime now)
+        protected StreamNewsEntryViewModelPage GetPageInternal (
+            int pageIndex,
+            int pageSize,
+            bool checkNow,
+            DateTime now)
         {
             IEnumerable<NewsEntryInfo> baseItems;
 

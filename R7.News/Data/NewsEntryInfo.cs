@@ -33,7 +33,6 @@ namespace R7.News.Data
     [TableName (Const.Prefix)]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
-    // [Cacheable ("r7_News", CacheItemPriority.Default, 20)]
     public class NewsEntryInfo: INewsEntry
     {
         #region INewsEntry implementation

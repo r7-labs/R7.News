@@ -30,7 +30,6 @@ using R7.DotNetNuke.Extensions.ModuleExtensions;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Controls;
 using R7.News.Data;
-using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 
@@ -39,18 +38,19 @@ namespace R7.News.Stream
     public partial class ViewNewsEntry : PortalModuleBase<StreamSettings>
     {
         #region Properties
-        
+
         ViewModelContext<StreamSettings> viewModelContext;
+
         protected ViewModelContext<StreamSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<StreamSettings> (this, Settings)); }
         }
 
         int? entryId;
+
         protected int? EntryId
         {
-            get
-            {
+            get {
                 if (entryId == null) {
                     var strEntryId = Request.QueryString ["entryId"];
                     int outEntryId;

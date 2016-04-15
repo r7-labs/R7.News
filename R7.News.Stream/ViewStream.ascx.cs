@@ -30,7 +30,6 @@ using R7.DotNetNuke.Extensions.Controls;
 using R7.DotNetNuke.Extensions.Entities.Modules;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
 using R7.News.Controls;
-using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 
@@ -39,6 +38,7 @@ namespace R7.News.Stream
     public partial class ViewStream : PortalModuleBase<StreamSettings>, IActionable
     {
         StreamViewModel viewModel;
+
         protected StreamViewModel ViewModel
         {
             get { return viewModel ?? (viewModel = new StreamViewModel (this, Settings)); }
@@ -46,8 +46,7 @@ namespace R7.News.Stream
 
         protected int PageSize
         {
-            get
-            { 
+            get { 
                 var objPageSize = ViewState ["PageSize"];
                 if (objPageSize != null) {
                     return (int) ViewState ["PageSize"];

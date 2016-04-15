@@ -47,6 +47,7 @@ namespace R7.News.Agent
         #region Properties
 
         ViewModelContext<AgentSettings> viewModelContext;
+
         protected ViewModelContext<AgentSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
@@ -54,8 +55,7 @@ namespace R7.News.Agent
 
         protected int GroupEntryId
         {
-            get
-            { 
+            get { 
                 var objGroupEntryId = ViewState ["GroupEntryId"];
                 if (objGroupEntryId != null) {
                     return (int) objGroupEntryId;

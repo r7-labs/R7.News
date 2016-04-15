@@ -29,7 +29,7 @@ namespace R7.News.Agent.ViewModels
 {
     public class AgentNewsEntryViewModel: NewsEntryViewModelBase
     {
-        public AgentNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context): 
+        public AgentNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context) :
             base (newsEntry, context)
         {
         }

@@ -50,7 +50,7 @@ namespace R7.News.Controls
         public string BadgeCssClass { get; set; }
 
         #endregion
-       
+
         public override void DataBind ()
         {
             if (DataSource != null) {

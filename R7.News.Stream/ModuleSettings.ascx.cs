@@ -115,7 +115,7 @@ namespace R7.News.Stream
                 Settings.MaxStructuralWeight = maxStructuralWeight;
 
                 // clear module-specific cache
-                CacheHelper.RemoveCacheByPrefix (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + ModuleId);
+                NewsRepository.Instance.RemoveModuleCache (ModuleId);
 
                 ModuleController.SynchronizeModule (ModuleId);
             }

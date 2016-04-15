@@ -56,8 +56,7 @@ namespace R7.News.Agent.Components
 
         public int ThumbnailWidth
         {
-            get 
-            { 
+            get { 
                 return ReadSetting<int> (SettingPrefix + "ThumbnailWidth",
                     NewsConfig.GetInstance (PortalId).AgentModule.DefaultThumbnailWidth); 
             }
@@ -66,8 +65,7 @@ namespace R7.News.Agent.Components
 
         public int GroupThumbnailWidth
         {
-            get 
-            { 
+            get { 
                 return ReadSetting<int> (SettingPrefix + "GroupThumbnailWidth",
                     NewsConfig.GetInstance (PortalId).AgentModule.DefaultGroupThumbnailWidth); 
             }

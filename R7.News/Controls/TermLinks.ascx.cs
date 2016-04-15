@@ -50,6 +50,7 @@ namespace R7.News.Controls
         #endregion
 
         private ViewModelContext viewModelContext;
+
         protected ViewModelContext ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this, Module)); }

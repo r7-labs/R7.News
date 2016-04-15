@@ -135,7 +135,7 @@ namespace R7.News.Data
             get { return @This.StructuralWeight; }
             set { @This.StructuralWeight = value; }
         }
-       
+
         [XmlIgnore]
         public ContentItem ContentItem
         {
@@ -173,8 +173,7 @@ namespace R7.News.Data
         /// <value>The terms.</value>
         public List<int> TermIds
         {
-            get 
-            {
+            get {
                 if (termIds == null) {
                     if (ContentItem != null) {
                         // on export
@@ -198,8 +197,7 @@ namespace R7.News.Data
         /// <value>The terms.</value>
         public List<int> ImageFileIds
         {
-            get 
-            {
+            get {
                 if (imageFileIds == null) {
                     if (ContentItem != null) {
                         // on export

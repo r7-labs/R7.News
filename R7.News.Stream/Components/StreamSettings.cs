@@ -54,8 +54,7 @@ namespace R7.News.Stream.Components
 
         public List<Term> IncludeTerms
         {
-            get
-            { 
+            get { 
                 var termController = new TermController ();
 
                 return ReadSetting<string> (SettingPrefix + "IncludeTerms", string.Empty)
@@ -64,8 +63,7 @@ namespace R7.News.Stream.Components
                     .ToList ();
             }
 
-            set
-            {
+            set {
                 WriteModuleSetting<string> (SettingPrefix + "IncludeTerms", 
                     TextUtils.FormatList (";", value.Select (t => t.TermId)));
             }
@@ -86,7 +84,9 @@ namespace R7.News.Stream.Components
 
         public int MaxThematicWeight
         {
-            get { return ReadSetting<int> (SettingPrefix + "MaxThematicWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
+            get { return ReadSetting<int> (
+                    SettingPrefix + "MaxThematicWeight",
+                    NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> (SettingPrefix + "MaxThematicWeight", value); }
         }
 
@@ -98,7 +98,9 @@ namespace R7.News.Stream.Components
 
         public int MaxStructuralWeight
         {
-            get { return ReadSetting<int> (SettingPrefix + "MaxStructuralWeight", NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
+            get { return ReadSetting<int> (
+                    SettingPrefix + "MaxStructuralWeight",
+                    NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
             set { WriteModuleSetting<int> (SettingPrefix + "MaxStructuralWeight", value); }
         }
 
@@ -132,14 +134,13 @@ namespace R7.News.Stream.Components
 
         public int MaxPageLinks
         {
-            get { return ReadSetting<int> (SettingPrefix +  "MaxPageLinks", 3); }
+            get { return ReadSetting<int> (SettingPrefix + "MaxPageLinks", 3); }
             set { WriteTabModuleSetting<int> (SettingPrefix + "MaxPageLinks", value); }
         }
 
         public int ThumbnailWidth
         {
-            get 
-            { 
+            get { 
                 return ReadSetting<int> (SettingPrefix + "ThumbnailWidth", 
                     NewsConfig.GetInstance (PortalId).StreamModule.DefaultThumbnailWidth); 
             }

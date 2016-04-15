@@ -69,17 +69,15 @@ namespace R7.News.Stream.Components
 
             // get news entries
             var newsEntries = GetNewsEntries (moduleInfo.ModuleID, moduleInfo.PortalID,
-                settings.MinThematicWeight, settings.MaxThematicWeight,
-                settings.MinStructuralWeight, settings.MaxStructuralWeight,
-                settings.ShowAllNews, settings.IncludeTerms);
+                                  settings.MinThematicWeight, settings.MaxThematicWeight,
+                                  settings.MinStructuralWeight, settings.MaxStructuralWeight,
+                                  settings.ShowAllNews, settings.IncludeTerms);
 
             // create search documents
-            foreach (var newsEntry in newsEntries)
-            {
+            foreach (var newsEntry in newsEntries) {
                 var now = DateTime.Now;
-                if (newsEntry.AgentModuleId == null // get only news entries w/o agent modules
-                    && newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime () > beginDateUtc.ToUniversalTime ())
-                {
+                if (newsEntry.AgentModuleId == null// get only news entries w/o agent modules
+                    && newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime () > beginDateUtc.ToUniversalTime ()) {
                     searchDocs.Add (new SearchDocument {
                         PortalId = moduleInfo.PortalID,
                         AuthorUserId = newsEntry.ContentItem.CreatedByUserID,

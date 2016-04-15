@@ -25,7 +25,6 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
-using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Controls;
 using R7.News.Models;
@@ -151,8 +150,7 @@ namespace R7.News.ViewModels
 
         public string Link
         {
-            get
-            { 
+            get { 
                 if (!string.IsNullOrWhiteSpace (Url)) {
                     return Globals.LinkClick (Url, Context.Module.TabId, Context.Module.ModuleId);
                 }
@@ -167,8 +165,7 @@ namespace R7.News.ViewModels
 
         public string TitleLink
         {
-            get
-            {
+            get {
                 if (!string.IsNullOrEmpty (Link)) {
                     return string.Format ("<a href=\"{0}\">{1}</a>", Link, Title);
                 }
@@ -187,8 +184,7 @@ namespace R7.News.ViewModels
 
         public string CreatedByUserName
         {
-            get 
-            {
+            get {
                 var user = ContentItem.CreatedByUser (Context.Module.PortalId);
                 if (user != null) {
                     return user.DisplayName;        
@@ -200,8 +196,7 @@ namespace R7.News.ViewModels
 
         public List<Badge> Badges
         {
-            get
-            { 
+            get { 
                 if (Context.Module.IsEditable) {
                     var badges = new List<Badge> ();
                     var now = DateTime.Now;

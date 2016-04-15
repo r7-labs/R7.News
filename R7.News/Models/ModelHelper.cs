@@ -47,14 +47,18 @@ namespace R7.News.Models
 
         public static DateTime PublishedOnDate (DateTime? startDate, DateTime createdOnDate)
         {
-            return (startDate != null)? startDate.Value : createdOnDate;
+            return (startDate != null) ? startDate.Value : createdOnDate;
         }
 
-        public static bool IsVisible (int thematicWeight, int structuralWeight, 
-            int minThematicWeight, int maxThematicWeight, int minStructuralWeight, int maxStructuralWeight)
+        public static bool IsVisible (int thematicWeight,
+                                      int structuralWeight, 
+                                      int minThematicWeight,
+                                      int maxThematicWeight,
+                                      int minStructuralWeight,
+                                      int maxStructuralWeight)
         {
             return IsThematicVisible (thematicWeight, minThematicWeight, maxThematicWeight)
-                || IsStructuralVisible (structuralWeight, minStructuralWeight, maxStructuralWeight);
+            || IsStructuralVisible (structuralWeight, minStructuralWeight, maxStructuralWeight);
         }
 
         public static bool IsThematicVisible (int thematicWeight, int minThematicWeight, int maxThematicWeight)

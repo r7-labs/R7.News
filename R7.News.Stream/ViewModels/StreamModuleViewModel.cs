@@ -61,8 +61,7 @@ namespace R7.News.Stream.ViewModels
 
         public string ModuleLink
         { 
-            get 
-            { 
+            get { 
                 return string.Format ("<a href=\"{1}\" target=\"_blank\">{0}</a>", ModuleTitle,
                     Globals.NavigateURL (Module.TabID) + "#" + ModuleId
                 );
@@ -88,14 +87,18 @@ namespace R7.News.Stream.ViewModels
             NewsEntry_Terms = newsEntryTerms;
         }
 
-        public static bool IsNewsEntryWillBePassedByModule (StreamSettings settings, int thematicWeight, int structuralWeight, IList<Term> terms)
+        public static bool IsNewsEntryWillBePassedByModule (
+            StreamSettings settings,
+            int thematicWeight,
+            int structuralWeight,
+            IList<Term> terms)
         {
-            return (settings.ShowAllNews || ModelHelper.IsTermsOverlaps (terms, settings.IncludeTerms)) 
-                && ModelHelper.IsVisible (thematicWeight, structuralWeight, 
-                    settings.MinThematicWeight, settings.MaxThematicWeight,
-                    settings.MinStructuralWeight, settings.MaxStructuralWeight
-                );
-            }
+            return (settings.ShowAllNews || ModelHelper.IsTermsOverlaps (terms, settings.IncludeTerms))
+            && ModelHelper.IsVisible (thematicWeight, structuralWeight, 
+                settings.MinThematicWeight, settings.MaxThematicWeight,
+                settings.MinStructuralWeight, settings.MaxStructuralWeight
+            );
+        }
 
         protected string GetPassesByString ()
         {
@@ -112,10 +115,16 @@ namespace R7.News.Stream.ViewModels
             }
 
             if (passesByTerms) {
-                if (ModelHelper.IsThematicVisible (NewsEntry_ThematicWeight, Settings.MinThematicWeight, Settings.MaxThematicWeight)) {
+                if (ModelHelper.IsThematicVisible (
+                        NewsEntry_ThematicWeight,
+                        Settings.MinThematicWeight,
+                        Settings.MaxThematicWeight)) {
                     passesBy.Add (Localization.GetString ("PassesByThematicWeight.Text", Context.LocalResourceFile));
                 }
-                if (ModelHelper.IsStructuralVisible (NewsEntry_StructuralWeight, Settings.MinStructuralWeight, Settings.MaxStructuralWeight)) {
+                if (ModelHelper.IsStructuralVisible (
+                        NewsEntry_StructuralWeight,
+                        Settings.MinStructuralWeight,
+                        Settings.MaxStructuralWeight)) {
                     passesBy.Add (Localization.GetString ("PassesByStructuralWeight.Text", Context.LocalResourceFile));
                 }
             }

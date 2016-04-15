@@ -42,9 +42,9 @@ namespace R7.News.Providers
                     return term.Description;
                 }
                 if (url.StartsWith ("mailto:", StringComparison.InvariantCultureIgnoreCase)
-                         || url.IndexOf ("://", StringComparison.InvariantCultureIgnoreCase) >= 0
-                         || url.StartsWith ("\\\\", StringComparison.InvariantCultureIgnoreCase)
-                         || url.StartsWith ("/", StringComparison.InvariantCultureIgnoreCase)) {
+                    || url.IndexOf ("://", StringComparison.InvariantCultureIgnoreCase) >= 0
+                    || url.StartsWith ("\\\\", StringComparison.InvariantCultureIgnoreCase)
+                    || url.StartsWith ("/", StringComparison.InvariantCultureIgnoreCase)) {
                     return term.Description;
                 }
             }
