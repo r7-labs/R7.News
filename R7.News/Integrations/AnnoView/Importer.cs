@@ -87,57 +87,64 @@ namespace R7.News.Integrations.AnnoView
                     foreach (var announcement in announcements) {
                         var module = moduleController.GetModule (announcement.ModuleId);
                         if (module != null) {
-                        
-                            // fill news entry
-                            var newsEntry = new NewsEntryInfo {
-                                Title = announcement.Title,
-                                Description = announcement.Description,
-                                StartDate = announcement.PublishDate,
-                                EndDate = announcement.ExpireDate,
-                                Url = announcement.Url,
-                                PortalId = module.PortalID,
-                                ThematicWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0,
-                                StructuralWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0
-                            };
-                            
-                            // fill image
-                            var images = new List<IFileInfo> ();
-                            if (Globals.GetURLType (announcement.ImageSource) == TabType.File) {
-                                var imageFileId = int.Parse (announcement.ImageSource.Substring (announcement.ImageSource.IndexOf ("=") + 1));
-                                var image = FileManager.Instance.GetFile (imageFileId);
-                                if (image != null) {
-                                    images.Add (image);
+                            try {
+                                // fill news entry
+                                var newsEntry = new NewsEntryInfo {
+                                    Title = announcement.Title,
+                                    Description = announcement.Description,
+                                    StartDate = announcement.PublishDate,
+                                    EndDate = announcement.ExpireDate,
+                                    Url = announcement.Url,
+                                    PortalId = module.PortalID,
+                                    ThematicWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0,
+                                    StructuralWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0
+                                };
+                                
+                                // fill image
+                                var images = new List<IFileInfo> ();
+                                if (Globals.GetURLType (announcement.ImageSource) == TabType.File) {
+                                    var imageFileId = int.Parse (announcement.ImageSource.Substring (announcement.ImageSource.IndexOf ("=") + 1));
+                                    var image = FileManager.Instance.GetFile (imageFileId);
+                                    if (image != null) {
+                                        images.Add (image);
+                                    }
                                 }
-                            }
 
-                            // try get tab
-                            TabInfo tab;
-                            if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
-                                // get link target tab
-                                tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
-                            }
-                            else {
-                                // get module tab
-                                tab = tabController.GetTab (module.TabID, module.PortalID);
-                            }
+                                // try get tab
+                                TabInfo tab;
+                                if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
+                                    // get link target tab
+                                    tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
+                                }
+                                else {
+                                    // get module tab
+                                    tab = tabController.GetTab (module.TabID, module.PortalID);
+                                }
 
-                            // fill terms
-                            var terms = new List<Term> ();
-                            if (tab != null) {
-                                terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                                // fill terms
+                                var terms = new List<Term> ();
+                                if (tab != null) {
+                                    terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                                }
+
+                                // add news entry
+                                NewsRepository.Instance.BulkAddNewsEntry (
+                                    repository,
+                                    newsEntry,
+                                    terms,
+                                    images,
+                                    module.ModuleID,
+                                    module.TabID);
+                                itemsImported++;
+
+                                Thread.Sleep (sleepTimeout);
                             }
-
-                            // add news entry
-                            NewsRepository.Instance.BulkAddNewsEntry (
-                                repository,
-                                newsEntry,
-                                terms,
-                                images,
-                                module.ModuleID,
-                                module.TabID);
-                            itemsImported++;
-
-                            Thread.Sleep (sleepTimeout);
+                            catch (Exception ex)
+                            {
+                                // log error on importing current announcement
+                                ScheduleHistoryItem.AddLogNote ("Announcement.ItemId=" +  announcement.ItemId + "; Exception=" + ex);
+                                Exceptions.LogException (ex);
+                            }
                         }
                     }
                 }
