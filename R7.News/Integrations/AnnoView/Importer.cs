@@ -52,7 +52,7 @@ namespace R7.News.Integrations.AnnoView
                 var itemsImported = Import (1000);
 
                 // log result
-                ScheduleHistoryItem.AddLogNote ("Items imported = " + itemsImported);
+                ScheduleHistoryItem.AddLogNote ("Items imported: " + itemsImported);
 
                 // show success
                 ScheduleHistoryItem.Succeeded = true;
@@ -60,7 +60,7 @@ namespace R7.News.Integrations.AnnoView
             }
             catch (Exception ex) {
                 ScheduleHistoryItem.Succeeded = false;
-                ScheduleHistoryItem.AddLogNote ("Exception = " + ex);
+                ScheduleHistoryItem.AddLogNote ("Exception: " + ex);
                 Errored (ref ex);
                 Exceptions.LogException (ex);
             }
@@ -73,6 +73,7 @@ namespace R7.News.Integrations.AnnoView
         protected int Import (int sleepTimeout)
         {
             var itemsImported = 0;
+            var itemsImportedDiv10 = 0;
 
             var announcements = NewsDataProvider.Instance.GetObjects<AnnouncementInfo> ();
             if (announcements != null) {
@@ -135,14 +136,21 @@ namespace R7.News.Integrations.AnnoView
                                     images,
                                     module.ModuleID,
                                     module.TabID);
+
+                                // count number of items imported,
+                                // invoke Progressing method each 10 items
                                 itemsImported++;
+                                if (itemsImported / 10 > itemsImportedDiv10) {
+                                    itemsImportedDiv10++;
+                                    Progressing ();
+                                }
 
                                 Thread.Sleep (sleepTimeout);
                             }
                             catch (Exception ex)
                             {
                                 // log error on importing current announcement
-                                ScheduleHistoryItem.AddLogNote ("Announcement.ItemId=" +  announcement.ItemId + "; Exception=" + ex);
+                                ScheduleHistoryItem.AddLogNote ("Announcement.ItemId:" +  announcement.ItemId + "; Exception:" + ex);
                                 Exceptions.LogException (ex);
                             }
                         }
