@@ -29,6 +29,8 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Common.Utilities;
 using R7.News.Components;
 using R7.News.Models;
+using Telerik.Pdf.Filter;
+using DotNetNuke.Data;
 
 namespace R7.News.Data
 {
@@ -103,6 +105,45 @@ namespace R7.News.Data
             }
 
             CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+
+            return newsEntry.EntryId;
+        }
+
+        internal int BulkAddNewsEntry (IRepository<NewsEntryInfo> repository, NewsEntryInfo newsEntry,
+            List<Term> terms,
+            List<IFileInfo> images,
+            int moduleId,
+            int tabId)
+        {
+            // TODO: Add value to ContentKey
+            var contentItem = new ContentItem {
+                ContentTitle = newsEntry.Title,
+                Content = newsEntry.Title,
+                ContentTypeId = NewsDataProvider.Instance.NewsContentType.ContentTypeId,
+                Indexed = false,
+                ModuleID = newsEntry.AgentModuleId ?? moduleId,
+                TabID = tabId,
+            };
+
+            // add content item and news entry
+            newsEntry.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
+            repository.Insert (newsEntry);
+
+            // update content item after EntryId get its value
+            contentItem.ContentKey = newsEntry.EntryId.ToString ();
+            NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
+
+            // add images to content item
+            if (images.Count > 0) {
+                var attachmentController = new AttachmentController (NewsDataProvider.Instance.ContentController);
+                attachmentController.AddImagesToContent (contentItem.ContentItemId, images);
+            }
+
+            // add terms to content item
+            var termController = new TermController ();
+            foreach (var term in terms) {
+                termController.AddTermToContent (term, contentItem);
+            }
 
             return newsEntry.EntryId;
         }

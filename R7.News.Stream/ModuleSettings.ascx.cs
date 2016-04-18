@@ -123,19 +123,6 @@ namespace R7.News.Stream
                 Exceptions.ProcessModuleLoadException (this, ex);
             }
         }
-
-        protected void buttonImport_Click (object sender, EventArgs e)
-        {
-            try {
-                var importer = new R7.News.Integrations.AnnoView.Importer ();
-                var itemsImported = importer.Import (ModuleId, TabId, PortalId);
-                buttonImport.Text = string.Format ("Imported {0} items", itemsImported);
-                buttonImport.Enabled = false;
-            }
-            catch (Exception ex) {
-                Exceptions.ProcessModuleLoadException (this, ex);
-            }
-        }
     }
 }
 
