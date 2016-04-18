@@ -190,7 +190,7 @@ namespace R7.News.ViewModels
                     return user.DisplayName;        
                 }
 
-                return string.Empty;
+                return Localization.GetString ("SystemUser.Text", Context.LocalResourceFile);
             }
         }
 
