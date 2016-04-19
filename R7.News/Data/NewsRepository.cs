@@ -89,6 +89,8 @@ namespace R7.News.Data
             NewsDataProvider.Instance.Add<NewsEntryInfo> (newsEntry);
 
             // update content item after EntryId get its value
+            // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
+            // more info here: http://www.dnnsoftware.com/community-blog/cid/131963/adding-core-taxonomy-to-your-module-part-2-ndash-content-items
             contentItem.ContentKey = newsEntry.EntryId.ToString ();
             NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
 
@@ -130,6 +132,8 @@ namespace R7.News.Data
             repository.Insert (newsEntry);
 
             // update content item after EntryId get its value
+            // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
+            // more info here: http://www.dnnsoftware.com/community-blog/cid/131963/adding-core-taxonomy-to-your-module-part-2-ndash-content-items
             contentItem.ContentKey = newsEntry.EntryId.ToString ();
             NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
 
