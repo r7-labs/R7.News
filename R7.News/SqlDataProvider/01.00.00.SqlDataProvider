@@ -292,35 +292,39 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT TOP (@pageSize) NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
-        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
-            ON NE.ContentItemID = CI.ContentItemID
-        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
-            ON CI.ContentItemID = CIT.ContentItemID 
-        WHERE NE.PortalID = @portalId
-            AND (@checkNow = 0 OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
-            AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
-                OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
-            AND (CIT.TermID = @term1
-            OR CIT.TermID = @term2
-            OR CIT.TermID = @term3
-            OR CIT.TermID = @term4
-            OR CIT.TermID = @term5
-            OR CIT.TermID = @term6
-            OR CIT.TermID = @term7
-            OR CIT.TermID = @term8
-            OR CIT.TermID = @term9
-            OR CIT.TermID = @term10
-            OR CIT.TermID = @term11
-            OR CIT.TermID = @term12
-            OR CIT.TermID = @term13
-            OR CIT.TermID = @term14
-            OR CIT.TermID = @term15
-            OR CIT.TermID = @term16
-            OR CIT.TermID = @term17
-            OR CIT.TermID = @term18
-            OR CIT.TermID = @term19
-            OR CIT.TermID = @term20)
-        ORDER BY CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END DESC
+    SELECT DISTINCT TOP (@pageSize) NE2.* FROM
+        (SELECT TOP (@pageSize) NE.*, 
+            (CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END) AS PublishedOnDate
+        FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+            INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+                ON NE.ContentItemID = CI.ContentItemID
+            INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
+                ON CI.ContentItemID = CIT.ContentItemID 
+            WHERE NE.PortalID = @portalId
+                AND (@checkNow = 0 OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
+                AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
+                    OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
+                AND (CIT.TermID = @term1
+                OR CIT.TermID = @term2
+                OR CIT.TermID = @term3
+                OR CIT.TermID = @term4
+                OR CIT.TermID = @term5
+                OR CIT.TermID = @term6
+                OR CIT.TermID = @term7
+                OR CIT.TermID = @term8
+                OR CIT.TermID = @term9
+                OR CIT.TermID = @term10
+                OR CIT.TermID = @term11
+                OR CIT.TermID = @term12
+                OR CIT.TermID = @term13
+                OR CIT.TermID = @term14
+                OR CIT.TermID = @term15
+                OR CIT.TermID = @term16
+                OR CIT.TermID = @term17
+                OR CIT.TermID = @term18
+                OR CIT.TermID = @term19
+                OR CIT.TermID = @term20)
+        ) AS NE2
+        ORDER BY NE2.PublishedOnDate DESC
 END
 GO
