@@ -36,6 +36,7 @@ using R7.DotNetNuke.Extensions.Entities.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
+using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
@@ -257,7 +258,9 @@ namespace R7.News.Agent
                 Title = activeTab.TabName,
                 Description = activeTab.Description,
                 AgentModuleId = ModuleId,
-                EndDate = DateTime.Today
+                EndDate = DateTime.Today, // expired by default
+                ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
+                StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
             };
 
             // add news entry
