@@ -153,6 +153,20 @@ namespace R7.News.Stream
             buttonUpdate.Text = LocalizeString ("Add.Text");
         }
 
+        /*
+        protected void Trace (LogController logController, string message)
+        {
+            var logInfo = new LogInfo {
+                LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString (),
+                LogUserID = -1, // superuser
+                LogPortalID = PortalId
+            };
+
+            logInfo.AddProperty ("EditNewsEntry", message);
+            logController.AddLog (logInfo);
+        }
+        */
+
         protected override void LoadItem (NewsEntryInfo item)
         {
             // load also content item
@@ -188,9 +202,12 @@ namespace R7.News.Stream
             var auditData = new AuditData {
                 CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString (),
                 LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString (),
-                CreatedByUser = item.ContentItem.CreatedByUser (PortalId).DisplayName,
-                LastModifiedByUser = item.ContentItem.LastModifiedByUser (PortalId).DisplayName
             };
+
+            var createdByUser = item.ContentItem.CreatedByUser (PortalId);
+            auditData.CreatedByUser = (createdByUser != null) ? createdByUser.DisplayName : LocalizeString ("SystemUser.Text");
+            var lastModifiedByUser = item.ContentItem.LastModifiedByUser (PortalId);
+            auditData.LastModifiedByUser = (lastModifiedByUser != null) ? lastModifiedByUser.DisplayName : LocalizeString ("SystemUser.Text");
 
             // bind audit control and store data to the viewstate
             BindAuditControl (auditData);
