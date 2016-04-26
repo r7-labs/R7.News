@@ -211,7 +211,7 @@
                                         <controlType>Edit</controlType>
                                         <iconFile />
                                         <helpUrl />
-                                        <supportsPartialRendering>False</supportsPartialRendering>
+                                        <supportsPartialRendering>True</supportsPartialRendering>
                                         <supportsPopUps>True</supportsPopUps>
                                         <viewOrder>0</viewOrder>
                                     </moduleControl>
