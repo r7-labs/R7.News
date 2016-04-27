@@ -113,6 +113,7 @@ namespace R7.News.Agent
                 }
             }
             else {
+                // REVIEW: Use HttpContext.Current.Timestamp or Request.RequestContext.HttpContext.Timestamp
                 var now = DateTime.Now;
 
                 // create viewmodels
@@ -163,6 +164,25 @@ namespace R7.News.Agent
                     true, 
                     false
                 );
+
+                // add edit action for each news entry
+                var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
+                if (items != null && items.Any ()) {
+                    foreach (var item in items) {
+                        actions.Add (
+                            GetNextActionID (), 
+                            LocalizeString ("EditNewsEntry.Action") + HtmlUtils.Shorten (item.Title, 16,"&hellip;"),
+                            ModuleActionType.EditContent,
+                            "",
+                            IconController.IconURL ("Edit"),
+                            EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry"),
+                            false,
+                            SecurityAccessLevel.Edit,
+                            true, 
+                            false
+                        );
+                    }
+                }
 
                 return actions;
             }
