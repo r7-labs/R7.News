@@ -218,7 +218,7 @@ namespace R7.News.Agent
             // add default news entry based on tab data
             var newsEntry = new NewsEntryInfo {
                 Title = activeTab.TabName,
-                Description = activeTab.Description,
+                Description = "<p>" + activeTab.Description + "</p>",
                 AgentModuleId = ModuleId,
                 EndDate = DateTime.Today, // expired by default
                 ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
