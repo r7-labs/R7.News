@@ -152,7 +152,7 @@
                 </component>
             </components>
         </package>
-        <package name="R7.News.Agent" type="Module" version="01.00.00">
+        <package name="R7.News.Agent" type="Module" version="01.01.00">
             <friendlyName>R7.News.Agent</friendlyName>
             <description>This module displays single news entry on the page.</description>
             <owner>
