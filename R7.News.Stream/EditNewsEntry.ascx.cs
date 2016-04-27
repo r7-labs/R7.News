@@ -148,10 +148,15 @@ namespace R7.News.Stream
         {
             List<Term> terms = null;
 
-            // get terms from module settings
+            // Stream: get terms from module settings
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.StreamModuleDefinitionName) {
                 var settings = new StreamSettings (this);
                 terms = settings.IncludeTerms;
+            }
+
+            // Agent: get terms from current tab
+            if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
+                terms = PortalSettings.ActiveTab.Terms;
             }
 
             termsTerms.Terms = terms ?? new List<Term> ();
