@@ -146,8 +146,16 @@ namespace R7.News.Stream
 
         protected override void LoadNewItem ()
         {
+            List<Term> terms = null;
+
+            // get terms from module settings
+            if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.StreamModuleDefinitionName) {
+                var settings = new StreamSettings (this);
+                terms = settings.IncludeTerms;
+            }
+
+            termsTerms.Terms = terms ?? new List<Term> ();
             termsTerms.PortalId = PortalId;
-            termsTerms.Terms = new List<Term> ();
             termsTerms.DataBind ();
 
             buttonUpdate.Text = LocalizeString ("Add.Text");
