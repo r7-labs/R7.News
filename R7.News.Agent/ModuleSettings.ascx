@@ -10,6 +10,10 @@
             <dnn:Label id="labelEnableGrouping" runat="server" ControlName="checkEnableGrouping" />
             <asp:CheckBox id="checkEnableGrouping" runat="server" />
         </div>
+        <div class="dnnFormItem">
+            <dnn:Label id="labelHideImages" runat="server" ControlName="checkHideImages" />
+            <asp:CheckBox id="checkHideImages" runat="server" />
+        </div>
         <div class="dnnFormItem dnnFormRequired">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />

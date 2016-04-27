@@ -54,6 +54,12 @@ namespace R7.News.Agent.Components
             set { WriteTabModuleSetting<bool> (SettingPrefix + "EnableGrouping", value); }
         }
 
+        public bool HideImages
+        {
+            get { return ReadSetting<bool> (SettingPrefix + "HideImages", false); }
+            set { WriteTabModuleSetting<bool> (SettingPrefix + "HideImages", value); }
+        }
+
         public int ThumbnailWidth
         {
             get { 

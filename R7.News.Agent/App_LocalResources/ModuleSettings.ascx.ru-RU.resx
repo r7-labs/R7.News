@@ -12,6 +12,12 @@
     <data name="labelEnableGrouping.Help" xml:space="preserve">
         <value>Отметьте, чтобы включить группировку новостей, относящихся к данному модулю.</value>
     </data>
+    <data name="labelHideImages.Text" xml:space="preserve">
+        <value>Скрывать изображения:</value>
+    </data>
+    <data name="labelHideImages.Help" xml:space="preserve">
+        <value>Отметьте, чтобы скрывать изображения новостей (даже если они были заданы).</value>
+    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Ширина миниатюры:</value>
     </data>

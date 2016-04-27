@@ -12,6 +12,12 @@
     <data name="labelEnableGrouping.Help" xml:space="preserve">
         <value>Check to enable grouping of news related to this agent module.</value>
     </data>
+    <data name="labelHideImages.Text" xml:space="preserve">
+        <value>Hide Images:</value>
+    </data>
+    <data name="labelHideImages.Help" xml:space="preserve">
+        <value>Check to hide news entry images (even if they were set).</value>
+    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Thumbnail Width:</value>
     </data>

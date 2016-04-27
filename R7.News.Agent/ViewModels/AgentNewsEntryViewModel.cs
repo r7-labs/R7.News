@@ -39,6 +39,11 @@ namespace R7.News.Agent.ViewModels
             get { return ((ViewModelContext<AgentSettings>) Context).Settings; }
         }
 
+        public new bool HasImage
+        {
+            get { return !Settings.HideImages && NewsEntry.GetImage () != null; }
+        }
+
         public string ImageUrl
         {
             get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth); }
@@ -51,12 +56,12 @@ namespace R7.News.Agent.ViewModels
 
         public string FirstColumnContainerCssClass
         {
-            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "hidden"; }
+            get { return HasImage ? "col-sm-6" : "hidden"; }
         }
 
         public string SecondColumnContainerCssClass
         {
-            get { return (NewsEntry.GetImage () != null) ? "col-sm-6" : "col-sm-12"; }
+            get { return HasImage ? "col-sm-6" : "col-sm-12"; }
         }
     }
 }
