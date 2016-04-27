@@ -3,6 +3,9 @@
     <data name="AddNewsEntry.Action" xml:space="preserve">
         <value>Добавить новость</value>
     </data>
+    <data name="AddFromTabData.Action" xml:space="preserve">
+        <value>Создать из данных страницы</value>
+    </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>&lt;P&gt; Модуль R7.News.Agent&lt;/P&gt;</value>
     </data>

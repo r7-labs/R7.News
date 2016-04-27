@@ -71,6 +71,11 @@ namespace R7.News.Agent
 
         #region Handlers
 
+        protected override void OnInit (EventArgs e)
+        {
+            AddActionHandler (OnAction);
+        }
+
         /// <summary>
         /// Handles Load event for a control
         /// </summary>
@@ -133,8 +138,6 @@ namespace R7.News.Agent
                 // to the controls dropdown menu
                 var actions = new ModuleActionCollection ();
 
-                // TODO: Add action to create news entry from tab data
-
                 actions.Add (
                     GetNextActionID (), 
                     LocalizeString ("AddNewsEntry.Action"),
@@ -148,11 +151,65 @@ namespace R7.News.Agent
                     false
                 );
 
+                actions.Add (
+                    GetNextActionID (), 
+                    LocalizeString ("AddFromTabData.Action"),
+                    ModuleActionType.AddContent + "_AddFromTabData",
+                    "",
+                    IconController.IconURL ("Add"), 
+                    "",
+                    true,
+                    SecurityAccessLevel.Edit,
+                    true, 
+                    false
+                );
+
                 return actions;
             }
         }
 
         #endregion
+
+        protected void OnAction (object sender, ActionEventArgs e)
+        {
+            if (e.Action.CommandName == ModuleActionType.AddContent + "_AddFromTabData") {
+                AddFromTabData ();
+            }
+        }
+
+        protected void buttonAddFromTabData_Click (object sender, EventArgs e)
+        {
+            AddFromTabData ();
+        }
+
+        protected void AddFromTabData ()
+        {
+            var newsEntry = AddFromTabData_Internal ();
+            UpdateModuleTitle (newsEntry.Title);
+
+            Response.Redirect (Globals.NavigateURL (), true);
+        }
+
+        private INewsEntry AddFromTabData_Internal ()
+        {
+            var tabController = new TabController ();
+            var activeTab = tabController.GetTab (TabId, PortalId);
+
+            // add default news entry based on tab data
+            var newsEntry = new NewsEntryInfo {
+                Title = activeTab.TabName,
+                Description = activeTab.Description,
+                AgentModuleId = ModuleId,
+                EndDate = DateTime.Today, // expired by default
+                ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
+                StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
+            };
+
+            // add news entry
+            NewsRepository.Instance.AddNewsEntry (newsEntry, activeTab.Terms, new List<IFileInfo> (), ModuleId, TabId);
+
+            return newsEntry;
+        }
 
         /// <summary>
         /// Handles the items being bound to the listview control. In this method we merge the data with the
@@ -231,14 +288,6 @@ namespace R7.News.Agent
             listBadges.DataBind ();
         }
 
-        protected void buttonAddFromTabData_Click (object sender, EventArgs e)
-        {
-            var newsEntry = AddFromTabData ();
-            UpdateModuleTitle (newsEntry.Title);
-
-            Response.Redirect (Globals.NavigateURL (), true);
-        }
-
         protected void buttonTitle_Command (object sender, CommandEventArgs e)
         {
             int groupEntryId;
@@ -246,27 +295,6 @@ namespace R7.News.Agent
                 GroupEntryId = groupEntryId;
                 Bind ();
             }
-        }
-
-        protected INewsEntry AddFromTabData ()
-        {
-            var tabController = new TabController ();
-            var activeTab = tabController.GetTab (TabId, PortalId);
-
-            // add default news entry based on tab data
-            var newsEntry = new NewsEntryInfo {
-                Title = activeTab.TabName,
-                Description = activeTab.Description,
-                AgentModuleId = ModuleId,
-                EndDate = DateTime.Today, // expired by default
-                ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
-                StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
-            };
-
-            // add news entry
-            NewsRepository.Instance.AddNewsEntry (newsEntry, activeTab.Terms, new List<IFileInfo> (), ModuleId, TabId);
-
-            return newsEntry;
         }
 
         protected void UpdateModuleTitle (string title)
