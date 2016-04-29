@@ -111,21 +111,23 @@ namespace R7.News.Integrations.AnnoView
                                     }
                                 }
 
-                                // try get tab
-                                TabInfo tab;
+                                var terms = new List<Term> ();
+
+                                // try get terms from target tab
                                 if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
-                                    // get link target tab
-                                    tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
-                                }
-                                else {
-                                    // get module tab
-                                    tab = tabController.GetTab (module.TabID, module.PortalID);
+                                    var tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
+                                    if (tab != null) {
+                                        terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                                    }
                                 }
 
-                                // fill terms
-                                var terms = new List<Term> ();
-                                if (tab != null) {
-                                    terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                                // try get terms from module tab
+                                if (terms == null || terms.Count == 0)
+                                {
+                                    var tab = tabController.GetTab (module.TabID, module.PortalID);
+                                    if (tab != null) {
+                                        terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                                    }
                                 }
 
                                 // add news entry
