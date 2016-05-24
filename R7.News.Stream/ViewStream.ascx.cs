@@ -27,7 +27,7 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using R7.DotNetNuke.Extensions.Controls;
-using R7.DotNetNuke.Extensions.Entities.Modules;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
 using R7.News.Controls;
 using R7.News.Stream.Components;
@@ -35,7 +35,7 @@ using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public partial class ViewStream : PortalModuleBase<StreamSettings>, IActionable
+    public partial class ViewStream: PortalModuleBase<StreamSettings>, IActionable
     {
         StreamViewModel viewModel;
 

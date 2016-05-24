@@ -29,7 +29,6 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Common.Utilities;
 using R7.News.Components;
 using R7.News.Models;
-using Telerik.Pdf.Filter;
 using DotNetNuke.Data;
 
 namespace R7.News.Data

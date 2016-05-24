@@ -32,7 +32,7 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
-using R7.DotNetNuke.Extensions.Entities.Modules;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
@@ -43,7 +43,7 @@ using R7.News.Models;
 
 namespace R7.News.Agent
 {
-    public partial class ViewAgent : PortalModuleBase<AgentSettings>, IActionable
+    public partial class ViewAgent: PortalModuleBase<AgentSettings>, IActionable
     {
         #region Properties
 

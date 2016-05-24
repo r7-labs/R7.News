@@ -58,7 +58,7 @@
     </Reference>
     <Reference Include="System.Xml.Serialization" />
     <Reference Include="R7.DotNetNuke.Extensions">
-      <HintPath>..\packages\R7.DotNetNuke.Extensions.0.7.0-alpha-2\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
+      <HintPath>..\packages\R7.DotNetNuke.Extensions.0.8.0\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

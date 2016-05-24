@@ -25,7 +25,7 @@ using System.Net;
 using System.Web;
 using System.Web.UI.WebControls;
 using DotNetNuke.Services.Exceptions;
-using R7.DotNetNuke.Extensions.Entities.Modules;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Controls;
@@ -35,7 +35,7 @@ using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public partial class ViewNewsEntry : PortalModuleBase<StreamSettings>
+    public partial class ViewNewsEntry: PortalModuleBase<StreamSettings>
     {
         #region Properties
 
