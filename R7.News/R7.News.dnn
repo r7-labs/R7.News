@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
     <packages>
-        <package name="R7.News" type="Library" version="01.01.00">
+        <package name="R7.News" type="Library" version="01.01.01">
             <friendlyName>R7.News</friendlyName>
             <description>A news subsystem for DNN Platform.</description>
             <owner>
@@ -16,7 +16,7 @@
                 <dependency type="CoreVersion">07.04.02</dependency>
                 <!-- .NET 4.5 -->
                 <dependency type="Type">System.Reflection.ReflectionContext</dependency>
-                <dependency type="managedPackage" version="0.7.0">R7.DotNetNuke.Extensions</dependency>
+                <dependency type="managedPackage" version="0.8.0">R7.DotNetNuke.Extensions</dependency>
                 <dependency type="managedPackage" version="1.0.2">R7.ImageHandler</dependency>
             </dependencies>
             <!-- https://dnntracker.atlassian.net/browse/DNN-3702 -->
@@ -64,7 +64,7 @@
                 </component>
             </components>
         </package>
-        <package name="R7.News.Stream" type="Module" version="01.01.00">
+        <package name="R7.News.Stream" type="Module" version="01.01.01">
             <friendlyName>R7.News.Stream</friendlyName>
             <description>This module displays aggregated news stream.</description>
             <owner>
@@ -152,7 +152,7 @@
                 </component>
             </components>
         </package>
-        <package name="R7.News.Agent" type="Module" version="01.01.00">
+        <package name="R7.News.Agent" type="Module" version="01.01.01">
             <friendlyName>R7.News.Agent</friendlyName>
             <description>This module displays single news entry on the page.</description>
             <owner>
