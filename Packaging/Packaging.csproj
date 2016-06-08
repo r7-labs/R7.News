@@ -52,4 +52,18 @@
   <ItemGroup>
     <Compile Include="Dummy.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\R7.News\R7.News.csproj">
+      <Project>{484911EF-DDCA-4B47-8975-D983AD7397B4}</Project>
+      <Name>R7.News</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\R7.News.Agent\R7.News.Agent.csproj">
+      <Project>{9C5EB53D-505F-4665-933C-774C650EA072}</Project>
+      <Name>R7.News.Agent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\R7.News.Stream\R7.News.Stream.csproj">
+      <Project>{8500A43C-923D-43B3-9288-BB1239A45BA7}</Project>
+      <Name>R7.News.Stream</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
