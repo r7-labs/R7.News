@@ -49,97 +49,97 @@ namespace R7.News.ViewModels
         public int EntryId
         {
             get { return NewsEntry.EntryId; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public int PortalId
         {
             get { return NewsEntry.PortalId; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public int ContentItemId
         {
             get { return NewsEntry.ContentItemId; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public int? AgentModuleId
         {
             get { return NewsEntry.AgentModuleId; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public string Url
         {
             get { return NewsEntry.Url; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public DateTime? StartDate
         {
             get { return NewsEntry.StartDate; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public DateTime? EndDate
         {
             get { return NewsEntry.EndDate; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public DateTime? ThresholdDate
         {
             get { return NewsEntry.ThresholdDate; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public DateTime? DueDate
         {
             get { return NewsEntry.DueDate; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public string Title
         {
             get { return NewsEntry.Title; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public string Description
         {
             get { return NewsEntry.Description; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public int ThematicWeight
         { 
             get { return NewsEntry.ThematicWeight; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public int StructuralWeight
         { 
             get { return NewsEntry.StructuralWeight; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public ContentItem ContentItem
         {
             get { return NewsEntry.ContentItem; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public ModuleInfo AgentModule
         {
             get { return NewsEntry.AgentModule; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         public ICollection<INewsEntry> Group
         {
             get { return NewsEntry.Group; }
-            set { throw new NotImplementedException (); }
+            set { throw new InvalidOperationException (); }
         }
 
         #endregion
