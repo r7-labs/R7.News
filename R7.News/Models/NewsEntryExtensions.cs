@@ -149,11 +149,6 @@ namespace R7.News.Models
             return ModelHelper.IsPublished (now, newsEntry.StartDate, newsEntry.EndDate);
         }
 
-        public static bool WillBePublished (this INewsEntry newsEntry)
-        {
-            return ModelHelper.WillBePublished (newsEntry.StartDate, newsEntry.EndDate);
-        }
-
         public static bool HasBeenExpired (this INewsEntry newsEntry)
         {
             return ModelHelper.HasBeenExpired (newsEntry.StartDate, newsEntry.EndDate);

@@ -33,12 +33,6 @@ namespace R7.News.Models
             return (startDate == null || now >= startDate) && (endDate == null || now < endDate);
         }
 
-        public static bool WillBePublished (DateTime? startDate, DateTime? endDate)
-        {
-            var now = DateTime.Now;
-            return (startDate != null || now < startDate);
-        }
-
         public static bool HasBeenExpired (DateTime? startDate, DateTime? endDate)
         {
             var now = DateTime.Now;
