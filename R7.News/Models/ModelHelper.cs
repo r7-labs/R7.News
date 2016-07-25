@@ -33,9 +33,8 @@ namespace R7.News.Models
             return (startDate == null || now >= startDate) && (endDate == null || now < endDate);
         }
 
-        public static bool HasBeenExpired (DateTime? startDate, DateTime? endDate)
+        public static bool HasBeenExpired (DateTime now, DateTime? startDate, DateTime? endDate)
         {
-            var now = DateTime.Now;
             return (endDate != null || now >= endDate);
         }
 

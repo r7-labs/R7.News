@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
@@ -199,10 +200,10 @@ namespace R7.News.ViewModels
             get { 
                 if (Context.Module.IsEditable) {
                     var badges = new List<Badge> ();
-                    var now = DateTime.Now;
+                    var now = HttpContext.Current.Timestamp;
 
                     if (!NewsEntry.IsPublished (now)) {
-                        if (NewsEntry.HasBeenExpired ()) {
+                        if (NewsEntry.HasBeenExpired (now)) {
                             badges.Add (new Badge {
                                 CssClass = "expired",
                                 Text = string.Format (Localization.GetString (

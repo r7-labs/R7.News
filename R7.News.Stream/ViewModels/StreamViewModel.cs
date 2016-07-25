@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Caching;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.UI.Modules;
@@ -42,7 +43,7 @@ namespace R7.News.Stream.ViewModels
         public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {
             var checkNow = !Module.IsEditable;
-            var now = DateTime.Now;
+            var now = HttpContext.Current.Timestamp;
 
             // REVIEW: Should 'now' value be used in the cache key? 
             // var today = DateTime.Today; 

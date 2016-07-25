@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
@@ -113,8 +114,7 @@ namespace R7.News.Agent
                 }
             }
             else {
-                // REVIEW: Use HttpContext.Current.Timestamp or Request.RequestContext.HttpContext.Timestamp
-                var now = DateTime.Now;
+                var now = HttpContext.Current.Timestamp;
 
                 // create viewmodels
                 var viewModels = items
@@ -269,7 +269,7 @@ namespace R7.News.Agent
 
             // show grouped news
             var listGroup = (ListView) e.Item.FindControl ("listGroup");
-            var now = DateTime.Now;
+            var now = HttpContext.Current.Timestamp;
 
             if (item.Group != null && item.Group.Count > 0) {
                 listGroup.DataSource = item.Group
