@@ -54,7 +54,7 @@
                 <div class="dnnFormItem">
                     <dnn:Label id="labelModules" runat="server" ControlName="buttonGetModules" />
                     <asp:LinkButton id="buttonGetModules" runat="server" resourcekey="buttonGetModules.Text" CssClass="dnnSecondaryAction"
-                        OnClick="buttonGetModules_Click" />
+                        CausesValidation="false" OnClick="buttonGetModules_Click" />
                 </div>
                 <div class="dnnFormItem">
                     <div class="dnnLabel"></div>
