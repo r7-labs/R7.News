@@ -57,10 +57,19 @@ namespace R7.News.Stream.Components
             get { 
                 var termController = new TermController ();
 
-                return ReadSetting<string> (SettingPrefix + "IncludeTerms", string.Empty)
+                var termIds = ReadSetting<string> (SettingPrefix + "IncludeTerms", string.Empty)
                     .Split (new [] { ';' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select (ti => termController.GetTerm (int.Parse (ti)))
-                    .ToList ();
+                    .Select (ti => int.Parse (ti));
+
+                var terms = new List<Term> ();
+                foreach (var termId in termIds) {
+                    var term = termController.GetTerm (termId);
+                    if (term != null) {
+                        terms.Add (term);
+                    }
+                }
+
+                return terms;
             }
 
             set {
