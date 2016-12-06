@@ -84,14 +84,8 @@ namespace R7.News.Models
 
         private static ModuleInfo GetAgentModule (ModuleController moduleController, int agentModuleId)
         {
-            var agentModule = moduleController.GetModule (agentModuleId);
-
-            // if agent module was deleted, treat it as it is not exists
-            if (agentModule != null && agentModule.IsDeleted) {
-                return null;
-            }
-
-            return agentModule;
+            return moduleController.GetTabModulesByModule (agentModuleId)
+                .FirstOrDefault (am => !am.IsDeleted);
         }
 
         public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries,
@@ -184,7 +178,10 @@ namespace R7.News.Models
                                                    int tabId)
         {
             if (newsEntry.AgentModuleId != null) {
-                return Globals.NavigateURL (newsEntry.WithAgentModuleOnce (moduleController).AgentModule.TabID);
+                newsEntry.WithAgentModuleOnce (moduleController);
+                if (newsEntry.AgentModule != null) {
+                    return Globals.NavigateURL (newsEntry.AgentModule.TabID);
+                }
             }
 
             return Globals.NavigateURL (
@@ -203,8 +200,10 @@ namespace R7.News.Models
                                               int tabId)
         {
             if (newsEntry.AgentModuleId != null) {
-                return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid="
-                + newsEntry.WithAgentModuleOnce (moduleController).AgentModule.TabID);
+                newsEntry.WithAgentModuleOnce (moduleController);
+                if (newsEntry.AgentModule != null) {
+                    return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + newsEntry.AgentModule.TabID);
+                }
             }
 
             return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + tabId
