@@ -67,7 +67,7 @@ namespace R7.News.Models
         public static INewsEntry WithAgentModule (this INewsEntry newsEntry, ModuleController moduleController)
         {
             if (newsEntry.AgentModuleId != null) {
-                newsEntry.AgentModule = moduleController.GetModule (newsEntry.AgentModuleId.Value);
+                newsEntry.AgentModule = GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
             }
 
             return newsEntry;
@@ -76,10 +76,22 @@ namespace R7.News.Models
         public static INewsEntry WithAgentModuleOnce (this INewsEntry newsEntry, ModuleController moduleController)
         {
             if (newsEntry.AgentModuleId != null && newsEntry.AgentModule == null) {
-                newsEntry.AgentModule = moduleController.GetModule (newsEntry.AgentModuleId.Value);
+                newsEntry.AgentModule = GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
             }
 
             return newsEntry;
+        }
+
+        private static ModuleInfo GetAgentModule (ModuleController moduleController, int agentModuleId)
+        {
+            var agentModule = moduleController.GetModule (agentModuleId);
+
+            // if agent module was deleted, treat it as it is not exists
+            if (agentModule != null && agentModule.IsDeleted) {
+                return null;
+            }
+
+            return agentModule;
         }
 
         public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries,
