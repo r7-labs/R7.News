@@ -10,6 +10,6 @@
         <value>Nothing to display, add some news or change module settings.</value>
     </data>
     <data name="buttonShowMore.Text" xml:space="preserve">
-        <value>Click to show more news</value>
+        <value>Click to see more news</value>
     </data>
 </root>

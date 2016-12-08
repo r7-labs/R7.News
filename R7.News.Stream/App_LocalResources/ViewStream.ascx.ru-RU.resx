@@ -10,6 +10,6 @@
         <value>Нечего отображать, добавьте новости или измените настройки модуля.</value>
     </data>
     <data name="buttonShowMore.Text" xml:space="preserve">
-        <value>Нажмите, чтобы показать больше новостей</value>
+        <value>Нажмите, чтобы увидеть больше новостей</value>
     </data>
 </root>
