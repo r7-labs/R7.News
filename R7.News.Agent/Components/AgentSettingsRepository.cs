@@ -18,13 +18,12 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-using System;
+
+using DotNetNuke.Entities.Modules.Settings;
+
 namespace R7.News.Agent.Components
 {
-    public class AgentSettingsRepository
+    public class AgentSettingsRepository: SettingsRepository<AgentSettings>
     {
-        public AgentSettingsRepository ()
-        {
-        }
     }
 }

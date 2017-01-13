@@ -94,6 +94,7 @@
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AgentNewsEntryViewModel.cs" />
+    <Compile Include="Components\AgentSettingsRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

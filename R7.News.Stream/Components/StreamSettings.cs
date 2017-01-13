@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -23,9 +23,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.UI.Modules;
-using R7.DotNetNuke.Extensions.Modules;
+using DotNetNuke.Entities.Modules.Settings;
+using DotNetNuke.Entities.Portals;
 using R7.DotNetNuke.Extensions.Utilities;
 using R7.News.Components;
 
@@ -34,30 +33,26 @@ namespace R7.News.Stream.Components
     /// <summary>
     /// Provides strong typed access to settings used by module
     /// </summary>
-    public class StreamSettings : SettingsWrapper
+    [Serializable]
+    public class StreamSettings
     {
         protected const string SettingPrefix = Const.Prefix + "_Stream_";
 
         public StreamSettings ()
         {
+            MaxThematicWeight = NewsConfig.GetInstance (PortalSettings.Current.PortalId).NewsEntry.MaxWeight;
+            MaxStructuralWeight = NewsConfig.GetInstance (PortalSettings.Current.PortalId).NewsEntry.MaxWeight;
+            ThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).StreamModule.DefaultThumbnailWidth;
         }
 
-        public StreamSettings (IModuleControl module) : base (module)
-        {
-        }
+        [ModuleSetting (Prefix = SettingPrefix, ParameterName = "IncludeTerms")]
+        public string IncludeTerms_Internal { get; set; } = string.Empty;
 
-        public StreamSettings (ModuleInfo module) : base (module)
-        {
-        }
-
-        #region Module settings
-
-        public List<Term> IncludeTerms
-        {
-            get { 
+        public List<Term> IncludeTerms {
+            get {
                 var termController = new TermController ();
 
-                var termIds = ReadSetting<string> (SettingPrefix + "IncludeTerms", string.Empty)
+                var termIds = IncludeTerms_Internal
                     .Split (new [] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select (ti => int.Parse (ti));
 
@@ -73,88 +68,45 @@ namespace R7.News.Stream.Components
             }
 
             set {
-                WriteModuleSetting<string> (SettingPrefix + "IncludeTerms", 
-                    TextUtils.FormatList (";", value.Select (t => t.TermId)));
+                IncludeTerms_Internal = TextUtils.FormatList (";", value.Select (t => t.TermId));
             }
         }
 
-        public bool ShowAllNews
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "ShowAllNews", false); }
-            set { WriteModuleSetting<bool> (SettingPrefix + "ShowAllNews", value); }
-        }
+        [ModuleSetting (Prefix = SettingPrefix)]
+        public bool ShowAllNews { get; set; } = false;
 
         // REVIEW: Separate config settings for weight filters
-        public int MinThematicWeight
-        {
-            get { return ReadSetting<int> (SettingPrefix + "MinThematicWeight", 0); }
-            set { WriteModuleSetting<int> (SettingPrefix + "MinThematicWeight", value); }
-        }
+        [ModuleSetting (Prefix = SettingPrefix)]
+        public int MinThematicWeight { get; set; } = 0;
 
-        public int MaxThematicWeight
-        {
-            get { return ReadSetting<int> (
-                    SettingPrefix + "MaxThematicWeight",
-                    NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
-            set { WriteModuleSetting<int> (SettingPrefix + "MaxThematicWeight", value); }
-        }
+        [ModuleSetting (Prefix = SettingPrefix)]
+        public int MaxThematicWeight { get; set; }
 
-        public int MinStructuralWeight
-        {
-            get { return ReadSetting<int> (SettingPrefix + "MinStructuralWeight", 0); }
-            set { WriteModuleSetting<int> (SettingPrefix + "MinStructuralWeight", value); }
-        }
+        [ModuleSetting (Prefix = SettingPrefix)]
+        public int MinStructuralWeight { get; set; } = 0;
 
-        public int MaxStructuralWeight
-        {
-            get { return ReadSetting<int> (
-                    SettingPrefix + "MaxStructuralWeight",
-                    NewsConfig.GetInstance (PortalId).NewsEntry.MaxWeight); }
-            set { WriteModuleSetting<int> (SettingPrefix + "MaxStructuralWeight", value); }
-        }
-
-        #endregion
+        [ModuleSetting (Prefix = SettingPrefix)]
+        public int MaxStructuralWeight { get; set; }
 
         #region Tab-specific module settings
 
-        public bool UseShowMore
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "UseShowMore", false); }
-            set { WriteTabModuleSetting<bool> (SettingPrefix + "UseShowMore", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool UseShowMore { get; set; } = false;
 
-        public bool ShowTopPager
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "ShowTopPager", true); }
-            set { WriteTabModuleSetting<bool> (SettingPrefix + "ShowTopPager", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool ShowTopPager { get; set; } = true;
 
-        public bool ShowBottomPager
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "ShowBottomPager", true); }
-            set { WriteTabModuleSetting<bool> (SettingPrefix + "ShowBottomPager", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool ShowBottomPager { get; set; } = true;
 
-        public int PageSize
-        {
-            get { return ReadSetting<int> (SettingPrefix + "PageSize", 3); }
-            set { WriteTabModuleSetting<int> (SettingPrefix + "PageSize", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int PageSize { get; set; } = 3;
 
-        public int MaxPageLinks
-        {
-            get { return ReadSetting<int> (SettingPrefix + "MaxPageLinks", 3); }
-            set { WriteTabModuleSetting<int> (SettingPrefix + "MaxPageLinks", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int MaxPageLinks { get; set; } = 3;
 
-        public int ThumbnailWidth
-        {
-            get { 
-                return ReadSetting<int> (SettingPrefix + "ThumbnailWidth", 
-                    NewsConfig.GetInstance (PortalId).StreamModule.DefaultThumbnailWidth); 
-            }
-            set { WriteTabModuleSetting<int> (SettingPrefix + "ThumbnailWidth", value); }
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int ThumbnailWidth { get; set; }
 
         #endregion
     }

@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -65,7 +65,7 @@ namespace R7.News.Stream.Components
         public override IList<SearchDocument> GetModifiedSearchDocuments (ModuleInfo moduleInfo, DateTime beginDateUtc)
         {
             var searchDocs = new List<SearchDocument> ();
-            var settings = new StreamSettings (moduleInfo);
+            var settings = new StreamSettingsRepository ().GetSettings (moduleInfo);
 
             // get news entries
             var newsEntries = GetNewsEntries (moduleInfo.ModuleID, moduleInfo.PortalID,

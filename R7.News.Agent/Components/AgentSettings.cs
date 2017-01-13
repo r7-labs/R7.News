@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -20,9 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.UI.Modules;
-using R7.DotNetNuke.Extensions.Modules;
+using DotNetNuke.Entities.Modules.Settings;
+using DotNetNuke.Entities.Portals;
 using R7.News.Components;
 
 namespace R7.News.Agent.Components
@@ -30,55 +29,28 @@ namespace R7.News.Agent.Components
     /// <summary>
     /// Provides strong typed access to settings used by module
     /// </summary>
-    public class AgentSettings : SettingsWrapper
+    [Serializable]
+    public class AgentSettings
     {
         protected const string SettingPrefix = Const.Prefix + "_Agent_";
 
         public AgentSettings ()
         {
+            ThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).AgentModule.DefaultThumbnailWidth;
+            GroupThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).AgentModule.DefaultGroupThumbnailWidth;
         }
 
-        public AgentSettings (IModuleControl module) : base (module)
-        {
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool EnableGrouping { get; set; } = false;
 
-        public AgentSettings (ModuleInfo module) : base (module)
-        {
-        }
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool HideImages { get; set; } = false;
 
-        #region Tab-specific module settings
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int ThumbnailWidth { get; set; }
 
-        public bool EnableGrouping
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "EnableGrouping", false); }
-            set { WriteTabModuleSetting<bool> (SettingPrefix + "EnableGrouping", value); }
-        }
-
-        public bool HideImages
-        {
-            get { return ReadSetting<bool> (SettingPrefix + "HideImages", false); }
-            set { WriteTabModuleSetting<bool> (SettingPrefix + "HideImages", value); }
-        }
-
-        public int ThumbnailWidth
-        {
-            get { 
-                return ReadSetting<int> (SettingPrefix + "ThumbnailWidth",
-                    NewsConfig.GetInstance (PortalId).AgentModule.DefaultThumbnailWidth); 
-            }
-            set { WriteTabModuleSetting<int> (SettingPrefix + "ThumbnailWidth", value); }
-        }
-
-        public int GroupThumbnailWidth
-        {
-            get { 
-                return ReadSetting<int> (SettingPrefix + "GroupThumbnailWidth",
-                    NewsConfig.GetInstance (PortalId).AgentModule.DefaultGroupThumbnailWidth); 
-            }
-            set { WriteTabModuleSetting<int> (SettingPrefix + "GroupThumbnailWidth", value); }
-        }
-
-        #endregion
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int GroupThumbnailWidth { get; set; }
     }
 }
 

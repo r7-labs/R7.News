@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -57,6 +57,8 @@ namespace R7.News.Agent
                 Settings.HideImages = checkHideImages.Checked;
                 Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
                 Settings.GroupThumbnailWidth = int.Parse (textGroupThumbnailWidth.Text);
+
+                SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 
                 ModuleController.SynchronizeModule (ModuleId);
             }

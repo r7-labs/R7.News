@@ -114,6 +114,8 @@ namespace R7.News.Stream
                 Settings.MinStructuralWeight = minStructuralWeight;
                 Settings.MaxStructuralWeight = maxStructuralWeight;
 
+                SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
+
                 // clear module-specific cache
                 NewsRepository.Instance.RemoveModuleCache (ModuleId);
 

@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -122,14 +122,15 @@ namespace R7.News.Stream
             IList<Term> terms)
         {
             var moduleController = new ModuleController ();
+            var settingsRepository = new StreamSettingsRepository ();
             return moduleController.GetModulesByDefinition (PortalId, Const.StreamModuleDefinitionName)
                 .Cast<ModuleInfo> ()
                 .Where (m => !m.IsDeleted)
-                .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (new StreamSettings (m), 
+                .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (settingsRepository.GetSettings (m), 
                 thematicWeight, structuralWeight, terms))
                 .Select (m => new StreamModuleViewModel (
                 m,
-                new StreamSettings (m),
+                settingsRepository.GetSettings (m),
                 ViewModelContext,
                 thematicWeight,
                 structuralWeight,
@@ -150,7 +151,7 @@ namespace R7.News.Stream
 
             // Stream: get terms from module settings
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.StreamModuleDefinitionName) {
-                var settings = new StreamSettings (this);
+                var settings = new StreamSettingsRepository ().GetSettings (ModuleConfiguration);
                 terms = settings.IncludeTerms;
             }
 
