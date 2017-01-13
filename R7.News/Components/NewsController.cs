@@ -48,8 +48,8 @@ namespace R7.News.Components
 
                     if (!contentTypeController.GetContentTypes ().Any (ct => ct.ContentType == Const.ContentType)) {
                         
-                        // register new content type
-                        var contentTypeId = contentTypeController.AddContentType (new ContentType (Const.ContentType));
+                        // register new content type, return value is new contentTypeId
+                        contentTypeController.AddContentType (new ContentType (Const.ContentType));
                         message += "Added content type for workflow." + Environment.NewLine;
                     
                         /*
