@@ -6,6 +6,9 @@
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>О настройках R7.News.Agent</value>
     </data>
+	<data name="NotSelected.Text" xml:space="preserve">
+        <value>&lt; Не выбрано &gt;</value>
+    </data>
     <data name="labelEnableGrouping.Text" xml:space="preserve">
         <value>Включить группировку:</value>
     </data>
@@ -42,4 +45,10 @@
     <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
         <value>Ширина миниатюры в группе должна быть целым числом от 1 до 1024.</value>
     </data>
+	<data name="labelGroupEntry.Text" xml:space="preserve">
+        <value>Новость для группировки:</value>
+    </data>
+    <data name="labelGroupEntry.Help" xml:space="preserve">
+        <value>Выберите новость для группировки других новостей вокруг нее. Если такая новость не выбрана, группировка будет производиться вокруг наиболе свежей новости.</value>
+    </data> 
 </root>

@@ -44,6 +44,9 @@ namespace R7.News.Agent.Components
         public bool EnableGrouping { get; set; } = false;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
+        public int? GroupEntryId { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
         public bool HideImages { get; set; } = false;
 
         [TabModuleSetting (Prefix = SettingPrefix)]

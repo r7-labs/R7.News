@@ -5,12 +5,19 @@
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Agent/admin.css" Priority="200" />
 <div class="dnnForm dnnClear">
-    <fieldset>  
-        <div class="dnnFormItem">
+    <fieldset>
+		<div class="dnnFormItem">
             <dnn:Label id="labelEnableGrouping" runat="server" ControlName="checkEnableGrouping" />
             <asp:CheckBox id="checkEnableGrouping" runat="server" />
         </div>
-        <div class="dnnFormItem">
+		<div class="dnnFormItem">
+            <dnn:Label id="labelGroupEntry" runat="server" ControlName="comboGroupEntry" />
+			<asp:DropDownList id="comboGroupEntry" runat="server"
+                DataTextField="Title"
+                DataValueField="EntryId"
+            />
+        </div>
+		<div class="dnnFormItem">
             <dnn:Label id="labelHideImages" runat="server" ControlName="checkHideImages" />
             <asp:CheckBox id="checkHideImages" runat="server" />
         </div>

@@ -6,6 +6,9 @@
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>About R7.News.Agent Settings</value>
     </data>
+	<data name="NotSelected.Text" xml:space="preserve">
+        <value>&lt; Not Selected &gt;</value>
+    </data>
     <data name="labelEnableGrouping.Text" xml:space="preserve">
         <value>Enable Grouping:</value>
     </data>
@@ -42,4 +45,10 @@
     <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
         <value>Thumbnail width in group must be an integer from 1 to 1024.</value>
     </data>
+	<data name="labelGroupEntry.Text" xml:space="preserve">
+        <value>Group Entry:</value>
+    </data>
+    <data name="labelGroupEntry.Help" xml:space="preserve">
+        <value>Select the specific entry to group other entries around. If no entry selected, most recent one will be used.</value>
+    </data>	
 </root>

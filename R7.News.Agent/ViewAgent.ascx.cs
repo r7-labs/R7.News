@@ -49,23 +49,9 @@ namespace R7.News.Agent
         #region Properties
 
         ViewModelContext<AgentSettings> viewModelContext;
-
         protected ViewModelContext<AgentSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
-        }
-
-        protected int GroupEntryId
-        {
-            get { 
-                var objGroupEntryId = ViewState ["GroupEntryId"];
-                if (objGroupEntryId != null) {
-                    return (int) objGroupEntryId;
-                }
-
-                return Null.NullInteger;
-            }
-            set { ViewState ["GroupEntryId"] = value; }
         }
 
         #endregion
@@ -119,7 +105,7 @@ namespace R7.News.Agent
                 // create viewmodels
                 var viewModels = items
                     .Where (ne => ne.IsPublished (now) || IsEditable)
-                    .OrderByDescending (ne => ne.EntryId == GroupEntryId)
+                    .OrderByDescending (ne => ne.EntryId == Settings.GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
                     .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
@@ -306,15 +292,6 @@ namespace R7.News.Agent
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
             listBadges.DataSource = item.Badges;
             listBadges.DataBind ();
-        }
-
-        protected void buttonTitle_Command (object sender, CommandEventArgs e)
-        {
-            int groupEntryId;
-            if (int.TryParse ((string) e.CommandArgument, out groupEntryId)) {
-                GroupEntryId = groupEntryId;
-                Bind ();
-            }
         }
 
         protected void UpdateModuleTitle (string title)

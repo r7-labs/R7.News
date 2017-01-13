@@ -29,7 +29,7 @@
                         <asp:HyperLink id="linkEdit" runat="server">
                             <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                         </asp:HyperLink>
-                        <%# Eval ("Title") %>
+                        <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
                     </h3>
                     <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
                     <p class="news-entry-info">
@@ -51,8 +51,7 @@
                                 <asp:HyperLink id="linkEdit" runat="server">
                                     <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                                 </asp:HyperLink>
-                                <asp:LinkButton id="buttonTitle" runat="server" Text='<%# Eval ("Title") %>' 
-                                    OnCommand="buttonTitle_Command" CommandArgument='<%# Eval ("EntryId") %>' />
+								<%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
                             </h4>
                             <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
                             <p class="news-entry-info">

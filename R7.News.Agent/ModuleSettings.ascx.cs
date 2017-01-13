@@ -23,12 +23,29 @@ using System;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using R7.DotNetNuke.Extensions.Modules;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Agent.Components;
+using R7.News.Data;
+using R7.DotNetNuke.Extensions.ControlExtensions;
+using R7.DotNetNuke.Extensions.Utilities;
 
 namespace R7.News.Agent
 {
     public partial class ModuleSettings : ModuleSettingsBase<AgentSettings>
     {
+        ViewModelContext viewModelContext;
+        protected ViewModelContext ViewModelContext {
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
+        }
+
+        protected override void OnInit (EventArgs e)
+        {
+            comboGroupEntry.DataSource = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
+            comboGroupEntry.DataBind ();
+            comboGroupEntry.InsertDefaultItem (LocalizeString ("NotSelected.Text"));
+            comboGroupEntry.SelectedIndex = 0;
+        }
+
         /// <summary>
         /// Handles the loading of the module setting for this control
         /// </summary>
@@ -37,6 +54,7 @@ namespace R7.News.Agent
             try {
                 if (!IsPostBack) {
                     checkEnableGrouping.Checked = Settings.EnableGrouping;
+                    comboGroupEntry.SelectByValue (Settings.GroupEntryId);
                     checkHideImages.Checked = Settings.HideImages;
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
                     textGroupThumbnailWidth.Text = Settings.GroupThumbnailWidth.ToString ();
@@ -54,6 +72,7 @@ namespace R7.News.Agent
         {
             try {
                 Settings.EnableGrouping = checkEnableGrouping.Checked;
+                Settings.GroupEntryId = TypeUtils.ParseToNullable<int> (comboGroupEntry.SelectedValue);
                 Settings.HideImages = checkHideImages.Checked;
                 Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
                 Settings.GroupThumbnailWidth = int.Parse (textGroupThumbnailWidth.Text);
