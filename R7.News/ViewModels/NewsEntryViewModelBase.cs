@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
@@ -154,6 +155,10 @@ namespace R7.News.ViewModels
         public string Link
         {
             get {
+                if (!string.IsNullOrWhiteSpace (Url)) {
+                    return Globals.LinkClick (Url, Context.Module.TabId, Context.Module.ModuleId);
+                }
+
                 return this.GetPermalink (PermalinkMode.Friendly,
                                           NewsDataProvider.Instance.ModuleController,
                                           PortalSettings.Current.PortalAlias,
