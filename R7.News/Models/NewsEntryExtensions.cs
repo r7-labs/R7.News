@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -73,19 +73,19 @@ namespace R7.News.Models
             return newsEntry;
         }
 
-        public static INewsEntry WithAgentModuleOnce (this INewsEntry newsEntry, ModuleController moduleController)
-        {
-            if (newsEntry.AgentModuleId != null && newsEntry.AgentModule == null) {
-                newsEntry.AgentModule = GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
-            }
-
-            return newsEntry;
-        }
-
         private static ModuleInfo GetAgentModule (ModuleController moduleController, int agentModuleId)
         {
             return moduleController.GetTabModulesByModule (agentModuleId)
                 .FirstOrDefault (am => !am.IsDeleted);
+        }
+
+        private static ModuleInfo GetAgentModuleOnce (ModuleController moduleController, INewsEntry newsEntry)
+        {
+            if (newsEntry.AgentModule == null && newsEntry.AgentModuleId != null) {
+                return GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
+            }
+
+            return newsEntry.AgentModule;
         }
 
         public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries,
@@ -172,16 +172,26 @@ namespace R7.News.Models
                 minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight);
         }
 
+        public static string GetPermalink (this INewsEntry newsEntry,
+                                           PermalinkMode permalinkMode,
+                                           ModuleController moduleController,
+                                           PortalAliasInfo portalAlias,
+                                           int moduleId,
+                                           int tabId)
+        {
+            return (permalinkMode == PermalinkMode.Friendly) ?
+                GetPermalinkFriendly (newsEntry, moduleController, moduleId, tabId) :
+                GetPermalinkRaw (newsEntry, moduleController, portalAlias, moduleId, tabId);
+        }
+        
         public static string GetPermalinkFriendly (this INewsEntry newsEntry,
                                                    ModuleController moduleController,
                                                    int moduleId,
                                                    int tabId)
         {
-            if (newsEntry.AgentModuleId != null) {
-                newsEntry.WithAgentModuleOnce (moduleController);
-                if (newsEntry.AgentModule != null) {
-                    return Globals.NavigateURL (newsEntry.AgentModule.TabID);
-                }
+            var agentModule = GetAgentModuleOnce (moduleController, newsEntry);
+            if (agentModule != null) {
+                return Globals.NavigateURL (agentModule.TabID);
             }
 
             return Globals.NavigateURL (
@@ -199,11 +209,9 @@ namespace R7.News.Models
                                               int moduleId,
                                               int tabId)
         {
-            if (newsEntry.AgentModuleId != null) {
-                newsEntry.WithAgentModuleOnce (moduleController);
-                if (newsEntry.AgentModule != null) {
-                    return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + newsEntry.AgentModule.TabID);
-                }
+            var agentModule = GetAgentModuleOnce (moduleController, newsEntry);
+            if (agentModule != null) {
+                return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + agentModule.TabID);
             }
 
             return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + tabId

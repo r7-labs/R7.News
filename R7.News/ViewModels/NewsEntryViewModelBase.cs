@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -22,12 +22,14 @@
 using System;
 using System.Collections.Generic;
 using System.Web;
-using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Localization;
 using R7.DotNetNuke.Extensions.ViewModels;
+using R7.News.Components;
 using R7.News.Controls;
+using R7.News.Data;
 using R7.News.Models;
 
 namespace R7.News.ViewModels
@@ -151,16 +153,11 @@ namespace R7.News.ViewModels
 
         public string Link
         {
-            get { 
-                if (!string.IsNullOrWhiteSpace (Url)) {
-                    return Globals.LinkClick (Url, Context.Module.TabId, Context.Module.ModuleId);
-                }
-
-                if (AgentModule != null) {
-                    return Globals.NavigateURL (AgentModule.TabID);
-                }
-
-                return string.Empty;
+            get {
+                return this.GetPermalink (PermalinkMode.Friendly,
+                                          NewsDataProvider.Instance.ModuleController,
+                                          PortalSettings.Current.PortalAlias,
+                                          Context.Module.ModuleId, Context.Module.TabId);
             }
         }
 
@@ -169,7 +166,7 @@ namespace R7.News.ViewModels
             get {
                 if (!string.IsNullOrEmpty (Link)) {
                     return string.Format ("<a href=\"{0}\">{1}</a>", Link, Title);
-                }
+                } 
 
                 return Title;
             }
