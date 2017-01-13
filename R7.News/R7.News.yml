@@ -19,4 +19,4 @@ news-entry:
 
 term-url-providers:
   - R7.News.Providers.DescriptionTermUrlProvider
-  - R7.News.Integrations.UniversityDivisionTermUrlProvider
+#  - R7.News.Integrations.UniversityDivisionTermUrlProvider
