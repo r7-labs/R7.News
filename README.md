@@ -3,9 +3,6 @@
 The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform, 
 which would take advantage from tight CMS integration and combinatorial approach to news article content authoring.
 
-The project is on early stage of development, so it's not feature-complete nor stable and any changes could happen. 
-ETA for main features is about the last quarter of 2016.
-
 ## Main features outline:
 
 - [x] Mark news entry with tags and use them to provide granular thematic views.
@@ -24,13 +21,13 @@ ETA for main features is about the last quarter of 2016.
 
 ## System requirements
 
-* DNN Platform 7.4.2 (DNN 8 support is planned)
+* DNN Platform v8.0.4.
 
 ## Install
 
 1. Download and install [dependencies](#dependencies) first.
 2. Download latest install package from releases.
-3. Install it as usual from *DNN &gt; Host &gt; Extensions*.
+3. Install it as usual from *Host &gt; Extensions*.
 
 ### <a name="dependencies">Dependencies</a>
 
