@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,14 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
-using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Common.Utilities;
+using System.Linq;
 using System.Web.Caching;
+using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Components;
-using R7.News.Providers;
 using R7.News.Data;
+using R7.News.Providers;
 
 namespace R7.News.Integrations
 {
@@ -73,7 +71,12 @@ namespace R7.News.Integrations
 
         private IEnumerable<UniversityDivisionInfo> GetDivisionsInternal ()
         {
-            return NewsDataProvider.Instance.GetObjects<UniversityDivisionInfo> ();
+            try {
+                return NewsDataProvider.Instance.GetObjects<UniversityDivisionInfo> ();
+            }
+            catch {
+                return Enumerable.Empty<UniversityDivisionInfo> ();
+            }
         }
     }
 }
