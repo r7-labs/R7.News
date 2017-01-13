@@ -298,10 +298,9 @@ namespace R7.News.Stream
             return NewsRepository.Instance.GetNewsEntry (itemId, PortalId);
         }
 
-        protected override int AddItem (NewsEntryInfo item)
+        protected override void AddItem (NewsEntryInfo item)
         {
             NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
-            return item.EntryId;
         }
 
         protected override void UpdateItem (NewsEntryInfo item)

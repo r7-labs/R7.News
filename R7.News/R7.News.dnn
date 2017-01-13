@@ -13,10 +13,10 @@
             <releaseNotes src="releaseNotes.htm" />
             <azureCompatible>true</azureCompatible>
             <dependencies>
-                <dependency type="CoreVersion">07.04.02</dependency>
+                <dependency type="CoreVersion">08.00.04</dependency>
                 <!-- .NET 4.5 -->
                 <dependency type="Type">System.Reflection.ReflectionContext</dependency>
-                <dependency type="managedPackage" version="0.8.0">R7.DotNetNuke.Extensions</dependency>
+                <dependency type="managedPackage" version="0.10.0">R7.DotNetNuke.Extensions</dependency>
                 <dependency type="managedPackage" version="1.0.2">R7.ImageHandler</dependency>
             </dependencies>
             <!-- https://dnntracker.atlassian.net/browse/DNN-3702 -->
