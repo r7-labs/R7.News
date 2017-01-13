@@ -205,9 +205,10 @@ namespace R7.News.Stream
 
             urlUrl.Url = item.Url;
 
-            textPermalink.Text = item.GetPermalink (NewsConfig.Instance.PermalinkMode,
-                                                    NewsDataProvider.Instance.ModuleController,
-                                                    PortalAlias, ModuleId, TabId);
+            textPermalinkRaw.Text = item.GetPermalinkRaw (NewsDataProvider.Instance.ModuleController,
+                                                          PortalAlias, ModuleId, TabId);
+            textPermalinkFriendly.Text = item.GetPermalinkFriendly (NewsDataProvider.Instance.ModuleController,
+                                                                    ModuleId, TabId);
 
             // REVIEW: Check for max value?
             sliderThematicWeight.Text = item.ThematicWeight.ToString ();

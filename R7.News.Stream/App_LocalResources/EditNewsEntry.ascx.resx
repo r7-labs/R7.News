@@ -99,11 +99,11 @@
     <data name="labelAudit.Help" xml:space="preserve">
         <value>Audit data for the news entry.</value>
     </data>
-    <data name="labelPermalink.Text" xml:space="preserve">
-        <value>Permalink:</value>
+    <data name="labelPermalinks.Text" xml:space="preserve">
+        <value>Permalinks:</value>
     </data>
-    <data name="labelPermalink.Help" xml:space="preserve">
-        <value>You can copy permalink for the news entry here.</value>
+    <data name="labelPermalinks.Help" xml:space="preserve">
+        <value>You can copy permalinks for the news entry here.</value>
     </data>
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Get Modules</value>

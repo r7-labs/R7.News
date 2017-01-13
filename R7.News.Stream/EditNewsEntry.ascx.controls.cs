@@ -27,6 +27,7 @@ namespace R7.News.Stream
         protected TextBox sliderStructuralWeight;
         protected LinkButton buttonGetModules;
         protected GridView gridModules;
-        protected TextBox textPermalink;
+        protected TextBox textPermalinkRaw;
+        protected TextBox textPermalinkFriendly;
     }
 }
