@@ -26,10 +26,10 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.FileSystem;
+using R7.DotNetNuke.Extensions.ControlExtensions;
 using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Components;
-using R7.News.ControlExtensions;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Stream.Components;
@@ -102,7 +102,7 @@ namespace R7.News.Stream
             sliderStructuralWeight.Text = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight.ToString ();
 
             // localize column headers in the gridview
-            gridModules.LocalizeColumnHeaders (".Column", LocalResourceFile);
+            gridModules.LocalizeColumnHeaders (LocalResourceFile);
         }
 
         protected void buttonGetModules_Click (object sender, EventArgs e)

@@ -71,7 +71,6 @@
     <Folder Include="Controls\" />
     <Folder Include="Controls\ViewModels\" />
     <Folder Include="Data\" />
-    <Folder Include="ControlExtensions\" />
     <Folder Include="Integrations\AnnoView\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
@@ -112,7 +111,6 @@
       <DependentUpon>BadgeList.ascx</DependentUpon>
     </Compile>
     <Compile Include="Data\NewsDataProvider.cs" />
-    <Compile Include="ControlExtensions\GridViewExtensions.cs" />
     <Compile Include="Data\XmlNewsEntryInfo.cs" />
     <Compile Include="Integrations\AnnoView\Importer.cs" />
     <Compile Include="Integrations\AnnoView\AnnouncementInfo.cs" />

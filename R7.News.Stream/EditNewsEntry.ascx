@@ -65,8 +65,8 @@
                         <AlternatingRowStyle CssClass="dnnGridAltItem" />
                         <Columns>
                             <asp:BoundField DataField="ModuleId" Visible="false" />
-                            <asp:BoundField DataField="ModuleLink" HeaderText="Module" HtmlEncode="false" />
-                            <asp:BoundField DataField="PassesByString" HeaderText="PassesBy" />
+                            <asp:BoundField DataField="ModuleLink" HeaderText="Module.Column" HtmlEncode="false" />
+                            <asp:BoundField DataField="PassesByString" HeaderText="PassesBy.Column" />
                         </Columns>
                     </asp:GridView>
                 </div>
