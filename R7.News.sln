@@ -39,7 +39,7 @@ Global
 		$1.ResourceNamePolicy = FileName
 		$0.TextStylePolicy = $2
 		$2.inheritsSet = null
-		$2.scope = text/x-dnn-sqldataprovider
+		$2.scope = text/css
 		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = text/x-dnn-manifest
@@ -78,12 +78,16 @@ Global
 		$0.NameConventionPolicy = $8
 		$8.Rules = $9
 		$9.NamingRule = $10
-		$10.Name = Namespaces
-		$10.AffectedEntity = Namespace
+		$10.Name = Type Parameters
+		$10.AffectedEntity = TypeParameter
 		$10.VisibilityMask = VisibilityMask
 		$10.NamingStyle = PascalCase
 		$10.IncludeInstanceMembers = True
 		$10.IncludeStaticEntities = True
+		$10.RequiredPrefixes = $30
+		$30.String = T
+		$10.RequiredSuffixes = $31
+		$31.String = Exception
 		$9.NamingRule = $11
 		$11.Name = Types
 		$11.AffectedEntity = Class, Struct, Enum, Delegate
@@ -192,6 +196,6 @@ Global
 		$28.NamingStyle = PascalCase
 		$28.IncludeInstanceMembers = True
 		$28.IncludeStaticEntities = True
-		version = 1.1.2
+		version = 1.2.0
 	EndGlobalSection
 EndGlobal
