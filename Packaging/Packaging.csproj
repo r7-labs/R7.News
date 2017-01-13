@@ -43,7 +43,7 @@
     <PackageName>R7.News</PackageName>
     <PackageOutputPath>output</PackageOutputPath>
     <DnnLocalDeployPath Condition="'$(OS)' != 'Unix'">C:\Dotnetnuke</DnnLocalDeployPath>
-    <DnnLocalDeployPath Condition="'$(OS)' == 'Unix'">/home/redhound/mnt/dnn</DnnLocalDeployPath>
+    <DnnLocalDeployPath Condition="'$(OS)' == 'Unix'">$(HOME)/mnt/dnn8</DnnLocalDeployPath>
     <MainProjectOutputPath>..\R7.News\bin\$(Configuration)</MainProjectOutputPath>
   </PropertyGroup>
   <Import Project="Install.targets" />
