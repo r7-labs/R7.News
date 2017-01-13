@@ -88,16 +88,14 @@ namespace R7.News.Stream.Components
         [ModuleSetting (Prefix = SettingPrefix)]
         public int MaxStructuralWeight { get; set; }
 
-        #region Tab-specific module settings
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool UseShowMore { get; set; } = true;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public bool UseShowMore { get; set; } = false;
+        public bool ShowTopPager { get; set; } = false;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public bool ShowTopPager { get; set; } = true;
-
-        [TabModuleSetting (Prefix = SettingPrefix)]
-        public bool ShowBottomPager { get; set; } = true;
+        public bool ShowBottomPager { get; set; } = false;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public int PageSize { get; set; } = 3;
@@ -107,8 +105,6 @@ namespace R7.News.Stream.Components
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public int ThumbnailWidth { get; set; }
-
-        #endregion
     }
 }
 
