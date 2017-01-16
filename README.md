@@ -3,6 +3,14 @@
 The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform, 
 which would take advantage from tight CMS integration and combinatorial approach to news article content authoring.
 
+## License
+
+[![AGPLv3](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.html)
+
+The *R7.News* is free software: you can redistribute it and/or modify it under the terms of 
+the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, 
+or (at your option) any later version.
+
 ## Main features outline:
 
 - [x] Mark news entry with tags and use them to provide granular thematic views.
