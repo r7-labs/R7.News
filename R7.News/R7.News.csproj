@@ -61,7 +61,7 @@
       <HintPath>..\packages\DotNetNuke.Web.Deprecated.8.0.4.226\lib\net40\Telerik.Web.UI.dll</HintPath>
     </Reference>
     <Reference Include="R7.DotNetNuke.Extensions">
-      <HintPath>..\packages\R7.DotNetNuke.Extensions.0.10.0-beta4\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
+      <HintPath>..\packages\R7.DotNetNuke.Extensions.0.10.0-beta5\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +73,8 @@
     <Folder Include="Data\" />
     <Folder Include="Integrations\AnnoView\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="assets\" />
+    <Folder Include="assets\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -80,6 +82,8 @@
     <Content Include="packages.config" />
     <Content Include="Controls\TermLinks.ascx" />
     <Content Include="Controls\BadgeList.ascx" />
+    <Content Include="Controls\AgplSignature.ascx" />
+    <Content Include="assets\css\module.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlDataProvider\Uninstall.SqlDataProvider" />
@@ -116,6 +120,9 @@
     <Compile Include="Integrations\AnnoView\AnnouncementInfo.cs" />
     <Compile Include="Components\Const.cs" />
     <Compile Include="ViewModels\NewsEntryViewModelBase.cs" />
+    <Compile Include="Controls\AgplSignature.ascx.cs">
+      <DependentUpon>AgplSignature.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

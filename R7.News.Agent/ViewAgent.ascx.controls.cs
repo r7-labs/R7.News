@@ -6,6 +6,7 @@ using System.Linq;
 using DotNetNuke.UI.UserControls;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Web.UI.WebControls;
+using R7.News.Controls;
 
 namespace R7.News.Agent
 {
@@ -13,5 +14,6 @@ namespace R7.News.Agent
     {
         protected Panel panelAddDefaultEntry;
         protected ListView listAgent;
+        protected AgplSignature agplSignature;
     }
 }

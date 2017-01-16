@@ -92,6 +92,9 @@ namespace R7.News.Stream
             else {
                 pagerBottom.Visible = false;
             }
+
+            // hide horizontal rule in signature if "Show more" button is used
+            agplSignature.ShowRule = !Settings.UseShowMore;
         }
 
         /// <summary>

@@ -109,10 +109,12 @@ namespace R7.News.Agent
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
                     .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
-
+                
                 // bind the data
                 listAgent.DataSource = viewModels;
                 listAgent.DataBind ();
+
+                agplSignature.Visible = (Settings.EnableGrouping == false && listAgent.Items.Count > 1);
             }
         }
 

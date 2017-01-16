@@ -7,6 +7,7 @@ using DotNetNuke.UI.UserControls;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Web.UI.WebControls;
 using PagingControl = R7.DotNetNuke.Extensions.Controls.PagingControl;
+using R7.News.Controls;
 
 namespace R7.News.Stream
 {
@@ -17,5 +18,6 @@ namespace R7.News.Stream
         protected PagingControl pagerTop;
         protected PagingControl pagerBottom;
         protected LinkButton buttonShowMore;
+        protected AgplSignature agplSignature;
     }
 }
