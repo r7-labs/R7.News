@@ -22,9 +22,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules.Settings;
-using DotNetNuke.Entities.Portals;
 using R7.DotNetNuke.Extensions.Utilities;
 using R7.News.Components;
 
@@ -40,9 +40,11 @@ namespace R7.News.Stream.Components
 
         public StreamSettings ()
         {
-            MaxThematicWeight = NewsConfig.GetInstance (PortalSettings.Current.PortalId).NewsEntry.MaxWeight;
-            MaxStructuralWeight = NewsConfig.GetInstance (PortalSettings.Current.PortalId).NewsEntry.MaxWeight;
-            ThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).StreamModule.DefaultThumbnailWidth;
+            if (HttpContext.Current != null) {
+                MaxThematicWeight = NewsConfig.Instance.NewsEntry.MaxWeight;
+                MaxStructuralWeight = NewsConfig.Instance.NewsEntry.MaxWeight;
+                ThumbnailWidth = NewsConfig.Instance.StreamModule.DefaultThumbnailWidth;
+            }
         }
 
         [ModuleSetting (Prefix = SettingPrefix, ParameterName = "IncludeTerms")]

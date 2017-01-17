@@ -20,8 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Web;
 using DotNetNuke.Entities.Modules.Settings;
-using DotNetNuke.Entities.Portals;
 using R7.News.Components;
 
 namespace R7.News.Agent.Components
@@ -36,8 +36,10 @@ namespace R7.News.Agent.Components
 
         public AgentSettings ()
         {
-            ThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).AgentModule.DefaultThumbnailWidth;
-            GroupThumbnailWidth = NewsConfig.GetInstance (PortalSettings.Current.PortalId).AgentModule.DefaultGroupThumbnailWidth;
+            if (HttpContext.Current != null) {
+                ThumbnailWidth = NewsConfig.Instance.AgentModule.DefaultThumbnailWidth;
+                GroupThumbnailWidth = NewsConfig.Instance.AgentModule.DefaultGroupThumbnailWidth;
+            }
         }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
