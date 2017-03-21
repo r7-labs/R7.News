@@ -74,19 +74,9 @@ namespace R7.News.Data
                                  int moduleId,
                                  int tabId)
         {
-            // TODO: Add value to ContentKey
-            var contentItem = new ContentItem {
-                ContentTitle = newsEntry.Title,
-                Content = newsEntry.Title,
-                ContentTypeId = NewsDataProvider.Instance.NewsContentType.ContentTypeId,
-                Indexed = false,
-                ModuleID = newsEntry.AgentModuleId ?? moduleId,
-                TabID = tabId,
-            };
-
-            // add content item and news entry
-            newsEntry.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
-            NewsDataProvider.Instance.Add<NewsEntryInfo> (newsEntry);
+            var contentItem = AddContentItem (newsEntry, tabId, moduleId);
+            newsEntry.ContentItemId = contentItem.ContentItemId;
+            NewsDataProvider.Instance.Add (newsEntry);
 
             // update content item after EntryId get its value
             // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
@@ -117,18 +107,8 @@ namespace R7.News.Data
             int moduleId,
             int tabId)
         {
-            // TODO: Add value to ContentKey
-            var contentItem = new ContentItem {
-                ContentTitle = newsEntry.Title,
-                Content = newsEntry.Title,
-                ContentTypeId = NewsDataProvider.Instance.NewsContentType.ContentTypeId,
-                Indexed = false,
-                ModuleID = newsEntry.AgentModuleId ?? moduleId,
-                TabID = tabId,
-            };
-
-            // add content item and news entry
-            newsEntry.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
+            var contentItem = AddContentItem (newsEntry, tabId, moduleId);
+            newsEntry.ContentItemId = contentItem.ContentItemId;
             repository.Insert (newsEntry);
 
             // update content item after EntryId get its value
@@ -150,6 +130,23 @@ namespace R7.News.Data
             }
 
             return newsEntry.EntryId;
+        }
+
+        ContentItem AddContentItem (INewsEntry newsEntry, int tabId, int moduleId)
+        {
+            // TODO: Add value to ContentKey
+            var contentItem = new ContentItem {
+                ContentTitle = newsEntry.Title,
+                Content = newsEntry.Title,
+                ContentTypeId = NewsDataProvider.Instance.NewsContentType.ContentTypeId,
+                Indexed = false,
+                ModuleID = newsEntry.AgentModuleId ?? moduleId,
+                TabID = tabId
+            };
+
+            contentItem.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
+
+            return contentItem;
         }
 
         public void UpdateNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
