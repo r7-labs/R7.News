@@ -41,22 +41,21 @@ namespace R7.News.Stream.Components
         {
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId, int portalId, 
-            int minThematicWeight, int maxThematicWeight, 
-            int minStructuralWeight, int maxStructuralWeight,
-            bool showAllNews, List<Term> includeTerms)
+        protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
+                                                             int portalId,
+                                                             WeightRange thematicWeights,
+                                                             WeightRange structuralWeights,
+                                                             bool showAllNews,
+                                                             List<Term> includeTerms)
         {
             if (showAllNews) {
-                return NewsRepository.Instance.GetNewsEntries (moduleId, portalId,
-                    minThematicWeight, maxThematicWeight,
-                    minStructuralWeight, maxStructuralWeight
+                return NewsRepository.Instance.GetNewsEntries (
+                    moduleId, portalId, thematicWeights, structuralWeights
                 );
             }
 
-            return NewsRepository.Instance.GetNewsEntriesByTerms (moduleId, portalId,
-                minThematicWeight, maxThematicWeight,
-                minStructuralWeight, maxStructuralWeight,
-                includeTerms
+            return NewsRepository.Instance.GetNewsEntriesByTerms (
+                moduleId, portalId, thematicWeights, structuralWeights, includeTerms
             );
         }
 
@@ -68,10 +67,12 @@ namespace R7.News.Stream.Components
             var settings = new StreamSettingsRepository ().GetSettings (moduleInfo);
 
             // get news entries
-            var newsEntries = GetNewsEntries (moduleInfo.ModuleID, moduleInfo.PortalID,
-                                  settings.MinThematicWeight, settings.MaxThematicWeight,
-                                  settings.MinStructuralWeight, settings.MaxStructuralWeight,
-                                  settings.ShowAllNews, settings.IncludeTerms);
+            var newsEntries = GetNewsEntries (
+                moduleInfo.ModuleID, moduleInfo.PortalID,
+                new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
+                new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight),
+                settings.ShowAllNews, settings.IncludeTerms
+            );
 
             // create search documents
             foreach (var newsEntry in newsEntries) {

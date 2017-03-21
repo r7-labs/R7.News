@@ -123,6 +123,7 @@
     <Compile Include="Controls\AgplSignature.ascx.cs">
       <DependentUpon>AgplSignature.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Models\WeightRange.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

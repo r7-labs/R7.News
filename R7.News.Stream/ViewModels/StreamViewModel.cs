@@ -75,28 +75,28 @@ namespace R7.News.Stream.ViewModels
             if (Settings.ShowAllNews) {
                 baseItemsCount = NewsRepository.Instance.GetNewsEntries_Count (
                     Module.PortalId, checkNow, now,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
                 );
 
                 baseItems = NewsRepository.Instance.GetNewsEntries_FirstPage (
                     Module.PortalId, pageSize, checkNow, now,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
                 );
             }
             else {
                 baseItemsCount = NewsRepository.Instance.GetNewsEntriesByTerms_Count (
                     Module.PortalId, checkNow, now,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
                     Settings.IncludeTerms
                 );
 
                 baseItems = NewsRepository.Instance.GetNewsEntriesByTerms_FirstPage (
                     Module.PortalId, pageSize, checkNow, now,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
                     Settings.IncludeTerms
                 );
             } 
@@ -122,15 +122,17 @@ namespace R7.News.Stream.ViewModels
             }
 
             if (Settings.ShowAllNews) {
-                baseItems = NewsRepository.Instance.GetNewsEntries (Module.ModuleId, Module.PortalId,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight
+                baseItems = NewsRepository.Instance.GetNewsEntries (
+                    Module.ModuleId, Module.PortalId,
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
                 );
             }
             else {
-                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (Module.ModuleId, Module.PortalId,
-                    Settings.MinThematicWeight, Settings.MaxThematicWeight, 
-                    Settings.MinStructuralWeight, Settings.MaxStructuralWeight,
+                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (
+                    Module.ModuleId, Module.PortalId,
+                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
+                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
                     Settings.IncludeTerms
                 );
             }
