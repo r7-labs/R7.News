@@ -106,7 +106,7 @@ namespace R7.News.Stream
                     
                     var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
 
-                    ToggleStreamControls (page.TotalItems);
+                    ToggleStreamControls (page.TotalItems, PageSize);
 
                     if (page.TotalItems > 0) {
                         // bind the data
@@ -120,21 +120,23 @@ namespace R7.News.Stream
             }
         }
 
-        protected void ToggleStreamControls (int totalItems)
+        protected void ToggleStreamControls (int totalItems, int pageSize)
         {
             if (totalItems > 0) {
                 // show module content
                 panelStream.Visible = true;
 
                 // setup paging controls
-                pagerTop.PageSize = PageSize;
-                pagerBottom.PageSize = PageSize;
+                pagerTop.PageSize = pageSize;
+                pagerBottom.PageSize = pageSize;
                 pagerTop.TotalRecords = totalItems;
                 pagerBottom.TotalRecords = totalItems;
 
-                var canShowPager = totalItems > PageSize;
+                var canShowPager = totalItems > pageSize;
                 pagerTop.Visible = canShowPager && Settings.ShowTopPager;
                 pagerBottom.Visible = canShowPager && Settings.ShowBottomPager;
+
+                buttonShowMore.Visible = Settings.UseShowMore && (totalItems - pageSize) > 0;
             }
             else {
                 if (IsEditable) {
@@ -166,7 +168,7 @@ namespace R7.News.Stream
                 pagerTop.CurrentPage = CurrentPage;
             }
 
-            ToggleStreamControls (page.TotalItems);
+            ToggleStreamControls (page.TotalItems, PageSize);
 
             if (page.TotalItems > 0) {
                 // bind the data
@@ -183,12 +185,7 @@ namespace R7.News.Stream
 
             var page = ViewModel.GetPage (CurrentPage - 1, PageSize);
 
-            // hide "show more" button, if there are no more items
-            if (PageSize >= page.TotalItems) {
-                buttonShowMore.Visible = false;
-            }
-
-            ToggleStreamControls (page.TotalItems);
+            ToggleStreamControls (page.TotalItems, PageSize);
 
             if (page.TotalItems > 0) {
                 // bind the data
