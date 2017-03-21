@@ -1,5 +1,7 @@
 # About R7.News
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/roman-yagodin/R7.News)](https://bettercodehub.com/)
+
 The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform, 
 which would take advantage from tight CMS integration and combinatorial approach to news article content authoring.
 
