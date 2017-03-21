@@ -100,42 +100,13 @@ namespace R7.News.Integrations.AnnoView
                                     ThematicWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0,
                                     StructuralWeight = (announcement.Export) ? NewsConfig.GetInstance (module.PortalID).NewsEntry.MaxWeight : 0
                                 };
-                                
-                                // fill image
-                                var images = new List<IFileInfo> ();
-                                if (Globals.GetURLType (announcement.ImageSource) == TabType.File) {
-                                    var imageFileId = int.Parse (announcement.ImageSource.Substring (announcement.ImageSource.IndexOf ("=") + 1));
-                                    var image = FileManager.Instance.GetFile (imageFileId);
-                                    if (image != null) {
-                                        images.Add (image);
-                                    }
-                                }
-
-                                var terms = new List<Term> ();
-
-                                // try get terms from target tab
-                                if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
-                                    var tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
-                                    if (tab != null) {
-                                        terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
-                                    }
-                                }
-
-                                // try get terms from module tab
-                                if (terms == null || terms.Count == 0)
-                                {
-                                    var tab = tabController.GetTab (module.TabID, module.PortalID);
-                                    if (tab != null) {
-                                        terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
-                                    }
-                                }
 
                                 // add news entry
                                 NewsRepository.Instance.BulkAddNewsEntry (
                                     repository,
                                     newsEntry,
-                                    terms,
-                                    images,
+                                    GetTerms (announcement, module, tabController, termController),
+                                    GetImages (announcement),
                                     module.ModuleID,
                                     module.TabID);
 
@@ -149,8 +120,7 @@ namespace R7.News.Integrations.AnnoView
 
                                 Thread.Sleep (sleepTimeout);
                             }
-                            catch (Exception ex)
-                            {
+                            catch (Exception ex) {
                                 // log error on importing current announcement
                                 ScheduleHistoryItem.AddLogNote ("Announcement.ItemId:" +  announcement.ItemId + "; Exception:" + ex);
                                 Exceptions.LogException (ex);
@@ -162,6 +132,43 @@ namespace R7.News.Integrations.AnnoView
         
             return itemsImported;
         }
-    }
+
+        static List<IFileInfo> GetImages (AnnouncementInfo announcement)
+        {
+            var images = new List<IFileInfo> ();
+            if (Globals.GetURLType (announcement.ImageSource) == TabType.File) {
+                var imageFileId = int.Parse (announcement.ImageSource.Substring (announcement.ImageSource.IndexOf ("=") + 1));
+                var image = FileManager.Instance.GetFile (imageFileId);
+                if (image != null) {
+                    images.Add (image);
+                }
+            }
+
+            return images;
+        }
+
+        static List<Term> GetTerms (AnnouncementInfo announcement, ModuleInfo module, TabController tabController, TermController termController)
+        {
+            var terms = new List<Term> ();
+
+            // try get terms from target tab
+            if (Globals.GetURLType (announcement.Url) == TabType.Tab) {
+                var tab = tabController.GetTab (int.Parse (announcement.Url), module.PortalID);
+                if (tab != null) {
+                    terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                }
+            }
+
+            // try get terms from module tab
+            if (terms == null || terms.Count == 0) {
+                var tab = tabController.GetTab (module.TabID, module.PortalID);
+                if (tab != null) {
+                    terms = termController.GetTermsByContent (tab.ContentItemId).ToList ();
+                }
+            }
+
+            return terms;
+        }
+   }
 }
 
