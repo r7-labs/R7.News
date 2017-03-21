@@ -102,13 +102,14 @@ namespace R7.News.Integrations.AnnoView
                                 };
 
                                 // add news entry
-                                NewsRepository.Instance.BulkAddNewsEntry (
+                                NewsRepository.Instance.AddNewsEntry_Internal (
                                     repository,
                                     newsEntry,
                                     GetTerms (announcement, module, tabController, termController),
                                     GetImages (announcement),
                                     module.ModuleID,
-                                    module.TabID);
+                                    module.TabID
+                                );
 
                                 // count number of items imported,
                                 // invoke Progressing method each 10 items

@@ -78,30 +78,14 @@ namespace R7.News.Data
             newsEntry.ContentItemId = contentItem.ContentItemId;
             NewsDataProvider.Instance.Add (newsEntry);
 
-            // update content item after EntryId get its value
-            // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
-            // more info here: http://www.dnnsoftware.com/community-blog/cid/131963/adding-core-taxonomy-to-your-module-part-2-ndash-content-items
-            contentItem.ContentKey = newsEntry.EntryId.ToString ();
-            NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
-
-            // add images to content item
-            if (images.Count > 0) {
-                var attachmentController = new AttachmentController (NewsDataProvider.Instance.ContentController);
-                attachmentController.AddImagesToContent (contentItem.ContentItemId, images);
-            }
-
-            // add terms to content item
-            var termController = new TermController ();
-            foreach (var term in terms) {
-                termController.AddTermToContent (term, contentItem);
-            }
+            UpdateContentItem (contentItem, newsEntry, terms, images);
 
             CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
 
             return newsEntry.EntryId;
         }
 
-        internal int BulkAddNewsEntry (IRepository<NewsEntryInfo> repository, NewsEntryInfo newsEntry,
+        internal int AddNewsEntry_Internal (IRepository<NewsEntryInfo> repository, NewsEntryInfo newsEntry,
             List<Term> terms,
             List<IFileInfo> images,
             int moduleId,
@@ -111,23 +95,7 @@ namespace R7.News.Data
             newsEntry.ContentItemId = contentItem.ContentItemId;
             repository.Insert (newsEntry);
 
-            // update content item after EntryId get its value
-            // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
-            // more info here: http://www.dnnsoftware.com/community-blog/cid/131963/adding-core-taxonomy-to-your-module-part-2-ndash-content-items
-            contentItem.ContentKey = newsEntry.EntryId.ToString ();
-            NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
-
-            // add images to content item
-            if (images.Count > 0) {
-                var attachmentController = new AttachmentController (NewsDataProvider.Instance.ContentController);
-                attachmentController.AddImagesToContent (contentItem.ContentItemId, images);
-            }
-
-            // add terms to content item
-            var termController = new TermController ();
-            foreach (var term in terms) {
-                termController.AddTermToContent (term, contentItem);
-            }
+            UpdateContentItem (contentItem, newsEntry, terms, images);
 
             return newsEntry.EntryId;
         }
@@ -147,6 +115,27 @@ namespace R7.News.Data
             contentItem.ContentItemId = NewsDataProvider.Instance.ContentController.AddContentItem (contentItem);
 
             return contentItem;
+        }
+
+        static void UpdateContentItem (ContentItem contentItem, NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images)
+        {
+            // update content item after EntryId get its value
+            // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
+            // more info here: http://www.dnnsoftware.com/community-blog/cid/131963/adding-core-taxonomy-to-your-module-part-2-ndash-content-items
+            contentItem.ContentKey = newsEntry.EntryId.ToString ();
+            NewsDataProvider.Instance.ContentController.UpdateContentItem (contentItem);
+
+            // add images to content item
+            if (images.Count > 0) {
+                var attachmentController = new AttachmentController (NewsDataProvider.Instance.ContentController);
+                attachmentController.AddImagesToContent (contentItem.ContentItemId, images);
+            }
+
+            // add terms to content item
+            var termController = new TermController ();
+            foreach (var term in terms) {
+                termController.AddTermToContent (term, contentItem);
+            }
         }
 
         public void UpdateNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
