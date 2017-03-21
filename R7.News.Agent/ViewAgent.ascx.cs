@@ -33,7 +33,6 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
-using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
@@ -41,10 +40,11 @@ using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
+using R7.News.Modules;
 
 namespace R7.News.Agent
 {
-    public partial class ViewAgent: PortalModuleBase<AgentSettings>, IActionable
+    public partial class ViewAgent: NewsModuleBase<AgentSettings>, IActionable
     {
         #region Properties
 
@@ -120,25 +120,10 @@ namespace R7.News.Agent
 
         #region IActionable implementation
 
-        public ModuleActionCollection ModuleActions
+        public override ModuleActionCollection ModuleActions
         {
             get {
-                // create a new action to add an item, this will be added 
-                // to the controls dropdown menu
-                var actions = new ModuleActionCollection ();
-
-                actions.Add (
-                    GetNextActionID (), 
-                    LocalizeString ("AddNewsEntry.Action"),
-                    ModuleActionType.AddContent,
-                    "",
-                    IconController.IconURL ("Add"), 
-                    EditUrl ("EditNewsEntry"),
-                    false, 
-                    SecurityAccessLevel.Edit,
-                    true, 
-                    false
-                );
+                var actions = base.ModuleActions;
 
                 actions.Add (
                     GetNextActionID (), 

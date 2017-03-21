@@ -75,6 +75,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
+    <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -124,6 +125,7 @@
       <DependentUpon>AgplSignature.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\WeightRange.cs" />
+    <Compile Include="Modules\NewsModuleBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

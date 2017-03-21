@@ -21,21 +21,17 @@
 
 using System;
 using System.Web.UI.WebControls;
-using DotNetNuke.Entities.Icons;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Entities.Modules.Actions;
-using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using R7.DotNetNuke.Extensions.Controls;
-using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
 using R7.News.Controls;
+using R7.News.Modules;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public partial class ViewStream: PortalModuleBase<StreamSettings>, IActionable
+    public partial class ViewStream: NewsModuleBase<StreamSettings>
     {
         StreamViewModel viewModel;
 
@@ -198,33 +194,6 @@ namespace R7.News.Stream
                 // bind the data
                 listStream.DataSource = page.Page;
                 listStream.DataBind ();
-            }
-        }
-
-        #endregion
-
-        #region IActionable implementation
-
-        public ModuleActionCollection ModuleActions
-        {
-            get {
-                // create a new action to add an item, this will be added 
-                // to the controls dropdown menu
-                var actions = new ModuleActionCollection ();
-                actions.Add (
-                    GetNextActionID (),
-                    LocalizeString ("AddNewsEntry.Action"),
-                    ModuleActionType.AddContent,
-                    "",
-                    IconController.IconURL ("Add"),
-                    EditUrl ("EditNewsEntry"),
-                    false,
-                    SecurityAccessLevel.Edit,
-                    true, 
-                    false
-                );
-
-                return actions;
             }
         }
 
