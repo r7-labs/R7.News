@@ -76,6 +76,7 @@
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
     <Folder Include="Modules\" />
+    <Folder Include="Integrations\Forum\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -126,6 +127,10 @@
     </Compile>
     <Compile Include="Models\WeightRange.cs" />
     <Compile Include="Modules\NewsModuleBase.cs" />
+    <Compile Include="Integrations\Forum\DnnForumConnector.cs" />
+    <Compile Include="Integrations\Forum\IForumConnector.cs" />
+    <Compile Include="Integrations\Forum\ActiveForumsConnector.cs" />
+    <Compile Include="Integrations\ReflectionHelper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
