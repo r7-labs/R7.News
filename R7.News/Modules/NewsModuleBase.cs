@@ -19,11 +19,16 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
+using DotNetNuke.Services.Log.EventLog;
 using R7.DotNetNuke.Extensions.Modules;
+using R7.News.Components;
+using R7.News.Data;
+using R7.News.Integrations.Forum;
 
 namespace R7.News.Modules
 {
@@ -53,5 +58,32 @@ namespace R7.News.Modules
         }
 
         #endregion
+
+        protected void linkDiscuss_Command (object sender, CommandEventArgs e)
+        {
+            var entryId = int.Parse ((string)e.CommandArgument);
+            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, PortalId);
+            if (newsEntry != null) {
+                var forum = new ForumConnector (NewsConfig.Instance.DiscussOnForum.ForumProvider);
+                var forumTabId = NewsConfig.Instance.DiscussOnForum.TabId;
+                var forumModuleId = NewsConfig.Instance.DiscussOnForum.ModuleId;
+                var forumId = NewsConfig.Instance.DiscussOnForum.ForumId;
+
+                var postId = forum.AddPost (
+                    newsEntry.Title, newsEntry.Description,
+                    forumTabId, forumModuleId, PortalId, UserId, forumId, newsEntry.ContentItem.Terms
+                );
+
+                if (postId > 0) {
+                    Response.Redirect (forum.GetPostUrl (forumTabId, forumId, postId));
+                } else {
+                    var log = new LogInfo ();
+                    log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
+                    log.LogPortalID = PortalId;
+                    log.AddProperty ("Message", "Cannot create forum post to discuss news entry");
+                    EventLogController.Instance.AddLog (log);
+                }
+            }
+        }
     }
 }

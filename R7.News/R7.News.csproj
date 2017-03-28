@@ -131,6 +131,7 @@
     <Compile Include="Integrations\Forum\IForumConnector.cs" />
     <Compile Include="Integrations\Forum\ActiveForumsConnector.cs" />
     <Compile Include="Integrations\ReflectionHelper.cs" />
+    <Compile Include="Integrations\Forum\ForumConnector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

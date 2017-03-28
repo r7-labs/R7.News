@@ -44,6 +44,7 @@
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                 </p>
+				<asp:LinkButton id="linkDiscuss" runat="server" resourceKey="linkDiscuss.Text" CssClass="btn btn-default btn-sm" OnCommand="linkDiscuss_Command" CommandArgument='<%# Eval ("EntryId") %>' />
             </div>
         </ItemTemplate>
         <ItemSeparatorTemplate>

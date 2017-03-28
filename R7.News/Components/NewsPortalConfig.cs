@@ -95,7 +95,7 @@ namespace R7.News.Components
 
     public class DiscussOnForumConfig
     {
-        public ForumProvider ForumModule { get; set; }
+        public ForumProvider ForumProvider { get; set; }
 
         public int TabId { get; set; }
 
