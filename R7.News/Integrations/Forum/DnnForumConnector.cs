@@ -111,5 +111,13 @@ namespace R7.News.Integrations.Forum
 
             return Null.NullInteger;
         }
+
+        public string GetPostUrl (int tabId, int forumId, int postId)
+        {
+            return Globals.NavigateURL (tabId, string.Empty,
+                                        "forumId", forumId.ToString (),
+                                        "threadId", postId.ToString (),
+                                        "scope", "posts");
+        }
     }
 }

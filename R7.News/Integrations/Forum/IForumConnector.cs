@@ -29,5 +29,7 @@ namespace R7.News.Integrations.Forum
         bool IsAvailable { get; }
 
         int AddPost (string postSubject, string postBody, int tabId, int moduleId, int portalId, int userId, int forumId, List<Term> terms);
+
+        string GetPostUrl (int tabId, int forumId, int postId);
     }
 }
