@@ -17,3 +17,10 @@ news-entry:
 term-url-providers:
   - R7.News.Providers.DescriptionTermUrlProvider
 #  - R7.News.Integrations.UniversityDivisionTermUrlProvider
+
+discuss-on-forum:
+  forum-provider: None # None, DnnForum, ActiveForums, YAF
+  tab-id: 1095
+  module-id: 418
+  forum-id: 2
+

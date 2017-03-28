@@ -19,7 +19,6 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.ObjectModel;
 using R7.News.Providers;
 
@@ -36,6 +35,8 @@ namespace R7.News.Components
         public AgentModuleConfig AgentModule { get; set; }
 
         public NewsEntryConfig NewsEntry { get; set; }
+
+        public DiscussOnForumConfig DiscussOnForum { get; set; }
 
         #region TermUrlProviders
 
@@ -81,5 +82,25 @@ namespace R7.News.Components
     {
         Friendly,
         Raw
+    }
+
+    // TODO: Move to Integrations.Forum namespace
+    public enum ForumProvider
+    {
+        None,
+        DnnForum,
+        ActiveForums,
+        YAF
+    }
+
+    public class DiscussOnForumConfig
+    {
+        public ForumProvider ForumModule { get; set; }
+
+        public int TabId { get; set; }
+
+        public int ModuleId { get; set; }
+
+        public int ForumId { get; set; }
     }
 }
