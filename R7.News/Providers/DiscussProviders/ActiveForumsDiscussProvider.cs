@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using DotNetNuke.Common;
@@ -29,31 +30,31 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
-using System.Collections.Generic;
+
 
 namespace R7.News.Providers.DiscussProviders
 {
     public class ActiveForumsDiscussProvider : IDiscussProvider
     {
-        static Assembly ForumAssembly;
+        static readonly Assembly forumAssembly;
 
         public IList<string> Params { get; set; }
 
         static ActiveForumsDiscussProvider ()
         {
             var dnnBinPath = Path.Combine (Globals.ApplicationMapPath, "bin");
-            ForumAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Modules.ActiveForums.dll"));
+            forumAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Modules.ActiveForums.dll"));
         }
 
         public bool IsAvailable {
-            get { return ForumAssembly != null; }
+            get { return forumAssembly != null; }
         }
 
         public int Discuss (INewsEntry newsEntry, int portalId, int userId)
         {
             try {
                 if (IsAvailable) {
-                    var connectorType = ForumAssembly.GetType ("DotNetNuke.Modules.ActiveForums.API.Content", true);
+                    var connectorType = forumAssembly.GetType ("DotNetNuke.Modules.ActiveForums.API.Content", true);
 
                     var connector = ReflectionHelper.New (connectorType);
                     var postMethod = ReflectionHelper.TryGetMethod (connectorType, "Topic_QuickCreate", BindingFlags.Instance | BindingFlags.Public);
