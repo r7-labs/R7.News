@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7.News.Agent", "R7.News.Ag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7.News.Stream", "R7.News.Stream\R7.News.Stream.csproj", "{8500A43C-923D-43B3-9288-BB1239A45BA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packaging", "Packaging\Packaging.csproj", "{6DA0B432-805E-4A97-B693-FE03027B9B4F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7.News.Tests", "R7.News.Tests\R7.News.Tests.csproj", "{9FE86FB8-58D5-466F-BC6C-294744565EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deploy", "Deploy\Deploy.csproj", "{5193C759-D066-47C2-84A8-1EB4159F4C34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{484911EF-DDCA-4B47-8975-D983AD7397B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484911EF-DDCA-4B47-8975-D983AD7397B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484911EF-DDCA-4B47-8975-D983AD7397B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6DA0B432-805E-4A97-B693-FE03027B9B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DA0B432-805E-4A97-B693-FE03027B9B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DA0B432-805E-4A97-B693-FE03027B9B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DA0B432-805E-4A97-B693-FE03027B9B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8500A43C-923D-43B3-9288-BB1239A45BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8500A43C-923D-43B3-9288-BB1239A45BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8500A43C-923D-43B3-9288-BB1239A45BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -37,6 +33,10 @@ Global
 		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5193C759-D066-47C2-84A8-1EB4159F4C34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5193C759-D066-47C2-84A8-1EB4159F4C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5193C759-D066-47C2-84A8-1EB4159F4C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5193C759-D066-47C2-84A8-1EB4159F4C34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -45,7 +45,7 @@ Global
 		$1.ResourceNamePolicy = FileName
 		$0.TextStylePolicy = $2
 		$2.inheritsSet = null
-		$2.scope = text/x-csharp
+		$2.scope = text/css
 		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = text/x-dnn-manifest
