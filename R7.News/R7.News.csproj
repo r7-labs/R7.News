@@ -76,8 +76,8 @@
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
     <Folder Include="Modules\" />
-    <Folder Include="Integrations\Forum\" />
     <Folder Include="Providers\TermUrlProviders\" />
+    <Folder Include="Providers\DiscussProviders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -123,16 +123,16 @@
     </Compile>
     <Compile Include="Models\WeightRange.cs" />
     <Compile Include="Modules\NewsModuleBase.cs" />
-    <Compile Include="Integrations\Forum\DnnForumConnector.cs" />
-    <Compile Include="Integrations\Forum\IForumConnector.cs" />
-    <Compile Include="Integrations\Forum\ActiveForumsConnector.cs" />
-    <Compile Include="Integrations\ReflectionHelper.cs" />
-    <Compile Include="Integrations\Forum\ForumConnector.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProvider.cs" />
     <Compile Include="Providers\TermUrlProviders\ITermUrlProvider.cs" />
     <Compile Include="Providers\TermUrlProviders\TermUrlManager.cs" />
     <Compile Include="Providers\TermUrlProviders\UniversityDivisionInfo.cs" />
     <Compile Include="Providers\TermUrlProviders\UniversityDivisionTermUrlProvider.cs" />
+    <Compile Include="Providers\DiscussProviders\ReflectionHelper.cs" />
+    <Compile Include="Providers\DiscussProviders\ActiveForumsConnector.cs" />
+    <Compile Include="Providers\DiscussProviders\DnnForumConnector.cs" />
+    <Compile Include="Providers\DiscussProviders\ForumConnector.cs" />
+    <Compile Include="Providers\DiscussProviders\IForumConnector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Components;
 
-namespace R7.News.Integrations.Forum
+namespace R7.News.Providers.DiscussProviders
 {
     public class ForumConnector: IForumConnector
     {

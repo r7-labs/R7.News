@@ -25,7 +25,7 @@ using System.Reflection;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 
-namespace R7.News.Integrations
+namespace R7.News.Providers.DiscussProviders
 {
     public static class ReflectionHelper
     {

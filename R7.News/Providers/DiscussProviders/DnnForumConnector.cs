@@ -30,7 +30,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using Assembly = System.Reflection.Assembly;
 
-namespace R7.News.Integrations.Forum
+namespace R7.News.Providers.DiscussProviders
 {
     internal enum DnnForumPostMessage
     {

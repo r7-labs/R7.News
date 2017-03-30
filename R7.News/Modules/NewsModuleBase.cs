@@ -28,7 +28,7 @@ using DotNetNuke.Services.Log.EventLog;
 using R7.DotNetNuke.Extensions.Modules;
 using R7.News.Components;
 using R7.News.Data;
-using R7.News.Integrations.Forum;
+using R7.News.Providers.DiscussProviders;
 
 namespace R7.News.Modules
 {
