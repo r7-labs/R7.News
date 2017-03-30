@@ -206,18 +206,6 @@ namespace R7.News.Stream
         {
             var item = (StreamNewsEntryViewModel) e.Item.DataItem;
 
-            var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
-            var iconEdit = (Image) e.Item.FindControl ("imageEdit");
-
-            // edit link
-            if (IsEditable) {
-                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
-            }
-
-            // make edit link visible in edit mode
-            linkEdit.Visible = IsEditable;
-            iconEdit.Visible = IsEditable;
-
             // visibility badges
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
             listBadges.DataSource = item.Badges;
@@ -231,4 +219,3 @@ namespace R7.News.Stream
         }
     }
 }
-

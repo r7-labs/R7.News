@@ -10,7 +10,7 @@
 
 <asp:Panel id="panelStream" runat="server">
     <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
-    <asp:ListView id="listStream" DataKeyNames="EntryId" runat="server" OnItemDataBound="listStream_ItemDataBound">
+    <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
             <div runat="server" class="news-stream">
                 <div runat="server" id="itemPlaceholder"></div>
@@ -19,32 +19,33 @@
         <ItemTemplate>
             <div>
                 <h3>
-                    <asp:HyperLink id="linkEdit" runat="server">
+                    <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>"
+						NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
                         <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                     </asp:HyperLink>
-                    <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
+                    <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                 </h3>
                 <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
                 <p class="news-entry-info">
-                    <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %> 
-                    <span class="glyphicon glyphicon-user"></span> <%# Eval ("CreatedByUserName") %>
+                    <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %> 
+                    <span class="glyphicon glyphicon-user"></span> <%# Item.CreatedByUserName %>
                 </p>
                 <div class="row news-entry-main-row">
-                    <div class="<%# Eval ("ImageContainerCssClass") %>">
-                        <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Eval ("Link") %>' Visible='<%# Eval ("HasImage") %>'>
+                    <div class="<%# Item.ImageContainerCssClass %>">
+                        <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                             <asp:Image id="imageImage" runat="server"
-                                ImageUrl='<%# Eval ("ImageUrl") %>' AlternateText='<%# Eval ("Title") %>'
+                                ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
                                 CssClass="img img-rounded img-responsive news-entry-image" />
                         </asp:HyperLink>
                     </div>
-                    <div class="<%# Eval ("DescriptionContainerCssClass") %> news-entry-description">
-                       <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                    <div class="<%# Item.DescriptionContainerCssClass %> news-entry-description">
+                       <%# HttpUtility.HtmlDecode (Item.Description) %>
                     </div>
                 </div>
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                 </p>
-				<asp:LinkButton id="linkDiscuss" runat="server" resourceKey="linkDiscuss.Text" CssClass="btn btn-default btn-sm" OnCommand="linkDiscuss_Command" CommandArgument='<%# Eval ("EntryId") %>' />
+				<asp:LinkButton id="linkDiscuss" runat="server" resourceKey="linkDiscuss.Text" CssClass="btn btn-default btn-sm" OnCommand="linkDiscuss_Command" CommandArgument="<%# Item.EntryId %>" />
             </div>
         </ItemTemplate>
         <ItemSeparatorTemplate>
