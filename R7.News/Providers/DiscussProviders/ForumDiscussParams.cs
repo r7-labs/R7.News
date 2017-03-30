@@ -1,5 +1,5 @@
 ﻿//
-//  IDiscussProvider.cs
+//  ForumDiscussParams.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -19,19 +19,25 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using R7.News.Models;
 using System.Collections.Generic;
 
 namespace R7.News.Providers.DiscussProviders
 {
-    public interface IDiscussProvider
+    internal struct ForumDiscussParams
     {
-        bool IsAvailable { get; }
+        public int TabId;
 
-        IList<string> Params { get; set; }
+        public int ModuleId;
 
-        int Discuss (INewsEntry newsEntry,int portalId, int userId);
+        public int ForumId;
 
-        string GetDiscussUrl (int discussId);
+        public static ForumDiscussParams Parse (IList<string> providerParams)
+        {
+            return new ForumDiscussParams {
+                TabId = int.Parse (providerParams [0]),
+                ModuleId = int.Parse (providerParams [1]),
+                ForumId = int.Parse (providerParams [2])
+            };
+        }
     }
 }

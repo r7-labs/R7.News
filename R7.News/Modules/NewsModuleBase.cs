@@ -29,6 +29,7 @@ using R7.DotNetNuke.Extensions.Modules;
 using R7.News.Components;
 using R7.News.Data;
 using R7.News.Providers.DiscussProviders;
+using System.Linq;
 
 namespace R7.News.Modules
 {
@@ -63,17 +64,14 @@ namespace R7.News.Modules
         {
             var entryId = int.Parse ((string)e.CommandArgument);
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, PortalId);
-            if (newsEntry != null) {
-                var discussProvider = new DiscussProvider (NewsConfig.Instance.DiscussOnForum.ForumProvider);
-                var tabId = NewsConfig.Instance.DiscussOnForum.TabId;
-                var moduleId = NewsConfig.Instance.DiscussOnForum.ModuleId;
-                var forumId = NewsConfig.Instance.DiscussOnForum.ForumId;
-
-                var discussId = discussProvider.Discuss (newsEntry, tabId, moduleId, PortalId, UserId, forumId);
+            var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault ();
+            if (newsEntry != null && discussProvider != null) {
+                var discussId = discussProvider.Discuss (newsEntry, PortalId, UserId);
 
                 if (discussId > 0) {
-                    Response.Redirect (discussProvider.GetDiscussUrl (tabId, forumId, discussId));
-                } else {
+                    Response.Redirect (discussProvider.GetDiscussUrl (discussId));
+                }
+                else {
                     var log = new LogInfo ();
                     log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
                     log.LogPortalID = PortalId;

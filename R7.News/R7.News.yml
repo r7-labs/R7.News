@@ -18,9 +18,8 @@ term-url-providers:
   - R7.News.Providers.TermUrlProviders.DescriptionTermUrlProvider
 #  - R7.News.Providers.TermUrlProviders.UniversityDivisionTermUrlProvider
 
-discuss-on-forum:
-  forum-provider: None # None, DnnForum, ActiveForums, YAF
-  tab-id: 1095
-  module-id: 418
-  forum-id: 2
-
+discuss-providers:
+  - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
+    params: ['1095', '418', '2'] # tabId, moduleId, forumId
+  - type: R7.News.Providers.DiscussProviders.ActiveForumsDiscussProvider   
+    params: ['1094', '418', '2'] # tabId, moduleId, forumId

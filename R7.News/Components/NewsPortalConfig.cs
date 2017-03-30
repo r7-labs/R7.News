@@ -19,8 +19,10 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using R7.News.Providers.TermUrlProviders;
+using R7.News.Providers.DiscussProviders;
 
 namespace R7.News.Components
 {
@@ -36,9 +38,7 @@ namespace R7.News.Components
 
         public NewsEntryConfig NewsEntry { get; set; }
 
-        public DiscussOnForumConfig DiscussOnForum { get; set; }
-
-        #region TermUrlProviders
+        #region TermUrl providers
 
         public Collection<string> TermUrlProviders { get; set; }
 
@@ -52,6 +52,24 @@ namespace R7.News.Components
         public void AddTermUrlProvider (ITermUrlProvider provider)
         {
             TermUrlProvidersInternal.Add (provider);
+        }
+
+        #endregion
+
+        #region Discuss providers
+
+        public List<DiscussProviderConfig> DiscussProviders { get; set; }
+
+        protected readonly Collection<IDiscussProvider> DiscussProviders_Internal = new Collection<IDiscussProvider> ();
+
+        public Collection<IDiscussProvider> GetDiscussProviders ()
+        {
+            return DiscussProviders_Internal;
+        }
+
+        public void AddDiscussProvider (IDiscussProvider provider)
+        {
+            DiscussProviders_Internal.Add (provider);
         }
 
         #endregion
@@ -84,23 +102,10 @@ namespace R7.News.Components
         Raw
     }
 
-    // TODO: Move to Integrations.Forum namespace
-    public enum ForumProvider
+    public class DiscussProviderConfig
     {
-        None,
-        DnnForum,
-        ActiveForums,
-        YAF
-    }
+        public string Type { get; set; }
 
-    public class DiscussOnForumConfig
-    {
-        public ForumProvider ForumProvider { get; set; }
-
-        public int TabId { get; set; }
-
-        public int ModuleId { get; set; }
-
-        public int ForumId { get; set; }
+        public List<string> Params { get; set; }
     }
 }

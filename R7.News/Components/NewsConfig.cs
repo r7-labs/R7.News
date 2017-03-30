@@ -29,6 +29,7 @@ using YamlDotNet.Serialization.NamingConventions;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Providers.TermUrlProviders;
 using Assembly = System.Reflection.Assembly;
+using R7.News.Providers.DiscussProviders;
 
 namespace R7.News.Components
 {
@@ -65,10 +66,12 @@ namespace R7.News.Components
                     var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
 
                     LoadTermUrlProviders (portalConfig);
+                    LoadDiscussProviders (portalConfig);
+
                     return portalConfig;
                 }
             }
-                                   ));
+            ));
 
             return lazyPortalConfig.Value;
         }
@@ -113,6 +116,46 @@ namespace R7.News.Components
                     portalConfig.AddTermUrlProvider (provider);
                 }
                 catch (Exception ex) {
+                    var logController = new ExceptionLogController ();
+                    logController.AddLog (ex);
+                }
+            }
+        }
+
+        private static void LoadDiscussProviders (NewsPortalConfig portalConfig)
+        {
+            foreach (var providerEntry in portalConfig.DiscussProviders) {
+                try {
+                    // parse config entry
+                    var providerEntrySplitted = providerEntry.Type.Split (colon, StringSplitOptions.RemoveEmptyEntries);
+                    string assemblyName;
+                    string typeName;
+                    if (providerEntrySplitted.Length == 1) {
+                        assemblyName = null;
+                        typeName = providerEntrySplitted [0];
+                    } else if (providerEntrySplitted.Length == 2) {
+                        assemblyName = providerEntrySplitted [0];
+                        typeName = providerEntrySplitted [1];
+                    } else {
+                        continue;
+                    }
+
+                    // load assembly and type
+                    Assembly assembly;
+                    if (string.IsNullOrEmpty (assemblyName)) {
+                        assembly = Assembly.GetExecutingAssembly ();
+                    } else {
+                        assembly = Assembly.LoadFrom (
+                            Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName)
+                        );
+                    }
+
+                    var type = assembly.GetType (typeName);
+                    var provider = Activator.CreateInstance (type) as IDiscussProvider;
+                    provider.Params = providerEntry.Params;
+
+                    portalConfig.AddDiscussProvider (provider);
+                } catch (Exception ex) {
                     var logController = new ExceptionLogController ();
                     logController.AddLog (ex);
                 }

@@ -131,8 +131,8 @@
     <Compile Include="Providers\DiscussProviders\ReflectionHelper.cs" />
     <Compile Include="Providers\DiscussProviders\ActiveForumsDiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\DnnForumDiscussProvider.cs" />
-    <Compile Include="Providers\DiscussProviders\DiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\IDiscussProvider.cs" />
+    <Compile Include="Providers\DiscussProviders\ForumDiscussParams.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

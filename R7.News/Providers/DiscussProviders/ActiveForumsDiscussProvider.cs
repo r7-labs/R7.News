@@ -29,12 +29,15 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
+using System.Collections.Generic;
 
 namespace R7.News.Providers.DiscussProviders
 {
     public class ActiveForumsDiscussProvider : IDiscussProvider
     {
         static Assembly ForumAssembly;
+
+        public IList<string> Params { get; set; }
 
         static ActiveForumsDiscussProvider ()
         {
@@ -46,7 +49,7 @@ namespace R7.News.Providers.DiscussProviders
             get { return ForumAssembly != null; }
         }
 
-        public int Discuss (INewsEntry newsEntry, int tabId, int moduleId, int portalId, int userId, int forumId)
+        public int Discuss (INewsEntry newsEntry, int portalId, int userId)
         {
             try {
                 if (IsAvailable) {
@@ -55,10 +58,12 @@ namespace R7.News.Providers.DiscussProviders
                     var connector = ReflectionHelper.New (connectorType);
                     var postMethod = ReflectionHelper.TryGetMethod (connectorType, "Topic_QuickCreate", BindingFlags.Instance | BindingFlags.Public);
 
+                    var forumParams = ForumDiscussParams.Parse (Params);
+
                     var result = postMethod.Invoke (connector, new object [] {
                         portalId,
-                        moduleId,
-                        forumId,
+                        forumParams.ModuleId,
+                        forumParams.ForumId,
                         newsEntry.Title,
                         newsEntry.Description,
                         userId,
@@ -82,10 +87,11 @@ namespace R7.News.Providers.DiscussProviders
             return Null.NullInteger;
         }
 
-        public string GetDiscussUrl (int tabId, int forumId, int discussId)
+        public string GetDiscussUrl (int discussId)
         {
-            return Globals.NavigateURL (tabId, string.Empty,
-                                        "forumId", forumId.ToString (),
+            var forumParams = ForumDiscussParams.Parse (Params);
+            return Globals.NavigateURL (forumParams.TabId, string.Empty,
+                                        "forumId", forumParams.ForumId.ToString (),
                                         "postId", discussId.ToString ());
         }
     }
