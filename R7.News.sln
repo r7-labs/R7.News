@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7.News.Stream", "R7.News.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Packaging", "Packaging\Packaging.csproj", "{6DA0B432-805E-4A97-B693-FE03027B9B4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R7.News.Tests", "R7.News.Tests\R7.News.Tests.csproj", "{9FE86FB8-58D5-466F-BC6C-294744565EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9C5EB53D-505F-4665-933C-774C650EA072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C5EB53D-505F-4665-933C-774C650EA072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C5EB53D-505F-4665-933C-774C650EA072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE86FB8-58D5-466F-BC6C-294744565EAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
@@ -39,7 +45,7 @@ Global
 		$1.ResourceNamePolicy = FileName
 		$0.TextStylePolicy = $2
 		$2.inheritsSet = null
-		$2.scope = text/css
+		$2.scope = text/x-csharp
 		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = text/x-dnn-manifest

@@ -65,5 +65,9 @@
       <Project>{8500A43C-923D-43B3-9288-BB1239A45BA7}</Project>
       <Name>R7.News.Stream</Name>
     </ProjectReference>
+    <ProjectReference Include="..\R7.News.Tests\R7.News.Tests.csproj">
+      <Project>{9FE86FB8-58D5-466F-BC6C-294744565EAB}</Project>
+      <Name>R7.News.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
