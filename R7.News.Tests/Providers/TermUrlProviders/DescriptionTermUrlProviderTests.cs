@@ -23,7 +23,7 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Providers.TermUrlProviders;
 using Xunit;
 
-namespace R7.News.Tests.Providers
+namespace R7.News.Tests.Providers.TermUrlProviders
 {
     public class DescriptionTermUrlProviderTests
     {
@@ -38,11 +38,6 @@ namespace R7.News.Tests.Providers
             Assert.Equal ("mailto:foo@bar.com", provider.GetUrl (new Term { Description = "mailto:foo@bar.com" }));
             Assert.Equal (string.Empty, provider.GetUrl (new Term { Description = "/LinkClick.aspx?link=10" }));
             Assert.Equal (string.Empty, provider.GetUrl (new Term { Description = "Hello!" }));
-        }
-
-        [Fact]
-        public void DummyTest ()
-        {
         }
     }
 }
