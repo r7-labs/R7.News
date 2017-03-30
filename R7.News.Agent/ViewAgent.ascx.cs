@@ -213,21 +213,6 @@ namespace R7.News.Agent
         protected void listAgent_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
             var item = (AgentNewsEntryViewModel) e.Item.DataItem;
-            
-            var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
-            var iconEdit = (Image) e.Item.FindControl ("imageEdit");
-            
-            // read module settings (may be useful in a future)
-            // var settings = new R7.News.AgentSettings (this);            
-            
-            // edit link
-            if (IsEditable) {
-                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
-            }
-
-            // make edit link visible in edit mode
-            linkEdit.Visible = IsEditable;
-            iconEdit.Visible = IsEditable;
 
             // visibility badges
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
@@ -262,18 +247,6 @@ namespace R7.News.Agent
         protected void listGroup_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
             var item = (AgentNewsEntryViewModel) e.Item.DataItem;
-
-            var linkEdit = (HyperLink) e.Item.FindControl ("linkEdit");
-            var iconEdit = (Image) e.Item.FindControl ("imageEdit");
-
-            // edit link
-            if (IsEditable) {
-                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
-            }
-
-            // make edit link visible in edit mode
-            linkEdit.Visible = IsEditable;
-            iconEdit.Visible = IsEditable;
 
             // visibility badges
             var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
