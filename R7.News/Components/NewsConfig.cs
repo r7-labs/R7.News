@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -20,16 +20,18 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Log.EventLog;
+using R7.News.Providers.DiscussProviders;
+using R7.News.Providers.TermUrlProviders;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using DotNetNuke.Services.Log.EventLog;
-using R7.News.Providers.TermUrlProviders;
 using Assembly = System.Reflection.Assembly;
-using R7.News.Providers.DiscussProviders;
 
 namespace R7.News.Components
 {
@@ -65,8 +67,8 @@ namespace R7.News.Components
                     var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
                     var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
 
-                    LoadTermUrlProviders (portalConfig);
-                    LoadDiscussProviders (portalConfig);
+                    LoadProviders<ITermUrlProvider> (portalConfig, portalConfig.TermUrlProviders.Cast<IProviderConfig> ());
+                    LoadProviders<IDiscussProvider> (portalConfig, portalConfig.DiscussProviders.Cast<IProviderConfig> ());
 
                     return portalConfig;
                 }
@@ -78,42 +80,14 @@ namespace R7.News.Components
 
         #endregion
 
-        private static readonly char [] colon = { ':' };
-
-        private static void LoadTermUrlProviders (NewsPortalConfig portalConfig)
+        static void LoadProviders<TProvider> (NewsPortalConfig portalConfig, IEnumerable<IProviderConfig> providerConfigs)
         {
-            foreach (var providerEntry in portalConfig.TermUrlProviders) {
+            foreach (var providerConfig in providerConfigs) {
                 try {
-                    // parse config entry
-                    var providerEntrySplitted = providerEntry.Split (colon, StringSplitOptions.RemoveEmptyEntries);
-                    string assemblyName;
-                    string typeName;
-                    if (providerEntrySplitted.Length == 1) {
-                        assemblyName = null;
-                        typeName = providerEntrySplitted [0];
+                    var providerType = GetProviderType (providerConfig.Type);
+                    if (providerType != null) {
+                        portalConfig.AddProvider ((TProvider)Activator.CreateInstance (providerType), providerConfig);
                     }
-                    else if (providerEntrySplitted.Length == 2) {
-                        assemblyName = providerEntrySplitted [0];
-                        typeName = providerEntrySplitted [1];
-                    }
-                    else {
-                        continue;
-                    }
-
-                    // load assembly and type
-                    Assembly assembly;
-                    if (string.IsNullOrEmpty (assemblyName)) {
-                        assembly = Assembly.GetExecutingAssembly ();
-                    }
-                    else {
-                        assembly = Assembly.LoadFrom (
-                            Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName)
-                        );
-                    }
-
-                    var type = assembly.GetType (typeName);
-                    var provider = Activator.CreateInstance (type) as ITermUrlProvider;
-                    portalConfig.AddTermUrlProvider (provider);
                 }
                 catch (Exception ex) {
                     var logController = new ExceptionLogController ();
@@ -122,45 +96,44 @@ namespace R7.News.Components
             }
         }
 
-        private static void LoadDiscussProviders (NewsPortalConfig portalConfig)
+        static Type GetProviderType (string fullTypeName)
         {
-            foreach (var providerEntry in portalConfig.DiscussProviders) {
-                try {
-                    // parse config entry
-                    var providerEntrySplitted = providerEntry.Type.Split (colon, StringSplitOptions.RemoveEmptyEntries);
-                    string assemblyName;
-                    string typeName;
-                    if (providerEntrySplitted.Length == 1) {
-                        assemblyName = null;
-                        typeName = providerEntrySplitted [0];
-                    } else if (providerEntrySplitted.Length == 2) {
-                        assemblyName = providerEntrySplitted [0];
-                        typeName = providerEntrySplitted [1];
-                    } else {
-                        continue;
-                    }
-
-                    // load assembly and type
-                    Assembly assembly;
-                    if (string.IsNullOrEmpty (assemblyName)) {
-                        assembly = Assembly.GetExecutingAssembly ();
-                    } else {
-                        assembly = Assembly.LoadFrom (
-                            Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName)
-                        );
-                    }
-
-                    var type = assembly.GetType (typeName);
-                    var provider = Activator.CreateInstance (type) as IDiscussProvider;
-                    provider.Params = providerEntry.Params;
-
-                    portalConfig.AddDiscussProvider (provider);
-                } catch (Exception ex) {
-                    var logController = new ExceptionLogController ();
-                    logController.AddLog (ex);
-                }
-            }
+            return LoadProviderAssembly (GetAssemblyName (fullTypeName)).GetType (GetProviderTypeName (fullTypeName));
         }
 
-    }
+        static readonly char [] colon = { ':' };
+
+        static string GetAssemblyName (string fullTypeName)
+        {
+            var fullTypeNameParts = fullTypeName.Split (colon, StringSplitOptions.RemoveEmptyEntries);
+            if (fullTypeNameParts.Length == 2) {
+                return fullTypeNameParts [0];
+            }
+
+            return null;
+        }
+
+        static string GetProviderTypeName (string fullTypeName)
+        {
+            var fullTypeNameParts = fullTypeName.Split (colon, StringSplitOptions.RemoveEmptyEntries);
+            if (fullTypeNameParts.Length == 1) {
+                return fullTypeNameParts [0];
+            }
+
+            if (fullTypeNameParts.Length == 2) {
+                return fullTypeNameParts [1];
+            }
+
+            return null;
+        }
+
+        static Assembly LoadProviderAssembly (string assemblyName)
+        {
+            if (string.IsNullOrEmpty (assemblyName)) {
+                return Assembly.GetExecutingAssembly ();
+            }
+
+            return Assembly.LoadFrom (Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName));
+        }
+   }
 }

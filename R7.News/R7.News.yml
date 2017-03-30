@@ -15,8 +15,8 @@ news-entry:
   default-structural-weight: 10
 
 term-url-providers:
-  - R7.News.Providers.TermUrlProviders.DescriptionTermUrlProvider
-#  - R7.News.Providers.TermUrlProviders.UniversityDivisionTermUrlProvider
+  - type: R7.News.Providers.TermUrlProviders.DescriptionTermUrlProvider
+#  - type: R7.News.Providers.TermUrlProviders.UniversityDivisionTermUrlProvider
 
 discuss-providers:
   - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider

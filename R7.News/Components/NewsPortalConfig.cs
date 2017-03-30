@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -40,7 +40,7 @@ namespace R7.News.Components
 
         #region TermUrl providers
 
-        public Collection<string> TermUrlProviders { get; set; }
+        public Collection<TermUrlProviderConfig> TermUrlProviders { get; set; }
 
         protected readonly Collection<ITermUrlProvider> TermUrlProvidersInternal = new Collection<ITermUrlProvider> ();
 
@@ -49,16 +49,11 @@ namespace R7.News.Components
             return TermUrlProvidersInternal;
         }
 
-        public void AddTermUrlProvider (ITermUrlProvider provider)
-        {
-            TermUrlProvidersInternal.Add (provider);
-        }
-
         #endregion
 
         #region Discuss providers
 
-        public List<DiscussProviderConfig> DiscussProviders { get; set; }
+        public Collection<DiscussProviderConfig> DiscussProviders { get; set; }
 
         protected readonly Collection<IDiscussProvider> DiscussProviders_Internal = new Collection<IDiscussProvider> ();
 
@@ -67,12 +62,19 @@ namespace R7.News.Components
             return DiscussProviders_Internal;
         }
 
-        public void AddDiscussProvider (IDiscussProvider provider)
-        {
-            DiscussProviders_Internal.Add (provider);
-        }
-
         #endregion
+
+        public void AddProvider<TProvider> (TProvider provider, IProviderConfig providerConfig)
+        {
+            if (provider is ITermUrlProvider) {
+                TermUrlProvidersInternal.Add ((ITermUrlProvider)provider);
+            }
+            else if (provider is IDiscussProvider) {
+                var discussProvider = (IDiscussProvider) provider;
+                discussProvider.Params = providerConfig.Params;
+                DiscussProviders_Internal.Add (discussProvider);
+            }
+        }
     }
 
     public class NewsEntryConfig
@@ -102,7 +104,21 @@ namespace R7.News.Components
         Raw
     }
 
-    public class DiscussProviderConfig
+    public interface IProviderConfig
+    {
+        string Type { get; set; }
+
+        List<string> Params { get; set; }
+    }
+
+    public class TermUrlProviderConfig : IProviderConfig
+    {
+        public string Type { get; set; }
+
+        public List<string> Params { get; set; }
+    }
+
+    public class DiscussProviderConfig: IProviderConfig
     {
         public string Type { get; set; }
 
