@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -20,9 +20,8 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Text.RegularExpressions;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Common;
-using DotNetNuke.Entities.Tabs;
 
 namespace R7.News.Providers
 {
@@ -35,21 +34,24 @@ namespace R7.News.Providers
 
         public string GetUrl (Term term)
         {
-            var url = term.Description;
-            var urlType = Globals.GetURLType (url);
-            if (urlType != TabType.Normal) {
-                if (urlType != TabType.Url) {
-                    return term.Description;
-                }
-                if (url.StartsWith ("mailto:", StringComparison.InvariantCultureIgnoreCase)
-                    || url.IndexOf ("://", StringComparison.InvariantCultureIgnoreCase) >= 0
-                    || url.StartsWith ("\\\\", StringComparison.InvariantCultureIgnoreCase)
-                    || url.StartsWith ("/", StringComparison.InvariantCultureIgnoreCase)) {
-                    return term.Description;
-                }
+            return IsUrl (term.Description) ? term.Description : string.Empty;
+        }
+
+        protected bool IsUrl (string url)
+        {
+            if (url.StartsWith ("mailto:", StringComparison.InvariantCultureIgnoreCase)
+                || url.IndexOf ("://", StringComparison.InvariantCultureIgnoreCase) >= 0
+                || url.StartsWith ("//", StringComparison.InvariantCultureIgnoreCase)
+                || IsTabUrl (url)) {
+                return true;
             }
 
-            return string.Empty;
+            return false;
+        }
+
+        protected bool IsTabUrl (string url)
+        {
+            return Regex.IsMatch (url, @"^\d+$");
         }
 
         public string GetUrl (int termId, TermController termController)
