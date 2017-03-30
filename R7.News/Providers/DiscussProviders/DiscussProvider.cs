@@ -1,5 +1,5 @@
 ﻿//
-//  ForumConnector.cs
+//  DiscussProvider.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -25,17 +25,17 @@ using R7.News.Components;
 
 namespace R7.News.Providers.DiscussProviders
 {
-    public class ForumConnector: IForumConnector
+    public class DiscussProvider: IDiscussProvider
     {
-        public ForumConnector (ForumProvider forumProvider)
+        public DiscussProvider (ForumProvider forumProvider)
         {
             switch (forumProvider) {
-                case ForumProvider.DnnForum: Implementation = new DnnForumConnector (); break;
-                case ForumProvider.ActiveForums: Implementation = new ActiveForumsConnector (); break;
+                case ForumProvider.DnnForum: Implementation = new DnnForumDiscussProvider (); break;
+                case ForumProvider.ActiveForums: Implementation = new ActiveForumsDiscussProvider (); break;
             }
         }
 
-        protected IForumConnector Implementation;
+        protected IDiscussProvider Implementation;
 
         public bool IsAvailable
         {

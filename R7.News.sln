@@ -45,7 +45,7 @@ Global
 		$1.ResourceNamePolicy = FileName
 		$0.TextStylePolicy = $2
 		$2.inheritsSet = null
-		$2.scope = text/css
+		$2.scope = text/x-csharp
 		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = text/x-dnn-manifest

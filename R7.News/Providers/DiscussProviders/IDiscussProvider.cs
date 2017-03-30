@@ -1,5 +1,5 @@
 ﻿//
-//  IForumConnector.cs
+//  IDiscussProvider.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -24,7 +24,7 @@ using DotNetNuke.Entities.Content.Taxonomy;
 
 namespace R7.News.Providers.DiscussProviders
 {
-    public interface IForumConnector
+    public interface IDiscussProvider
     {
         bool IsAvailable { get; }
 

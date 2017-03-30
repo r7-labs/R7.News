@@ -1,5 +1,5 @@
 ﻿//
-//  DnnForumConnector.cs
+//  DnnForumDiscussProvider.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -52,13 +52,13 @@ namespace R7.News.Providers.DiscussProviders
         UserCannotViewForum = 15,
     }
 
-    public class DnnForumConnector: IForumConnector
+    public class DnnForumDiscussProvider: IDiscussProvider
     {
         static Assembly ForumAssembly;
 
         static Assembly ForumAssembly2;
 
-        static DnnForumConnector ()
+        static DnnForumDiscussProvider ()
         {
             var dnnBinPath = Path.Combine (Globals.ApplicationMapPath, "bin");
             ForumAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Modules.Forum.dll"));

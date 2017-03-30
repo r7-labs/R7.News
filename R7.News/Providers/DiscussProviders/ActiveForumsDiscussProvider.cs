@@ -1,5 +1,5 @@
 ﻿//
-//  ActiveForumsConnector.cs
+//  ActiveForumsDiscussProvider.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -33,11 +33,11 @@ using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Providers.DiscussProviders
 {
-    public class ActiveForumsConnector : IForumConnector
+    public class ActiveForumsDiscussProvider : IDiscussProvider
     {
         static Assembly ForumAssembly;
 
-        static ActiveForumsConnector ()
+        static ActiveForumsDiscussProvider ()
         {
             var dnnBinPath = Path.Combine (Globals.ApplicationMapPath, "bin");
             ForumAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Modules.ActiveForums.dll"));

@@ -129,10 +129,10 @@
     <Compile Include="Providers\TermUrlProviders\UniversityDivisionInfo.cs" />
     <Compile Include="Providers\TermUrlProviders\UniversityDivisionTermUrlProvider.cs" />
     <Compile Include="Providers\DiscussProviders\ReflectionHelper.cs" />
-    <Compile Include="Providers\DiscussProviders\ActiveForumsConnector.cs" />
-    <Compile Include="Providers\DiscussProviders\DnnForumConnector.cs" />
-    <Compile Include="Providers\DiscussProviders\ForumConnector.cs" />
-    <Compile Include="Providers\DiscussProviders\IForumConnector.cs" />
+    <Compile Include="Providers\DiscussProviders\ActiveForumsDiscussProvider.cs" />
+    <Compile Include="Providers\DiscussProviders\DnnForumDiscussProvider.cs" />
+    <Compile Include="Providers\DiscussProviders\DiscussProvider.cs" />
+    <Compile Include="Providers\DiscussProviders\IDiscussProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
