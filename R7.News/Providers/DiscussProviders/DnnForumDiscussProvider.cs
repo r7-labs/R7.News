@@ -29,6 +29,7 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using Assembly = System.Reflection.Assembly;
+using R7.News.Models;
 
 namespace R7.News.Providers.DiscussProviders
 {
@@ -69,7 +70,7 @@ namespace R7.News.Providers.DiscussProviders
             get { return ForumAssembly != null && ForumAssembly2 != null; }
         }
 
-        public int AddPost (string postSubject, string postBody, int tabId, int moduleId, int portalId, int userId, int forumId, List<Term> terms)
+        public int Discuss (INewsEntry newsEntry, int tabId, int moduleId, int portalId, int userId, int forumId)
         {
             try {
                 if (IsAvailable) {
@@ -84,14 +85,14 @@ namespace R7.News.Providers.DiscussProviders
                             moduleId,
                             portalId,
                             userId,
-                            postSubject,
-                            postBody,
+                            newsEntry.Title,
+                            newsEntry.Description,
                             forumId,
                             0, // ParentPostID
                             null, // string of attachments
                             "R7.News", // provider
                             -1, // ParentThreadID
-                            terms,
+                            newsEntry.ContentItem.Terms,
                             true // IsPinned
                         });
 
@@ -112,11 +113,11 @@ namespace R7.News.Providers.DiscussProviders
             return Null.NullInteger;
         }
 
-        public string GetPostUrl (int tabId, int forumId, int postId)
+        public string GetDiscussUrl (int tabId, int forumId, int discussId)
         {
             return Globals.NavigateURL (tabId, string.Empty,
                                         "forumId", forumId.ToString (),
-                                        "threadId", postId.ToString (),
+                                        "threadId", discussId.ToString (),
                                         "scope", "posts");
         }
     }

@@ -19,8 +19,7 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using DotNetNuke.Entities.Content.Taxonomy;
+using R7.News.Models;
 
 namespace R7.News.Providers.DiscussProviders
 {
@@ -28,8 +27,8 @@ namespace R7.News.Providers.DiscussProviders
     {
         bool IsAvailable { get; }
 
-        int AddPost (string postSubject, string postBody, int tabId, int moduleId, int portalId, int userId, int forumId, List<Term> terms);
+        int Discuss (INewsEntry newsEntry, int tabId, int moduleId, int portalId, int userId, int forumId);
 
-        string GetPostUrl (int tabId, int forumId, int postId);
+        string GetDiscussUrl (int tabId, int forumId, int discussId);
     }
 }

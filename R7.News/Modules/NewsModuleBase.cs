@@ -65,22 +65,19 @@ namespace R7.News.Modules
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, PortalId);
             if (newsEntry != null) {
                 var discussProvider = new DiscussProvider (NewsConfig.Instance.DiscussOnForum.ForumProvider);
-                var forumTabId = NewsConfig.Instance.DiscussOnForum.TabId;
-                var forumModuleId = NewsConfig.Instance.DiscussOnForum.ModuleId;
+                var tabId = NewsConfig.Instance.DiscussOnForum.TabId;
+                var moduleId = NewsConfig.Instance.DiscussOnForum.ModuleId;
                 var forumId = NewsConfig.Instance.DiscussOnForum.ForumId;
 
-                var postId = discussProvider.AddPost (
-                    newsEntry.Title, newsEntry.Description,
-                    forumTabId, forumModuleId, PortalId, UserId, forumId, newsEntry.ContentItem.Terms
-                );
+                var discussId = discussProvider.Discuss (newsEntry, tabId, moduleId, PortalId, UserId, forumId);
 
-                if (postId > 0) {
-                    Response.Redirect (discussProvider.GetPostUrl (forumTabId, forumId, postId));
+                if (discussId > 0) {
+                    Response.Redirect (discussProvider.GetDiscussUrl (tabId, forumId, discussId));
                 } else {
                     var log = new LogInfo ();
                     log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
                     log.LogPortalID = PortalId;
-                    log.AddProperty ("Message", "Cannot create forum post to discuss news entry");
+                    log.AddProperty ("Message", "Cannot create discussion for a news entry");
                     EventLogController.Instance.AddLog (log);
                 }
             }

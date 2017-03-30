@@ -20,15 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
-using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
+using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Providers.DiscussProviders
@@ -47,7 +46,7 @@ namespace R7.News.Providers.DiscussProviders
             get { return ForumAssembly != null; }
         }
 
-        public int AddPost (string postSubject, string postBody, int tabId, int moduleId, int portalId, int userId, int forumId, List<Term> terms)
+        public int Discuss (INewsEntry newsEntry, int tabId, int moduleId, int portalId, int userId, int forumId)
         {
             try {
                 if (IsAvailable) {
@@ -60,8 +59,8 @@ namespace R7.News.Providers.DiscussProviders
                         portalId,
                         moduleId,
                         forumId,
-                        postSubject,
-                        postBody,
+                        newsEntry.Title,
+                        newsEntry.Description,
                         userId,
                         UserController.Instance.GetUserById (portalId, userId).DisplayName,
                         true, // IsApproved
@@ -83,11 +82,11 @@ namespace R7.News.Providers.DiscussProviders
             return Null.NullInteger;
         }
 
-        public string GetPostUrl (int tabId, int forumId, int postId)
+        public string GetDiscussUrl (int tabId, int forumId, int discussId)
         {
             return Globals.NavigateURL (tabId, string.Empty,
                                         "forumId", forumId.ToString (),
-                                        "postId", postId.ToString ());
+                                        "postId", discussId.ToString ());
         }
     }
 }

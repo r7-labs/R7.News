@@ -19,9 +19,8 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Components;
+using R7.News.Models;
 
 namespace R7.News.Providers.DiscussProviders
 {
@@ -42,14 +41,14 @@ namespace R7.News.Providers.DiscussProviders
             get { return Implementation.IsAvailable; }
         }
 
-        public int AddPost (string postSubject, string postBody, int tabId, int moduleId, int portalId, int userId, int forumId, List<Term> terms)
+        public int Discuss (INewsEntry newsEntry, int tabId, int moduleId, int portalId, int userId, int forumId)
         {
-            return Implementation.AddPost (postSubject, postBody, tabId, moduleId, portalId, userId, forumId, terms);
+            return Implementation.Discuss (newsEntry, tabId, moduleId, portalId, userId, forumId);
         }
 
-        public string GetPostUrl (int tabId, int forumId, int postId)
+        public string GetDiscussUrl (int tabId, int forumId, int discussId)
         {
-            return Implementation.GetPostUrl (tabId, forumId, postId);
+            return Implementation.GetDiscussUrl (tabId, forumId, discussId);
         }
     }
 }
