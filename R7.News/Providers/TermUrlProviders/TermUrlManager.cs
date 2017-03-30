@@ -19,11 +19,10 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Components;
 
-namespace R7.News.Providers
+namespace R7.News.Providers.TermUrlProviders
 {
     public static class TermUrlManager
     {

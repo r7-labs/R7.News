@@ -23,7 +23,7 @@ using System;
 using System.Text.RegularExpressions;
 using DotNetNuke.Entities.Content.Taxonomy;
 
-namespace R7.News.Providers
+namespace R7.News.Providers.TermUrlProviders
 {
     /// <summary>
     /// Basic term URL provider which assume what term have URL in the description

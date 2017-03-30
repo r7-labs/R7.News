@@ -19,13 +19,12 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Portals;
 using R7.DotNetNuke.Extensions.ViewModels;
-using R7.News.Providers;
+using R7.News.Providers.TermUrlProviders;
 
 namespace R7.News.Controls.ViewModels
 {

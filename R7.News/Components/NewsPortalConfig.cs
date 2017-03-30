@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.ObjectModel;
-using R7.News.Providers;
+using R7.News.Providers.TermUrlProviders;
 
 namespace R7.News.Components
 {

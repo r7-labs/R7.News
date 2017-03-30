@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DotNetNuke.Entities.Content.Taxonomy;
-using R7.News.Providers;
+using R7.News.Providers.TermUrlProviders;
 using Xunit;
 
 namespace R7.News.Tests.Providers

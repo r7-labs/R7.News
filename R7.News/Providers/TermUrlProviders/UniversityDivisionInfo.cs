@@ -1,5 +1,5 @@
 //
-//  ITermUrlProvider.cs
+//  UniversityDivisionInfo.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -19,15 +19,21 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DotNetNuke.Entities.Content.Taxonomy;
+using DotNetNuke.ComponentModel.DataAnnotations;
 
-namespace R7.News.Providers
+namespace R7.News.Providers.TermUrlProviders
 {
-    public interface ITermUrlProvider
+    [TableName ("University_Divisions")]
+    [PrimaryKey ("DivisionID", AutoIncrement = false)]
+    public class UniversityDivisionInfo
     {
-        string GetUrl (Term term);
+        public int DivisionID { get; set; }
 
-        string GetUrl (int termId, TermController termController);
+        public string Title { get; set; }
+
+        public string HomePage { get; set; }
+
+        public int? DivisionTermId { get; set; }
     }
 }
+

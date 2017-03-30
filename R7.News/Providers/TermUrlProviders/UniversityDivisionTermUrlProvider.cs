@@ -26,9 +26,8 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using R7.News.Components;
 using R7.News.Data;
-using R7.News.Providers;
 
-namespace R7.News.Integrations
+namespace R7.News.Providers.TermUrlProviders
 {
     public class UniversityDivisionTermUrlProvider: ITermUrlProvider
     {

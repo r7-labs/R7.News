@@ -27,7 +27,7 @@ using DotNetNuke.Entities.Portals;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using DotNetNuke.Services.Log.EventLog;
-using R7.News.Providers;
+using R7.News.Providers.TermUrlProviders;
 using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Components

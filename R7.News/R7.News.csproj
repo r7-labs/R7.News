@@ -77,6 +77,7 @@
     <Folder Include="assets\css\" />
     <Folder Include="Modules\" />
     <Folder Include="Integrations\Forum\" />
+    <Folder Include="Providers\TermUrlProviders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -101,11 +102,6 @@
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />
-    <Compile Include="Integrations\UniversityDivisionTermUrlProvider.cs" />
-    <Compile Include="Integrations\UniversityDivisionInfo.cs" />
-    <Compile Include="Providers\ITermUrlProvider.cs" />
-    <Compile Include="Providers\DescriptionTermUrlProvider.cs" />
-    <Compile Include="Providers\TermUrlManager.cs" />
     <Compile Include="Controls\TermLinks.ascx.cs">
       <DependentUpon>TermLinks.ascx</DependentUpon>
     </Compile>
@@ -132,6 +128,11 @@
     <Compile Include="Integrations\Forum\ActiveForumsConnector.cs" />
     <Compile Include="Integrations\ReflectionHelper.cs" />
     <Compile Include="Integrations\Forum\ForumConnector.cs" />
+    <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProvider.cs" />
+    <Compile Include="Providers\TermUrlProviders\ITermUrlProvider.cs" />
+    <Compile Include="Providers\TermUrlProviders\TermUrlManager.cs" />
+    <Compile Include="Providers\TermUrlProviders\UniversityDivisionInfo.cs" />
+    <Compile Include="Providers\TermUrlProviders\UniversityDivisionTermUrlProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
