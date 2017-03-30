@@ -15,8 +15,8 @@ news-entry:
   default-structural-weight: 10
 
 term-url-providers:
-  - R7.News.Providers.DescriptionTermUrlProvider
-#  - R7.News.Integrations.UniversityDivisionTermUrlProvider
+  - R7.News.Providers.TermUrlProviders.DescriptionTermUrlProvider
+#  - R7.News.Providers.TermUrlProviders.UniversityDivisionTermUrlProvider
 
 discuss-on-forum:
   forum-provider: None # None, DnnForum, ActiveForums, YAF
