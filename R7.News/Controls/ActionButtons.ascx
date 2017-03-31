@@ -10,7 +10,7 @@
             <li>
 				<asp:LinkButton id="linkActionButton" runat="server" CssClass="btn btn-sm btn-default"
                     role="button" Enabled="<%# Item.Enabled %>" Visible="<%# Item.Visible %>"
-					Text="<%# Item.Title %>"
+					Text="<%# LocalizeString (Item.ActionKey) %>"
 					CommandName="<%# Item.ActionKey %>" CommandArgument="<%# Item.EntryId %>" OnCommand="linkActionButton_Command" />
             </li>
         </ItemTemplate>

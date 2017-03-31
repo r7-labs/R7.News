@@ -23,9 +23,10 @@ using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Localization;
 using R7.News.Components;
 using R7.News.Controls.ViewModels;
-using DotNetNuke.Entities.Users;
+using DnnWebUiUtilities = DotNetNuke.Web.UI.Utilities;
 
 namespace R7.News.Controls
 {
@@ -44,6 +45,22 @@ namespace R7.News.Controls
         public List<NewsEntryAction> DataSource { get; set; }
 
         #endregion
+
+        string localResourceFile;
+        protected string LocalResourceFile {
+            get {
+                if (localResourceFile == null) {
+                    localResourceFile = DnnWebUiUtilities.GetLocalResourceFile (this);
+                }
+
+                return localResourceFile;
+            }
+        }
+
+        protected string LocalizeString (string key)
+        {
+            return Localization.GetString (key, LocalResourceFile);
+        }
 
         public override void DataBind ()
         {

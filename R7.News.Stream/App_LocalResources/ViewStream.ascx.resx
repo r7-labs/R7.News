@@ -12,10 +12,4 @@
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Click to see more news</value>
     </data>
-	<data name="DiscussOnDnnForum.Text" xml:space="preserve">
-        <value>Discuss on Forum</value>
-    </data>
-	<data name="DiscussOnActiveForums.Text" xml:space="preserve">
-        <value>Discuss on Forum</value>
-    </data>
 </root>

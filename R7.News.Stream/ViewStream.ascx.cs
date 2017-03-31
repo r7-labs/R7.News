@@ -227,8 +227,6 @@ namespace R7.News.Stream
                 actions.Add (new NewsEntryAction {
                     EntryId = item.EntryId,
                     ActionKey = discussProvider.ActionKey,
-                    // TODO: Localize inside ActionButtons control
-                    Title = LocalizeString (discussProvider.ActionKey + ".Text"),
                     Enabled = Request.IsAuthenticated,
                     Visible = true
                 });
