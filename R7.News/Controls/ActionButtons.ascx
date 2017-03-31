@@ -8,9 +8,10 @@
         </LayoutTemplate>
         <ItemTemplate>
             <li>
-				<asp:LinkButton id="linkActionButton" runat="server" CssClass="btn btn-sm btn-default"
+				<asp:LinkButton id="linkActionButton" runat="server"
+				    CssClass='<%# "btn btn-sm btn-default" + (Item.Enabled? string.Empty : " disabled") %>'
 				    Enabled="<%# Item.Enabled %>" Visible="<%# Item.Visible %>"
-                    role="button" aria-disabled="<%# !Item.Enabled %>"
+                    role="button" aria-disabled="<%# (!Item.Enabled).ToString ().ToLowerInvariant () %>"
 					Text="<%# LocalizeString (Item.ActionKey) %>"
 					CommandName="<%# Item.ActionKey %>" CommandArgument="<%# Item.EntryId %>" OnCommand="linkActionButton_Command" />
             </li>
