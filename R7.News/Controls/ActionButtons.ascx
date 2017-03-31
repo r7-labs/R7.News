@@ -9,7 +9,8 @@
         <ItemTemplate>
             <li>
 				<asp:LinkButton id="linkActionButton" runat="server" CssClass="btn btn-sm btn-default"
-                    role="button" Enabled="<%# Item.Enabled %>" Visible="<%# Item.Visible %>"
+				    Enabled="<%# Item.Enabled %>" Visible="<%# Item.Visible %>"
+                    role="button" aria-disabled="<%# !Item.Enabled %>"
 					Text="<%# LocalizeString (Item.ActionKey) %>"
 					CommandName="<%# Item.ActionKey %>" CommandArgument="<%# Item.EntryId %>" OnCommand="linkActionButton_Command" />
             </li>
