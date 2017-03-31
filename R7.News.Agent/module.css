@@ -1,39 +1,4 @@
-﻿.news-agent .visibility-badges {
-    margin-left:inherit;
-    font-size:85%
-}
-
-.news-agent .visibility-badges .badge {
-    padding-left:.5em;
-    padding-right:.5em
-}
-
-.news-agent .visibility-badges .badge.not-published {
-    background-color:#cc3
-}
-
-.news-agent .visibility-badges .badge.expired {
-    background-color:#c33
-}
-
-.news-agent .term-links {
-    font-size:85%
-}
-
-.news-agent .term-links span.glyphicon {
-    color:gray
-}
-
-.news-agent .news-entry-info {
-    color:gray;
-    font-size:85%
-}
-
-.news-agent .news-entry-info .glyphicon-user {
-    margin-left:1em
-}
-
-.button-add-from-tab-data {
+﻿.button-add-from-tab-data {
     position:relative;
     top:-.5em
 }
