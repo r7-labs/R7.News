@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
+<%@ Register TagPrefix="news" TagName="ActionButtons" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionButtons.ascx" %>
 <%@ Register TagPrefix="news" TagName="AgplSignature" Src="~/DesktopModules/R7.News/R7.News/Controls/AgplSignature.ascx" %>
 <%@ Register TagPrefix="r7" Assembly="R7.DotNetNuke.Extensions" Namespace="R7.DotNetNuke.Extensions.Controls" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
@@ -45,7 +46,7 @@
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                 </p>
-				<asp:LinkButton id="linkDiscuss" runat="server" resourceKey="linkDiscuss.Text" CssClass="btn btn-default btn-sm" OnCommand="linkDiscuss_Command" CommandArgument="<%# Item.EntryId %>" />
+				<news:ActionButtons id="actionButtons" runat="server" />
             </div>
         </ItemTemplate>
         <ItemSeparatorTemplate>

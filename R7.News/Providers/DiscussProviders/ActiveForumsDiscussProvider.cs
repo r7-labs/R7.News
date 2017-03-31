@@ -31,7 +31,6 @@ using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
 
-
 namespace R7.News.Providers.DiscussProviders
 {
     public class ActiveForumsDiscussProvider : IDiscussProvider
@@ -39,6 +38,8 @@ namespace R7.News.Providers.DiscussProviders
         static readonly Assembly forumAssembly;
 
         public IList<string> Params { get; set; }
+
+        public string ActionKey { get; set; }
 
         static ActiveForumsDiscussProvider ()
         {

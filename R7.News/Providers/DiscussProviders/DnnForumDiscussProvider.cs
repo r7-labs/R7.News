@@ -60,6 +60,8 @@ namespace R7.News.Providers.DiscussProviders
 
         public IList<string> Params { get; set; }
 
+        public string ActionKey { get; set; }
+
         static DnnForumDiscussProvider ()
         {
             var dnnBinPath = Path.Combine (Globals.ApplicationMapPath, "bin");

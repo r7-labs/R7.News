@@ -87,6 +87,7 @@
     <Content Include="Controls\BadgeList.ascx" />
     <Content Include="Controls\AgplSignature.ascx" />
     <Content Include="assets\css\module.css" />
+    <Content Include="Controls\ActionButtons.ascx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlDataProvider\Uninstall.SqlDataProvider" />
@@ -133,6 +134,11 @@
     <Compile Include="Providers\DiscussProviders\DnnForumDiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\IDiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\ForumDiscussParams.cs" />
+    <Compile Include="Controls\ActionButtons.ascx.cs">
+      <DependentUpon>ActionButtons.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ViewModels\NewsEntryAction.cs" />
+    <Compile Include="Components\ActionHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -12,7 +12,10 @@
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Нажмите, чтобы увидеть больше новостей</value>
     </data>
-	<data name="linkDiscuss.Text" xml:space="preserve">
+    <data name="DiscussOnDnnForum.Text" xml:space="preserve">
+        <value>Обсудить на форуме</value>
+    </data>
+    <data name="DiscussOnActiveForums.Text" xml:space="preserve">
         <value>Обсудить на форуме</value>
     </data>
 </root>

@@ -20,11 +20,14 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using DotNetNuke.Services.Exceptions;
 using R7.DotNetNuke.Extensions.Controls;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
+using R7.News.Components;
 using R7.News.Controls;
+using R7.News.Controls.ViewModels;
 using R7.News.Modules;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
@@ -216,6 +219,23 @@ namespace R7.News.Stream
             termLinks.Module = this;
             termLinks.DataSource = item.ContentItem.Terms;
             termLinks.DataBind ();
+
+            // action buttons
+            var actionButtons = (ActionButtons) e.Item.FindControl ("actionButtons");
+            var actions = new List<NewsEntryAction> ();
+            foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
+                actions.Add (new NewsEntryAction {
+                    EntryId = item.EntryId,
+                    ActionKey = discussProvider.ActionKey,
+                    // TODO: Localize inside ActionButtons control
+                    Title = LocalizeString (discussProvider.ActionKey + ".Text"),
+                    Enabled = Request.IsAuthenticated,
+                    Visible = true
+                });
+            }
+
+            actionButtons.DataSource = actions;
+            actionButtons.DataBind ();
         }
     }
 }

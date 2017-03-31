@@ -1,5 +1,5 @@
 ﻿//
-//  IDiscussProvider.cs
+//  NewsEntryAction.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -19,21 +19,18 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using R7.News.Models;
-using System.Collections.Generic;
-
-namespace R7.News.Providers.DiscussProviders
+namespace R7.News.Controls.ViewModels
 {
-    public interface IDiscussProvider
+    public class NewsEntryAction
     {
-        bool IsAvailable { get; }
+        public int EntryId { get; set; }
 
-        IList<string> Params { get; set; }
+        public string ActionKey { get; set; }
 
-        string ActionKey { get; set; }
+        public string Title { get; set; }
 
-        int Discuss (INewsEntry newsEntry,int portalId, int userId);
+        public bool Enabled { get; set; }
 
-        string GetDiscussUrl (int discussId);
+        public bool Visible { get; set; }
     }
 }
