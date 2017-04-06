@@ -42,7 +42,7 @@ namespace R7.News.Controls
 
         public string CssClass { get; set; }
 
-        public IList<NewsEntryAction> DataSource { get; set; }
+        public IList<NewsEntryAction> Actions { get; set; }
 
         #endregion
 
@@ -64,8 +64,8 @@ namespace R7.News.Controls
 
         public override void DataBind ()
         {
-            if (DataSource != null && DataSource.Count > 0) {
-                listActionButtons.DataSource = DataSource;
+            if (Actions != null && Actions.Count > 0) {
+                listActionButtons.DataSource = Actions;
             }
 
             base.DataBind ();

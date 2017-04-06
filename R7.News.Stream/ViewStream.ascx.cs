@@ -225,7 +225,7 @@ namespace R7.News.Stream
             var actions = GetNewsEntryActions (item);
 
             if (actions.Count > 0) {
-                actionButtons.DataSource = actions;
+                actionButtons.Actions = actions;
                 actionButtons.DataBind ();
             }
             else {
