@@ -25,6 +25,6 @@
 
 IF NOT EXISTS (select * from sys.columns where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News]') and name = N'DiscussProviderKey')
     ALTER TABLE {databaseOwner}[{objectQualifier}r7_News]
-        ADD DiscussProviderKey nvarchar (16) NULL,
+        ADD DiscussProviderKey nvarchar (64) NULL,
             DiscussEntryID nvarchar (255) NULL -- e.g. forum post id
 GO

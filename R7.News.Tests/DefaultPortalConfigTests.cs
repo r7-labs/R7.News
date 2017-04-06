@@ -25,18 +25,37 @@ using Xunit;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace R7.Epsilon.Tests
+namespace R7.News.Tests
 {
     public class DefaultPortalConfigTests
     {
         [Fact]
         public void PortalConfigDeserializationTest ()
         {
-            var defaultConfigFile = Path.Combine ("..", "..", "..", "R7.News", "R7.News.yml");
+            var config = DeserializeConfig (GetDefaultConfigFile ());
+            Assert.NotNull (config);
+        }
 
-            using (var configReader = new StringReader (File.ReadAllText (defaultConfigFile))) {
+        [Fact]
+        public void PortalConfigFieldLengthTest ()
+        {
+            var config = DeserializeConfig (GetDefaultConfigFile ());
+
+            foreach (var discussProvider in config.DiscussProviders) {
+                Assert.True (discussProvider.ProviderKey.Length <= 64);
+            }
+        }
+
+        protected string GetDefaultConfigFile ()
+        {
+            return Path.Combine ("..", "..", "..", "R7.News", "R7.News.yml");
+        }
+
+        protected NewsPortalConfig DeserializeConfig (string configFile)
+        {
+            using (var configReader = new StringReader (File.ReadAllText (configFile))) {
                 var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
-                Assert.NotNull (deserializer.Deserialize<NewsPortalConfig> (configReader));
+                return deserializer.Deserialize<NewsPortalConfig> (configReader);
             }
         }
     }
