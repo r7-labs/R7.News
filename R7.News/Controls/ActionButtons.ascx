@@ -1,14 +1,12 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ActionButtons.ascx.cs" Inherits="R7.News.Controls.ActionButtons" %>
-<div class="<%: CssClass %>">
+<ul runat="server" class="<%# CssClass %>">
     <asp:ListView id="listActionButtons" runat="server" ItemType="R7.News.Controls.ViewModels.NewsEntryAction">
         <LayoutTemplate>
-            <ul runat="server" class="list-inline">
-                <li runat="server" id="itemPlaceholder"></li>
-            </ul>
+            <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>
         <ItemTemplate>
             <li>
-				<asp:LinkButton id="linkActionButton" runat="server" role="button" 
+				<asp:LinkButton runat="server" role="button" 
 					Enabled="<%# Item.Enabled %>"
 				    aria-disabled="<%# (!Item.Enabled).ToString ().ToLowerInvariant () %>"
 					CssClass='<%# "btn btn-sm btn-default" + (Item.Enabled? string.Empty : " disabled") %>'
@@ -17,4 +15,4 @@
             </li>
         </ItemTemplate>
     </asp:ListView>
-</div>
+</ul>
