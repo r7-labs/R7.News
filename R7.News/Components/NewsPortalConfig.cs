@@ -72,7 +72,7 @@ namespace R7.News.Components
             else if (provider is IDiscussProvider) {
                 var discussProvider = (IDiscussProvider) provider;
                 discussProvider.Params = providerConfig.Params;
-                discussProvider.ActionKey = ((DiscussProviderConfig) providerConfig).ActionKey;
+                discussProvider.ProviderKey = ((DiscussProviderConfig) providerConfig).ProviderKey;
                 DiscussProviders_Internal.Add (discussProvider);
             }
         }
@@ -125,6 +125,6 @@ namespace R7.News.Components
 
         public List<string> Params { get; set; }
 
-        public string ActionKey { get; set; }
+        public string ProviderKey { get; set; }
     }
 }

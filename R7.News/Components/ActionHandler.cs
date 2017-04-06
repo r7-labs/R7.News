@@ -50,7 +50,7 @@ namespace R7.News.Components
         public void ExecuteDiscussAction (string actionKey, int entryId, int portalId, int userId)
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
-            var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ActionKey == actionKey);
+            var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == actionKey);
             if (newsEntry != null && discussProvider != null) {
                 var discussId = discussProvider.Discuss (newsEntry, portalId, userId);
                 if (discussId > 0) {

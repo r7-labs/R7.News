@@ -30,7 +30,7 @@ namespace R7.News.Providers.DiscussProviders
 
         IList<string> Params { get; set; }
 
-        string ActionKey { get; set; }
+        string ProviderKey { get; set; }
 
         int Discuss (INewsEntry newsEntry,int portalId, int userId);
 

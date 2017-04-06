@@ -226,7 +226,7 @@ namespace R7.News.Stream
             foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
                 actions.Add (new NewsEntryAction {
                     EntryId = item.EntryId,
-                    ActionKey = discussProvider.ActionKey,
+                    ActionKey = discussProvider.ProviderKey,
                     Enabled = Request.IsAuthenticated,
                     Visible = true
                 });
