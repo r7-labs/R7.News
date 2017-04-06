@@ -25,7 +25,7 @@ using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Localization;
 using R7.News.Components;
-using R7.News.Controls.ViewModels;
+using R7.News.Controls.Models;
 using DnnWebUiUtilities = DotNetNuke.Web.UI.Utilities;
 
 namespace R7.News.Controls

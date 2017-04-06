@@ -141,8 +141,8 @@
     <Compile Include="Controls\ActionButtons.ascx.cs">
       <DependentUpon>ActionButtons.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ViewModels\NewsEntryAction.cs" />
     <Compile Include="Components\ActionHandler.cs" />
+    <Compile Include="Models\NewsEntryAction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

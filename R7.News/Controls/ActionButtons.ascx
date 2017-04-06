@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ActionButtons.ascx.cs" Inherits="R7.News.Controls.ActionButtons" %>
 <ul runat="server" class="<%# CssClass %>">
-    <asp:ListView id="listActionButtons" runat="server" ItemType="R7.News.Controls.ViewModels.NewsEntryAction">
+    <asp:ListView id="listActionButtons" runat="server" ItemType="R7.News.Controls.Models.NewsEntryAction">
         <LayoutTemplate>
             <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>

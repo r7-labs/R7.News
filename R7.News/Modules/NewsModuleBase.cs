@@ -26,7 +26,7 @@ using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
 using R7.DotNetNuke.Extensions.Modules;
 using R7.News.Components;
-using R7.News.Controls.ViewModels;
+using R7.News.Controls.Models;
 using R7.News.Models;
 
 namespace R7.News.Modules
