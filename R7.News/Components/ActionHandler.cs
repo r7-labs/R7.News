@@ -57,7 +57,7 @@ namespace R7.News.Components
                     var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == actionKey);
                     if (discussProvider != null) {
                         var discussEntryId = discussProvider.Discuss (newsEntry, portalId, userId);
-                        if (discussEntryId > 0) {
+                        if (!string.IsNullOrEmpty (discussEntryId)) {
                             newsEntry.DiscussProviderKey = discussProvider.ProviderKey;
                             newsEntry.DiscussEntryId = discussEntryId.ToString ();
                             NewsRepository.Instance.UpdateNewsEntry (newsEntry);

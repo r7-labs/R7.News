@@ -73,7 +73,7 @@ namespace R7.News.Providers.DiscussProviders
             get { return forumAssembly != null && forumLibraryAssembly != null; }
         }
 
-        public int Discuss (INewsEntry newsEntry, int portalId, int userId)
+        public string Discuss (INewsEntry newsEntry, int portalId, int userId)
         {
             try {
                 if (IsAvailable) {
@@ -102,9 +102,9 @@ namespace R7.News.Providers.DiscussProviders
                         });
 
                     var postId = (int) submitResultType.GetField ("PostId").GetValue (result);
-                    var postMessage = (DnnForumPostMessage) submitResultType.GetField ("Result").GetValue (result);
+                    // var postMessage = (DnnForumPostMessage) submitResultType.GetField ("Result").GetValue (result);
 
-                    return postId;
+                    return postId.ToString ();
                 }
             }
             catch (Exception ex) {
@@ -115,15 +115,15 @@ namespace R7.News.Providers.DiscussProviders
                 EventLogController.Instance.AddLog (log);
             }
 
-            return Null.NullInteger;
+            return null;
         }
 
-        public string GetDiscussUrl (int discussId)
+        public string GetDiscussUrl (string discussEntryId)
         {
             var forumParams = ForumDiscussParams.Parse (Params);
             return Globals.NavigateURL (forumParams.TabId, string.Empty,
                                         "forumId", forumParams.ForumId.ToString (),
-                                        "threadId", discussId.ToString (),
+                                        "threadId", discussEntryId,
                                         "scope", "posts");
         }
     }

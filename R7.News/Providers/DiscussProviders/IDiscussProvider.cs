@@ -32,8 +32,8 @@ namespace R7.News.Providers.DiscussProviders
 
         string ProviderKey { get; set; }
 
-        int Discuss (INewsEntry newsEntry,int portalId, int userId);
+        string Discuss (INewsEntry newsEntry,int portalId, int userId);
 
-        string GetDiscussUrl (int discussId);
+        string GetDiscussUrl (string discussEntryId);
     }
 }
