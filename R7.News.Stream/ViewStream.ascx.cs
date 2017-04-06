@@ -242,8 +242,13 @@ namespace R7.News.Stream
                 }
             }
 
-            actionButtons.DataSource = actions;
-            actionButtons.DataBind ();
+            if (actions.Count > 0) {
+                actionButtons.DataSource = actions;
+                actionButtons.DataBind ();
+            }
+            else {
+                actionButtons.Visible = false;
+            }
         }
     }
 }
