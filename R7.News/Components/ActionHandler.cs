@@ -30,6 +30,8 @@ namespace R7.News.Components
 {
     public class ActionHandler
     {
+        static readonly object discussLock = new object ();
+
         public void ExecuteAction (string actionKey, int entryId, int portalId, int userId)
         {
             try {
@@ -49,22 +51,29 @@ namespace R7.News.Components
 
         public void ExecuteDiscussAction (string actionKey, int entryId, int portalId, int userId)
         {
-            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
-            var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == actionKey);
-            if (newsEntry != null && discussProvider != null) {
-                var discussId = discussProvider.Discuss (newsEntry, portalId, userId);
-                if (discussId > 0) {
-                    // TODO: Remember discuss was added for news entry
-                    HttpContext.Current.Response.Redirect (discussProvider.GetDiscussUrl (discussId), false);
-                }
-                else {
-                    var log = new LogInfo ();
-                    log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
-                    log.LogPortalID = portalId;
-                    log.AddProperty ("Message", $"Cannot add discussion for news entry");
-                    EventLogController.Instance.AddLog (log);
+            lock (discussLock) {
+                var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
+                if (newsEntry != null && string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {
+                    var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == actionKey);
+                    if (discussProvider != null) {
+                        var discussEntryId = discussProvider.Discuss (newsEntry, portalId, userId);
+                        if (discussEntryId > 0) {
+                            newsEntry.DiscussProviderKey = discussProvider.ProviderKey;
+                            newsEntry.DiscussEntryId = discussEntryId.ToString ();
+                            NewsRepository.Instance.UpdateNewsEntry (newsEntry);
+                            HttpContext.Current.Response.Redirect (discussProvider.GetDiscussUrl (discussEntryId), false);
+                        }
+                        else {
+                            var log = new LogInfo ();
+                            log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
+                            log.LogPortalID = portalId;
+                            log.AddProperty ("Message", $"Cannot add discussion for news entry");
+                            EventLogController.Instance.AddLog (log);
+                        }
+                    }
                 }
             }
         }
     }
 }
+

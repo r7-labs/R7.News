@@ -160,6 +160,16 @@ namespace R7.News.Data
             CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
         }
 
+        /// <summary>
+        /// Updates the news entry w/o associated content item.
+        /// </summary>
+        /// <param name="newsEntry">News entry.</param>
+        public void UpdateNewsEntry (NewsEntryInfo newsEntry)
+        {
+            NewsDataProvider.Instance.Update (newsEntry);
+            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+        }
+
         public void DeleteNewsEntry (INewsEntry newsEntry)
         {
             // delete content item, related news entry will be deleted by foreign key rule
