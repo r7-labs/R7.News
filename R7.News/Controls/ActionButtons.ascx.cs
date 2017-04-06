@@ -64,9 +64,8 @@ namespace R7.News.Controls
 
         public override void DataBind ()
         {
-            if (DataSource != null) {
+            if (DataSource != null && DataSource.Count > 0) {
                 listActionButtons.DataSource = DataSource;
-                listActionButtons.DataBind ();
             }
 
             base.DataBind ();
