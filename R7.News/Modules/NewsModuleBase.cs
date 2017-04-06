@@ -19,11 +19,15 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
 using R7.DotNetNuke.Extensions.Modules;
+using R7.News.Components;
+using R7.News.Controls.ViewModels;
+using R7.News.Models;
 
 namespace R7.News.Modules
 {
@@ -53,5 +57,30 @@ namespace R7.News.Modules
         }
 
         #endregion
+
+        public IList<NewsEntryAction> GetNewsEntryActions (INewsEntry newsEntry)
+        {
+            var actions = new List<NewsEntryAction> ();
+            var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
+            foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
+                if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        // TODO: Serialize/deserialize NewsEntryAction to pass more parameters to ActionHandler
+                        ActionKey = discussProvider.ProviderKey.Replace ("Discuss", "JoinDiscussion"),
+                        Enabled = Request.IsAuthenticated
+                    });
+                }
+                else if (!discussionStarted) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        ActionKey = discussProvider.ProviderKey,
+                        Enabled = Request.IsAuthenticated
+                    });
+                }
+            }
+
+            return actions;
+        }
     }
 }

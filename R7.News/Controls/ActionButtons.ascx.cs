@@ -42,7 +42,7 @@ namespace R7.News.Controls
 
         public string CssClass { get; set; }
 
-        public List<NewsEntryAction> DataSource { get; set; }
+        public IList<NewsEntryAction> DataSource { get; set; }
 
         #endregion
 
