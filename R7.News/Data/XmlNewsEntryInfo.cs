@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -155,6 +155,16 @@ namespace R7.News.Data
         {
             get { return @This.Group; }
             set { @This.Group = value; }
+        }
+
+        public string DiscussProviderKey {
+            get { return @This.DiscussProviderKey; }
+            set { @This.DiscussProviderKey = value; }
+        }
+
+        public string DiscussEntryId {
+            get { return @This.DiscussEntryId; }
+            set { @This.DiscussEntryId = value; }
         }
 
         #endregion

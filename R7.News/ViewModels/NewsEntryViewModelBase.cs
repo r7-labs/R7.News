@@ -145,6 +145,16 @@ namespace R7.News.ViewModels
             set { throw new InvalidOperationException (); }
         }
 
+        public string DiscussProviderKey {
+            get { return NewsEntry.DiscussProviderKey; }
+            set { throw new InvalidOperationException (); }
+        }
+
+        public string DiscussEntryId {
+            get { return NewsEntry.DiscussEntryId; }
+            set { throw new InvalidOperationException (); }
+        }
+
         #endregion
 
         public bool HasImage

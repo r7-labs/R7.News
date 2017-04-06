@@ -97,6 +97,7 @@
     <None Include="SqlDataProvider\01.00.00.SqlDataProvider" />
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.resx" />
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.ru-RU.resx" />
+    <None Include="SqlDataProvider\01.03.00.SqlDataProvider" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -60,5 +60,9 @@ namespace R7.News.Models
         ModuleInfo AgentModule { get; set; }
 
         ICollection<INewsEntry> Group { get; set; }
+
+        string DiscussProviderKey { get; set; }
+
+        string DiscussEntryId { get; set; }
     }
 }
