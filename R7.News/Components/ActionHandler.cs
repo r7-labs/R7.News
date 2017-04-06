@@ -27,6 +27,7 @@ using DotNetNuke.Services.Log.EventLog;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Providers.DiscussProviders;
+using R7.News.Controls.Models;
 
 namespace R7.News.Components
 {
@@ -34,14 +35,17 @@ namespace R7.News.Components
     {
         static readonly object discussLock = new object ();
 
-        public void ExecuteAction (string actionKey, int entryId, int portalId, int userId)
+        public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
         {
             try {
-                if (actionKey.StartsWith ("Discuss", StringComparison.InvariantCulture)) {
-                    ExecuteDiscussAction (actionKey, entryId, portalId, userId);
-                }
-                else if (actionKey.StartsWith ("JoinDiscussion", StringComparison.InvariantCulture)) {
-                    ExecuteJoinDiscussionAction (entryId, portalId);
+                if (action.ActionKey.StartsWith ("Discuss", StringComparison.InvariantCulture)) {
+                    // TODO: Do something with magic values?
+                    if (action.Argument == "Start") {
+                        StartDiscussion (action.ActionKey, action.EntryId, portalId, userId);
+                    }
+                    else if (action.Argument == "Join") {
+                        JoinDiscussion (action.EntryId, portalId);
+                    }
                 }
             }
             catch (Exception ex) {
@@ -49,17 +53,17 @@ namespace R7.News.Components
                 log.Exception = new ExceptionInfo (ex);
                 log.LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString ();
                 log.LogPortalID = portalId;
-                log.AddProperty ("Message", $"Cannot execute {actionKey} action");
+                log.AddProperty ("Message", $"Cannot execute {action.ActionKey} action");
                 EventLogController.Instance.AddLog (log);
             }
         }
 
-        public void ExecuteDiscussAction (string actionKey, int entryId, int portalId, int userId)
+        public void StartDiscussion (string providerKey, int entryId, int portalId, int userId)
         {
             lock (discussLock) {
                 var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
                 if (newsEntry != null && string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {
-                    var discussProvider = GetDiscussProviderByKey (actionKey);
+                    var discussProvider = GetDiscussProviderByKey (providerKey);
                     if (discussProvider != null) {
                         var discussEntryId = discussProvider.Discuss (newsEntry, portalId, userId);
                         if (!string.IsNullOrEmpty (discussEntryId)) {
@@ -69,17 +73,17 @@ namespace R7.News.Components
                             RedirectToDiscussion (newsEntry, discussProvider);
                         }
                         else {
-                            LogAdminAlert ($"Error adding discussion for news entry using {actionKey} provider", portalId);
+                            LogAdminAlert ($"Error adding discussion for news entry using {providerKey} provider", portalId);
                         }
                     }
                     else {
-                        LogAdminAlert ($"Cannot add discussion for news entry, {actionKey} provider does not exists", portalId);
+                        LogAdminAlert ($"Cannot add discussion for news entry, {providerKey} provider does not exists", portalId);
                     }
                 }
             }
         }
 
-        public void ExecuteJoinDiscussionAction (int entryId, int portalId)
+        public void JoinDiscussion (int entryId, int portalId)
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
             if (newsEntry != null && !string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {

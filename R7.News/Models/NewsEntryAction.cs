@@ -19,13 +19,18 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace R7.News.Controls.Models
 {
+    [Serializable]
     public class NewsEntryAction
     {
         public int EntryId { get; set; }
 
         public string ActionKey { get; set; }
+
+        public string Argument { get; set; }
 
         public bool Enabled { get; set; }
     }

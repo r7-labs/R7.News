@@ -63,18 +63,19 @@ namespace R7.News.Modules
             var actions = new List<NewsEntryAction> ();
             var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
             foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
-                if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
-                    actions.Add (new NewsEntryAction {
-                        EntryId = newsEntry.EntryId,
-                        // TODO: Serialize/deserialize NewsEntryAction to pass more parameters to ActionHandler
-                        ActionKey = discussProvider.ProviderKey.Replace ("Discuss", "JoinDiscussion"),
-                        Enabled = Request.IsAuthenticated
-                    });
-                }
-                else if (!discussionStarted) {
+                if (!discussionStarted) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         ActionKey = discussProvider.ProviderKey,
+                        Argument = "Start",
+                        Enabled = Request.IsAuthenticated
+                    });
+                }
+                else if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        ActionKey = discussProvider.ProviderKey,
+                        Argument = "Join",
                         Enabled = Request.IsAuthenticated
                     });
                 }

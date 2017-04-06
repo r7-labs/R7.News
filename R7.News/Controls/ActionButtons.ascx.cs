@@ -22,6 +22,7 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Localization;
 using R7.News.Components;
@@ -74,8 +75,8 @@ namespace R7.News.Controls
         protected void linkActionButton_Command (object sender, CommandEventArgs e)
         {
             var actionHandler = new ActionHandler ();
-            actionHandler.ExecuteAction (actionKey: e.CommandName,
-                                         entryId: int.Parse ((string) e.CommandArgument),
+            var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
+            actionHandler.ExecuteAction (action,
                                          portalId: PortalSettings.Current.PortalId,
                                          // TODO: Get superuser
                                          userId: 1); // as superuser
