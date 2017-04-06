@@ -25,6 +25,8 @@ using System.Web;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Data;
+using R7.News.Models;
+using R7.News.Providers.DiscussProviders;
 
 namespace R7.News.Components
 {
@@ -37,6 +39,9 @@ namespace R7.News.Components
             try {
                 if (actionKey.StartsWith ("Discuss", StringComparison.InvariantCulture)) {
                     ExecuteDiscussAction (actionKey, entryId, portalId, userId);
+                }
+                else if (actionKey.StartsWith ("JoinDiscussion", StringComparison.InvariantCulture)) {
+                    ExecuteJoinDiscussionAction (entryId, portalId);
                 }
             }
             catch (Exception ex) {
@@ -54,25 +59,56 @@ namespace R7.News.Components
             lock (discussLock) {
                 var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
                 if (newsEntry != null && string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {
-                    var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == actionKey);
+                    var discussProvider = GetDiscussProviderByKey (actionKey);
                     if (discussProvider != null) {
                         var discussEntryId = discussProvider.Discuss (newsEntry, portalId, userId);
                         if (!string.IsNullOrEmpty (discussEntryId)) {
                             newsEntry.DiscussProviderKey = discussProvider.ProviderKey;
-                            newsEntry.DiscussEntryId = discussEntryId.ToString ();
+                            newsEntry.DiscussEntryId = discussEntryId;
                             NewsRepository.Instance.UpdateNewsEntry (newsEntry);
-                            HttpContext.Current.Response.Redirect (discussProvider.GetDiscussUrl (discussEntryId), false);
+                            RedirectToDiscussion (newsEntry, discussProvider);
                         }
                         else {
-                            var log = new LogInfo ();
-                            log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
-                            log.LogPortalID = portalId;
-                            log.AddProperty ("Message", $"Cannot add discussion for news entry");
-                            EventLogController.Instance.AddLog (log);
+                            LogAdminAlert ($"Error adding discussion for news entry using {actionKey} provider", portalId);
                         }
+                    }
+                    else {
+                        LogAdminAlert ($"Cannot add discussion for news entry, {actionKey} provider does not exists", portalId);
                     }
                 }
             }
+        }
+
+        public void ExecuteJoinDiscussionAction (int entryId, int portalId)
+        {
+            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
+            if (newsEntry != null && !string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {
+                var discussProvider = GetDiscussProviderByKey (newsEntry.DiscussProviderKey);
+                if (discussProvider != null) {
+                    RedirectToDiscussion (newsEntry, discussProvider);
+                } else {
+                    LogAdminAlert ($"Cannot redirect to discussion, {newsEntry.DiscussProviderKey} provider does not exists", portalId);
+                }
+            }
+        }
+
+        protected IDiscussProvider GetDiscussProviderByKey (string providerKey)
+        {
+            return NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == providerKey);
+        }
+
+        protected void RedirectToDiscussion (INewsEntry newsEntry, IDiscussProvider discussProvider)
+        {
+            HttpContext.Current.Response.Redirect (discussProvider.GetDiscussUrl (newsEntry.DiscussEntryId), false);
+        }
+
+        protected void LogAdminAlert (string message, int portalId)
+        {
+            var log = new LogInfo ();
+            log.LogTypeKey = EventLogController.EventLogType.ADMIN_ALERT.ToString ();
+            log.LogPortalID = portalId;
+            log.AddProperty ("Message", message);
+            EventLogController.Instance.AddLog (log);
         }
     }
 }

@@ -223,13 +223,23 @@ namespace R7.News.Stream
             // action buttons
             var actionButtons = (ActionButtons) e.Item.FindControl ("actionButtons");
             var actions = new List<NewsEntryAction> ();
+            var discussionStarted = !string.IsNullOrEmpty (item.DiscussProviderKey);
             foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
-                actions.Add (new NewsEntryAction {
-                    EntryId = item.EntryId,
-                    ActionKey = discussProvider.ProviderKey,
-                    Enabled = Request.IsAuthenticated,
-                    Visible = true
-                });
+                if (discussionStarted && item.DiscussProviderKey == discussProvider.ProviderKey) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = item.EntryId,
+                        // TODO: Serialize/deserialize NewsEntryAction to pass more parameters to ActionHandler
+                        ActionKey = discussProvider.ProviderKey.Replace ("Discuss", "JoinDiscussion"),
+                        Enabled = Request.IsAuthenticated
+                    });
+                }
+                else if (!discussionStarted) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = item.EntryId,
+                        ActionKey = discussProvider.ProviderKey,
+                        Enabled = Request.IsAuthenticated
+                    });
+                }
             }
 
             actionButtons.DataSource = actions;
