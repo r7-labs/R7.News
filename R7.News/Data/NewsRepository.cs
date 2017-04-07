@@ -34,6 +34,7 @@ using R7.News.Models;
 
 namespace R7.News.Data
 {
+    // TODO: Use DataTime.MinValue instead of checkNow flag (need also SP refactoring)
     public class NewsRepository
     {
         #region Singleton implementation
