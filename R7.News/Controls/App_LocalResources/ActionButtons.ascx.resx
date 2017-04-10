@@ -15,7 +15,13 @@
     <data name="StartDiscussion.Text" xml:space="preserve">
         <value>Discuss</value>
     </data>
+	<data name="StartDiscussion.Title" xml:space="preserve">
+        <value>You must be logged in to be able to start discussion and post comments.</value>
+    </data>
     <data name="JoinDiscussion.Text" xml:space="preserve">
         <value>Discuss ({1} comments)</value>
+    </data>
+	<data name="JoinDiscussion.Title" xml:space="preserve">
+        <value>You must be logged in to be able to post comments.</value>
     </data>
 </root>

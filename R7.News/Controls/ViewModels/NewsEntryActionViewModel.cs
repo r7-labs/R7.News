@@ -47,5 +47,9 @@ namespace R7.News.Controls.ViewModels
                 return text;
             }
         }
+
+        public string Title {
+            get { return Localization.GetString (Action + ".Title", Context.LocalResourceFile); }
+        }
     }
 }

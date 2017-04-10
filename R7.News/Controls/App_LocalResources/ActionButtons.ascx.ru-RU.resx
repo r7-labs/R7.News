@@ -15,7 +15,13 @@
     <data name="StartDiscussion.Text" xml:space="preserve">
         <value>Обсудить</value>
     </data>
+	<data name="StartDiscussion.Title" xml:space="preserve">
+        <value>Для того, чтобы начать обсуждение или оставить комментарий, требуется войти в систему.</value>
+    </data>
     <data name="JoinDiscussion.Text" xml:space="preserve">
         <value>Обсудить ({1} комментариев)</value>
+    </data>
+	<data name="JoinDiscussion.Title" xml:space="preserve">
+        <value>Для того, чтобы оставить комментарий, требуется войти в систему.</value>
     </data>
 </root>
