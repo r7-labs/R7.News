@@ -12,16 +12,10 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-    <data name="StartDiscussion_DiscussOnDnnForum.Text" xml:space="preserve">
-        <value>Discuss on Forum</value>
+    <data name="StartDiscussion.Text" xml:space="preserve">
+        <value>Discuss</value>
     </data>
-    <data name="JoinDiscussion_DiscussOnDnnForum.Text" xml:space="preserve">
-        <value>Join Discussion</value>
-    </data>
-    <data name="StartDiscussion_DiscussOnActiveForums.Text" xml:space="preserve">
-        <value>Discuss on ActiveForums</value>
-    </data>
-	<data name="JoinDiscussion_DiscussOnActiveForums.Text" xml:space="preserve">
+    <data name="JoinDiscussion.Text" xml:space="preserve">
         <value>Join Discussion</value>
     </data>
 </root>
