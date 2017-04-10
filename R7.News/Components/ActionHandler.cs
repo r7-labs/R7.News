@@ -40,10 +40,10 @@ namespace R7.News.Components
             try {
                 if (action.ActionKey.StartsWith ("Discuss", StringComparison.InvariantCulture)) {
                     // TODO: Do something with magic values?
-                    if (action.Argument == "Start") {
+                    if (action.Params [0] == "Start") {
                         StartDiscussion (action.ActionKey, action.EntryId, portalId, userId);
                     }
-                    else if (action.Argument == "Join") {
+                    else if (action.Params [0] == "Join") {
                         JoinDiscussion (action.EntryId, portalId);
                     }
                 }

@@ -11,7 +11,7 @@
 					Enabled="<%# Item.Enabled %>"
 				    aria-disabled="<%# (!Item.Enabled).ToString ().ToLowerInvariant () %>"
 					CssClass='<%# "btn btn-sm btn-default" + (Item.Enabled? string.Empty : " disabled") %>'
-					Text='<%# LocalizeString (Item.ActionKey + "_" + Item.Argument) %>'
+					Text='<%# LocalizeString (Item.ActionKey + "_" + Item.Params [0]) %>'
 					CommandName="<%# Item.ActionKey %>" CommandArgument="<%# JsonExtensionsWeb.ToJson (Item) %>" OnCommand="linkActionButton_Command" />
             </li>
         </ItemTemplate>

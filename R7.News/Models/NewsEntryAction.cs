@@ -30,7 +30,7 @@ namespace R7.News.Controls.Models
 
         public string ActionKey { get; set; }
 
-        public string Argument { get; set; }
+        public string [] Params { get; set; }
 
         public bool Enabled { get; set; }
     }

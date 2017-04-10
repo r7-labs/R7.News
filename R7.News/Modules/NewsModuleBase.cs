@@ -67,7 +67,7 @@ namespace R7.News.Modules
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         ActionKey = discussProvider.ProviderKey,
-                        Argument = "Start",
+                        Params = new string [] { "Start" },
                         Enabled = Request.IsAuthenticated
                     });
                 }
@@ -75,7 +75,7 @@ namespace R7.News.Modules
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         ActionKey = discussProvider.ProviderKey,
-                        Argument = "Join",
+                        Params = new string [] { "Join" },
                         Enabled = Request.IsAuthenticated
                     });
                 }
