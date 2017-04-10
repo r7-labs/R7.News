@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Components\ActionHandler.cs" />
     <Compile Include="Models\NewsEntryAction.cs" />
+    <Compile Include="Models\NewsEntryActions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

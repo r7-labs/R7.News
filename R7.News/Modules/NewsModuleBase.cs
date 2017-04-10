@@ -66,16 +66,16 @@ namespace R7.News.Modules
                 if (!discussionStarted) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
-                        ActionKey = discussProvider.ProviderKey,
-                        Params = new string [] { "Start" },
+                        ActionKey = NewsEntryActions.StartDiscussion,
+                        Params = new string [] { discussProvider.ProviderKey },
                         Enabled = Request.IsAuthenticated
                     });
                 }
                 else if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
-                        ActionKey = discussProvider.ProviderKey,
-                        Params = new string [] { "Join" },
+                        ActionKey = NewsEntryActions.JoinDiscussion,
+                        Params = new string [] { discussProvider.ProviderKey },
                         Enabled = Request.IsAuthenticated
                     });
                 }

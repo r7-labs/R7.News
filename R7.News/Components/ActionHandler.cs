@@ -38,14 +38,11 @@ namespace R7.News.Components
         public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
         {
             try {
-                if (action.ActionKey.StartsWith ("Discuss", StringComparison.InvariantCulture)) {
-                    // TODO: Do something with magic values?
-                    if (action.Params [0] == "Start") {
-                        StartDiscussion (action.ActionKey, action.EntryId, portalId, userId);
-                    }
-                    else if (action.Params [0] == "Join") {
-                        JoinDiscussion (action.EntryId, portalId);
-                    }
+                if (action.ActionKey == NewsEntryActions.StartDiscussion) {
+                    StartDiscussion (action.Params [0], action.EntryId, portalId, userId);
+                }
+                else if (action.ActionKey == NewsEntryActions.JoinDiscussion) {
+                    JoinDiscussion (action.EntryId, portalId);
                 }
             }
             catch (Exception ex) {
