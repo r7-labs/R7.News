@@ -79,7 +79,7 @@ namespace R7.News.Modules
                             discussProvider.ProviderKey,
                             discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()
                         },
-                        Enabled = Request.IsAuthenticated
+                        Enabled = true
                     });
                 }
             }
