@@ -75,7 +75,10 @@ namespace R7.News.Modules
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         Action = NewsEntryActions.JoinDiscussion,
-                        Params = new string [] { discussProvider.ProviderKey },
+                        Params = new string [] {
+                            discussProvider.ProviderKey,
+                            discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()
+                        },
                         Enabled = Request.IsAuthenticated
                     });
                 }

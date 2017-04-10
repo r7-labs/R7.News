@@ -16,6 +16,6 @@
         <value>Обсудить</value>
     </data>
     <data name="JoinDiscussion.Text" xml:space="preserve">
-        <value>Участвовать в обсуждении</value>
+        <value>Обсудить ({1} комментариев)</value>
     </data>
 </root>

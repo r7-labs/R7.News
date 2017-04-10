@@ -16,6 +16,6 @@
         <value>Discuss</value>
     </data>
     <data name="JoinDiscussion.Text" xml:space="preserve">
-        <value>Join Discussion</value>
+        <value>Discuss ({1} comments)</value>
     </data>
 </root>
