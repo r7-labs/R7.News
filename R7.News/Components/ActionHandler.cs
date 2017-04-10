@@ -38,10 +38,10 @@ namespace R7.News.Components
         public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
         {
             try {
-                if (action.ActionKey == NewsEntryActions.StartDiscussion) {
+                if (action.Action == NewsEntryActions.StartDiscussion) {
                     StartDiscussion (action.Params [0], action.EntryId, portalId, userId);
                 }
-                else if (action.ActionKey == NewsEntryActions.JoinDiscussion) {
+                else if (action.Action == NewsEntryActions.JoinDiscussion) {
                     JoinDiscussion (action.EntryId, portalId);
                 }
             }
@@ -50,7 +50,7 @@ namespace R7.News.Components
                 log.Exception = new ExceptionInfo (ex);
                 log.LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString ();
                 log.LogPortalID = portalId;
-                log.AddProperty ("Message", $"Cannot execute {action.ActionKey} action");
+                log.AddProperty ("Message", $"Cannot execute {action.Action} action");
                 EventLogController.Instance.AddLog (log);
             }
         }

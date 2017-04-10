@@ -66,7 +66,7 @@ namespace R7.News.Modules
                 if (!discussionStarted) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
-                        ActionKey = NewsEntryActions.StartDiscussion,
+                        Action = NewsEntryActions.StartDiscussion,
                         Params = new string [] { discussProvider.ProviderKey },
                         Enabled = Request.IsAuthenticated
                     });
@@ -74,7 +74,7 @@ namespace R7.News.Modules
                 else if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
-                        ActionKey = NewsEntryActions.JoinDiscussion,
+                        Action = NewsEntryActions.JoinDiscussion,
                         Params = new string [] { discussProvider.ProviderKey },
                         Enabled = Request.IsAuthenticated
                     });

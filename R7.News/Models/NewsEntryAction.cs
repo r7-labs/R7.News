@@ -28,7 +28,7 @@ namespace R7.News.Controls.Models
     {
         public int EntryId { get; set; }
 
-        public string ActionKey { get; set; }
+        public string Action { get; set; }
 
         public string [] Params { get; set; }
 
