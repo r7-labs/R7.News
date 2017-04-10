@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ActionButtons.ascx.cs" Inherits="R7.News.Controls.ActionButtons" %>
 <%@ Import Namespace="DotNetNuke.Common.Utilities" %>
 <ul runat="server" class="<%# CssClass %>">
-    <asp:ListView id="listActionButtons" runat="server" ItemType="R7.News.Controls.Models.NewsEntryAction">
+    <asp:ListView id="listActionButtons" runat="server" ItemType="R7.News.Controls.ViewModels.NewsEntryActionViewModel">
         <LayoutTemplate>
             <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>
@@ -11,7 +11,7 @@
 					Enabled="<%# Item.Enabled %>"
 				    aria-disabled="<%# (!Item.Enabled).ToString ().ToLowerInvariant () %>"
 					CssClass='<%# "btn btn-sm btn-default" + (Item.Enabled? string.Empty : " disabled") %>'
-					Text='<%# LocalizeString (Item.Action) %>'
+					Text='<%# Item.Text %>'
 					CommandName="<%# Item.Action %>" CommandArgument="<%# JsonExtensionsWeb.ToJson (Item) %>" OnCommand="linkActionButton_Command" />
             </li>
         </ItemTemplate>

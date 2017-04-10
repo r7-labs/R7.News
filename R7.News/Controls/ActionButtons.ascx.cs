@@ -20,14 +20,17 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Services.Localization;
+using DotNetNuke.UI.Modules;
+using R7.DotNetNuke.Extensions.ControlExtensions;
+using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Components;
 using R7.News.Controls.Models;
-using DnnWebUiUtilities = DotNetNuke.Web.UI.Utilities;
+using R7.News.Controls.ViewModels;
 
 namespace R7.News.Controls
 {
@@ -47,26 +50,15 @@ namespace R7.News.Controls
 
         #endregion
 
-        string localResourceFile;
-        protected string LocalResourceFile {
-            get {
-                if (localResourceFile == null) {
-                    localResourceFile = DnnWebUiUtilities.GetLocalResourceFile (this);
-                }
-
-                return localResourceFile;
-            }
-        }
-
-        protected string LocalizeString (string key)
-        {
-            return Localization.GetString (key, LocalResourceFile);
+        ViewModelContext viewModelContext;
+        ViewModelContext ViewModelContext {
+            get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this, this.FindParentOfType<IModuleControl> ())); }
         }
 
         public override void DataBind ()
         {
             if (Actions != null && Actions.Count > 0) {
-                listActionButtons.DataSource = Actions;
+                listActionButtons.DataSource = Actions.Select (a => new NewsEntryActionViewModel (a, ViewModelContext));
             }
 
             base.DataBind ();
