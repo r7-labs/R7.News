@@ -21,10 +21,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Reflection;
 using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
@@ -125,6 +126,23 @@ namespace R7.News.Providers.DiscussProviders
                                         "forumId", forumParams.ForumId.ToString (),
                                         "threadId", discussEntryId,
                                         "scope", "posts");
+        }
+
+        public int GetReplyCount (string discussEntryId)
+        {
+            try {
+                using (IDataContext dataContext = DataContext.Instance ()) {
+                    return dataContext.ExecuteScalar<int> (
+                        CommandType.Text,
+                        @"SELECT Replies FROM {databaseOwner}[{objectQualifier}Forum_Threads]
+                            WHERE ThreadID = (SELECT ThreadID FROM {databaseOwner}[{objectQualifier}Forum_Posts] WHERE PostID = @0)",
+                        discussEntryId
+                    );
+                }
+            }
+            catch {
+                return -1;
+            }
         }
     }
 }

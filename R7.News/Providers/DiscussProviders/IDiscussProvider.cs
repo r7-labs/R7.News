@@ -35,5 +35,7 @@ namespace R7.News.Providers.DiscussProviders
         string Discuss (INewsEntry newsEntry,int portalId, int userId);
 
         string GetDiscussUrl (string discussEntryId);
+
+        int GetReplyCount (string discussEntryId);
     }
 }

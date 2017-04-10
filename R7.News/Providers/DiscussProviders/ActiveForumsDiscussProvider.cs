@@ -21,10 +21,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Reflection;
 using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
+using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
@@ -95,6 +96,22 @@ namespace R7.News.Providers.DiscussProviders
             return Globals.NavigateURL (forumParams.TabId, string.Empty,
                                         "forumId", forumParams.ForumId.ToString (),
                                         "postId", discussEntryId);
+        }
+
+        public int GetReplyCount (string discussEntryId)
+        {
+            try {
+                using (IDataContext dataContext = DataContext.Instance ()) {
+                    return dataContext.ExecuteScalar<int> (
+                        CommandType.Text,
+                        @"SELECT ReplyCount FROM {databaseOwner}[{objectQualifier}activeforums_Topics]
+                            WHERE TopicId = @0",
+                        discussEntryId
+                    );
+                }
+            } catch {
+                return -1;
+            }
         }
     }
 }
