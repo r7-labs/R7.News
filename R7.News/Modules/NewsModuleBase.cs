@@ -59,38 +59,6 @@ namespace R7.News.Modules
 
         #endregion
 
-        public IList<NewsEntryAction> GetNewsEntryActions (INewsEntry newsEntry)
-        {
-            var actions = new List<NewsEntryAction> ();
-            var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
-            if (!discussionStarted) {
-                var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault ();
-                if (discussProvider != null) {
-                    actions.Add (new NewsEntryAction {
-                        EntryId = newsEntry.EntryId,
-                        Action = NewsEntryActions.StartDiscussion,
-                        Params = new string [] { discussProvider.ProviderKey },
-                        Enabled = Request.IsAuthenticated
-                    });
-                }
-            }
-            else {
-                var discussProvider = NewsConfig.Instance.GetDiscussProviders ()
-                                                .FirstOrDefault (dp => dp.ProviderKey == newsEntry.DiscussProviderKey);
-                if (discussProvider != null) {
-                    actions.Add (new NewsEntryAction {
-                        EntryId = newsEntry.EntryId,
-                        Action = NewsEntryActions.JoinDiscussion,
-                        Params = new string [] {
-                            discussProvider.ProviderKey,
-                            discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()
-                        },
-                        Enabled = true
-                    });
-                }
-            }
 
-            return actions;
-        }
     }
 }

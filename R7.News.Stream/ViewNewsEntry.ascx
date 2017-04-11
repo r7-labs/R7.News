@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewNewsEntry.ascx.cs" Inherits="R7.News.Stream.ViewNewsEntry" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
+<%@ Register TagPrefix="news" TagName="ActionButtons" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionButtons.ascx" %>
 <%@ Import Namespace="System.Web" %>
 
 <asp:FormView id="formNewsEntry" CssClass="news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
@@ -32,6 +33,7 @@
             <p>
                 <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
             </p>
+			<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
         </div>
     </ItemTemplate>
 </asp:FormView>

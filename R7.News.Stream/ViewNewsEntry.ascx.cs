@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -25,11 +25,12 @@ using System.Net;
 using System.Web;
 using System.Web.UI.WebControls;
 using DotNetNuke.Services.Exceptions;
-using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
+using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
 using R7.News.Controls;
 using R7.News.Data;
+using R7.News.Models;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 
@@ -135,6 +136,17 @@ namespace R7.News.Stream
             termLinks.Module = this;
             termLinks.DataSource = item.ContentItem.Terms;
             termLinks.DataBind ();
+
+            // action buttons
+            var actionButtons = (ActionButtons) formNewsEntry.FindControl ("actionButtons");
+            var actions = ModelHelper.GetNewsEntryActions (item);
+
+            if (actions.Count > 0) {
+                actionButtons.Actions = actions;
+                actionButtons.DataBind ();
+            } else {
+                actionButtons.Visible = false;
+            }
         }
     }
 

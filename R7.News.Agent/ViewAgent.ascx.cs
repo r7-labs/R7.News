@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -224,6 +224,17 @@ namespace R7.News.Agent
             termLinks.Module = this;
             termLinks.DataSource = item.ContentItem.Terms;
             termLinks.DataBind ();
+
+            // action buttons
+            var actionButtons = (ActionButtons)e.Item.FindControl ("actionButtons");
+            var actions = ModelHelper.GetNewsEntryActions (item);
+
+            if (actions.Count > 0) {
+                actionButtons.Actions = actions;
+                actionButtons.DataBind ();
+            } else {
+                actionButtons.Visible = false;
+            }
 
             // show grouped news
             var listGroup = (ListView) e.Item.FindControl ("listGroup");

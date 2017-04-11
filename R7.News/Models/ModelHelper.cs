@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -22,7 +22,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using DotNetNuke.Entities.Content.Taxonomy;
+using R7.News.Components;
+using R7.News.Controls.Models;
 
 namespace R7.News.Models
 {
@@ -69,6 +72,40 @@ namespace R7.News.Models
             var terms = terms1.Join (terms2, t1 => t1.TermId, t2 => t2.TermId, (t1, t2) => t1);
 
             return terms != null && terms.Any ();
+        }
+
+        public static IList<NewsEntryAction> GetNewsEntryActions (INewsEntry newsEntry)
+        {
+            var actions = new List<NewsEntryAction> ();
+            var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
+            if (!discussionStarted) {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault ();
+                if (discussProvider != null) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        Action = NewsEntryActions.StartDiscussion,
+                        Params = new string [] { discussProvider.ProviderKey },
+                        Enabled = HttpContext.Current.Request.IsAuthenticated
+                    });
+                }
+            }
+            else {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ()
+                                                .FirstOrDefault (dp => dp.ProviderKey == newsEntry.DiscussProviderKey);
+                if (discussProvider != null) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        Action = NewsEntryActions.JoinDiscussion,
+                        Params = new string [] {
+                            discussProvider.ProviderKey,
+                            discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()
+                        },
+                        Enabled = true
+                    });
+                }
+            }
+
+            return actions;
         }
     }
 }
