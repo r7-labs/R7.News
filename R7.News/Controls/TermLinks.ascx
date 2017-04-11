@@ -1,10 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="TermLinks.ascx.cs" Inherits="R7.News.Controls.TermLinks" %>
-<div class="<%: CssClass %>">
+<ul runat="server" class="<%# CssClass %>" style="margin-left:inherit">
     <asp:ListView id="listTermLinks" runat="server" ItemType="R7.News.Controls.ViewModels.TermLinksViewModel">
-        <LayoutTemplate>
-            <ul runat="server" class="list-inline" style="margin-left:inherit">
-                <li runat="server" id="itemPlaceholder"></li>
-            </ul>
+	    <LayoutTemplate>
+            <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>
         <ItemTemplate>
             <li style="padding-left:inherit">
@@ -13,4 +11,4 @@
             </li>
         </ItemTemplate>
     </asp:ListView>
-</div>
+</ul>

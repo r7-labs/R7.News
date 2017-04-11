@@ -16,7 +16,7 @@
                 </asp:HyperLink>
                 <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
             </h3>
-            <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+            <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
             <p class="news-entry-info">
                 <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %> 
                 <span class="glyphicon glyphicon-user"></span> <%# Eval ("CreatedByUserName") %>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <p>
-                <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
+                <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
             </p>
 			<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
         </div>

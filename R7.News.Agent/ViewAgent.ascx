@@ -36,7 +36,7 @@
                         </asp:HyperLink>
                         <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                     </h3>
-                    <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+                    <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
                     <p class="news-entry-info">
                         <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
                         <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Item.CreatedByUserName %></p>
@@ -44,7 +44,7 @@
                     <div class="news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
                     </div>
-                    <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
+                    <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
 					<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
@@ -59,7 +59,7 @@
                                 </asp:HyperLink>
 								<%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                             </h4>
-                            <news:BadgeList id="listBadges" runat="server" CssClass="visibility-badges" BadgeCssClass="badge" />
+                            <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
                             <p class="news-entry-info">
                                 <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
                                 <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Item.CreatedByUserName %>
