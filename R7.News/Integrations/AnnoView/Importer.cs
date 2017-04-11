@@ -33,6 +33,7 @@ using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Scheduling;
 using R7.News.Components;
 using R7.News.Data;
+using R7.News.Models;
 
 namespace R7.News.Integrations.AnnoView
 {

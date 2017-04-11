@@ -25,9 +25,8 @@ using DotNetNuke.ComponentModel.DataAnnotations;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using R7.News.Components;
-using R7.News.Models;
 
-namespace R7.News.Data
+namespace R7.News.Models
 {
     [TableName (Const.Prefix)]
     [PrimaryKey ("EntryId", AutoIncrement = true)]

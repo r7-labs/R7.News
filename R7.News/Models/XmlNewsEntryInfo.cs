@@ -25,9 +25,8 @@ using System.Linq;
 using System.Xml.Serialization;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
-using R7.News.Models;
 
-namespace R7.News.Data
+namespace R7.News.Models
 {
     /// <summary>
     /// XML serialization adapter for NewsEntryInfo
