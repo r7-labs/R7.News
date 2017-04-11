@@ -214,27 +214,7 @@ namespace R7.News.Agent
         {
             var item = (AgentNewsEntryViewModel) e.Item.DataItem;
 
-            // visibility badges
-            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
-            listBadges.DataSource = item.Badges;
-            listBadges.DataBind ();
-
-            // show term links
-            var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
-            termLinks.Module = this;
-            termLinks.DataSource = item.ContentItem.Terms;
-            termLinks.DataBind ();
-
-            // action buttons
-            var actionButtons = (ActionButtons)e.Item.FindControl ("actionButtons");
-            var actions = ModelHelper.GetNewsEntryActions (item);
-
-            if (actions.Count > 0) {
-                actionButtons.Actions = actions;
-                actionButtons.DataBind ();
-            } else {
-                actionButtons.Visible = false;
-            }
+            BindChildControls (item, e.Item);
 
             // show grouped news
             var listGroup = (ListView) e.Item.FindControl ("listGroup");

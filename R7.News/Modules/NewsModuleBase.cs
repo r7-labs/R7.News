@@ -19,16 +19,16 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Linq;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
 using R7.DotNetNuke.Extensions.Modules;
-using R7.News.Components;
-using R7.News.Controls.Models;
+using R7.News.Controls;
 using R7.News.Models;
+using R7.News.ViewModels;
 
 namespace R7.News.Modules
 {
@@ -59,6 +59,41 @@ namespace R7.News.Modules
 
         #endregion
 
+        protected void BindChildControls (NewsEntryViewModelBase item, Control itemControl)
+        {
+            var linkEdit = (HyperLink) itemControl.FindControl ("linkEdit");
+            var iconEdit = (Image) itemControl.FindControl ("imageEdit");
 
+            // edit link
+            if (IsEditable) {
+                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
+            }
+
+            // make edit link visible in edit mode
+            linkEdit.Visible = IsEditable;
+            iconEdit.Visible = IsEditable;
+
+            // visibility badges
+            var listBadges = (BadgeList) itemControl.FindControl ("listBadges");
+            listBadges.DataSource = item.Badges;
+            listBadges.DataBind ();
+
+            // show term links
+            var termLinks = (TermLinks) itemControl.FindControl ("termLinks");
+            termLinks.Module = this;
+            termLinks.DataSource = item.ContentItem.Terms;
+            termLinks.DataBind ();
+
+            // action buttons
+            var actionButtons = (ActionButtons) itemControl.FindControl ("actionButtons");
+            var actions = ModelHelper.GetNewsEntryActions (item);
+
+            if (actions.Count > 0) {
+                actionButtons.Actions = actions;
+                actionButtons.DataBind ();
+            } else {
+                actionButtons.Visible = false;
+            }
+        }
     }
 }

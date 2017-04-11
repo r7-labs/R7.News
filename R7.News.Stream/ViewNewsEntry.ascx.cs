@@ -23,25 +23,23 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web;
-using System.Web.UI.WebControls;
+using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using R7.DotNetNuke.Extensions.ModuleExtensions;
-using R7.DotNetNuke.Extensions.Modules;
 using R7.DotNetNuke.Extensions.ViewModels;
-using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
+using R7.News.Modules;
 using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream
 {
-    public partial class ViewNewsEntry: PortalModuleBase<StreamSettings>
+    public partial class ViewNewsEntry: NewsModuleBase<StreamSettings>
     {
         #region Properties
 
         ViewModelContext<StreamSettings> viewModelContext;
-
         protected ViewModelContext<StreamSettings> ViewModelContext
         {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<StreamSettings> (this, Settings)); }
@@ -61,6 +59,12 @@ namespace R7.News.Stream
                 }
 
                 return entryId;
+            }
+        }
+
+        public override ModuleActionCollection ModuleActions {
+            get {
+                return new ModuleActionCollection ();
             }
         }
 
@@ -112,41 +116,7 @@ namespace R7.News.Stream
 
         protected void formNewsEntry_DataBound (object sender, EventArgs e)
         {
-            var item = (StreamNewsEntryViewModel) formNewsEntry.DataItem;
-
-            var linkEdit = (HyperLink) formNewsEntry.FindControl ("linkEdit");
-            var iconEdit = (Image) formNewsEntry.FindControl ("imageEdit");
-
-            // edit link
-            if (IsEditable) {
-                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
-            }
-
-            // make edit link visible in edit mode
-            linkEdit.Visible = IsEditable;
-            iconEdit.Visible = IsEditable;
-
-            // visibility badges
-            var listBadges = (BadgeList) formNewsEntry.FindControl ("listBadges");
-            listBadges.DataSource = item.Badges;
-            listBadges.DataBind ();
-
-            // show term links
-            var termLinks = (TermLinks) formNewsEntry.FindControl ("termLinks");
-            termLinks.Module = this;
-            termLinks.DataSource = item.ContentItem.Terms;
-            termLinks.DataBind ();
-
-            // action buttons
-            var actionButtons = (ActionButtons) formNewsEntry.FindControl ("actionButtons");
-            var actions = ModelHelper.GetNewsEntryActions (item);
-
-            if (actions.Count > 0) {
-                actionButtons.Actions = actions;
-                actionButtons.DataBind ();
-            } else {
-                actionButtons.Visible = false;
-            }
+            BindChildControls ((StreamNewsEntryViewModel) formNewsEntry.DataItem, formNewsEntry);
         }
     }
 

@@ -205,30 +205,7 @@ namespace R7.News.Stream
         /// <param name="e"></param>
         protected void listStream_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (StreamNewsEntryViewModel) e.Item.DataItem;
-
-            // visibility badges
-            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
-            listBadges.DataSource = item.Badges;
-            listBadges.DataBind ();
-
-            // show term links
-            var termLinks = (TermLinks) e.Item.FindControl ("termLinks");
-            termLinks.Module = this;
-            termLinks.DataSource = item.ContentItem.Terms;
-            termLinks.DataBind ();
-
-            // action buttons
-            var actionButtons = (ActionButtons) e.Item.FindControl ("actionButtons");
-            var actions = ModelHelper.GetNewsEntryActions (item);
-
-            if (actions.Count > 0) {
-                actionButtons.Actions = actions;
-                actionButtons.DataBind ();
-            }
-            else {
-                actionButtons.Visible = false;
-            }
+            BindChildControls ((StreamNewsEntryViewModel) e.Item.DataItem, e.Item);
         }
     }
 }
