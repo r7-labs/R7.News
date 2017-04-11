@@ -124,7 +124,6 @@
     <Compile Include="Controls\AgplSignature.ascx.cs">
       <DependentUpon>AgplSignature.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Models\WeightRange.cs" />
     <Compile Include="Modules\NewsModuleBase.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProvider.cs" />
     <Compile Include="Providers\TermUrlProviders\ITermUrlProvider.cs" />
@@ -144,7 +143,7 @@
     <Compile Include="Models\NewsEntryActions.cs" />
     <Compile Include="Controls\ViewModels\NewsEntryActionViewModel.cs" />
     <Compile Include="Models\NewsEntryInfo.cs" />
-    <Compile Include="Models\XmlNewsEntryInfo.cs" />
+    <Compile Include="Models\WeightRange.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

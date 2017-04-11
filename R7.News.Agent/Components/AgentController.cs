@@ -34,6 +34,7 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Search.Entities;
+using R7.News.Agent.Models;
 using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;

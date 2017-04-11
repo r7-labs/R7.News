@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -95,6 +96,7 @@
     </Compile>
     <Compile Include="ViewModels\AgentNewsEntryViewModel.cs" />
     <Compile Include="Components\AgentSettingsRepository.cs" />
+    <Compile Include="Models\XmlNewsEntryInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
