@@ -46,3 +46,200 @@ BEGIN
         SET DefinitionName = N'R7_News_Agent' WHERE DefinitionName = N'R7.News.Agent'
 END
 GO
+
+-- Drop stored procedures
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_Count]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_Count]
+GO
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_FirstPage]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_FirstPage]
+GO
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_Count]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_Count]
+GO
+
+IF EXISTS (select * from sys.objects where object_id = object_id(N'{databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_FirstPage]') and type in (N'P'))
+    DROP PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_FirstPage]
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_Count]
+    @portalId int,
+    @now datetime,
+    @minThematicWeight int,
+    @maxThematicWeight int,
+    @minStructuralWeight int,
+    @maxStructuralWeight int
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT COUNT (*) FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+            ON NE.ContentItemID = CI.ContentItemID
+        WHERE NE.PortalID = @portalId
+            AND (@now IS NULL OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
+            AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
+                OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntries_FirstPage]
+    @portalId int,
+    @pageSize int,
+    @now datetime,
+    @minThematicWeight int,
+    @maxThematicWeight int,
+    @minStructuralWeight int,
+    @maxStructuralWeight int
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT TOP (@pageSize) NE.* FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+            ON NE.ContentItemID = CI.ContentItemID
+        WHERE NE.PortalID = @portalId
+            -- Get only published items
+            AND (@now IS NULL OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
+            -- Filter by weighs
+            AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
+                OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
+        -- Order by PublishedOnDate DESC 
+        ORDER BY CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END DESC
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_Count]
+    @portalId int,
+    @now datetime,
+    @minThematicWeight int,
+    @maxThematicWeight int,
+    @minStructuralWeight int,
+    @maxStructuralWeight int,
+    @term1 int,
+    @term2 int = NULL,
+    @term3 int = NULL,
+    @term4 int = NULL,
+    @term5 int = NULL,
+    @term6 int = NULL,
+    @term7 int = NULL,
+    @term8 int = NULL,
+    @term9 int = NULL,
+    @term10 int = NULL,
+    @term11 int = NULL,
+    @term12 int = NULL,
+    @term13 int = NULL,
+    @term14 int = NULL,
+    @term15 int = NULL,
+    @term16 int = NULL,
+    @term17 int = NULL,
+    @term18 int = NULL,
+    @term19 int = NULL,
+    @term20 int = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT COUNT (DISTINCT NE.EntryID) FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+            ON NE.ContentItemID = CI.ContentItemID
+        INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
+            ON CI.ContentItemID = CIT.ContentItemID 
+        WHERE NE.PortalID = @portalId
+            AND (@now IS NULL OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
+            AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
+                OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
+            AND (CIT.TermID = @term1
+            OR CIT.TermID = @term2
+            OR CIT.TermID = @term3
+            OR CIT.TermID = @term4
+            OR CIT.TermID = @term5
+            OR CIT.TermID = @term6
+            OR CIT.TermID = @term7
+            OR CIT.TermID = @term8
+            OR CIT.TermID = @term9
+            OR CIT.TermID = @term10
+            OR CIT.TermID = @term11
+            OR CIT.TermID = @term12
+            OR CIT.TermID = @term13
+            OR CIT.TermID = @term14
+            OR CIT.TermID = @term15
+            OR CIT.TermID = @term16
+            OR CIT.TermID = @term17
+            OR CIT.TermID = @term18
+            OR CIT.TermID = @term19
+            OR CIT.TermID = @term20)
+END
+GO
+
+CREATE PROCEDURE {databaseOwner}[{objectQualifier}r7_News_GetNewsEntriesByTerms_FirstPage]
+    @portalId int,
+    @pageSize int,
+    @now datetime,
+    @minThematicWeight int,
+    @maxThematicWeight int,
+    @minStructuralWeight int,
+    @maxStructuralWeight int,
+    @term1 int,
+    @term2 int = NULL,
+    @term3 int = NULL,
+    @term4 int = NULL,
+    @term5 int = NULL,
+    @term6 int = NULL,
+    @term7 int = NULL,
+    @term8 int = NULL,
+    @term9 int = NULL,
+    @term10 int = NULL,
+    @term11 int = NULL,
+    @term12 int = NULL,
+    @term13 int = NULL,
+    @term14 int = NULL,
+    @term15 int = NULL,
+    @term16 int = NULL,
+    @term17 int = NULL,
+    @term18 int = NULL,
+    @term19 int = NULL,
+    @term20 int = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT DISTINCT TOP (@pageSize) NE2.* FROM
+        (SELECT TOP (@pageSize) NE.*, 
+            (CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END) AS PublishedOnDate
+        FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
+            INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
+                ON NE.ContentItemID = CI.ContentItemID
+            INNER JOIN {databaseOwner}[{objectQualifier}ContentItems_Tags] AS CIT 
+                ON CI.ContentItemID = CIT.ContentItemID 
+            WHERE NE.PortalID = @portalId
+                AND (@now IS NULL OR ((NE.StartDate IS NULL OR @now >= NE.StartDate) AND (NE.EndDate IS NULL OR @now < NE.EndDate)))
+                AND ((NE.ThematicWeight >= @minThematicWeight AND NE.ThematicWeight <= @maxThematicWeight)
+                    OR (NE.StructuralWeight >= @minStructuralWeight AND NE.StructuralWeight <= @maxStructuralWeight))
+                AND (CIT.TermID = @term1
+                OR CIT.TermID = @term2
+                OR CIT.TermID = @term3
+                OR CIT.TermID = @term4
+                OR CIT.TermID = @term5
+                OR CIT.TermID = @term6
+                OR CIT.TermID = @term7
+                OR CIT.TermID = @term8
+                OR CIT.TermID = @term9
+                OR CIT.TermID = @term10
+                OR CIT.TermID = @term11
+                OR CIT.TermID = @term12
+                OR CIT.TermID = @term13
+                OR CIT.TermID = @term14
+                OR CIT.TermID = @term15
+                OR CIT.TermID = @term16
+                OR CIT.TermID = @term17
+                OR CIT.TermID = @term18
+                OR CIT.TermID = @term19
+                OR CIT.TermID = @term20)
+        ) AS NE2
+        ORDER BY NE2.PublishedOnDate DESC
+END
+GO

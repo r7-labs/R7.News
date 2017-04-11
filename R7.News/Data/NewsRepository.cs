@@ -34,7 +34,6 @@ using R7.News.Models;
 
 namespace R7.News.Data
 {
-    // TODO: Use DataTime.MinValue instead of checkNow flag (need also SP refactoring)
     public class NewsRepository
     {
         #region Singleton implementation
@@ -207,28 +206,25 @@ namespace R7.News.Data
         }
 
         public int GetNewsEntries_Count (int portalId,
-                                         bool checkNow,
-                                         DateTime now,
+                                         DateTime? now,
                                          WeightRange thematicWeights,
                                          WeightRange structuralWeights)
         {
             return NewsDataProvider.Instance.ExecuteSpScalar<int> (
-                SpNamePrefix + "GetNewsEntries_Count", 
-                portalId, checkNow, now,
+                SpNamePrefix + "GetNewsEntries_Count", portalId, now,
                 thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max
             );
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntries_FirstPage (int portalId, 
                                                                     int pageSize,
-                                                                    bool checkNow,
-                                                                    DateTime now, 
+                                                                    DateTime? now, 
                                                                     WeightRange thematicWeights,
                                                                     WeightRange structuralWeights)
         {
             return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (
                 SpNamePrefix + "GetNewsEntries_FirstPage",
-                portalId, pageSize, checkNow, now,
+                portalId, pageSize, now,
                 thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
@@ -272,8 +268,7 @@ namespace R7.News.Data
         }
 
         public int GetNewsEntriesByTerms_Count (int portalId,
-                                                bool checkNow,
-                                                DateTime now,
+                                                DateTime? now,
                                                 WeightRange thematicWeights,
                                                 WeightRange structuralWeights,
                                                 IList<Term> terms)
@@ -282,8 +277,7 @@ namespace R7.News.Data
 
             if (terms.Count > 0) {
                 return NewsDataProvider.Instance.ExecuteSpScalar<int> (
-                    SpNamePrefix + "GetNewsEntriesByTerms_Count",
-                    portalId, checkNow, now,
+                    SpNamePrefix + "GetNewsEntriesByTerms_Count", portalId, now,
                     thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max,
                     terms.Select (t => t.TermId).ToArray ()
                 );
@@ -294,8 +288,7 @@ namespace R7.News.Data
 
         public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms_FirstPage (int portalId,
                                                                            int pageSize,
-                                                                           bool checkNow,
-                                                                           DateTime now,
+                                                                           DateTime? now,
                                                                            WeightRange thematicWeights,
                                                                            WeightRange structuralWeights,
                                                                            IList<Term> terms)
@@ -304,7 +297,7 @@ namespace R7.News.Data
 
             if (terms.Count > 0) {
                 return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntriesByTerms_FirstPage",
-                    portalId, pageSize, checkNow, now,
+                    portalId, pageSize, now,
                     thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max,
                     terms.Select (t => t.TermId).ToArray ())
                         .WithContentItems ()
