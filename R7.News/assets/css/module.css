@@ -9,6 +9,12 @@
     text-decoration:inherit;
 }
 
+.news-agent .news-action-btns a.btn.disabled,
+.news-entry .news-action-btns a.btn.disabled,
+.news-stream .news-action-btns a.btn.disabled {
+    pointer-events:auto;
+}
+
 .news-stream .visibility-badges,
 .news-agent .visibility-badges,
 .news-entry .visibility-badges {

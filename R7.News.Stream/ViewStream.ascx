@@ -46,7 +46,7 @@
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="term-links" />
                 </p>
-				<news:ActionButtons id="actionButtons" CssClass="list-inline" runat="server" />
+				<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
             </div>
         </ItemTemplate>
         <ItemSeparatorTemplate>
