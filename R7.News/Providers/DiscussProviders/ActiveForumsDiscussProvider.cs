@@ -24,7 +24,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Web;
 using DotNetNuke.Common;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
@@ -68,7 +70,7 @@ namespace R7.News.Providers.DiscussProviders
                         forumParams.ModuleId,
                         forumParams.ForumId,
                         newsEntry.Title,
-                        newsEntry.Description,
+                        HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true),
                         userId,
                         UserController.Instance.GetUserById (portalId, userId).DisplayName,
                         true, // IsApproved
