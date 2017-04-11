@@ -29,9 +29,9 @@ namespace R7.News.Components
 
         public const string ContentType = Prefix + "_Entry";
 
-        public const string AgentModuleDefinitionName = "R7.News.Agent";
+        public const string AgentModuleDefinitionName = "R7_News_Agent";
 
-        public const string StreamModuleDefinitionName = "R7.News.Stream";
+        public const string StreamModuleDefinitionName = "R7_News_Stream";
     }
 }
 

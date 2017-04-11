@@ -90,7 +90,7 @@
                         <moduleDefinitions>
                             <moduleDefinition>
                                 <friendlyName>R7.News.Stream</friendlyName>
-                                <definitionName>R7.News.Stream</definitionName>
+                                <definitionName>R7_News_Stream</definitionName>
                                 <defaultCacheTime>0</defaultCacheTime>
                                 <moduleControls>
                                     <moduleControl>
@@ -180,7 +180,7 @@
                         <moduleDefinitions>
                             <moduleDefinition>
                                 <friendlyName>R7.News.Agent</friendlyName>
-                                <definitionName>R7.News.Agent</definitionName>
+                                <definitionName>R7_News_Agent</definitionName>
                                 <defaultCacheTime>0</defaultCacheTime>
                                 <moduleControls>
                                     <moduleControl>

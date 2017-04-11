@@ -28,3 +28,21 @@ IF NOT EXISTS (select * from sys.columns where object_id = object_id (N'{databas
         ADD DiscussProviderKey nvarchar (64) NULL,
             DiscussEntryID nvarchar (255) NULL -- e.g. forum post id
 GO
+
+IF EXISTS (select * from {databaseOwner}[{objectQualifier}ModuleDefinitions] where DefinitionName like N'R7.News%')
+BEGIN
+    -- Remove definitions added by new install
+    DELETE FROM {databaseOwner}[{objectQualifier}ModuleDefinitions]
+        WHERE DefinitionName = N'R7_News_Stream'
+
+    DELETE FROM {databaseOwner}[{objectQualifier}ModuleDefinitions]
+        WHERE DefinitionName = N'R7_News_Agent'
+
+    -- Rename old definitions
+    UPDATE {databaseOwner}[{objectQualifier}ModuleDefinitions]
+        SET DefinitionName = N'R7_News_Stream' WHERE DefinitionName = N'R7.News.Stream'
+
+    UPDATE {databaseOwner}[{objectQualifier}ModuleDefinitions]
+        SET DefinitionName = N'R7_News_Agent' WHERE DefinitionName = N'R7.News.Agent'
+END
+GO
