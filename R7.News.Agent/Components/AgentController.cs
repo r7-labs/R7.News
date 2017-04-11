@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Xml;
 using System.Xml.Serialization;
 using DotNetNuke.Common.Utilities;
@@ -33,9 +34,9 @@ using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
 using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Services.Search.Entities;
+using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;
-using R7.News.Components;
 
 namespace R7.News.Agent.Components
 {
@@ -66,7 +67,7 @@ namespace R7.News.Agent.Components
                         AuthorUserId = newsEntry.ContentItem.CreatedByUserID,
                         Title = newsEntry.Title,
                         // Description = HtmlUtils.Shorten (...);
-                        Body = HtmlUtils.ConvertToText (newsEntry.Description),
+                        Body = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false),
                         Tags = newsEntry.ContentItem.Terms.Select (t => t.Name),
                         ModifiedTimeUtc = newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime (),
                         UniqueKey = string.Format (Const.Prefix + "_{0}", newsEntry.EntryId),
