@@ -7,7 +7,7 @@
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 
-<asp:FormView id="formNewsEntry" CssClass="news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
+<asp:FormView id="formNewsEntry" CssClass="news-module news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
     <ItemTemplate>
         <div>
             <h3>

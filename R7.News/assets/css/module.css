@@ -1,72 +1,50 @@
 ﻿.news-agpl-footer > hr { margin-bottom:0;margin-top:0;width:33% }
 .news-agpl-footer > a { font-size:xx-small;color:#ccc }
 
-.news-agent a.btn.aspNetDisabled,
-.news-entry a.btn.aspNetDisabled,
-.news-stream a.btn.aspNetDisabled {
+.news-module a.btn.aspNetDisabled {
     color:inherit;
     cursor:inherit;
     text-decoration:inherit;
 }
 
-.news-agent .news-action-btns a.btn.disabled,
-.news-entry .news-action-btns a.btn.disabled,
-.news-stream .news-action-btns a.btn.disabled {
+.news-module .news-action-btns a.btn.disabled {
     pointer-events:auto;
 }
 
-.news-stream .visibility-badges,
-.news-agent .visibility-badges,
-.news-entry .visibility-badges {
+.news-module .visibility-badges {
     font-size:85%
 }
 
-.news-stream .visibility-badges ul.list-inline,
-.news-agent .visibility-badges ul.list-inline,
-.news-entry .visibility-badges ul.list-inline {
+.news-module .visibility-badges ul.list-inline {
     margin-left:0
 }
 
-.news-stream .visibility-badges .badge,
-.news-agent .visibility-badges .badge,
-.news-entry .visibility-badges .badge {
+.news-module .visibility-badges .badge {
     padding-left:.5em;
     padding-right:.5em
 }
 
-.news-stream .visibility-badges .badge.not-published,
-.news-agent .visibility-badges .badge.not-published,
-.news-entry .visibility-badges .badge.not-published {
+.news-module .visibility-badges .badge.not-published {
     background-color:#cc3
 }
 
-.news-stream .visibility-badges .badge.expired,
-.news-agent .visibility-badges .badge.expired,
-.news-entry .visibility-badges .badge.expired {
+.news-module .visibility-badges .badge.expired {
     background-color:#c33
 }
 
-.news-stream .term-links,
-.news-agent .term-links,
-.news-entry .term-links {
+.news-module .term-links {
     font-size:85%
 }
 
-.news-stream .term-links span.glyphicon,
-.news-agent .term-links span.glyphicon,
-.news-entry .term-links span.glyphicon {
+.news-module .term-links span.glyphicon {
     color:gray
 }
 
-.news-stream .news-entry-info,
-.news-agent .news-entry-info,
-.news-entry .news-entry-info {
+.news-module .news-entry-info {
     color:gray;
     font-size:85%
 }
 
-.news-stream .news-entry-info .glyphicon-user,
-.news-agent .news-entry-info .glyphicon-user,
-.news-entry .news-entry-info .glyphicon-user {
+.news-module .news-entry-info .glyphicon-user {
     margin-left:1em
 }

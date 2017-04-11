@@ -15,7 +15,7 @@
 </asp:Panel>
 <asp:ListView id="listAgent" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listAgent_ItemDataBound">
     <LayoutTemplate>
-        <div runat="server" class="news-agent">
+        <div runat="server" class="news-module news-agent">
             <div runat="server" id="itemPlaceholder"></div>
         </div>
     </LayoutTemplate>
