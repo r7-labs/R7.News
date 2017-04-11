@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.Linq;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
@@ -62,8 +63,9 @@ namespace R7.News.Modules
         {
             var actions = new List<NewsEntryAction> ();
             var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
-            foreach (var discussProvider in NewsConfig.Instance.GetDiscussProviders ()) {
-                if (!discussionStarted) {
+            if (!discussionStarted) {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault ();
+                if (discussProvider != null) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         Action = NewsEntryActions.StartDiscussion,
@@ -71,7 +73,11 @@ namespace R7.News.Modules
                         Enabled = Request.IsAuthenticated
                     });
                 }
-                else if (discussionStarted && newsEntry.DiscussProviderKey == discussProvider.ProviderKey) {
+            }
+            else {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ()
+                                                .FirstOrDefault (dp => dp.ProviderKey == newsEntry.DiscussProviderKey);
+                if (discussProvider != null) {
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         Action = NewsEntryActions.JoinDiscussion,
