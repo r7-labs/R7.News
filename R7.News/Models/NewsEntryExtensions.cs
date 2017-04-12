@@ -217,6 +217,18 @@ namespace R7.News.Models
             return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + tabId
             + "&mid=" + moduleId + "&ctl=entry&entryid=" + newsEntry.EntryId);
         }
+
+        public static string GetUrl (this INewsEntry newsEntry, int tabId, int moduleId)
+        {
+            if (!string.IsNullOrWhiteSpace (newsEntry.Url)) {
+                return Globals.LinkClick (newsEntry.Url, tabId, moduleId);
+            }
+
+            return newsEntry.GetPermalink (PermalinkMode.Friendly,
+                                      NewsDataProvider.Instance.ModuleController,
+                                      PortalSettings.Current.PortalAlias,
+                                      moduleId, tabId);
+        }
     }
 }
 
