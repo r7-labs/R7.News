@@ -54,16 +54,22 @@ In order to setup discussions for *R7.News*, you need do the following:
    E.g. if you have some DNN Forum module instance (moduleId=145) placed on page with tabId=40
    and you want discussion posts to be created on specific forum (forumId=2), then your configuration
    should look like this:
+
    ```YAML
    discuss-providers:
      - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
        provider-key: DiscussOnDnnForum
        params: ['40', '145', '2'] # tabId, moduleId, forumId
     ```
+
 4. Comment unused providers using `#` sign.
 5. Restart application to apply changes.
 
-To disable discussions, comment all lines in `discuss-providers` section of `R7.News.yml` config file, leaving only `discuss-providers:` line itself.
+To disable discussions, your `discuss-providers` section in portal config file should look like this:
+
+```YAML
+discuss-providers: []
+```
 
 Note that you could develop and register your own discuss providers by implementing `IDiscussProvider` public interface.
 
@@ -71,12 +77,14 @@ To allow *R7.News* to use custom discuss provider:
 
 1. Place a DLL with custom discuss provider class into `bin` folder of DNN install.
 2. Register custom discuss provider using portal config file, adding assembly name followed by `:` to class name, like this:
+
    ```YAML
    discuss-providers:
      - type: MyCompany.DiscussProviders:MyCompany.DiscussProviders.MyCustomDiscussProvider
        provider-key: DiscussOnSomething
        params: ['your', 'custom', 'provider', 'params', 'here']
     ```
+
 3. Restart application to apply changes.
 4. If all OK, you'll be able to create discussions for news entries using new provider.
    If not, see DNN event log for more info about what's wrong.
