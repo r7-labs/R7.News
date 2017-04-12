@@ -138,4 +138,15 @@
     <data name="PassesByTerms.Text" xml:space="preserve">
         <value>по меткам</value>
     </data>
+	<data name="labelDiscussionLink.Text" xml:space="preserve">
+        <value>Ссылка на обсуждение:</value>
+    </data>
+    <data name="labelDiscussionLink.Help" xml:space="preserve">
+        <value>Отсюда Вы можете скопировать ссылку на обсуждение новости.
+		Нажмите &quot;Удалить ссылку на обсуждение&quot; для того, чтобы удалить связь новости с обсуждением.
+        После этого, можно будет безопасно удалить обсуждение.</value>
+    </data>
+    <data name="buttonClearDiscussionLink.Text" xml:space="preserve">
+        <value>Удалить ссылку на обсуждение</value>
+    </data>
 </root>

@@ -29,5 +29,9 @@ namespace R7.News.Stream
         protected GridView gridModules;
         protected TextBox textPermalinkRaw;
         protected TextBox textPermalinkFriendly;
+        protected HiddenField hiddenDiscussProviderKey;
+        protected HiddenField hiddenDiscussEntryId;
+        protected TextBox textDiscussionLink;
+        protected LinkButton buttonClearDiscussionLink;
     }
 }

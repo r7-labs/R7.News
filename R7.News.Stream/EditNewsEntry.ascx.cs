@@ -42,7 +42,8 @@ namespace R7.News.Stream
     {
         Common,
         TermsAndWeights,
-        Advanced
+        Advanced,
+        Audit
     }
 
     public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
@@ -72,6 +73,11 @@ namespace R7.News.Stream
                         // buttonGetModules control is on Citation tab
                         ViewState ["SelectedTab"] = EditNewsEntryTab.TermsAndWeights;
                         return EditNewsEntryTab.TermsAndWeights;
+                    }
+
+                    if (eventTarget.Contains ("$" + buttonClearDiscussionLink.ID)) {
+                        ViewState ["SelectedTab"] = EditNewsEntryTab.Audit;
+                        return EditNewsEntryTab.Audit;
                     }
                 }
                     
@@ -136,6 +142,13 @@ namespace R7.News.Stream
                 structuralWeight,
                 terms))
                 .OrderBy (m => m.ModuleTitle);
+        }
+
+        protected void buttonClearDiscussionLink_Click (object sender, EventArgs e)
+        {
+            hiddenDiscussProviderKey.Value = null;
+            hiddenDiscussEntryId.Value = null;
+            textDiscussionLink.Text = string.Empty;
         }
 
         #region Implemented abstract and overriden members of EditPortalModuleBase
@@ -214,6 +227,17 @@ namespace R7.News.Stream
             sliderThematicWeight.Text = item.ThematicWeight.ToString ();
             sliderStructuralWeight.Text = item.StructuralWeight.ToString ();
 
+            hiddenDiscussProviderKey.Value = item.DiscussProviderKey;
+            hiddenDiscussEntryId.Value = item.DiscussEntryId;
+
+            if (!string.IsNullOrEmpty (item.DiscussProviderKey)) {
+                buttonClearDiscussionLink.Visible = true;
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == item.DiscussProviderKey);
+                if (discussProvider != null) {
+                    textDiscussionLink.Text = discussProvider.GetDiscussUrl (item.DiscussEntryId);
+                }
+            }
+
             var auditData = new AuditData {
                 CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString (),
                 LastModifiedDate = item.ContentItem.LastModifiedOnDate.ToLongDateString (),
@@ -289,6 +313,9 @@ namespace R7.News.Stream
 
             item.ThematicWeight = int.Parse (sliderThematicWeight.Text);
             item.StructuralWeight = int.Parse (sliderStructuralWeight.Text);
+
+            item.DiscussProviderKey = (hiddenDiscussProviderKey.Value.Length > 0)? hiddenDiscussProviderKey.Value : null;
+            item.DiscussEntryId = (hiddenDiscussEntryId.Value.Length > 0) ? hiddenDiscussEntryId.Value : null; ;
 
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
                 item.AgentModuleId = ModuleId;

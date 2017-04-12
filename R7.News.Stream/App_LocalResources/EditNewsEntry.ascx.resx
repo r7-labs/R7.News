@@ -138,4 +138,15 @@
     <data name="PassesByTerms.Text" xml:space="preserve">
         <value>by terms</value>
     </data>
+	<data name="labelDiscussionLink.Text" xml:space="preserve">
+        <value>Discussion Link:</value>
+    </data>
+	<data name="labelDiscussionLink.Help" xml:space="preserve">
+        <value>You can copy link to news entry discussion here.
+		Click &quot;Clear Discussion Link&quot; to clear binding between news entry and discussion.
+		After that, the discussion can be removed safely.</value>
+    </data>
+	<data name="buttonClearDiscussionLink.Text" xml:space="preserve">
+        <value>Clear Discussion Link</value>
+    </data>
 </root>

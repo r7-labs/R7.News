@@ -115,11 +115,23 @@
                     <div class="dnnLabel"></div>
 					<asp:TextBox id="textPermalinkRaw" runat="server" ReadOnly="true" />
                 </div>
+				<div class="dnnFormItem">
+                    <dnn:Label id="labelDiscussionLink" runat="server" ControlName="textDiscussionLink" /> 
+                        <asp:TextBox id="textDiscussionLink" runat="server" ReadOnly="true" />
+                </div>
+                <div class="dnnFormItem">
+                    <label class="dnnLabel"></label>
+                    <asp:LinkButton id="buttonClearDiscussionLink" runat="server" Visible="false"
+                        CssClass="dnnSecondaryAction" ResourceKey="buttonClearDiscussionLink"
+						OnClick="buttonClearDiscussionLink_Click" />
+                </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" /> 
                     <dnn:Audit id="ctlAudit" runat="server" />
                 </div>
-            </fieldset>
+			</fieldset>
+			<asp:HiddenField id="hiddenDiscussProviderKey" runat="server" />
+			<asp:HiddenField id="hiddenDiscussEntryId" runat="server" />
         </div>
     </div>
     <ul class="dnnActions dnnClear">
