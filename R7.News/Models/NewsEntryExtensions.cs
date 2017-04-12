@@ -20,16 +20,18 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DotNetNuke.Entities.Content;
-using R7.News.Components;
-using DotNetNuke.Services.FileSystem;
-using DotNetNuke.Entities.Portals;
+using System.Linq;
+using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
+using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.FileSystem;
+using R7.News.Components;
+using R7.News.Controls.Models;
 using R7.News.Data;
 
 namespace R7.News.Models
@@ -216,6 +218,39 @@ namespace R7.News.Models
 
             return Globals.AddHTTP (portalAlias.HTTPAlias + "/default.aspx?tabid=" + tabId
             + "&mid=" + moduleId + "&ctl=entry&entryid=" + newsEntry.EntryId);
+        }
+
+        public static IList<NewsEntryAction> GetActions (this INewsEntry newsEntry)
+        {
+            var actions = new List<NewsEntryAction> ();
+            var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
+            if (!discussionStarted) {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault ();
+                if (discussProvider != null) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        Action = NewsEntryActions.StartDiscussion,
+                        Params = new string [] { discussProvider.ProviderKey },
+                        Enabled = HttpContext.Current.Request.IsAuthenticated
+                    });
+                }
+            } else {
+                var discussProvider = NewsConfig.Instance.GetDiscussProviders ()
+                                                .FirstOrDefault (dp => dp.ProviderKey == newsEntry.DiscussProviderKey);
+                if (discussProvider != null) {
+                    actions.Add (new NewsEntryAction {
+                        EntryId = newsEntry.EntryId,
+                        Action = NewsEntryActions.JoinDiscussion,
+                        Params = new string [] {
+                            discussProvider.ProviderKey,
+                            discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()
+                        },
+                        Enabled = true
+                    });
+                }
+            }
+
+            return actions;
         }
 
         public static string GetUrl (this INewsEntry newsEntry, int tabId, int moduleId)

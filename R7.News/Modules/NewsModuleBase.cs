@@ -86,7 +86,7 @@ namespace R7.News.Modules
 
             // action buttons
             var actionButtons = (ActionButtons) itemControl.FindControl ("actionButtons");
-            var actions = ModelHelper.GetNewsEntryActions (item);
+            var actions = item.GetActions ();
 
             if (actions.Count > 0) {
                 actionButtons.Actions = actions;
