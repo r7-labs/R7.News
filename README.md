@@ -63,6 +63,8 @@ In order to setup discussions for *R7.News*, you need do the following:
 4. Comment unused providers using `#` sign.
 5. Restart application to apply changes.
 
+To disable discussions, comment all lines in `discuss-providers` section of `R7.News.yml` config file, leaving only `discuss-providers:` line itself.
+
 Note that you could develop and register your own discuss providers by implementing `IDiscussProvider` public interface.
 
 To allow *R7.News* to use custom discuss provider:
