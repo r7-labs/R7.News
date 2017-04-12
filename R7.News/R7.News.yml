@@ -20,8 +20,8 @@ term-url-providers:
 
 discuss-providers:
   - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
-    provider-key: DiscussOnDnnForum
+    provider-key: DnnForum
     params: ['1095', '418', '2'] # tabId, moduleId, forumId
   - type: R7.News.Providers.DiscussProviders.ActiveForumsDiscussProvider
-    provider-key: DiscussOnActiveForums
+    provider-key: ActiveForums
     params: ['1094', '1478', '2'] # tabId, moduleId, forumId
