@@ -75,14 +75,22 @@ namespace R7.News.Modules
 
             // visibility badges
             var listBadges = (BadgeList) itemControl.FindControl ("listBadges");
-            listBadges.DataSource = item.Badges;
-            listBadges.DataBind ();
+            if (item.Badges.Count > 0) {
+                listBadges.DataSource = item.Badges;
+                listBadges.DataBind ();
+            } else {
+                listBadges.Visible = false;
+            }
 
             // show term links
             var termLinks = (TermLinks) itemControl.FindControl ("termLinks");
-            termLinks.Module = this;
-            termLinks.DataSource = item.ContentItem.Terms;
-            termLinks.DataBind ();
+            if (item.ContentItem.Terms.Count > 0) {
+                termLinks.Module = this;
+                termLinks.DataSource = item.ContentItem.Terms;
+                termLinks.DataBind ();
+            } else {
+                termLinks.Visible = false;
+            }
 
             // action buttons
             var actionButtons = (ActionButtons) itemControl.FindControl ("actionButtons");
