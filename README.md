@@ -58,7 +58,7 @@ In order to setup discussions for *R7.News*, you need do the following:
    ```YAML
    discuss-providers:
      - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
-       provider-key: DiscussOnDnnForum
+       provider-key: DnnForum
        params: ['40', '145', '2'] # tabId, moduleId, forumId
     ```
 
@@ -80,8 +80,8 @@ To allow *R7.News* to use custom discuss provider:
 
    ```YAML
    discuss-providers:
-     - type: MyCompany.DiscussProviders:MyCompany.DiscussProviders.MyCustomDiscussProvider
-       provider-key: DiscussOnSomething
+     - type: YourCompany.DiscussProviders:YourCompany.DiscussProviders.YourCustomDiscussProvider
+       provider-key: YourCustomProviderKey
        params: ['your', 'custom', 'provider', 'params', 'here']
     ```
 
