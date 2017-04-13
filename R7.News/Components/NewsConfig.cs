@@ -59,7 +59,8 @@ namespace R7.News.Components
                 if (!File.Exists (portalConfigFile)) {
                     File.Copy (Path.Combine (
                         Globals.ApplicationMapPath,
-                        "DesktopModules\\R7.News\\R7.News\\R7.News.yml"), 
+                        Const.LibraryInstallPath,
+                        "R7.News.yml"), 
                         portalConfigFile);
                 }
 

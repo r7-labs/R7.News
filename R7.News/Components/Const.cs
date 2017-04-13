@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2017 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -19,8 +19,6 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
 namespace R7.News.Components
 {
     public static class Const
@@ -32,6 +30,10 @@ namespace R7.News.Components
         public const string AgentModuleDefinitionName = "R7_News_Agent";
 
         public const string StreamModuleDefinitionName = "R7_News_Stream";
+
+        public const string InstallPath = "DesktopModules/R7.News";
+
+        public const string LibraryInstallPath = InstallPath + "/R7.News";
     }
 }
 

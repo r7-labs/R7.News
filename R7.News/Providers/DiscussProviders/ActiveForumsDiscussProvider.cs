@@ -32,6 +32,7 @@ using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
+using R7.News.Components;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
 
@@ -119,7 +120,7 @@ namespace R7.News.Providers.DiscussProviders
 
         protected string FormatMessage (INewsEntry newsEntry, int tabId, int moduleId)
         {
-            var label = Localization.GetString ("ReadMore.Text", "DesktopModules/R7.News/R7.News/App_LocalResources/SharedResources.resx");
+            var label = Localization.GetString ("ReadMore.Text", Path.Combine (Const.LibraryInstallPath, "App_LocalResources", "SharedResources.resx"));
             return $"{newsEntry.PublishedOnDate ().ToShortDateString ()}: " 
                 + HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true)
                 + $" {label}: {newsEntry.GetFullUrl (tabId, moduleId)}";
