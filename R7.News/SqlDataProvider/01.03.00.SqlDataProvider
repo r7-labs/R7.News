@@ -208,7 +208,7 @@ BEGIN
     SET NOCOUNT ON;
 
     SELECT DISTINCT TOP (@pageSize) NE2.* FROM
-        (SELECT TOP (@pageSize) NE.*, 
+        (SELECT NE.*, 
             (CASE WHEN NE.StartDate IS NOT NULL THEN NE.StartDate ELSE CI.CreatedOnDate END) AS PublishedOnDate
         FROM {databaseOwner}[{objectQualifier}r7_News] AS NE
             INNER JOIN {databaseOwner}[{objectQualifier}ContentItems] AS CI
