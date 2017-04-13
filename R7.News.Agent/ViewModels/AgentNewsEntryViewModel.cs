@@ -56,12 +56,12 @@ namespace R7.News.Agent.ViewModels
 
         public string FirstColumnContainerCssClass
         {
-            get { return HasImage ? "col-sm-6" : "hidden"; }
+            get { return HasImage ? "col-md-6" : "hidden"; }
         }
 
         public string SecondColumnContainerCssClass
         {
-            get { return HasImage ? "col-sm-6" : "col-sm-12"; }
+            get { return HasImage ? "col-md-6" : "col-md-12"; }
         }
     }
 }
