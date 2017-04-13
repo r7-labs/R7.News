@@ -75,7 +75,7 @@ namespace R7.News.Modules
 
             // visibility badges
             var listBadges = (BadgeList) itemControl.FindControl ("listBadges");
-            if (item.Badges.Count > 0) {
+            if (item.Badges != null && item.Badges.Count > 0) {
                 listBadges.DataSource = item.Badges;
                 listBadges.DataBind ();
             } else {
