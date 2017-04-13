@@ -27,7 +27,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle ("R7.News.Tests")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("R7.Solutions")]
+[assembly: AssemblyCompany ("R7.Labs")]
 [assembly: AssemblyProduct ("")]
 [assembly: AssemblyCopyright ("Roman M. Yagodin")]
 [assembly: AssemblyTrademark ("")]
