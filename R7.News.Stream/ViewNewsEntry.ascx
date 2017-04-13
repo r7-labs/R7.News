@@ -7,30 +7,30 @@
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 
-<asp:FormView id="formNewsEntry" CssClass="news-module news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
+<asp:FormView id="formNewsEntry" ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" CssClass="news-module news-entry" runat="server" OnDataBound="formNewsEntry_DataBound">
     <ItemTemplate>
         <div>
             <h3>
                 <asp:HyperLink id="linkEdit" runat="server">
                     <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
                 </asp:HyperLink>
-                <%# HttpUtility.HtmlDecode ((string) Eval ("TitleLink")) %>
+                <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
             </h3>
             <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
             <p class="news-entry-info">
-                <span class="glyphicon glyphicon-calendar"></span> <%# Eval ("PublishedOnDateString") %> 
-                <span class="glyphicon glyphicon-user"></span> <%# Eval ("CreatedByUserName") %>
+                <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %> 
+                <span class="glyphicon glyphicon-user"></span> <%# Item.CreatedByUserName %>
             </p>
             <div class="row news-entry-main-row">
-                <div class="<%# Eval ("ImageContainerCssClass") %>">
-                    <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Eval ("Link") %>' Visible='<%# Eval ("HasImage") %>'>
+                <div class="<%# Item.ImageContainerCssClass %>">
+                    <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Item.Link %>' Visible='<%# Item.HasImage %>'>
                         <asp:Image id="imageImage" runat="server" 
-                            ImageUrl='<%# Eval ("ImageUrl") %>' AlternateText='<%# Eval ("Title") %>'
+                            ImageUrl='<%# Item.ImageUrl %>' AlternateText='<%# Item.Title %>'
                             CssClass="img img-rounded news-entry-image" />
                     </asp:HyperLink>
                 </div>
-                <div class="<%# Eval ("DescriptionContainerCssClass") %> news-entry-description">
-                   <%# HttpUtility.HtmlDecode ((string) Eval ("Description")) %>
+                <div class="<%# Item.DescriptionContainerCssClass %> news-entry-description">
+                   <%# HttpUtility.HtmlDecode (Item.Description) %>
                 </div>
             </div>
             <p>
