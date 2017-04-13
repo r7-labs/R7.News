@@ -148,10 +148,9 @@ namespace R7.News.Providers.DiscussProviders
 
         protected string FormatMessage (INewsEntry newsEntry, int tabId, int moduleId)
         {
-            var label = Localization.GetString ("ReadMore.Text", "~/DesktopModules/R7.News/R7.News/App_LocalResources");
-            return newsEntry.Description + HttpUtility.HtmlEncode (
-                $"<p><a href=\"{newsEntry.GetUrl (tabId, moduleId)}\" target=\"_blank\">{label}...</a></p>"
-            );
-        }
+            var label = Localization.GetString ("ReadMore.Text", "DesktopModules/R7.News/R7.News/App_LocalResources/SharedResources.resx");
+            return HttpUtility.HtmlEncode ($"<p>{newsEntry.PublishedOnDate ().ToShortDateString ()}</p>") + newsEntry.Description
+                              + HttpUtility.HtmlEncode ($"<p><a href=\"{newsEntry.GetUrl (tabId, moduleId)}\" target=\"_blank\">{label}...</a></p>");
+        }       
     }
 }

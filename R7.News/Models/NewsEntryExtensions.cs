@@ -264,6 +264,19 @@ namespace R7.News.Models
                                       PortalSettings.Current.PortalAlias,
                                       moduleId, tabId);
         }
+
+        public static string GetFullUrl (this INewsEntry newsEntry, int tabId, int moduleId)
+        {
+            var portalAlias = PortalSettings.Current.PortalAlias;
+            if (!string.IsNullOrWhiteSpace (newsEntry.Url)) {
+                return Globals.AddHTTP (portalAlias.HTTPAlias + Globals.LinkClick (newsEntry.Url, tabId, moduleId));
+            }
+
+            return newsEntry.GetPermalink (PermalinkMode.Friendly,
+                                      NewsDataProvider.Instance.ModuleController,
+                                      portalAlias,
+                                      moduleId, tabId);
+        }
     }
 }
 
