@@ -24,9 +24,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Reflection;
+using System.Web;
 using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
@@ -53,7 +55,7 @@ namespace R7.News.Providers.DiscussProviders
         UserCannotViewForum = 15,
     }
 
-    public class DnnForumDiscussProvider: IDiscussProvider
+    public class DnnForumDiscussProvider : IDiscussProvider
     {
         static readonly Assembly forumAssembly;
 
@@ -92,7 +94,7 @@ namespace R7.News.Providers.DiscussProviders
                             portalId,
                             userId,
                             newsEntry.Title,
-                            newsEntry.Description,
+                            FormatMessage (newsEntry, forumParams.TabId, forumParams.ModuleId),
                             forumParams.ForumId,
                             0, // ParentPostID
                             null, // string of attachments
@@ -107,8 +109,7 @@ namespace R7.News.Providers.DiscussProviders
 
                     return postId.ToString ();
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 var log = new LogInfo ();
                 log.Exception = new ExceptionInfo (ex);
                 log.LogPortalID = portalId;
@@ -143,6 +144,14 @@ namespace R7.News.Providers.DiscussProviders
             catch {
                 return -1;
             }
+        }
+
+        protected string FormatMessage (INewsEntry newsEntry, int tabId, int moduleId)
+        {
+            var label = Localization.GetString ("ReadMore.Text", "~/DesktopModules/R7.News/R7.News/App_LocalResources");
+            return newsEntry.Description + HttpUtility.HtmlEncode (
+                $"<p><a href=\"{newsEntry.GetUrl (tabId, moduleId)}\" target=\"_blank\">{label}...</a></p>"
+            );
         }
     }
 }

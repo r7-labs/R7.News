@@ -30,6 +30,7 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Users;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Models;
 using Assembly = System.Reflection.Assembly;
@@ -70,7 +71,7 @@ namespace R7.News.Providers.DiscussProviders
                         forumParams.ModuleId,
                         forumParams.ForumId,
                         newsEntry.Title,
-                        HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true),
+                        FormatMessage (newsEntry, forumParams.TabId, forumParams.ModuleId),
                         userId,
                         UserController.Instance.GetUserById (portalId, userId).DisplayName,
                         true, // IsApproved
@@ -114,6 +115,13 @@ namespace R7.News.Providers.DiscussProviders
             } catch {
                 return -1;
             }
+        }
+
+        protected string FormatMessage (INewsEntry newsEntry, int tabId, int moduleId)
+        {
+            var label = Localization.GetString ("ReadMore.Text", "~/DesktopModules/R7.News/R7.News/App_LocalResources");
+            return HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true) +
+                            $"\n\n{label}: {newsEntry.GetUrl (tabId, moduleId)}";
         }
     }
 }
