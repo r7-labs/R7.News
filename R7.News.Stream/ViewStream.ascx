@@ -55,6 +55,6 @@
     </asp:ListView>
     <hr />
     <r7:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
-    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-default btn-block" OnClick="buttonShowMore_Click" />
+    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-sm btn-default btn-block" OnClick="buttonShowMore_Click" />
 </asp:Panel>
 <news:AgplSignature id="agplSignature" runat="server" />
