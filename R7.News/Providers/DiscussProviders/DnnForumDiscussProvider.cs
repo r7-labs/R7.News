@@ -149,9 +149,13 @@ namespace R7.News.Providers.DiscussProviders
 
         protected string FormatMessage (INewsEntry newsEntry, int tabId, int moduleId)
         {
-            var label = Localization.GetString ("ReadMore.Text", Path.Combine (Const.LibraryInstallPath, "App_LocalResources", "SharedResources.resx"));
-            return HttpUtility.HtmlEncode ($"<p>{newsEntry.PublishedOnDate ().ToShortDateString ()}</p>") + newsEntry.Description
-                              + HttpUtility.HtmlEncode ($"<p><a href=\"{newsEntry.GetUrl (tabId, moduleId)}\" target=\"_blank\">{label}...</a></p>");
+            var resourceFile = Path.Combine (Const.LibraryInstallPath, "App_LocalResources", "SharedResources.resx");
+            var publishedOnDateText = Localization.GetString ("PublishedOnDate.Text", resourceFile);
+            var readMoreText = Localization.GetString ("ReadMore.Text", resourceFile);
+
+            return newsEntry.Description
+                            + HttpUtility.HtmlEncode ($"<p>{publishedOnDateText}: {newsEntry.PublishedOnDate ().ToShortDateString ()}</p>")
+                            + HttpUtility.HtmlEncode ($"<p><a href=\"{newsEntry.GetUrl (tabId, moduleId)}\" target=\"_blank\">{readMoreText}...</a></p>");
         }       
     }
 }
