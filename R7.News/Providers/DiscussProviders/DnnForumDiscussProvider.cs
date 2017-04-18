@@ -102,7 +102,7 @@ namespace R7.News.Providers.DiscussProviders
                             "R7.News", // provider
                             -1, // ParentThreadID
                             newsEntry.ContentItem.Terms,
-                            true // IsPinned
+                            false // IsPinned
                         });
 
                     var postId = (int) submitResultType.GetField ("PostId").GetValue (result);
