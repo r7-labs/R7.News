@@ -83,14 +83,14 @@ namespace R7.News.Integrations.DDRMenu
                 node.TabId = newsEntry.AgentModule.TabID;
             }
 
-            // TODO: Don't assume Stream module on home page
-            var homeStreamModule = ModuleController.Instance.GetTabModules (portalSettings.HomeTabId)
-                                                   .FirstOrDefault (m => m.Value.ModuleDefinition.DefinitionName == Const.StreamModuleDefinitionName).Value;
-            if (homeStreamModule != null) {
-                node.Url = newsEntry.GetUrl (portalSettings.HomeTabId, homeStreamModule.ModuleID);
+            // TODO: Don't assume Stream module on the parent page
+            var parentStreamModule = ModuleController.Instance.GetTabModules (parentNode.TabId)
+                                                     .FirstOrDefault (m => m.Value.ModuleDefinition.DefinitionName == Const.StreamModuleDefinitionName).Value;
+            if (parentStreamModule != null) {
+                node.Url = newsEntry.GetUrl (parentNode.TabId, parentStreamModule.ModuleID);
             }
             else {
-                LogAdminAlert ("Cannot find Stream module on the home page.", portalSettings.PortalId);
+                LogAdminAlert ($"Cannot find Stream module on the parent page with TabID={parentNode.TabId}.", portalSettings.PortalId);
             }
 
             return node;
