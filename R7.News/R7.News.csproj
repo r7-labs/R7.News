@@ -63,6 +63,9 @@
     <Reference Include="R7.DotNetNuke.Extensions">
       <HintPath>..\packages\R7.DotNetNuke.Extensions.0.10.0\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetNuke.Web.DDRMenu">
+      <HintPath>lib\DotNetNuke.Web.DDRMenu.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -80,6 +83,7 @@
     <Folder Include="Providers\DiscussProviders\" />
     <Folder Include="Controls\App_LocalResources\" />
     <Folder Include="App_LocalResources\" />
+    <Folder Include="Integrations\DDRMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -101,6 +105,7 @@
     <None Include="SqlDataProvider\01.03.00.SqlDataProvider" />
     <None Include="App_LocalResources\SharedResources.resx" />
     <None Include="App_LocalResources\SharedResources.ru-RU.resx" />
+    <None Include="lib\DotNetNuke.Web.DDRMenu.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +152,7 @@
     <Compile Include="Controls\ViewModels\NewsEntryActionViewModel.cs" />
     <Compile Include="Models\NewsEntryInfo.cs" />
     <Compile Include="Models\WeightRange.cs" />
+    <Compile Include="Integrations\DDRMenu\NewsNodeManipulator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

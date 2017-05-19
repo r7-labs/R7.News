@@ -25,3 +25,11 @@ discuss-providers:
   - type: R7.News.Providers.DiscussProviders.ActiveForumsDiscussProvider
     provider-key: ActiveForums
     params: ['1094', '1478', '2'] # tabId, moduleId, forumId
+
+node-manipulator:
+  parent-tab-id: 77
+  news-count: 12
+  min-thematic-weight: 10
+  max-thematic-weight: 10
+  min-structural-weight: 10
+  max-structural-weight: 10
