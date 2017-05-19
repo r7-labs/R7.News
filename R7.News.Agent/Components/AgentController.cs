@@ -67,7 +67,6 @@ namespace R7.News.Agent.Components
                         PortalId = moduleInfo.PortalID,
                         AuthorUserId = newsEntry.ContentItem.CreatedByUserID,
                         Title = newsEntry.Title,
-                        // Description = HtmlUtils.Shorten (...);
                         Body = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false),
                         Tags = newsEntry.ContentItem.Terms.Select (t => t.Name),
                         ModifiedTimeUtc = newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime (),

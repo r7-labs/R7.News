@@ -22,13 +22,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Search.Entities;
+using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;
-using R7.News.Components;
 
 namespace R7.News.Stream.Components
 {
@@ -77,14 +78,13 @@ namespace R7.News.Stream.Components
             // create search documents
             foreach (var newsEntry in newsEntries) {
                 var now = DateTime.Now;
-                if (newsEntry.AgentModuleId == null// get only news entries w/o agent modules
+                if (newsEntry.AgentModuleId == null // get only news entries w/o agent modules
                     && newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime () > beginDateUtc.ToUniversalTime ()) {
                     searchDocs.Add (new SearchDocument {
                         PortalId = moduleInfo.PortalID,
                         AuthorUserId = newsEntry.ContentItem.CreatedByUserID,
                         Title = newsEntry.Title,
-                        // Description = HtmlUtils.Shorten (...);
-                        Body = HtmlUtils.ConvertToText (newsEntry.Description),
+                        Body = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false),
                         Tags = newsEntry.ContentItem.Terms.Select (t => t.Name),
                         ModifiedTimeUtc = newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime (),
                         UniqueKey = string.Format (Const.Prefix + "_{0}", newsEntry.EntryId),
