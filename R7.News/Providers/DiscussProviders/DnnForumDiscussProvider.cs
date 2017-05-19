@@ -25,6 +25,7 @@ using System.Data;
 using System.IO;
 using System.Reflection;
 using System.Web;
+using System.Web.Compilation;
 using DotNetNuke.Common;
 using DotNetNuke.Data;
 using DotNetNuke.Services.Exceptions;
@@ -32,7 +33,6 @@ using DotNetNuke.Services.Localization;
 using DotNetNuke.Services.Log.EventLog;
 using R7.News.Components;
 using R7.News.Models;
-using Assembly = System.Reflection.Assembly;
 
 namespace R7.News.Providers.DiscussProviders
 {
@@ -58,9 +58,9 @@ namespace R7.News.Providers.DiscussProviders
 
     public class DnnForumDiscussProvider : IDiscussProvider
     {
-        static readonly Assembly forumAssembly;
+        static readonly Type connectorType;
 
-        static readonly Assembly forumLibraryAssembly;
+        static readonly Type submitResultType;
 
         public IList<string> Params { get; set; }
 
@@ -68,22 +68,18 @@ namespace R7.News.Providers.DiscussProviders
 
         static DnnForumDiscussProvider ()
         {
-            var dnnBinPath = Path.Combine (Globals.ApplicationMapPath, "bin");
-            forumAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Modules.Forum.dll"));
-            forumLibraryAssembly = ReflectionHelper.TryLoadAssembly (Path.Combine (dnnBinPath, "DotNetNuke.Forum.Library.dll"));
+            connectorType = BuildManager.GetType ("DotNetNuke.Modules.Forum.PostConnector, DotNetNuke.Modules.Forum", false, true);
+            submitResultType = BuildManager.GetType ("DotNetNuke.Forum.Library.Data.SubmitPostResult, DotNetNuke.Forum.Library", false, true);
         }
 
         public bool IsAvailable {
-            get { return forumAssembly != null && forumLibraryAssembly != null; }
+            get { return connectorType != null && submitResultType != null; }
         }
 
         public string Discuss (INewsEntry newsEntry, int portalId, int userId)
         {
             try {
                 if (IsAvailable) {
-                    var connectorType = forumAssembly.GetType ("DotNetNuke.Modules.Forum.PostConnector", true);
-                    var submitResultType = forumLibraryAssembly.GetType ("DotNetNuke.Forum.Library.Data.SubmitPostResult", true);
-
                     var connector = ReflectionHelper.New (connectorType);
                     var postMethod = ReflectionHelper.TryGetMethod (connectorType, "SubmitExternalPost", BindingFlags.Instance | BindingFlags.Public, 13);
 

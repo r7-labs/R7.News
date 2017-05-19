@@ -22,8 +22,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.Log.EventLog;
 
 namespace R7.News.Providers.DiscussProviders
 {
@@ -49,20 +47,6 @@ namespace R7.News.Providers.DiscussProviders
         public static object New (Type type)
         {
             return TryGetCstor (type).Invoke (null);
-        }
-
-        public static Assembly TryLoadAssembly (string path)
-        {
-            try {
-                return Assembly.LoadFrom (path);
-            } catch (Exception ex) {
-                var log = new LogInfo ();
-                log.Exception = new ExceptionInfo (ex);
-                log.LogTypeKey = EventLogController.EventLogType.HOST_ALERT.ToString ();
-                EventLogController.Instance.AddLog (log);
-
-                return null;
-            }
         }
     }
 }

@@ -24,14 +24,14 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web.Compilation;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
-using DotNetNuke.Services.Log.EventLog;
 using R7.News.Providers.DiscussProviders;
 using R7.News.Providers.TermUrlProviders;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
-using Assembly = System.Reflection.Assembly;
+using DotNetNuke.Services.Exceptions;
 
 namespace R7.News.Components
 {
@@ -85,56 +85,13 @@ namespace R7.News.Components
         {
             foreach (var providerConfig in providerConfigs) {
                 try {
-                    var providerType = GetProviderType (providerConfig.Type);
-                    if (providerType != null) {
-                        portalConfig.AddProvider ((TProvider)Activator.CreateInstance (providerType), providerConfig);
-                    }
+                    var providerType = BuildManager.GetType (providerConfig.Type, true, true);
+                    portalConfig.AddProvider ((TProvider) Activator.CreateInstance (providerType), providerConfig);
                 }
                 catch (Exception ex) {
-                    var logController = new ExceptionLogController ();
-                    logController.AddLog (ex);
+                    Exceptions.LogException (ex);
                 }
             }
-        }
-
-        static Type GetProviderType (string fullTypeName)
-        {
-            return LoadProviderAssembly (GetAssemblyName (fullTypeName)).GetType (GetProviderTypeName (fullTypeName));
-        }
-
-        static readonly char [] colon = { ':' };
-
-        static string GetAssemblyName (string fullTypeName)
-        {
-            var fullTypeNameParts = fullTypeName.Split (colon, StringSplitOptions.RemoveEmptyEntries);
-            if (fullTypeNameParts.Length == 2) {
-                return fullTypeNameParts [0];
-            }
-
-            return null;
-        }
-
-        static string GetProviderTypeName (string fullTypeName)
-        {
-            var fullTypeNameParts = fullTypeName.Split (colon, StringSplitOptions.RemoveEmptyEntries);
-            if (fullTypeNameParts.Length == 1) {
-                return fullTypeNameParts [0];
-            }
-
-            if (fullTypeNameParts.Length == 2) {
-                return fullTypeNameParts [1];
-            }
-
-            return null;
-        }
-
-        static Assembly LoadProviderAssembly (string assemblyName)
-        {
-            if (string.IsNullOrEmpty (assemblyName)) {
-                return Assembly.GetExecutingAssembly ();
-            }
-
-            return Assembly.LoadFrom (Path.Combine (Globals.ApplicationMapPath, "bin", assemblyName));
         }
    }
 }
