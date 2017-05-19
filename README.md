@@ -76,11 +76,11 @@ Note that you could develop and register your own discuss providers by implement
 To allow *R7.News* to use custom discuss provider:
 
 1. Place a DLL with custom discuss provider class into `bin` folder of DNN install.
-2. Register custom discuss provider using portal config file, adding assembly name followed by `:` to class name, like this:
+2. Register custom discuss provider using portal config file by adding assembly name:
 
    ```YAML
    discuss-providers:
-     - type: YourCompany.DiscussProviders:YourCompany.DiscussProviders.YourCustomDiscussProvider
+     - type: YourCompany.DiscussProviders.YourCustomDiscussProvider, YourCompany.DiscussProviders
        provider-key: YourCustomProviderKey
        params: ['your', 'custom', 'provider', 'params', 'here']
     ```
