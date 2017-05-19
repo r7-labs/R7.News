@@ -21,11 +21,11 @@
 
 namespace R7.News.Models
 {
-    public struct WeightRange
+    public class WeightRange
     {
-        public int Min;
+        public int Min { get; set; }
 
-        public int Max;
+        public int Max { get; set; }
 
         public WeightRange (int min, int max)
         {
