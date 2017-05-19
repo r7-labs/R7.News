@@ -24,7 +24,6 @@ using System.Collections.ObjectModel;
 using R7.News.Models;
 using R7.News.Providers.DiscussProviders;
 using R7.News.Providers.TermUrlProviders;
-using YamlDotNet.Serialization;
 
 namespace R7.News.Components
 {
@@ -138,22 +137,8 @@ namespace R7.News.Components
 
         public int NewsCount { get; set; }
 
-        public int MinThematicWeight { get; set; }
+        public WeightRange ThematicWeightRange { get; set; }
 
-        public int MaxThematicWeight { get; set; }
-
-        public int MinStructuralWeight { get; set; }
-
-        public int MaxStructuralWeight { get; set; }
-
-        [YamlIgnore]
-        public WeightRange ThematicWeightRange {
-            get { return new WeightRange (MinThematicWeight, MaxThematicWeight); }
-        }
-
-        [YamlIgnore]
-        public WeightRange StructuralWeightRange {
-	        get { return new WeightRange (MinThematicWeight, MaxThematicWeight); }
-        }
+        public WeightRange StructuralWeightRange { get; set; }
     }
 }

@@ -27,6 +27,10 @@ namespace R7.News.Models
 
         public int Max { get; set; }
 
+        public WeightRange ()
+        {
+	    }
+
         public WeightRange (int min, int max)
         {
             Min = min;
