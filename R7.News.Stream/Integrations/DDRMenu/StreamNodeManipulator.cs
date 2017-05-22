@@ -21,7 +21,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
@@ -45,7 +44,7 @@ namespace R7.News.Stream.Integrations.DDRMenu
         {
             try {
                 var config = NewsConfig.GetInstance (portalSettings.PortalId).NodeManipulator;
-                var parentNode = nodes.FirstOrDefault (n => n.TabId == config.ParentNodeTabId);
+                var parentNode = FindNodeByTabId (nodes, config.ParentNodeTabId);
                 if (parentNode != null) {
                     var streamModule = ModuleController.Instance.GetModule (config.StreamModuleId, config.StreamModuleTabId, false);
                     if (streamModule != null) {
@@ -69,6 +68,18 @@ namespace R7.News.Stream.Integrations.DDRMenu
         }
 
         #endregion
+
+        protected MenuNode FindNodeByTabId (IList<MenuNode> nodes, int tabId)
+        {
+            foreach (var node in nodes) {
+                var parentNode = node.FindById (tabId);
+                if (parentNode != null) {
+                    return parentNode;
+                }
+            }
+
+            return null;
+        }
 
         protected IEnumerable<INewsEntry> GetNewsEntries (StreamSettings settings, int newsCount, int portalId)
         {
