@@ -19,9 +19,9 @@ or (at your option) any later version.
 - [x] Cast any page into news article by placing *R7.News.Agent* module onto it.
 - [x] Streamline new articles creation by adding *R7.News.Agent* module into the page template.
 - [x] Allow users to [discuss](#discuss) news on forum.
+- [x] DDRMenu integration (display news entries in the menu).
 - [ ] Keep news article page settings in sync with corresponding news entry properties.
 - [ ] Export news into RSS/Atoms feeds.
-- [ ] DDRMenu integration (to display recent news in the menu).
 
 ### Future releases may also include:
 
@@ -89,8 +89,27 @@ To allow *R7.News* to use custom discuss provider:
 4. If all OK, you'll be able to create discussions for news entries using new provider.
    If not, see DNN event log for more info about what's wrong.
 
+## DDRMenu integration
+
+*R7.News* provides public node manipulator class for DDRMenu. In order to use it, you should do the following:
+
+1. Add Stream module instance to the page, configure it to display required news. Node manipulator will use this module
+   instance settings to get required parameters (like taxonomy terms, &quot;show all news&quot; flag, etc.)
+   The page size setting value will be used as max. number of menu entries for news to display.
+2. Set node manipulator options in the `R7.News.yml` config file:
+   ```YAML
+   node-manipulator:
+     parent-node-tab-id: 77    # TabId of a parent menu node, to which news entries will be added as children
+     stream-module-tab-id: 77  # TabId of a page with Stream module instance
+     stream-module-id: 429     # ModuleId of Stream module instance
+   ```
+3. Specify `R7.News.Stream.Integrations.DDRMenu.StreamNodeManipulator` type name as NodeManipulator
+   setting value in DDRMenu module settings or skinobject parameters.
+
+Remember to check event log in case if something went wrong.
+
 ## Uninstall
 
 1. Uninstall *R7.News* library package first, this will remove all database objects and data.
-2. Then uninstall *R7.News.Agent* and *R7.News.Stream* module packages (in any order).
-3. Uninstall *R7.ImageHandler* and *R7.DotNetNuke.Extensions* library packages, if you don't need them.
+2. Uninstall *R7.News.Agent* and *R7.News.Stream* module packages (in any order).
+3. Uninstall *R7.ImageHandler* and *R7.DotNetNuke.Extensions* library packages, if you don't need them anymore.
