@@ -59,10 +59,15 @@
     <Reference Include="R7.DotNetNuke.Extensions">
       <HintPath>..\packages\R7.DotNetNuke.Extensions.0.10.0\lib\net45\R7.DotNetNuke.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetNuke.Web.DDRMenu">
+      <HintPath>..\R7.News\lib\DotNetNuke.Web.DDRMenu.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Data\" />
+    <Folder Include="Integrations\" />
+    <Folder Include="Integrations\DDRMenu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -120,6 +125,7 @@
     <Compile Include="ViewModels\StreamNewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Components\StreamSettingsRepository.cs" />
+    <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -27,7 +27,6 @@ discuss-providers:
     params: ['1094', '1478', '2'] # tabId, moduleId, forumId
 
 node-manipulator:
-  parent-tab-id: 77
-  news-count: 12
-  thematic-weight-range: {min: 10, max: 10}
-  structural-weight-range: {min: 10, max: 10}
+  parent-node-tab-id: 77
+  stream-module-tab-id: 77
+  stream-module-id: 429

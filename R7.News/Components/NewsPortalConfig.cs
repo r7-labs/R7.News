@@ -21,7 +21,6 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using R7.News.Models;
 using R7.News.Providers.DiscussProviders;
 using R7.News.Providers.TermUrlProviders;
 
@@ -133,12 +132,10 @@ namespace R7.News.Components
 
     public class NodeManipulatorConfig
     {
-        public int ParentTabId { get; set; }
+        public int ParentNodeTabId { get; set; }
 
-        public int NewsCount { get; set; }
+        public int StreamModuleId { get; set; }
 
-        public WeightRange ThematicWeightRange { get; set; }
-
-        public WeightRange StructuralWeightRange { get; set; }
+        public int StreamModuleTabId { get; set; }
     }
 }
