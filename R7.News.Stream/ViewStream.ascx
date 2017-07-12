@@ -26,6 +26,9 @@
                     </asp:HyperLink>
                     <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                 </h3>
+				<p>
+                    <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
+                </p>
                 <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
                 <p class="news-entry-info">
                     <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %> 
@@ -36,18 +39,15 @@
                         <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                             <asp:Image id="imageImage" runat="server"
                                 ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
-                                CssClass="img img-rounded img-responsive news-entry-image" />
+                                CssClass="img-thumbnail img-responsive news-entry-image" />
                         </asp:HyperLink>
                     </div>
                     <div class="<%# Item.DescriptionContainerCssClass %> news-entry-description">
                        <%# HttpUtility.HtmlDecode (Item.Description) %>
+					   <news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
                     </div>
                 </div>
-                <p>
-                    <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
-                </p>
-				<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
-            </div>
+			</div>
         </ItemTemplate>
         <ItemSeparatorTemplate>
             <hr />

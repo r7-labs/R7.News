@@ -36,6 +36,9 @@
                         </asp:HyperLink>
                         <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                     </h3>
+					<p>
+						<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
+					</p>
                     <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
                     <p class="news-entry-info">
                         <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
@@ -43,9 +46,8 @@
                     <p>
                     <div class="news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
+				        <news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
                     </div>
-                    <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
-					<news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -69,7 +71,7 @@
                                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                                         <asp:Image id="imageImage" runat="server" 
                                             ImageUrl="<%# Item.GroupImageUrl %>" AlternateText="<%# Item.Title %>"
-                                            CssClass="img news-entry-image" />
+                                            CssClass="img-thumbnail news-entry-image" />
                                     </asp:HyperLink>
                                 </div>
                                 <div class="news-entry-description">
