@@ -26,7 +26,7 @@
                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                         <asp:Image id="imageImage" runat="server" 
                             ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
-                            CssClass="img img-rounded img-responsive" />
+                            CssClass="img-thumbnail img-responsive" />
                     </asp:HyperLink>
                 </div>
                 <div class="<%# Item.SecondColumnContainerCssClass %>">
