@@ -23,9 +23,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Search.Entities;
 using R7.News.Components;
 using R7.News.Data;
@@ -35,13 +37,6 @@ namespace R7.News.Stream.Components
 {
     public class StreamController : ModuleSearchBase
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="R7.News.Stream.Components.StreamController"/> class.
-        /// </summary>
-        public StreamController () : base ()
-        {
-        }
-
         protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
                                                              int portalId,
                                                              WeightRange thematicWeights,
@@ -75,6 +70,9 @@ namespace R7.News.Stream.Components
                 settings.ShowAllNews, settings.IncludeTerms
             );
 
+            var portalAlias = PortalAliasController.Instance.GetPortalAliasesByPortalId (moduleInfo.PortalID).First (pa => pa.IsPrimary);
+            var portalSettings = new PortalSettings (moduleInfo.TabID, portalAlias);
+
             // create search documents
             foreach (var newsEntry in newsEntries) {
                 var now = DateTime.Now;
@@ -88,7 +86,7 @@ namespace R7.News.Stream.Components
                         Tags = newsEntry.ContentItem.Terms.Select (t => t.Name),
                         ModifiedTimeUtc = newsEntry.ContentItem.LastModifiedOnDate.ToUniversalTime (),
                         UniqueKey = string.Format (Const.Prefix + "_{0}", newsEntry.EntryId),
-                        Url = string.Format ("/Default.aspx?tabid={0}#{1}", moduleInfo.TabID, moduleInfo.ModuleID),
+                        Url = Globals.NavigateURL (moduleInfo.TabID, portalSettings, "", null),
                         IsActive = newsEntry.IsPublished (now)
                     });
                 }
