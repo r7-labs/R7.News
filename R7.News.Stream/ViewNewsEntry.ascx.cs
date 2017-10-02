@@ -21,11 +21,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.ModuleExtensions;
+using R7.Dnn.Extensions.Utilities;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Data;
 using R7.News.Models;
@@ -89,6 +92,9 @@ namespace R7.News.Stream
                     }
 
                     if (newsEntry != null) {
+
+                        ReplacePageTitleAndMeta (newsEntry);
+
                         var newsEntries = new List<StreamNewsEntryViewModel> ();
                         newsEntries.Add (new StreamNewsEntryViewModel (newsEntry, ViewModelContext));
 
@@ -111,6 +117,17 @@ namespace R7.News.Stream
             }
             catch (Exception ex) {
                 Exceptions.ProcessModuleLoadException (this, ex);
+            }
+        }
+
+        void ReplacePageTitleAndMeta (INewsEntry newsEntry)
+        {
+            var page = (DotNetNuke.Framework.CDefault) Page;
+            page.Title = TextUtils.FormatList (" > ", page.Title, newsEntry.Title);
+            page.Description = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false);
+
+            if (newsEntry.ContentItem.Terms.Count > 0) {
+                page.KeyWords = TextUtils.FormatList (",", newsEntry.ContentItem.Terms.Select (t => t.Name));
             }
         }
 
