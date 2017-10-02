@@ -3,7 +3,7 @@
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Register TagPrefix="news" TagName="ActionButtons" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionButtons.ascx" %>
 <%@ Register TagPrefix="news" TagName="AgplSignature" Src="~/DesktopModules/R7.News/R7.News/Controls/AgplSignature.ascx" %>
-<%@ Register TagPrefix="r7" Assembly="R7.DotNetNuke.Extensions" Namespace="R7.DotNetNuke.Extensions.Controls" %>
+<%@ Register TagPrefix="r7" Assembly="R7.Dnn.Extensions" Namespace="R7.Dnn.Extensions.Controls" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 
