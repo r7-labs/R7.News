@@ -145,7 +145,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\NewsController.cs" />
     <Compile Include="Models\INewsEntry.cs" />
-    <Compile Include="Components\CacheHelper.cs" />
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />
