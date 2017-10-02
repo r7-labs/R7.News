@@ -38,6 +38,14 @@
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
                     <dnn:TextEditor id="textDescription" runat="server" />
                 </div>
+				<div class="dnnFormItem">
+                    <dnn:Label id="labelStartDate" runat="server" ControlName="datetimeStartDate" />
+                    <dnn:DnnDateTimePicker id="datetimeStartDate" runat="server" />
+                </div>
+                <div class="dnnFormItem">
+                    <dnn:Label id="labelEndDate" runat="server" ControlName="datetimeEndDate" />
+                    <dnn:DnnDateTimePicker id="datetimeEndDate" runat="server" />
+                </div>
             </fieldset>
         </div>
         <div id="newsentry-terms-and-weigths-tab">
@@ -77,14 +85,6 @@
         </div>
         <div id="newsentry-advanced-tab">
             <fieldset>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelStartDate" runat="server" ControlName="datetimeStartDate" />
-                    <dnn:DnnDateTimePicker id="datetimeStartDate" runat="server" />
-                </div>
-                <div class="dnnFormItem">
-                    <dnn:Label id="labelEndDate" runat="server" ControlName="datetimeEndDate" />
-                    <dnn:DnnDateTimePicker id="datetimeEndDate" runat="server" />
-                </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelThresholdDate" runat="server" ControlName="datetimeThresholdDate" />
                     <dnn:DnnDateTimePicker id="datetimeThresholdDate" runat="server" />
