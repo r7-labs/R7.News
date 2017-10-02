@@ -20,7 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using R7.DotNetNuke.Extensions.ViewModels;
+using R7.Dnn.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Models;
 using R7.News.ViewModels;

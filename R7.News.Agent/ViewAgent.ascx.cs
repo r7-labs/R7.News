@@ -33,7 +33,7 @@ using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.FileSystem;
-using R7.DotNetNuke.Extensions.ViewModels;
+using R7.Dnn.Extensions.ViewModels;
 using R7.News.Agent.Components;
 using R7.News.Agent.ViewModels;
 using R7.News.Components;

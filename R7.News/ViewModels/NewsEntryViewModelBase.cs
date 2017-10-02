@@ -25,7 +25,7 @@ using System.Web;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
-using R7.DotNetNuke.Extensions.ViewModels;
+using R7.Dnn.Extensions.ViewModels;
 using R7.News.Controls;
 using R7.News.Models;
 

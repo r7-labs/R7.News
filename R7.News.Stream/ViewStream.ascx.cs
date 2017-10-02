@@ -22,8 +22,8 @@
 using System;
 using System.Web.UI.WebControls;
 using DotNetNuke.Services.Exceptions;
-using R7.DotNetNuke.Extensions.Controls;
-using R7.DotNetNuke.Extensions.ModuleExtensions;
+using R7.Dnn.Extensions.Controls;
+using R7.Dnn.Extensions.ModuleExtensions;
 using R7.News.Controls;
 using R7.News.Models;
 using R7.News.Modules;

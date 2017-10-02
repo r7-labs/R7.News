@@ -25,7 +25,7 @@ using System.Linq;
 using System.Web;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules.Settings;
-using R7.DotNetNuke.Extensions.Utilities;
+using R7.Dnn.Extensions.Utilities;
 using R7.News.Components;
 
 namespace R7.News.Stream.Components

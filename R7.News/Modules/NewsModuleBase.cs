@@ -25,7 +25,7 @@ using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
-using R7.DotNetNuke.Extensions.Modules;
+using R7.Dnn.Extensions.Modules;
 using R7.News.Controls;
 using R7.News.Models;
 using R7.News.ViewModels;

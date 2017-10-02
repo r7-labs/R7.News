@@ -25,7 +25,7 @@ using System.Linq;
 using DotNetNuke.Data;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
-using R7.DotNetNuke.Extensions.Data;
+using R7.Dnn.Extensions.Data;
 using R7.News.Components;
 
 namespace R7.News.Data

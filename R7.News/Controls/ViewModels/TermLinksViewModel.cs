@@ -23,7 +23,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Portals;
-using R7.DotNetNuke.Extensions.ViewModels;
+using R7.Dnn.Extensions.ViewModels;
 using R7.News.Providers.TermUrlProviders;
 
 namespace R7.News.Controls.ViewModels

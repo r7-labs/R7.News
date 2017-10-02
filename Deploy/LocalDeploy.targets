@@ -15,7 +15,6 @@
         <ItemGroup>
             <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)/R7.News*.dll" />
             <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)/R7.News*.pdb" Condition="'$(Configuration)' == 'Debug'" />
-            <LocalDeployBinaryFiles Include="$(MainProjectOutputPath)/YamlDotNet.dll" />
         </ItemGroup>
         <!-- Declare resource files -->
         <ItemGroup>

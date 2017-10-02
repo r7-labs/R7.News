@@ -26,7 +26,7 @@ using System.Web;
 using System.Web.Caching;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.UI.Modules;
-using R7.DotNetNuke.Extensions.ViewModels;
+using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;

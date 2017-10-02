@@ -22,8 +22,8 @@
 using System;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
-using R7.DotNetNuke.Extensions.ControlExtensions;
-using R7.DotNetNuke.Extensions.Modules;
+using R7.Dnn.Extensions.ControlExtensions;
+using R7.Dnn.Extensions.Modules;
 using R7.News.Components;
 using R7.News.Data;
 using R7.News.Stream.Components;

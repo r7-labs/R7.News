@@ -22,7 +22,6 @@
         <ItemGroup>
             <InstallBinaryFiles Include="$(MainProjectOutputPath)/R7.News*.dll" />
 			<InstallBinaryFiles Include="$(MainProjectOutputPath)/R7.News*.pdb" Condition="'$(Configuration)' == 'Debug'" />
-            <InstallBinaryFiles Include="$(MainProjectOutputPath)/YamlDotNet.dll" />
         </ItemGroup>
         <!-- Declare manifest files -->
         <ItemGroup>
