@@ -88,13 +88,5 @@ namespace R7.News.Data
         }
 
         #endregion
-
-        // TODO: Move to the base class
-        public T ExecuteSpScalar<T> (string spName, params object [] args)
-        {
-            using (var ctx = DataContext.Instance ()) {
-                return ctx.ExecuteScalar<T> (CommandType.StoredProcedure, spName, args);
-            }
-        }
     }
 }
