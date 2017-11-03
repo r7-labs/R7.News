@@ -63,14 +63,13 @@ namespace R7.News.Stream
                 // get postback initiator
                 var eventTarget = Request.Form ["__EVENTTARGET"];
                 if (!string.IsNullOrEmpty (eventTarget)) {
-                    if (eventTarget.Contains ("$" + urlUrl.ID)) {
-                        // urlURL control is on Advanced tab
+                    if (eventTarget.Contains ("$" + urlUrl.ID) ||
+                        eventTarget.Contains ("$" + buttonSelectCurrentPage.ID)) {
                         ViewState ["SelectedTab"] = EditNewsEntryTab.Advanced;
                         return EditNewsEntryTab.Advanced;
                     }
 
                     if (eventTarget.Contains ("$" + buttonGetModules.ID)) {
-                        // buttonGetModules control is on Citation tab
                         ViewState ["SelectedTab"] = EditNewsEntryTab.TermsAndWeights;
                         return EditNewsEntryTab.TermsAndWeights;
                     }
@@ -149,6 +148,11 @@ namespace R7.News.Stream
             hiddenDiscussProviderKey.Value = null;
             hiddenDiscussEntryId.Value = null;
             textDiscussionLink.Text = string.Empty;
+        }
+
+        protected void buttonSelectCurrentPage_Click (object sender, EventArgs e)
+        {
+            urlUrl.Url = TabId.ToString ();    
         }
 
         #region Implemented abstract and overriden members of EditPortalModuleBase

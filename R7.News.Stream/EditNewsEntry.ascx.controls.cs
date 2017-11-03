@@ -33,5 +33,6 @@ namespace R7.News.Stream
         protected HiddenField hiddenDiscussEntryId;
         protected TextBox textDiscussionLink;
         protected LinkButton buttonClearDiscussionLink;
+        protected LinkButton buttonSelectCurrentPage;
     }
 }

@@ -5,7 +5,9 @@ select.dnnSmallSizeComboBox {
     display:inline-block
 }
 
-.dnnForm.edit-newsentry .dnnFormItem.newsentry-description .dnnLabel { margin-bottom: 18px; }
+.dnnForm.edit-newsentry .dnnFormItem.newsentry-description .dnnLabel { margin-bottom:18px; }
+
+.dnnForm.edit-newsentry .newsentry-button-select-current-page { margin-left:1em; }
 
 /* Title, Description: override textbox and text editor (in basic mode) width */
 #newsentry-common-tab .dnnFormItem input[type="text"],
