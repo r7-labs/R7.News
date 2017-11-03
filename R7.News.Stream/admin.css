@@ -5,15 +5,7 @@ select.dnnSmallSizeComboBox {
     display:inline-block
 }
 
-/* Description texteditor: show label and radiogroup in one line */
-#newsentry-common-tab .dnnTextEditor.dnnClear {
-    clear:none
-}
-
-/* Description texteditor: hide Editor label */
-#newsentry-common-tab .dnnTextEditor .dnnLabel {
-    display:none
-}
+.dnnForm.edit-newsentry .dnnFormItem.newsentry-description .dnnLabel { margin-bottom: 18px; }
 
 /* Title, Description: override textbox and text editor (in basic mode) width */
 #newsentry-common-tab .dnnFormItem input[type="text"],

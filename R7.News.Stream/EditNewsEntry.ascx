@@ -34,9 +34,9 @@
                     <dnn:Label id="labelImage" runat="server" ControlName="pickerImage" />
                     <dnn:Picker id="pickerImage" runat="server" />
                 </div>
-                <div class="dnnFormItem">
+                <div class="dnnFormItem newsentry-description">
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
-                    <dnn:TextEditor id="textDescription" runat="server" />
+                    <dnn:TextEditor id="textDescription" runat="server" ChooseMode="false" />
                 </div>
 				<div class="dnnFormItem">
                     <dnn:Label id="labelStartDate" runat="server" ControlName="datetimeStartDate" />
