@@ -140,7 +140,7 @@
     <ul class="dnnActions dnnClear">
         <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>
         <li><asp:HyperLink id="linkCancel" runat="server" CssClass="dnnSecondaryAction cancel-action" ResourceKey="cmdCancel" /></li>
-		<li>&nbps;</li>
+		<li>&nbsp;</li>
 		<li><asp:LinkButton id="buttonDelete" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdDelete" /></li>
     </ul>
 	<news:AgplSignature runat="server" ShowRule="false" />
