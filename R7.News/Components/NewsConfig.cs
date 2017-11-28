@@ -65,7 +65,7 @@ namespace R7.News.Components
                 }
 
                 using (var configReader = new StringReader (File.ReadAllText (portalConfigFile))) {
-                    var deserializer = new Deserializer (namingConvention: new HyphenatedNamingConvention ());
+                    var deserializer = new DeserializerBuilder ().WithNamingConvention (new HyphenatedNamingConvention ()).Build ();
                     var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
 
                     LoadProviders<ITermUrlProvider> (portalConfig, portalConfig.TermUrlProviders.Cast<IProviderConfig> ());
