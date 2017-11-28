@@ -123,7 +123,7 @@ namespace R7.News.Stream
         void ReplacePageTitleAndMeta (INewsEntry newsEntry)
         {
             var page = (DotNetNuke.Framework.CDefault) Page;
-            page.Title = TextUtils.FormatList (" > ", page.Title, newsEntry.Title);
+            page.Title = TextUtils.FormatList (" - ", page.Title, newsEntry.Title);
             page.Description = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false);
 
             if (newsEntry.ContentItem.Terms.Count > 0) {
