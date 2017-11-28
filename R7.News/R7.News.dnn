@@ -60,10 +60,6 @@
                             <path>bin</path>
                             <name>R7.News.dll</name>
                         </assembly>
-                        <assembly>
-                            <path>bin</path>
-                            <name>YamlDotNet.dll</name>
-                        </assembly>
                     </assemblies>
                 </component>
             </components>
