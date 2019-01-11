@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -19,14 +19,13 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Localization;
-using R7.Dnn.Extensions.Utilities;
+using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Models;
 using R7.News.Stream.Components;
@@ -129,7 +128,7 @@ namespace R7.News.Stream.ViewModels
                 }
             }
 
-            return TextUtils.FormatList (", ", passesBy); 
+            return FormatHelper.JoinNotNullOrEmpty (", ", passesBy); 
         }
     }
 }

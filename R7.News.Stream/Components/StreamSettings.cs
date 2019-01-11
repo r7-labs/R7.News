@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +25,7 @@ using System.Linq;
 using System.Web;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules.Settings;
-using R7.Dnn.Extensions.Utilities;
+using R7.Dnn.Extensions.Text;
 using R7.News.Components;
 
 namespace R7.News.Stream.Components
@@ -70,7 +70,7 @@ namespace R7.News.Stream.Components
             }
 
             set {
-                IncludeTerms_Internal = TextUtils.FormatList (";", value.Select (t => t.TermId));
+                IncludeTerms_Internal = FormatHelper.JoinNotNullOrEmpty (";", value.Select (t => t.TermId));
             }
         }
 

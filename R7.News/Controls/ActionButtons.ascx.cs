@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017 Roman M. Yagodin
+//  Copyright (c) 2017-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -26,11 +26,11 @@ using System.Web.UI.WebControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.UI.Modules;
-using R7.Dnn.Extensions.ControlExtensions;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
 using R7.News.Controls.Models;
 using R7.News.Controls.ViewModels;
+using R7.Dnn.Extensions.Controls;
 
 namespace R7.News.Controls
 {

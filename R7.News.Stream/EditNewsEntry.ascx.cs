@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -26,7 +26,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.FileSystem;
-using R7.Dnn.Extensions.ControlExtensions;
+using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
@@ -89,7 +89,7 @@ namespace R7.News.Stream
 
         #endregion
 
-        public EditNewsEntry () : base ("entryid", true)
+        public EditNewsEntry () : base ("entryid", null)
         {
         }
 
@@ -279,9 +279,9 @@ namespace R7.News.Stream
 
         private List<IFileInfo> images;
 
-        protected override void BeforeUpdateItem (NewsEntryInfo item)
+        protected override void BeforeUpdateItem (NewsEntryInfo item, bool isNew)
         {
-            if (ItemId == null) {
+            if (ItemKey == null) {
                 images = new List<IFileInfo> ();
             }
             else {
@@ -326,9 +326,9 @@ namespace R7.News.Stream
             }   
         }
 
-        protected override NewsEntryInfo GetItem (int itemId)
+        protected override NewsEntryInfo GetItem (int itemKey)
         {
-            return NewsRepository.Instance.GetNewsEntry (itemId, PortalId);
+            return NewsRepository.Instance.GetNewsEntry (itemKey, PortalId);
         }
 
         protected override void AddItem (NewsEntryInfo item)

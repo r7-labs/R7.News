@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using DotNetNuke.UI.UserControls;
 using DotNetNuke.UI.WebControls;
 using DotNetNuke.Web.UI.WebControls;
-using PagingControl = R7.Dnn.Extensions.Controls.PagingControl;
+using PagingControl = R7.Dnn.Extensions.Controls.PagingControl.PagingControl;
 using R7.News.Controls;
 
 namespace R7.News.Stream

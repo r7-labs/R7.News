@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -29,7 +29,6 @@ using DotNetNuke.Data;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Services.FileSystem;
-using R7.Dnn.Extensions.Utilities;
 using R7.News.Components;
 using R7.News.Models;
 
@@ -54,7 +53,7 @@ namespace R7.News.Data
 
         public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
         {
-            var newsEntry = NewsDataProvider.Instance.Get<NewsEntryInfo> (entryId, portalId);
+            var newsEntry = NewsDataProvider.Instance.Get<NewsEntryInfo,int,int> (entryId, portalId);
             if (newsEntry != null) {
                 return (NewsEntryInfo) newsEntry
                     .WithAgentModule (NewsDataProvider.Instance.ModuleController)
@@ -66,7 +65,7 @@ namespace R7.News.Data
 
         public NewsEntryInfo GetNewsEntryByContentItem (ContentItem contentItem)
         {
-            return NewsDataProvider.Instance.Get<NewsEntryInfo> (int.Parse (contentItem.ContentKey));
+            return NewsDataProvider.Instance.Get<NewsEntryInfo,int> (int.Parse (contentItem.ContentKey));
         }
 
         public int AddNewsEntry (NewsEntryInfo newsEntry,
@@ -81,7 +80,7 @@ namespace R7.News.Data
 
             UpdateContentItem (contentItem, newsEntry, terms, images);
 
-            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+            DataCache.ClearCache (NewsCacheKeyPrefix);
 
             return newsEntry.EntryId;
         }
@@ -158,7 +157,7 @@ namespace R7.News.Data
                 termController.AddTermToContent (term, newsEntry.ContentItem);
             }
 
-            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+            DataCache.ClearCache (NewsCacheKeyPrefix);
         }
 
         /// <summary>
@@ -168,7 +167,7 @@ namespace R7.News.Data
         public void UpdateNewsEntry (NewsEntryInfo newsEntry)
         {
             NewsDataProvider.Instance.Update (newsEntry);
-            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+            DataCache.ClearCache (NewsCacheKeyPrefix);
         }
 
         public void DeleteNewsEntry (INewsEntry newsEntry)
@@ -176,7 +175,7 @@ namespace R7.News.Data
             // delete content item, related news entry will be deleted by foreign key rule
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
 
-            CacheHelper.RemoveCacheByPrefix (NewsCacheKeyPrefix);
+            DataCache.ClearCache (NewsCacheKeyPrefix);
         }
 
         public IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
@@ -328,7 +327,7 @@ namespace R7.News.Data
 
         public void RemoveModuleCache (int moduleId)
         {
-            CacheHelper.RemoveCacheByPrefix (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + moduleId);
+            DataCache.ClearCache (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + moduleId);
         }
     }
 }
