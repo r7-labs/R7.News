@@ -147,7 +147,7 @@ namespace R7.News.Agent
                             LocalizeString ("EditNewsEntry.Action") + HtmlUtils.Shorten (item.Title, 16,"&hellip;"),
                             ModuleActionType.EditContent,
                             "",
-                            IconController.IconURL ("Edit"),
+                            IconController.IconURL ("Edit", "16X16", "Gray"),
                             EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry"),
                             false,
                             SecurityAccessLevel.Edit,

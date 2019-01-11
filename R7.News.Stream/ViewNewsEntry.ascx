@@ -13,7 +13,7 @@
             <div>
                 <h3>
                     <asp:HyperLink id="linkEdit" runat="server">
-                        <asp:Image id="imageEdit" runat="server" IconKey="Edit" resourcekey="Edit" />
+                        <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
                     </asp:HyperLink>
                     <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                 </h3>
