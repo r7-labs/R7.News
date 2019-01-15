@@ -25,8 +25,11 @@ using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.UI;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Framework;
+using DotNetNuke.Security.Permissions;
+using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.Text;
 using R7.News.Components;
 using R7.News.Data;
@@ -36,7 +39,6 @@ using R7.News.Stream.Components;
 
 namespace R7.News.Stream
 {
-    // TODO: Add security checks
     public class Feed : PageBase
     {
         protected override void OnInit (EventArgs e)
@@ -73,35 +75,47 @@ namespace R7.News.Stream
 
         protected override void Render (HtmlTextWriter writer)
         {
-            var moduleId = ParseHelper.ParseToNullable<int> (Request.QueryString ["mid"]) ?? -1;
-            var tabId = ParseHelper.ParseToNullable<int> (Request.QueryString ["tabid"]) ?? -1;
+            try {
+                var moduleId = ParseHelper.ParseToNullable<int> (Request.QueryString ["mid"]) ?? -1;
+                var tabId = ParseHelper.ParseToNullable<int> (Request.QueryString ["tabid"]) ?? -1;
 
-            var settings = default (StreamSettings);
+                var settings = default (StreamSettings);
 
-            var isValidModule = false;
-            var module = ModuleController.Instance.GetModule (moduleId, tabId, false);
-            if (module != null) {
-                settings = GetModuleSettings (module);
-                isValidModule = (settings != null);
-            }
+                var isValidModule = false;
+                var module = ModuleController.Instance.GetModule (moduleId, tabId, false);
+                if (module != null) {
+                    settings = GetModuleSettings (module);
+                    isValidModule = (settings != null);
+                }
 
-            if (!isValidModule) {
-                Response.StatusCode = (int) HttpStatusCode.NotFound;
-                Response.End ();
-                // TODO: Log error
-                return;
-            }
+                if (!isValidModule) {
+                    Response.StatusCode = (int) HttpStatusCode.NotFound;
+                    Response.End ();
+                    // TODO: Log error
+                    return;
+                }
 
-            if (settings.EnableFeed) {
+                if (!settings.EnableFeed) {
+                    Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                    Response.End ();
+                    return;
+                }
+
+                if (!ModulePermissionController.CanViewModule (module)) {
+                    // FIXME: Unauthorized leads to invalid redirect to login page
+                    Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                    Response.End ();
+                    return;
+                }
+
                 var newsEntries = GetNewsEntries (module, settings);
                 if (newsEntries != null) {
                     var feed = new AtomFeed ();
                     feed.Render (writer, newsEntries, module, this);
                 }
             }
-            else {
-                Response.StatusCode = (int) HttpStatusCode.Forbidden;
-                Response.End ();
+            catch (Exception ex) {
+                Exceptions.ProcessPageLoadException (ex);
             }
         }
     }
