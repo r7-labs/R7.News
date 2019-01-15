@@ -168,7 +168,7 @@
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Components\StreamSettingsRepository.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
-    <Compile Include="AtomFeed.aspx.cs">
+    <Compile Include="Feed.aspx.cs">
       <DependentUpon>Feed.aspx</DependentUpon>
     </Compile>
   </ItemGroup>

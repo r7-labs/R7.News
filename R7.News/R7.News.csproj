@@ -118,6 +118,7 @@
     <Folder Include="Providers\DiscussProviders\" />
     <Folder Include="Controls\App_LocalResources\" />
     <Folder Include="App_LocalResources\" />
+    <Folder Include="Feeds\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -185,6 +186,8 @@
     <Compile Include="Controls\ViewModels\NewsEntryActionViewModel.cs" />
     <Compile Include="Models\NewsEntryInfo.cs" />
     <Compile Include="Models\WeightRange.cs" />
+    <Compile Include="Feeds\IFeed.cs" />
+    <Compile Include="Feeds\AtomFeed.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
