@@ -37,6 +37,7 @@ namespace R7.News.Stream.Components
 {
     public class StreamController : ModuleSearchBase
     {
+        // TODO: Move to NewsRepository
         protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
                                                              int portalId,
                                                              WeightRange thematicWeights,
@@ -45,7 +46,7 @@ namespace R7.News.Stream.Components
                                                              List<Term> includeTerms)
         {
             if (showAllNews) {
-                return NewsRepository.Instance.GetNewsEntries (
+                return NewsRepository.Instance.GetAllNewsEntries (
                     moduleId, portalId, thematicWeights, structuralWeights
                 );
             }

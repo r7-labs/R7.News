@@ -118,6 +118,7 @@
     <Content Include="ModuleSettings.ascx" />
     <Content Include="ViewNewsEntry.ascx" />
     <Content Include="packages.config" />
+    <Content Include="Feed.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -167,6 +168,9 @@
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Components\StreamSettingsRepository.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
+    <Compile Include="AtomFeed.aspx.cs">
+      <DependentUpon>Feed.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

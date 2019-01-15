@@ -66,7 +66,7 @@ namespace R7.News.Models
             }
         }
 
-        public static INewsEntry WithAgentModule (this INewsEntry newsEntry, ModuleController moduleController)
+        public static INewsEntry WithAgentModule (this INewsEntry newsEntry, IModuleController moduleController)
         {
             if (newsEntry.AgentModuleId != null) {
                 newsEntry.AgentModule = GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
@@ -75,13 +75,13 @@ namespace R7.News.Models
             return newsEntry;
         }
 
-        private static ModuleInfo GetAgentModule (ModuleController moduleController, int agentModuleId)
+        private static ModuleInfo GetAgentModule (IModuleController moduleController, int agentModuleId)
         {
             return moduleController.GetTabModulesByModule (agentModuleId)
                 .FirstOrDefault (am => !am.IsDeleted);
         }
 
-        private static ModuleInfo GetAgentModuleOnce (ModuleController moduleController, INewsEntry newsEntry)
+        private static ModuleInfo GetAgentModuleOnce (IModuleController moduleController, INewsEntry newsEntry)
         {
             if (newsEntry.AgentModule == null && newsEntry.AgentModuleId != null) {
                 return GetAgentModule (moduleController, newsEntry.AgentModuleId.Value);
@@ -91,7 +91,7 @@ namespace R7.News.Models
         }
 
         public static IEnumerable<INewsEntry> WithAgentModules (this IEnumerable<INewsEntry> newsEntries,
-                                                                ModuleController moduleController)
+                                                                IModuleController moduleController)
         {
             foreach (var newsEntry in newsEntries) {
                 yield return newsEntry.WithAgentModule (moduleController);
@@ -176,7 +176,7 @@ namespace R7.News.Models
 
         public static string GetPermalink (this INewsEntry newsEntry,
                                            PermalinkMode permalinkMode,
-                                           ModuleController moduleController,
+                                           IModuleController moduleController,
                                            PortalAliasInfo portalAlias,
                                            int moduleId,
                                            int tabId)
@@ -187,7 +187,7 @@ namespace R7.News.Models
         }
         
         public static string GetPermalinkFriendly (this INewsEntry newsEntry,
-                                                   ModuleController moduleController,
+                                                   IModuleController moduleController,
                                                    int moduleId,
                                                    int tabId)
         {
@@ -206,7 +206,7 @@ namespace R7.News.Models
         }
 
         public static string GetPermalinkRaw (this INewsEntry newsEntry,
-                                              ModuleController moduleController,
+                                              IModuleController moduleController,
                                               PortalAliasInfo portalAlias,
                                               int moduleId,
                                               int tabId)

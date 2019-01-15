@@ -178,21 +178,21 @@ namespace R7.News.Data
             DataCache.ClearCache (NewsCacheKeyPrefix);
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
-                                                          int portalId,
-                                                          WeightRange thematicWeights,
-                                                          WeightRange structuralWeights)
+        public IEnumerable<NewsEntryInfo> GetAllNewsEntries (int moduleId,
+                                                             int portalId,
+                                                             WeightRange thematicWeights,
+                                                             WeightRange structuralWeights)
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
-                c => GetNewsEntriesInternal (portalId, 
+                c => GetAllNewsEntriesInternal (portalId, 
                     thematicWeights, structuralWeights)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesInternal (int portalId, 
+        protected IEnumerable<NewsEntryInfo> GetAllNewsEntriesInternal (int portalId, 
                                                                      WeightRange thematicWeights,
                                                                      WeightRange structuralWeights)
         {
@@ -205,10 +205,10 @@ namespace R7.News.Data
                     .Cast<NewsEntryInfo> ();
         }
 
-        public int GetNewsEntries_Count (int portalId,
-                                         DateTime? now,
-                                         WeightRange thematicWeights,
-                                         WeightRange structuralWeights)
+        public int GetAllNewsEntries_Count (int portalId,
+                                            DateTime? now,
+                                            WeightRange thematicWeights,
+                                            WeightRange structuralWeights)
         {
             return NewsDataProvider.Instance.ExecuteSpScalar<int> (
                 SpNamePrefix + "GetNewsEntries_Count", portalId, now,
@@ -216,11 +216,11 @@ namespace R7.News.Data
             );
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries_FirstPage (int portalId, 
-                                                                    int pageSize,
-                                                                    DateTime? now, 
-                                                                    WeightRange thematicWeights,
-                                                                    WeightRange structuralWeights)
+        public IEnumerable<NewsEntryInfo> GetAllNewsEntries_FirstPage (int portalId,
+                                                                       int pageSize,
+                                                                       DateTime? now, 
+                                                                       WeightRange thematicWeights,
+                                                                       WeightRange structuralWeights)
         {
             return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (
                 SpNamePrefix + "GetNewsEntries_FirstPage",
@@ -286,7 +286,7 @@ namespace R7.News.Data
             return 0;
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms_FirstPage (int portalId,
+        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms_FirstPage (int portalId,
                                                                            int pageSize,
                                                                            DateTime? now,
                                                                            WeightRange thematicWeights,
@@ -325,9 +325,32 @@ namespace R7.News.Data
                 .Cast<NewsEntryInfo> ();
         }
 
+        public IEnumerable<NewsEntryInfo> GetNewsEntries_FirstPage (int portalId, int pageSize, DateTime? now,
+            WeightRange thematicRange, WeightRange structRange, bool showAllNews, IList<Term> includeTerms,
+            out int newsEntriesCount)
+        {
+            if (showAllNews) {
+                newsEntriesCount = GetAllNewsEntries_Count (portalId, now, thematicRange, structRange);
+                return GetAllNewsEntries_FirstPage (portalId, pageSize, now, thematicRange, structRange);
+            }
+
+            newsEntriesCount = GetNewsEntriesByTerms_Count (portalId, now, thematicRange, structRange, includeTerms);
+            return GetNewsEntriesByTerms_FirstPage (portalId, pageSize, now, thematicRange, structRange, includeTerms);
+        }
+
+        public IEnumerable<NewsEntryInfo> GetNewsEntries_Page (int moduleId, int portalId, 
+            WeightRange thematicRange, WeightRange structRange, bool showAllNews, IList<Term> includeTerms)
+        {
+            if (showAllNews) {
+                return GetAllNewsEntries (moduleId, portalId, thematicRange, structRange);
+            }
+
+            return GetNewsEntriesByTerms (moduleId, portalId, thematicRange, structRange, includeTerms);
+        }
+
         public void RemoveModuleCache (int moduleId)
         {
-            DataCache.ClearCache (NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + moduleId);
+            DataCache.ClearCache (NewsCacheKeyPrefix + "ModuleId=" + moduleId);
         }
     }
 }

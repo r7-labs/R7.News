@@ -248,7 +248,7 @@ namespace R7.News.Agent
         protected void UpdateModuleTitle (string title)
         {
             var moduleController = NewsDataProvider.Instance.ModuleController;
-            var module = moduleController.GetModule (ModuleId, TabId);
+            var module = moduleController.GetModule (ModuleId, TabId, true);
             if (module.ModuleTitle != title) {
                 module.ModuleTitle = title;
                 moduleController.UpdateModule (module);

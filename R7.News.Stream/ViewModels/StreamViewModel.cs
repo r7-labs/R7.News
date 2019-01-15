@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016 Roman M. Yagodin
+//  Copyright (c) 2016-2019  Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -68,37 +68,10 @@ namespace R7.News.Stream.ViewModels
 
         protected StreamNewsEntryViewModelPage GetFirstPageInternal (int pageSize, DateTime? now)
         {
-            IEnumerable<NewsEntryInfo> baseItems;
-            int baseItemsCount;
-
-            if (Settings.ShowAllNews) {
-                baseItemsCount = NewsRepository.Instance.GetNewsEntries_Count (
-                    Module.PortalId, now,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
-                );
-
-                baseItems = NewsRepository.Instance.GetNewsEntries_FirstPage (
-                    Module.PortalId, pageSize, now,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
-                );
-            }
-            else {
-                baseItemsCount = NewsRepository.Instance.GetNewsEntriesByTerms_Count (
-                    Module.PortalId, now,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
-                    Settings.IncludeTerms
-                );
-
-                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms_FirstPage (
-                    Module.PortalId, pageSize, now,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
-                    Settings.IncludeTerms
-                );
-            } 
+            var baseItems = NewsRepository.Instance.GetNewsEntries_FirstPage (Module.PortalId, Settings.PageSize, now,
+                new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight),
+                new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
+                Settings.ShowAllNews, Settings.IncludeTerms, out int baseItemsCount);
 
             return new StreamNewsEntryViewModelPage (
                 baseItemsCount,
@@ -109,28 +82,15 @@ namespace R7.News.Stream.ViewModels
 
         protected StreamNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, DateTime? now)
         {
-            IEnumerable<NewsEntryInfo> baseItems;
-
             // check for pageIndex < 0
             if (pageIndex < 0) {
                 return StreamNewsEntryViewModelPage.Empty;
             }
 
-            if (Settings.ShowAllNews) {
-                baseItems = NewsRepository.Instance.GetNewsEntries (
-                    Module.ModuleId, Module.PortalId,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight)
-                );
-            }
-            else {
-                baseItems = NewsRepository.Instance.GetNewsEntriesByTerms (
-                    Module.ModuleId, Module.PortalId,
-                    new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight), 
-                    new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
-                    Settings.IncludeTerms
-                );
-            }
+            var baseItems = NewsRepository.Instance.GetNewsEntries_Page (Module.ModuleId, Module.PortalId,
+                new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight),
+                new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
+                Settings.ShowAllNews, Settings.IncludeTerms);
 
             // check for no data available
             if (baseItems == null || !baseItems.Any ()) {

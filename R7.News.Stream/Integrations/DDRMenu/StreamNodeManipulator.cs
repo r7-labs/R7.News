@@ -84,19 +84,11 @@ namespace R7.News.Stream.Integrations.DDRMenu
         protected IEnumerable<INewsEntry> GetNewsEntries (StreamSettings settings, int newsCount, int portalId)
         {
             // TODO: Cache the result?
-            if (settings.ShowAllNews) {
-                return NewsRepository.Instance.GetNewsEntries_FirstPage (
-                    portalId, newsCount, DateTime.Now,
-                    new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
-                    new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight)
-                );
-            }
-
-            return NewsRepository.Instance.GetNewsEntriesByTerms_FirstPage (
+            return NewsRepository.Instance.GetNewsEntries_FirstPage (
                 portalId, newsCount, DateTime.Now,
                 new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
                 new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight),
-                settings.IncludeTerms
+                settings.ShowAllNews, settings.IncludeTerms, out int newsEntriesCount
             );
         }
 

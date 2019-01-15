@@ -72,9 +72,8 @@ namespace R7.News.Data
             }
         }
 
-        private ModuleController moduleController;
-
-        public ModuleController ModuleController
+        private IModuleController moduleController;
+        public IModuleController ModuleController
         {
             get { 
                 if (moduleController == null) {
