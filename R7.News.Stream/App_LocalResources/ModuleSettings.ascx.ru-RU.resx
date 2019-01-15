@@ -84,10 +84,19 @@
     <data name="MaxPageLinks.Invalid" xml:space="preserve">
         <value>Максимальное число ссылок в переключателе должно быть целым числом от 1 до 100.</value>
     </data>
+	<data name="lblEnableFeed.Text" xml:space="preserve">
+        <value>Включить канал Atom?</value>
+    </data>
+    <data name="lblEnableFeed.Help" xml:space="preserve">
+        <value>Отметьте, чтобы включить экспорт новостной ленты в виде канала Atom.</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Основные настройки</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Настройки разбивки на страницы</value>
+    </data>
+	<data name="sectionFeed.Text" xml:space="preserve">
+        <value>Настройки канала Atom</value>
     </data>
 </root>

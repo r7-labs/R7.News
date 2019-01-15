@@ -21,6 +21,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Web;
 using System.Web.UI;
@@ -75,24 +76,32 @@ namespace R7.News.Stream
             var moduleId = ParseHelper.ParseToNullable<int> (Request.QueryString ["mid"]) ?? -1;
             var tabId = ParseHelper.ParseToNullable<int> (Request.QueryString ["tabid"]) ?? -1;
 
+            var settings = default (StreamSettings);
+
+            var isValidModule = false;
             var module = ModuleController.Instance.GetModule (moduleId, tabId, false);
-            if (module == null) {
-                Response.StatusCode = 500;
+            if (module != null) {
+                settings = GetModuleSettings (module);
+                isValidModule = (settings != null);
+            }
+
+            if (!isValidModule) {
+                Response.StatusCode = (int) HttpStatusCode.NotFound;
+                Response.End ();
                 // TODO: Log error
                 return;
             }
 
-            var settings = GetModuleSettings (module);
-            if (settings == null) {
-                Response.StatusCode = 500;
-                // TODO: Log error
-                return;
+            if (settings.EnableFeed) {
+                var newsEntries = GetNewsEntries (module, settings);
+                if (newsEntries != null) {
+                    var feed = new AtomFeed ();
+                    feed.Render (writer, newsEntries, module, this);
+                }
             }
-
-            var newsEntries = GetNewsEntries (module, settings);
-            if (newsEntries != null) {
-                var feed = new AtomFeed ();
-                feed.Render (writer, newsEntries, module, this);
+            else {
+                Response.StatusCode = (int) HttpStatusCode.Forbidden;
+                Response.End ();
             }
         }
     }

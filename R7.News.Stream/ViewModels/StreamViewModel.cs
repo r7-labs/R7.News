@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Caching;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.UI.Modules;
 using R7.Dnn.Extensions.ViewModels;
@@ -39,6 +40,10 @@ namespace R7.News.Stream.ViewModels
         public StreamViewModel (IModuleControl module, StreamSettings settings) : base (module, settings)
         {
         }
+
+        public string FeedUrl => Globals.AddHTTP (Module.PortalAlias.HTTPAlias
+                + Globals.DesktopModulePath
+                + $"R7.News/R7.News.Stream/Feed.aspx?tabid={Module.TabId}&mid={Module.ModuleId}");
 
         public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {

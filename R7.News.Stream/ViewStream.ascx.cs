@@ -90,6 +90,8 @@ namespace R7.News.Stream
 
             // hide horizontal rule in signature if "Show more" button is used
             agplSignature.ShowRule = !Settings.UseShowMore;
+
+            pnlFeed.Visible = Settings.EnableFeed;
         }
 
         /// <summary>

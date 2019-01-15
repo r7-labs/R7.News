@@ -70,4 +70,11 @@
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="MaxPageLinks.Invalid" />
         </div>
     </fieldset>
+	<h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionFeed.Text") %></a></h2>
+	<fieldset>
+        <div class="dnnFormItem">
+            <dnn:Label id="lblEnableFeed" runat="server" ControlName="chkEnableFeed" />
+            <asp:CheckBox id="chkEnableFeed" runat="server" />
+        </div>
+	</fieldset>
 </div>

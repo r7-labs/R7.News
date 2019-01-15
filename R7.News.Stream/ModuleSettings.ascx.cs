@@ -70,6 +70,8 @@ namespace R7.News.Stream
                     comboMaxThematicWeight.SelectByValue (Settings.MaxThematicWeight);
                     comboMinStructuralWeight.SelectByValue (Settings.MinStructuralWeight);
                     comboMaxStructuralWeight.SelectByValue (Settings.MaxStructuralWeight);
+
+                    chkEnableFeed.Checked = Settings.EnableFeed;
                 }
             }
             catch (Exception ex) {
@@ -113,6 +115,9 @@ namespace R7.News.Stream
                 Settings.MaxThematicWeight = maxThematicWeight;
                 Settings.MinStructuralWeight = minStructuralWeight;
                 Settings.MaxStructuralWeight = maxStructuralWeight;
+
+                Settings.EnableFeed = chkEnableFeed.Checked;
+
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 

@@ -10,6 +10,12 @@
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 
 <asp:Panel id="panelStream" runat="server">
+	<asp:Panel id="pnlFeed" runat="server">
+		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link">
+			<span class="glyphicon glyphicon-export"></span>
+			<%: LocalizeString ("btnFeed.Text") %>
+		</a>
+	</asp:Panel>	
     <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>

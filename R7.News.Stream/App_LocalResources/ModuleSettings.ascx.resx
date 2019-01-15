@@ -84,10 +84,19 @@
     <data name="MaxPageLinks.Invalid" xml:space="preserve">
         <value>Maximum page links value must be an integer between from 1 to 100.</value>
     </data>
+	<data name="lblEnableFeed.Text" xml:space="preserve">
+        <value>Enable Atom Feed?</value>
+    </data>
+    <data name="lblEnableFeed.Help" xml:space="preserve">
+        <value>Check to enable news stream export as the Atom feed.</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Basic Settings</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Pagination Settings</value>
+    </data>
+	<data name="sectionFeed.Text" xml:space="preserve">
+        <value>Atom Feed Settings</value>
     </data>
 </root>

@@ -70,7 +70,7 @@ namespace R7.News.Stream.Components
             }
 
             set {
-                IncludeTerms_Internal = FormatHelper.JoinNotNullOrEmpty (";", value.Select (t => t.TermId));
+                IncludeTerms_Internal = FormatHelper.JoinNotNullOrEmpty (";", value.Select (t => t.TermId.ToString ()));
             }
         }
 
@@ -107,6 +107,9 @@ namespace R7.News.Stream.Components
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public int ThumbnailWidth { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool EnableFeed { get; set; } = false;
     }
 }
 

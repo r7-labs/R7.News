@@ -12,4 +12,7 @@
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Больше новостей...</value>
     </data>
+	<data name="btnFeed.Text" xml:space="preserve">
+        <value>Экспортировать в Atom</value>
+    </data>
 </root>
