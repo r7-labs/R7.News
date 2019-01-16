@@ -1,6 +1,5 @@
-﻿
-//
-//  IFeed.cs
+﻿//
+//  RouteMapper.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -20,16 +19,15 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Xml;
-using DotNetNuke.Entities.Modules;
-using DotNetNuke.Entities.Portals;
-using R7.News.Models;
+using DotNetNuke.Web.Api;
 
-namespace R7.News.Feeds
+namespace R7.News.Stream.Api
 {
-    public interface IFeed
+    public class RouteMapper : IServiceRouteMapper
     {
-        void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl);
+        public void RegisterRoutes (IMapRoute mapRouteManager)
+        {
+            mapRouteManager.MapHttpRoute ("R7.News.Stream", "NewsStreamFeedMap1", "{controller}/{action}", null, null, new [] { "R7.News.Stream.Api" });
+        }
     }
 }

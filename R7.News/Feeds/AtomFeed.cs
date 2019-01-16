@@ -23,11 +23,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
+using System.Xml;
 using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
-using DotNetNuke.Framework;
+using DotNetNuke.Entities.Portals;
 using R7.News.Models;
 
 namespace R7.News.Feeds
@@ -36,36 +36,60 @@ namespace R7.News.Feeds
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
 
-        public void Render (HtmlTextWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PageBase page)
+        public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl)
         {
-            var authorityDate = page.PortalSettings.CreatedOnDate.ToString ("yyyy-MM-dd");
+            var authorityDate = portalSettings.CreatedOnDate.ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;
 
-            writer.WriteLine ("<?xml version=\"1.0\" encoding=\"utf-8\" ?>");
-            writer.WriteLine ($"<feed xmlns=\"http://www.w3.org/2005/Atom\">");
-            writer.WriteLine ($"  <title>{module.ModuleTitle}</title>");
-            writer.WriteLine ("  <author>");
-            writer.WriteLine ($"    <name>{page.PortalSettings.PortalName}</name>");
-            writer.WriteLine ("  </author>");
-            writer.WriteLine ($"  <id>tag:{page.PortalSettings.PortalAlias.HTTPAlias},{authorityDate}:stream#{module.TabModuleID}</id>");
-            writer.WriteLine ($"  <link rel=\"self\" href=\"{HttpUtility.HtmlAttributeEncode (page.Request.Url.ToString ())}\" />");
-            writer.WriteLine ($"  <link rel=\"alternate\" href=\"{HttpUtility.HtmlAttributeEncode (Globals.NavigateURL (module.TabID))}\" />");
-            writer.WriteLine ($"  <updated>{IsoDateTime (updatedDate)}</updated>");
+            writer.WriteStartDocument ();
+            writer.WriteStartElement ("feed", "http://www.w3.org/2005/Atom");
+
+            writer.WriteElementString ("title", module.ModuleTitle);
+            writer.WriteStartElement ("author");
+            writer.WriteElementString ("name", portalSettings.PortalName);
+            writer.WriteEndElement ();
+
+            writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:stream#{module.TabModuleID}");
+
+            writer.WriteStartElement ("link");
+            writer.WriteAttributeString ("rel", "self");
+            writer.WriteAttributeString ("href", requestUrl);
+            writer.WriteEndElement ();
+
+            writer.WriteStartElement ("link");
+            writer.WriteAttributeString ("rel", "alternate");
+            writer.WriteAttributeString ("href", Globals.NavigateURL (module.TabID));
+            writer.WriteEndElement ();
+
+            writer.WriteElementString ("updated", IsoDateTime (updatedDate));
 
             foreach (var n in newsEntries) {
                 var permalink = n.GetPermalinkFriendly (ModuleController.Instance, module.ModuleID, module.TabID);
 
-                writer.WriteLine ("  <entry>");
-                writer.WriteLine ($"    <title>{n.Title}</title>");
-                writer.WriteLine ($"    <link rel=\"alternate\" href=\"{HttpUtility.HtmlAttributeEncode (permalink)}\" />");
-                writer.WriteLine ($"    <id>tag:{page.PortalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}</id>");
-                writer.WriteLine ($"    <updated>{IsoDateTime (n.PublishedOnDate ())}</updated>");
-                writer.WriteLine ($"    <summary>{HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true).Trim ()}</summary>");
-                writer.WriteLine ($"    <content type=\"html\">{n.Description}</content>");
-                writer.WriteLine ("  </entry>");
+                writer.WriteStartElement ("entry");
+                writer.WriteElementString ("title", n.Title);
+
+                writer.WriteStartElement ("link");
+                writer.WriteAttributeString ("rel", "alternate");
+                writer.WriteAttributeString ("href", permalink);
+                writer.WriteEndElement ();
+
+                writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}");
+                writer.WriteElementString ("updated", IsoDateTime (n.PublishedOnDate ()));
+                writer.WriteElementString ("summary", HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true).Trim ());
+
+                writer.WriteStartElement ("content");
+                writer.WriteAttributeString ("type", "html");
+                writer.WriteString (n.Description);
+                writer.WriteEndElement ();
+
+                writer.WriteEndElement ();
             }
 
-            writer.Write ("</feed>");
+            writer.WriteEndElement ();
+            writer.WriteEndDocument ();
+
+            writer.Close ();
         }
     }
 }

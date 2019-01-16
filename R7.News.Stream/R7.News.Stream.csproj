@@ -83,16 +83,7 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.1.1\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.1\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.1.1\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
     <Reference Include="NGettext">
       <HintPath>..\packages\NGettext.0.6.3\lib\net45\NGettext.dll</HintPath>
     </Reference>
@@ -103,12 +94,22 @@
     <Reference Include="R7.Dnn.Extensions">
       <HintPath>..\packages\R7.Dnn.Extensions.0.13.0-rc1\lib\net45\R7.Dnn.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Data\" />
     <Folder Include="Integrations\" />
     <Folder Include="Integrations\DDRMenu\" />
+    <Folder Include="Api\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -118,7 +119,6 @@
     <Content Include="ModuleSettings.ascx" />
     <Content Include="ViewNewsEntry.ascx" />
     <Content Include="packages.config" />
-    <Content Include="Feed.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
@@ -168,9 +168,8 @@
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Components\StreamSettingsRepository.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
-    <Compile Include="Feed.aspx.cs">
-      <DependentUpon>Feed.aspx</DependentUpon>
-    </Compile>
+    <Compile Include="Api\RouteMapper.cs" />
+    <Compile Include="Api\FeedController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
