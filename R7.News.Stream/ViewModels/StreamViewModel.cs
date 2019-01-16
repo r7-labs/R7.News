@@ -43,7 +43,7 @@ namespace R7.News.Stream.ViewModels
 
         public string FeedUrl => Globals.AddHTTP (Module.PortalAlias.HTTPAlias
                 + Globals.DesktopModulePath
-                + $"R7.News.Stream/API/Feed/Get?tabid={Module.TabId}&moduleid={Module.ModuleId}");
+                + "R7.News.Stream/API/Feed/Atom?key=" + UrlUtils.EncryptParameter ($"{Module.TabId}-{Module.ModuleId}"));
 
         public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {

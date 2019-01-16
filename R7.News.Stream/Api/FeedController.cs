@@ -27,6 +27,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http;
 using System.Xml;
+using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Security.Permissions;
@@ -70,8 +71,12 @@ namespace R7.News.Stream.Api
 
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage Get (int tabId, int moduleId)
+        public HttpResponseMessage Atom (string key)
         {
+            var keyParts = UrlUtils.DecryptParameter (key).Split ('-');
+            var tabId = int.Parse (keyParts [0]);
+            var moduleId = int.Parse (keyParts [1]);
+
             var settings = default (StreamSettings);
 
             var isValidModule = false;
