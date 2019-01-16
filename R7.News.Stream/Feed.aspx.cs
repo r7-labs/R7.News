@@ -39,6 +39,7 @@ using R7.News.Stream.Components;
 
 namespace R7.News.Stream
 {
+    // TODO: Implement as WebAPI?
     public class Feed : PageBase
     {
         protected override void OnInit (EventArgs e)
@@ -89,7 +90,7 @@ namespace R7.News.Stream
                 }
 
                 if (!isValidModule) {
-                    Response.StatusCode = (int) HttpStatusCode.NotFound;
+                    Response.StatusCode = (int) HttpStatusCode.BadRequest;
                     Response.End ();
                     // TODO: Log error
                     return;
@@ -102,7 +103,7 @@ namespace R7.News.Stream
                 }
 
                 if (!ModulePermissionController.CanViewModule (module)) {
-                    // FIXME: Unauthorized leads to invalid redirect to login page
+                    // 401 Unauthorized leads to invalid redirect to login page
                     Response.StatusCode = (int) HttpStatusCode.Forbidden;
                     Response.End ();
                     return;
