@@ -49,7 +49,8 @@ namespace R7.News.Feeds
             writer.WriteElementString ("name", portalSettings.PortalName);
             writer.WriteEndElement ();
 
-            writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:stream#{module.TabModuleID}");
+            writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:feed#"
+                + UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}"));
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "self");
