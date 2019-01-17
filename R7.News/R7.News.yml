@@ -19,14 +19,18 @@ term-url-providers:
 #  - type: R7.News.Providers.TermUrlProviders.UniversityDivisionTermUrlProvider
 
 discuss-providers:
-  - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
-    provider-key: DnnForum
-    params: ['1095', '418', '2'] # tabId, moduleId, forumId
-  - type: R7.News.Providers.DiscussProviders.ActiveForumsDiscussProvider
-    provider-key: ActiveForums
-    params: ['1094', '1478', '2'] # tabId, moduleId, forumId
+#  - type: R7.News.Providers.DiscussProviders.DnnForumDiscussProvider
+#    provider-key: DnnForum
+#    params: ['1095', '418', '2'] # tabId, moduleId, forumId
+#  - type: R7.News.Providers.DiscussProviders.ActiveForumsDiscussProvider
+#    provider-key: ActiveForums
+#    params: ['1094', '1478', '2'] # tabId, moduleId, forumId
 
 node-manipulator:
-  parent-node-tab-id: 77
-  stream-module-tab-id: 77
-  stream-module-id: 429
+  parent-node-tab-id: -1
+  stream-module-tab-id: -1
+  stream-module-id: -1
+
+#  parent-node-tab-id: 77
+#  stream-module-tab-id: 77
+#  stream-module-id: 429

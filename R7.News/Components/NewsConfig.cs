@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -20,66 +20,33 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web.Compilation;
-using DotNetNuke.Common;
-using DotNetNuke.Entities.Portals;
+using DotNetNuke.Services.Exceptions;
+using R7.Dnn.Extensions.Configuration;
 using R7.News.Providers.DiscussProviders;
 using R7.News.Providers.TermUrlProviders;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
-using DotNetNuke.Services.Exceptions;
 
 namespace R7.News.Components
 {
     public static class NewsConfig
     {
-        #region Singleton implementation
+        static readonly ExtensionYamlConfig<NewsPortalConfig> _config;
 
-        private static readonly ConcurrentDictionary<int,Lazy<NewsPortalConfig>> portalConfigs = 
-            new ConcurrentDictionary<int,Lazy<NewsPortalConfig>> ();
+        static NewsConfig () => _config = new ExtensionYamlConfig<NewsPortalConfig> ("R7.News.yml", Init);
 
-        public static NewsPortalConfig Instance
+        public static NewsPortalConfig GetInstance (int portalId) => _config.GetInstance (portalId);
+
+        public static NewsPortalConfig Instance => _config.Instance;
+
+        static NewsPortalConfig Init (NewsPortalConfig portalConfig)
         {
-            get { return GetInstance (PortalSettings.Current.PortalId); }
+            LoadProviders<ITermUrlProvider> (portalConfig, portalConfig.TermUrlProviders.Cast<IProviderConfig> ());
+            LoadProviders<IDiscussProvider> (portalConfig, portalConfig.DiscussProviders.Cast<IProviderConfig> ());
+
+            return portalConfig;
         }
-
-        public static NewsPortalConfig GetInstance (int portalId)
-        {
-            var lazyPortalConfig = portalConfigs.GetOrAdd (portalId, newKey => 
-                new Lazy<NewsPortalConfig> (() => {
-
-                var portalSettings = new PortalSettings (portalId);
-                var portalConfigFile = Path.Combine (portalSettings.HomeDirectoryMapPath, "R7.News.yml");
-
-                // ensure portal config file exists
-                if (!File.Exists (portalConfigFile)) {
-                    File.Copy (Path.Combine (
-                        Globals.ApplicationMapPath,
-                        Const.LibraryInstallPath,
-                        "R7.News.yml"), 
-                        portalConfigFile);
-                }
-
-                using (var configReader = new StringReader (File.ReadAllText (portalConfigFile))) {
-                    var deserializer = new DeserializerBuilder ().WithNamingConvention (new HyphenatedNamingConvention ()).Build ();
-                    var portalConfig = deserializer.Deserialize<NewsPortalConfig> (configReader);
-
-                    LoadProviders<ITermUrlProvider> (portalConfig, portalConfig.TermUrlProviders.Cast<IProviderConfig> ());
-                    LoadProviders<IDiscussProvider> (portalConfig, portalConfig.DiscussProviders.Cast<IProviderConfig> ());
-
-                    return portalConfig;
-                }
-            }
-            ));
-
-            return lazyPortalConfig.Value;
-        }
-
-        #endregion
 
         static void LoadProviders<TProvider> (NewsPortalConfig portalConfig, IEnumerable<IProviderConfig> providerConfigs)
         {

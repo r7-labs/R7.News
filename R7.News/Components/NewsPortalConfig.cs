@@ -28,39 +28,35 @@ namespace R7.News.Components
 {
     public class NewsPortalConfig
     {
-        public int DataCacheTime { get; set; }
+        public int DataCacheTime { get; set; } = 20;
 
-        public string DefaultImagesPath { get; set; }
+        public string DefaultImagesPath { get; set; } = "images";
 
-        public StreamModuleConfig StreamModule { get; set; }
+        public StreamModuleConfig StreamModule { get; set; } = new StreamModuleConfig ();
 
-        public AgentModuleConfig AgentModule { get; set; }
+        public AgentModuleConfig AgentModule { get; set; } = new AgentModuleConfig ();
 
-        public NewsEntryConfig NewsEntry { get; set; }
+        public NewsEntryConfig NewsEntry { get; set; } = new NewsEntryConfig ();
 
         #region TermUrl providers
 
-        public Collection<TermUrlProviderConfig> TermUrlProviders { get; set; }
+        public List<TermUrlProviderConfig> TermUrlProviders { get; set; } = new List<TermUrlProviderConfig> {
+            new TermUrlProviderConfig {
+                Type = typeof (DescriptionTermUrlProvider).FullName
+            },
+        };
 
-        protected readonly Collection<ITermUrlProvider> TermUrlProvidersInternal = new Collection<ITermUrlProvider> ();
-
-        public Collection<ITermUrlProvider> GetTermUrlProviders ()
-        {
-            return TermUrlProvidersInternal;
-        }
+        protected readonly List<ITermUrlProvider> TermUrlProvidersInternal = new List<ITermUrlProvider> ();
+        public List<ITermUrlProvider> GetTermUrlProviders () => TermUrlProvidersInternal;
 
         #endregion
 
         #region Discuss providers
 
-        public Collection<DiscussProviderConfig> DiscussProviders { get; set; }
+        public List<DiscussProviderConfig> DiscussProviders { get; set; } = new List<DiscussProviderConfig> ();
 
-        protected readonly Collection<IDiscussProvider> DiscussProviders_Internal = new Collection<IDiscussProvider> ();
-
-        public Collection<IDiscussProvider> GetDiscussProviders ()
-        {
-            return DiscussProviders_Internal;
-        }
+        protected readonly List<IDiscussProvider> DiscussProviders_Internal = new List<IDiscussProvider> ();
+        public List<IDiscussProvider> GetDiscussProviders () => DiscussProviders_Internal;
 
         #endregion
 
@@ -82,23 +78,23 @@ namespace R7.News.Components
 
     public class NewsEntryConfig
     {
-        public int MaxWeight { get; set; }
+        public int MaxWeight { get; set; } = 10;
 
-        public int DefaultThematicWeight { get; set; }
+        public int DefaultThematicWeight { get; set; } = 10;
 
-        public int DefaultStructuralWeight { get; set; }
+        public int DefaultStructuralWeight { get; set; } = 10;
     }
 
     public class StreamModuleConfig
     {
-        public int DefaultThumbnailWidth { get; set; }
+        public int DefaultThumbnailWidth { get; set; } = 262;
     }
 
     public class AgentModuleConfig
     {
-        public int DefaultThumbnailWidth { get; set; }
+        public int DefaultThumbnailWidth { get; set; } = 555;
 
-        public int DefaultGroupThumbnailWidth { get; set; }
+        public int DefaultGroupThumbnailWidth { get; set; } = 133;
     }
 
     public enum PermalinkMode
@@ -132,10 +128,10 @@ namespace R7.News.Components
 
     public class NodeManipulatorConfig
     {
-        public int ParentNodeTabId { get; set; }
+        public int ParentNodeTabId { get; set; } = -1;
 
-        public int StreamModuleId { get; set; }
+        public int StreamModuleId { get; set; } = -1;
 
-        public int StreamModuleTabId { get; set; }
+        public int StreamModuleTabId { get; set; } = -1;
     }
 }
