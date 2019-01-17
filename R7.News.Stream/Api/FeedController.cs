@@ -19,6 +19,7 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -31,6 +32,8 @@ using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Security.Permissions;
+using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.Log.EventLog;
 using DotNetNuke.Web.Api;
 using R7.News.Components;
 using R7.News.Data;
@@ -69,39 +72,45 @@ namespace R7.News.Stream.Api
             return null;
         }
 
+        void DecryptParameters (string key, out int tabId, out int moduleId)
+        {
+            var keyParts = UrlUtils.DecryptParameter (key).Split ('-');
+            tabId = int.Parse (keyParts [0]);
+            moduleId = int.Parse (keyParts [1]);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage Atom (string key)
         {
-            var keyParts = UrlUtils.DecryptParameter (key).Split ('-');
-            var tabId = int.Parse (keyParts [0]);
-            var moduleId = int.Parse (keyParts [1]);
+            var statusCode = HttpStatusCode.InternalServerError;
+            var logType = EventLogController.EventLogType.HOST_ALERT;
+            var tabId = -1;
+            var moduleId = -1;
 
-            var settings = default (StreamSettings);
+            try {
+                DecryptParameters (key, out tabId, out moduleId);
+                var module = ModuleController.Instance.GetModule (moduleId, tabId, false);
+                var settings = GetModuleSettings (module);
 
-            var isValidModule = false;
-            var module = ModuleController.Instance.GetModule (moduleId, tabId, false);
-            if (module != null) {
-                settings = GetModuleSettings (module);
-                isValidModule = (settings != null);
-            }
+                if (settings == null) {
+                    statusCode = HttpStatusCode.BadRequest;
+                    logType = EventLogController.EventLogType.ADMIN_ALERT;
+                    throw new Exception ("Stream module not found.");
+                }
 
-            if (!isValidModule) {
-                // TODO: Log error
-                return Request.CreateResponse (HttpStatusCode.BadRequest);
-            }
+                if (!settings.EnableFeed) {
+                    Request.CreateResponse (HttpStatusCode.Forbidden);
+                }
 
-            if (!settings.EnableFeed) {
-                return Request.CreateResponse (HttpStatusCode.Forbidden);
-            }
+                if (!ModulePermissionController.CanViewModule (module)) {
+                    Request.CreateResponse (HttpStatusCode.Unauthorized);
+                }
 
-            if (!ModulePermissionController.CanViewModule (module)) {
-                return Request.CreateResponse (HttpStatusCode.Unauthorized);
-            }
-
-            var newsEntries = GetNewsEntries (module, settings);
-            if (newsEntries != null) {
-                var feed = new AtomFeed ();
+                var newsEntries = GetNewsEntries (module, settings);
+                if (newsEntries == null) {
+                    throw new Exception ("Error reading news entries for module.");
+                }
 
                 var writer = new Utf8StringWriter ();
                 var xmlWriter = XmlWriter.Create (writer, new XmlWriterSettings {
@@ -110,15 +119,30 @@ namespace R7.News.Stream.Api
                     Encoding = Encoding.UTF8
                 });
 
+                var feed = new AtomFeed ();
                 feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString ());
 
                 // media type should be "application/atom+xml", but IIS serve it as file to download
                 return Request.CreateResponse (HttpStatusCode.OK, writer.ToString (),
                     new StringPassThroughMediaTypeFormatter (), "text/xml");
             }
+            catch (Exception ex) {
+                var log = new LogInfo ();
+                log.AddProperty ("Source", GetType ().FullName);
+                log.AddProperty ("PortalId", PortalSettings.PortalId.ToString ());
+                log.AddProperty ("TabId", tabId.ToString ());
+                log.AddProperty ("ModuleId", moduleId.ToString ());
+                log.AddProperty ("RawUrl", Request.GetHttpContext ().Request.RawUrl);
+                log.AddProperty ("Referrer", Request.GetHttpContext ().Request.UrlReferrer?.ToString ());
+                log.LogPortalID = PortalSettings.PortalId;
+                log.LogUserID = UserInfo?.UserID ?? -1;
+                log.LogUserName = UserInfo?.Username ?? "Unknown";
+                log.LogTypeKey = logType.ToString ();
+                log.Exception = new ExceptionInfo (ex);
+                EventLogController.Instance.AddLog (log);
 
-            // TODO: Log error
-            return Request.CreateResponse (HttpStatusCode.InternalServerError);
+                return Request.CreateResponse (statusCode);
+            }
         }
     }
 }
