@@ -193,6 +193,7 @@ namespace R7.News.Agent
                 Title = activeTab.TabName,
                 Description = HttpUtility.HtmlEncode ("<p>" + activeTab.Description + "</p>"),
                 AgentModuleId = ModuleId,
+                PortalId = PortalId,
                 EndDate = DateTime.Today, // expired by default
                 ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
                 StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
