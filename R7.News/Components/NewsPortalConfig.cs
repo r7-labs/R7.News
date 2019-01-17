@@ -28,7 +28,7 @@ namespace R7.News.Components
 {
     public class NewsPortalConfig
     {
-        public int DataCacheTime { get; set; } = 20;
+        public int DataCacheTime { get; set; } = 60;
 
         public string DefaultImagesPath { get; set; } = "images";
 
