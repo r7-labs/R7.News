@@ -1,10 +1,10 @@
 ﻿//
-//  DefaultPortalConfigTests.cs
+//  ExamplePortalConfigTests.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017 Roman M. Yagodin
+//  Copyright (c) 2017-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -48,7 +48,7 @@ namespace R7.News.Tests
 
         protected string GetDefaultConfigFile ()
         {
-            return Path.Combine ("..", "..", "..", "R7.News", "R7.News.yml");
+            return Path.Combine ("..", "..", "..", "R7.News", "R7.News.example.yml");
         }
 
         protected NewsPortalConfig DeserializeConfig (string configFile)

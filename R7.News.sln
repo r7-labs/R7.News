@@ -75,9 +75,24 @@ Global
 		$6.IndexerDeclarationParameterWrapping = WrapIfTooLong
 		$6.AlignToFirstIndexerDeclarationParameter = False
 		$6.IndexerArgumentWrapping = WrapIfTooLong
-		$6.inheritsSet = Mono
-		$6.inheritsScope = text/x-csharp
 		$6.scope = text/x-csharp
+		$6.IndentSwitchSection = False
+		$6.NewLinesForBracesInProperties = False
+		$6.NewLinesForBracesInAccessors = False
+		$6.NewLinesForBracesInAnonymousMethods = False
+		$6.NewLinesForBracesInControlBlocks = False
+		$6.NewLinesForBracesInAnonymousTypes = False
+		$6.NewLinesForBracesInObjectCollectionArrayInitializers = False
+		$6.NewLinesForBracesInLambdaExpressionBody = False
+		$6.NewLineForElse = False
+		$6.NewLineForCatch = False
+		$6.NewLineForFinally = False
+		$6.NewLineForMembersInObjectInit = False
+		$6.NewLineForMembersInAnonymousTypes = False
+		$6.NewLineForClausesInQuery = False
+		$6.SpacingAfterMethodDeclarationName = True
+		$6.SpaceAfterMethodCallName = True
+		$6.SpaceBeforeOpenSquareBracket = True
 		$0.TextStylePolicy = $7
 		$7.inheritsSet = null
 		$7.scope = text/css
@@ -204,7 +219,6 @@ Global
 		$28.IncludeStaticEntities = True
 		$0.StandardHeader = $32
 		$32.Text = @ \n ${FileName}\n \n Author:\n      ${AuthorName} <${AuthorEmail}>\n\n Copyright (c) ${Year} ${CopyrightHolder}\n\n This program is free software: you can redistribute it and/or modify\n it under the terms of the GNU Affero General Public License as published by\n the Free Software Foundation, either version 3 of the License, or\n (at your option) any later version.\n\n This program is distributed in the hope that it will be useful,\n but WITHOUT ANY WARRANTY; without even the implied warranty of\n MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n GNU Affero General Public License for more details.\n\n You should have received a copy of the GNU Affero General Public License\n along with this program.  If not, see <http://www.gnu.org/licenses/>.
-		$32.IncludeInNewFiles = True
 		version = 1.5.0
 	EndGlobalSection
 EndGlobal

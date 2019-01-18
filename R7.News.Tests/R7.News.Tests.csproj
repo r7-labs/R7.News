@@ -107,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DefaultPortalConfigTests.cs" />
+    <Compile Include="ExamplePortalConfigTests.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>
