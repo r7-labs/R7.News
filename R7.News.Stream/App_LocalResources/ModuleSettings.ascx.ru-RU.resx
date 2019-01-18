@@ -90,6 +90,13 @@
     <data name="lblEnableFeed.Help" xml:space="preserve">
         <value>Отметьте, чтобы включить экспорт новостной ленты в виде канала Atom.</value>
     </data>
+	<data name="lblFeedMaxEntries.Text" xml:space="preserve">
+        <value>Макс. новостей:</value>
+    </data>
+    <data name="lblFeedMaxEntries.Help" xml:space="preserve">
+        <value>Введите максимальное количество новостей для экспорта в виде канала Atom.
+		Если оставить поле пустым, вместо этого будет использоваться значение параметра &quot;feed.default-max-entries&quot; из конфигурации портала.</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Основные настройки</value>
     </data>

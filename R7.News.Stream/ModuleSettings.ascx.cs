@@ -24,6 +24,7 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.Modules;
+using R7.Dnn.Extensions.Text;
 using R7.News.Components;
 using R7.News.Data;
 using R7.News.Stream.Models;
@@ -72,6 +73,7 @@ namespace R7.News.Stream
                     comboMaxStructuralWeight.SelectByValue (Settings.MaxStructuralWeight);
 
                     chkEnableFeed.Checked = Settings.EnableFeed;
+                    txtFeedMaxEntries.Text = Settings.FeedMaxEntries?.ToString (); 
                 }
             }
             catch (Exception ex) {
@@ -117,7 +119,7 @@ namespace R7.News.Stream
                 Settings.MaxStructuralWeight = maxStructuralWeight;
 
                 Settings.EnableFeed = chkEnableFeed.Checked;
-
+                Settings.FeedMaxEntries = ParseHelper.ParseToNullable<int> (txtFeedMaxEntries.Text);
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 

@@ -38,6 +38,8 @@ namespace R7.News.Components
 
         public NewsEntryConfig NewsEntry { get; set; } = new NewsEntryConfig ();
 
+        public FeedConfig Feed { get; set; } = new FeedConfig ();
+
         #region TermUrl providers
 
         public List<TermUrlProviderConfig> TermUrlProviders { get; set; } = new List<TermUrlProviderConfig> {
@@ -133,5 +135,10 @@ namespace R7.News.Components
         public int StreamModuleId { get; set; } = -1;
 
         public int StreamModuleTabId { get; set; } = -1;
+    }
+
+    public class FeedConfig
+    {
+        public int DefaultMaxEntries { get; set; } = 10;
     }
 }

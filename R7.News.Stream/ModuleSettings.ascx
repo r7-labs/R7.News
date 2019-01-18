@@ -76,5 +76,9 @@
             <dnn:Label id="lblEnableFeed" runat="server" ControlName="chkEnableFeed" />
             <asp:CheckBox id="chkEnableFeed" runat="server" />
         </div>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblFeedMaxEntries" runat="server" ControlName="txtFeedMaxEntries" />
+            <asp:TextBox id="txtFeedMaxEntries" runat="server" />
+        </div>
 	</fieldset>
 </div>

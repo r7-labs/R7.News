@@ -110,6 +110,9 @@ namespace R7.News.Stream.Models
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public bool EnableFeed { get; set; } = false;
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public int? FeedMaxEntries { get; set; }
     }
 
     public class StreamSettingsRepository : SettingsRepository<StreamSettings>

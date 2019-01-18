@@ -53,10 +53,8 @@ namespace R7.News.Stream.Api
     {
         IEnumerable<NewsEntryInfo> GetNewsEntries (ModuleInfo module, StreamSettings settings)
         {
-            // TODO: Provide separate value via config/settings
-            var numOfEntries = settings.PageSize;
-
-            return NewsRepository.Instance.GetNewsEntries_FirstPage (PortalSettings.PortalId, numOfEntries,
+            return NewsRepository.Instance.GetNewsEntries_FirstPage (PortalSettings.PortalId,
+                settings.FeedMaxEntries ?? NewsConfig.Instance.Feed.DefaultMaxEntries,
                 HttpContext.Current.Timestamp,
                 new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
                 new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight),
