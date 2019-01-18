@@ -27,9 +27,6 @@
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
         <value>Set width in px for generated thumbnail images.</value>
     </data>
-    <data name="ThumbnailWidth.Required" xml:space="preserve">
-        <value>Thumbnail width is required.</value>
-    </data>
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Thumbnail width must be an integer from 1 to 4096.</value>
     </data>
@@ -38,9 +35,6 @@
     </data>
     <data name="labelGroupThumbnailWidth.Help" xml:space="preserve">
         <value>Set width in px for generated thumbnail images for grouped news entries.</value>
-    </data>
-    <data name="GroupThumbnailWidth.Required" xml:space="preserve">
-        <value>Thumbnail width in group is required.</value>
     </data>
     <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
         <value>Thumbnail width in group must be an integer from 1 to 1024.</value>

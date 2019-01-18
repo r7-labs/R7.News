@@ -27,11 +27,9 @@
             <span>&ndash;</span>
             <asp:DropDownList id="comboMaxStructuralWeight" runat="server" CssClass="dnnSmallSizeComboBox" />
         </div>
-        <div class="dnnFormItem dnnFormRequired">
+        <div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
-            <asp:RequiredFieldValidator runat="server" ControlToValidate="textThumbnailWidth"
-                CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="ThumbnailWidth.Required" />
             <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth" 
                 Type="Integer" MinimumValue="1" MaximumValue="4096"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="ThumbnailWidth.Invalid" />

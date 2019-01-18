@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using R7.Dnn.Extensions.ViewModels;
+using R7.News.Components;
 using R7.News.Models;
 using R7.News.Stream.Models;
 using R7.News.ViewModels;
@@ -40,7 +41,7 @@ namespace R7.News.Stream.ViewModels
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? NewsConfig.Instance.StreamModule.DefaultThumbnailWidth); }
         }
 
         public string ImageContainerCssClass

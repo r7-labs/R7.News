@@ -21,6 +21,7 @@
 
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Agent.Models;
+using R7.News.Components;
 using R7.News.Models;
 using R7.News.ViewModels;
 
@@ -45,12 +46,12 @@ namespace R7.News.Agent.ViewModels
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? NewsConfig.Instance.AgentModule.DefaultThumbnailWidth); }
         }
 
         public string GroupImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.GroupThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.GroupThumbnailWidth ?? NewsConfig.Instance.AgentModule.DefaultGroupThumbnailWidth); }
         }
 
         public string FirstColumnContainerCssClass

@@ -88,7 +88,7 @@ namespace R7.News.Stream
         {
             try {
 
-                Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
+                Settings.ThumbnailWidth = ParseHelper.ParseToNullable<int> (textThumbnailWidth.Text);
 
                 Settings.UseShowMore = checkUseShowMore.Checked;
                 Settings.ShowTopPager = checkShowTopPager.Checked;

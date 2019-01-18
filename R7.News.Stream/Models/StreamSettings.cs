@@ -43,7 +43,6 @@ namespace R7.News.Stream.Models
             if (HttpContext.Current != null) {
                 MaxThematicWeight = NewsConfig.Instance.NewsEntry.MaxWeight;
                 MaxStructuralWeight = NewsConfig.Instance.NewsEntry.MaxWeight;
-                ThumbnailWidth = NewsConfig.Instance.StreamModule.DefaultThumbnailWidth;
             }
         }
 
@@ -106,7 +105,7 @@ namespace R7.News.Stream.Models
         public int MaxPageLinks { get; set; } = 3;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public int ThumbnailWidth { get; set; }
+        public int? ThumbnailWidth { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public bool EnableFeed { get; set; } = false;

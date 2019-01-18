@@ -34,14 +34,6 @@ namespace R7.News.Agent.Models
     {
         protected const string SettingPrefix = Const.Prefix + "_Agent_";
 
-        public AgentSettings ()
-        {
-            if (HttpContext.Current != null) {
-                ThumbnailWidth = NewsConfig.Instance.AgentModule.DefaultThumbnailWidth;
-                GroupThumbnailWidth = NewsConfig.Instance.AgentModule.DefaultGroupThumbnailWidth;
-            }
-        }
-
         [TabModuleSetting (Prefix = SettingPrefix)]
         public bool EnableGrouping { get; set; } = false;
 
@@ -52,10 +44,10 @@ namespace R7.News.Agent.Models
         public bool HideImages { get; set; } = false;
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public int ThumbnailWidth { get; set; }
+        public int? ThumbnailWidth { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public int GroupThumbnailWidth { get; set; }
+        public int? GroupThumbnailWidth { get; set; }
     }
 
     public class AgentSettingsRepository : SettingsRepository<AgentSettings>

@@ -27,9 +27,6 @@
     <data name="labelThumbnailWidth.Help" xml:space="preserve">
         <value>Задайте ширину в пикселах генерируемых миниатюр изображений.</value>
     </data>
-    <data name="ThumbnailWidth.Required" xml:space="preserve">
-        <value>Укажите ширину миниатюры.</value>
-    </data>
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Ширина миниатюры должна быть целым числом от 1 до 4096.</value>
     </data>
@@ -38,9 +35,6 @@
     </data>
     <data name="labelGroupThumbnailWidth.Help" xml:space="preserve">
         <value>Задайте ширину в пикселах генерируемых миниатюр изображений для новостей в группе.</value>
-    </data>
-    <data name="GroupThumbnailWidth.Required" xml:space="preserve">
-        <value>Укажите ширину миниатюры в группе.</value>
     </data>
     <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
         <value>Ширина миниатюры в группе должна быть целым числом от 1 до 1024.</value>
