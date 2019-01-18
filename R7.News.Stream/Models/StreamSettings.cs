@@ -28,7 +28,7 @@ using DotNetNuke.Entities.Modules.Settings;
 using R7.Dnn.Extensions.Text;
 using R7.News.Components;
 
-namespace R7.News.Stream.Components
+namespace R7.News.Stream.Models
 {
     /// <summary>
     /// Provides strong typed access to settings used by module
@@ -111,5 +111,8 @@ namespace R7.News.Stream.Components
         [TabModuleSetting (Prefix = SettingPrefix)]
         public bool EnableFeed { get; set; } = false;
     }
-}
 
+    public class StreamSettingsRepository : SettingsRepository<StreamSettings>
+    {
+    }
+}

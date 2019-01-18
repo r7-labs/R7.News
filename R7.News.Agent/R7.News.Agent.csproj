@@ -131,7 +131,6 @@
     <Compile Include="ViewAgent.ascx.controls.cs">
       <DependentUpon>ViewAgent.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Components\AgentSettings.cs" />
     <Compile Include="Components\AgentController.cs" />
     <Compile Include="ModuleSettings.ascx.cs">
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
@@ -140,8 +139,9 @@
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AgentNewsEntryViewModel.cs" />
-    <Compile Include="Components\AgentSettingsRepository.cs" />
     <Compile Include="Models\XmlNewsEntryInfo.cs" />
+    <Compile Include="Models\AgentSettings.cs" />
+    <Compile Include="Models\AgentSettingsRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

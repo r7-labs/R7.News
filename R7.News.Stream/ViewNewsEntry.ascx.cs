@@ -33,7 +33,7 @@ using R7.Dnn.Extensions.ViewModels;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Modules;
-using R7.News.Stream.Components;
+using R7.News.Stream.Models;
 using R7.News.Stream.ViewModels;
 
 namespace R7.News.Stream

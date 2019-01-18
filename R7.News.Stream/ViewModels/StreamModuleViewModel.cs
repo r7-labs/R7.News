@@ -28,7 +28,7 @@ using DotNetNuke.Services.Localization;
 using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Models;
-using R7.News.Stream.Components;
+using R7.News.Stream.Models;
 
 namespace R7.News.Stream.ViewModels
 {

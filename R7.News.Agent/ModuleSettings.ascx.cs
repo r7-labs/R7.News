@@ -24,10 +24,10 @@ using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.ViewModels;
-using R7.News.Agent.Components;
 using R7.News.Data;
 using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.Text;
+using R7.News.Agent.Models;
 
 namespace R7.News.Agent
 {

@@ -106,10 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="Data\" />
     <Folder Include="Integrations\" />
     <Folder Include="Integrations\DDRMenu\" />
     <Folder Include="Api\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="module.css" />
@@ -146,7 +146,6 @@
     <Compile Include="ViewStream.ascx.cs">
       <DependentUpon>ViewStream.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Components\StreamSettings.cs" />
     <Compile Include="Components\StreamController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ModuleSettings.ascx.cs">
@@ -157,7 +156,6 @@
     </Compile>
     <Compile Include="ViewModels\StreamViewModel.cs" />
     <Compile Include="ViewModels\StreamModuleViewModel.cs" />
-    <Compile Include="Data\AuditData.cs" />
     <Compile Include="ViewNewsEntry.ascx.cs">
       <DependentUpon>ViewNewsEntry.ascx</DependentUpon>
     </Compile>
@@ -166,10 +164,11 @@
     </Compile>
     <Compile Include="ViewModels\StreamNewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
-    <Compile Include="Components\StreamSettingsRepository.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
     <Compile Include="Api\RouteMapper.cs" />
     <Compile Include="Api\FeedController.cs" />
+    <Compile Include="Models\AuditData.cs" />
+    <Compile Include="Models\StreamSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

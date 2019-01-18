@@ -1,10 +1,10 @@
 //
-//  AgentSettingsRepository.cs
+//  AuditData.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -19,11 +19,20 @@
 //  You should have received a copy of the GNU Affero General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DotNetNuke.Entities.Modules.Settings;
+using System;
 
-namespace R7.News.Agent.Components
+namespace R7.News.Stream.Models
 {
-    public class AgentSettingsRepository: SettingsRepository<AgentSettings>
+    [Serializable]
+    public struct AuditData
     {
+        public string CreatedDate;
+
+        public string LastModifiedDate;
+
+        public string CreatedByUser;
+
+        public string LastModifiedByUser;
     }
 }
+

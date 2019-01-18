@@ -26,7 +26,7 @@ using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.Modules;
 using R7.News.Components;
 using R7.News.Data;
-using R7.News.Stream.Components;
+using R7.News.Stream.Models;
 
 namespace R7.News.Stream
 {

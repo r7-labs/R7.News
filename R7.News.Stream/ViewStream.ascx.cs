@@ -25,8 +25,8 @@ using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.Controls.PagingControl;
 using R7.News.Modules;
-using R7.News.Stream.Components;
 using R7.News.Stream.ViewModels;
+using R7.News.Stream.Models;
 
 namespace R7.News.Stream
 {

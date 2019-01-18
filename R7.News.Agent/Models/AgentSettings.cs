@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -24,7 +24,7 @@ using System.Web;
 using DotNetNuke.Entities.Modules.Settings;
 using R7.News.Components;
 
-namespace R7.News.Agent.Components
+namespace R7.News.Agent.Models
 {
     /// <summary>
     /// Provides strong typed access to settings used by module
@@ -57,5 +57,8 @@ namespace R7.News.Agent.Components
         [TabModuleSetting (Prefix = SettingPrefix)]
         public int GroupThumbnailWidth { get; set; }
     }
-}
 
+    public class AgentSettingsRepository : SettingsRepository<AgentSettings>
+    {
+    }
+}
