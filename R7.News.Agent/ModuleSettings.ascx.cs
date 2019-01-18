@@ -74,7 +74,7 @@ namespace R7.News.Agent
                 Settings.EnableGrouping = checkEnableGrouping.Checked;
                 Settings.GroupEntryId = ParseHelper.ParseToNullable<int> (comboGroupEntry.SelectedValue);
                 Settings.HideImages = checkHideImages.Checked;
-                Settings.ThumbnailWidth = int.Parse (textThumbnailWidth.Text);
+                Settings.ThumbnailWidth = ParseHelper.ParseToNullable<int> (textThumbnailWidth.Text);
                 Settings.GroupThumbnailWidth = ParseHelper.ParseToNullable<int> (textGroupThumbnailWidth.Text);
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
