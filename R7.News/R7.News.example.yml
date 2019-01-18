@@ -3,10 +3,10 @@
 default-images-path: images
 
 stream-module:
-  default-thumbnail-width: 262
+  default-thumbnail-width: 768
 
 agent-module:
-  default-thumbnail-width: 555
+  default-thumbnail-width: 768
   default-group-thumbnail-width: 133
 
 news-entry:

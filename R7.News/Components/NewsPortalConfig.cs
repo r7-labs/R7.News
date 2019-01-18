@@ -89,12 +89,12 @@ namespace R7.News.Components
 
     public class StreamModuleConfig
     {
-        public int DefaultThumbnailWidth { get; set; } = 262;
+        public int DefaultThumbnailWidth { get; set; } = 768;
     }
 
     public class AgentModuleConfig
     {
-        public int DefaultThumbnailWidth { get; set; } = 555;
+        public int DefaultThumbnailWidth { get; set; } = 768;
 
         public int DefaultGroupThumbnailWidth { get; set; } = 133;
     }
