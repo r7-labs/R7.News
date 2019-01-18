@@ -9,17 +9,18 @@
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 
-<asp:Panel id="panelStream" runat="server">
-	<asp:Panel id="pnlFeed" runat="server">
-		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link">
-			<span class="glyphicon glyphicon-export"></span>
-			<%: LocalizeString ("btnFeed.Text") %>
+<asp:Panel id="panelStream" runat="server" CssClass="news-module news-stream">
+	<asp:Panel id="pnlFeed" runat="server" CssClass="news-top-actions">
+		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link"
+			title='<%: LocalizeString ("btnFeed.Title") %>'>
+			<span class="fas fa-rss-square"></span>
+			<%: LocalizeString ("btnFeed.Text") %> <%: ModuleConfiguration.ModuleTitle %>
 		</a>
 	</asp:Panel>	
     <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
-            <div runat="server" class="news-module news-stream">
+            <div runat="server">
                 <div runat="server" id="itemPlaceholder"></div>
             </div>
         </LayoutTemplate>

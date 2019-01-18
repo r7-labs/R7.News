@@ -13,6 +13,9 @@
         <value>Больше новостей...</value>
     </data>
 	<data name="btnFeed.Text" xml:space="preserve">
-        <value>Экспортировать в Atom</value>
+        <value>Подписаться на</value>
+    </data>
+	<data name="btnFeed.Title" xml:space="preserve">
+        <value>Канал Atom 1.0</value>
     </data>
 </root>

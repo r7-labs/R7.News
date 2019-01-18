@@ -13,6 +13,9 @@
         <value>More news...</value>
     </data>
 	<data name="btnFeed.Text" xml:space="preserve">
-        <value>Export as Atom</value>
+        <value>Subscribe to</value>
+    </data>
+	<data name="btnFeed.Title" xml:space="preserve">
+        <value>Atom 1.0 feed</value>
     </data>
 </root>
