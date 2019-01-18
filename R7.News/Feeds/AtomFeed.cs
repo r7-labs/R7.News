@@ -38,7 +38,7 @@ namespace R7.News.Feeds
 
         public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl)
         {
-            var authorityDate = portalSettings.CreatedOnDate.ToString ("yyyy-MM-dd");
+            var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;
 
             writer.WriteStartDocument ();
