@@ -8,8 +8,8 @@
 * Allows editing of displayed news entries.
 * Provides pagination in various modes.
 * Displays not yet published or expired news entries for editors.
+* Atom feeds with aggregated content.
 
 ## Future releases may include:
 
-* RSS/Atom feeds with aggregated content.
 * User-controlled sorting and basic search (by dates, tags, etc.)

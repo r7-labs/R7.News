@@ -3,7 +3,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/roman-yagodin/R7.News)](https://bettercodehub.com/)
 
 The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform, 
-which would take advantage from tight CMS integration and combinatorial approach to news article content authoring.
+which would take advantage from tight CMS integration and combinational approach to news article content authoring.
 
 ## License
 
@@ -20,8 +20,8 @@ or (at your option) any later version.
 - [x] Streamline new articles creation by adding *R7.News.Agent* module into the page template.
 - [x] Allow users to [discuss](#discuss) news on forum.
 - [x] DDRMenu integration (display news entries in the menu).
+- [x] Export news into Atoms feeds.
 - [ ] Keep news article page settings in sync with corresponding news entry properties.
-- [ ] Export news into RSS/Atoms feeds.
 
 ### Future releases may also include:
 
