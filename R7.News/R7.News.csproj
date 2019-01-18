@@ -129,7 +129,6 @@
     <Content Include="Controls\AgplSignature.ascx" />
     <Content Include="assets\css\module.css" />
     <Content Include="Controls\ActionButtons.ascx" />
-    <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SqlDataProvider\Uninstall.SqlDataProvider" />

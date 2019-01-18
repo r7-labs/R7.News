@@ -114,7 +114,6 @@
     <Content Include="ViewAgent.ascx" />
     <Content Include="ModuleSettings.ascx" />
     <Content Include="packages.config" />
-    <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App_LocalResources\ViewAgent.ascx.resx" />
@@ -141,7 +140,6 @@
     <Compile Include="ViewModels\AgentNewsEntryViewModel.cs" />
     <Compile Include="Models\XmlNewsEntryInfo.cs" />
     <Compile Include="Models\AgentSettings.cs" />
-    <Compile Include="Models\AgentSettingsRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
