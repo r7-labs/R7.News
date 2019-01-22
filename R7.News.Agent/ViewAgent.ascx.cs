@@ -20,23 +20,19 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
-using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
-using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.Services.FileSystem;
+using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Agent.Models;
 using R7.News.Agent.ViewModels;
-using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
@@ -44,13 +40,12 @@ using R7.News.Modules;
 
 namespace R7.News.Agent
 {
-    public partial class ViewAgent: NewsModuleBase<AgentSettings>, IActionable
+    public partial class ViewAgent : NewsModuleBase<AgentSettings>, IActionable
     {
         #region Properties
 
         ViewModelContext<AgentSettings> viewModelContext;
-        protected ViewModelContext<AgentSettings> ViewModelContext
-        {
+        protected ViewModelContext<AgentSettings> ViewModelContext {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext<AgentSettings> (this, Settings)); }
         }
 
@@ -75,8 +70,7 @@ namespace R7.News.Agent
                 if (!IsPostBack) {
                     Bind ();
                 }
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Exceptions.ProcessModuleLoadException (this, ex);
             }
         }
@@ -93,13 +87,11 @@ namespace R7.News.Agent
                 // show panel with add button
                 if (IsEditable) {
                     panelAddDefaultEntry.Visible = true;
-                }
-                else {
+                } else {
                     // hide module from non-editors
                     ContainerControl.Visible = false;
                 }
-            }
-            else {
+            } else {
                 var now = HttpContext.Current.Timestamp;
 
                 // create viewmodels
@@ -109,7 +101,7 @@ namespace R7.News.Agent
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
                     .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
-                
+
                 // bind the data
                 listAgent.DataSource = viewModels;
                 listAgent.DataBind ();
@@ -120,48 +112,41 @@ namespace R7.News.Agent
 
         #region IActionable implementation
 
-        public override ModuleActionCollection ModuleActions
-        {
+        public override ModuleActionCollection ModuleActions {
             get {
                 var actions = base.ModuleActions;
 
                 actions.Add (
-                    GetNextActionID (), 
+                    GetNextActionID (),
                     LocalizeString ("AddFromTabData.Action"),
                     ModuleActionType.AddContent + "_AddFromTabData",
                     "",
-                    IconController.IconURL ("Add"), 
+                    IconController.IconURL ("Add"),
                     "",
                     true,
                     SecurityAccessLevel.Edit,
-                    true, 
+                    true,
                     false
                 );
-
-                // add edit action for each news entry
-                var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
-                if (items != null && items.Any ()) {
-                    foreach (var item in items) {
-                        actions.Add (
-                            GetNextActionID (), 
-                            LocalizeString ("EditNewsEntry.Action") + HtmlUtils.Shorten (item.Title, 16,"&hellip;"),
-                            ModuleActionType.EditContent,
-                            "",
-                            IconController.IconURL ("Edit", "16X16", "Gray"),
-                            EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry"),
-                            false,
-                            SecurityAccessLevel.Edit,
-                            true, 
-                            false
-                        );
-                    }
-                }
 
                 return actions;
             }
         }
 
         #endregion
+
+        protected void btnSyncTab_Command (object sender, CommandEventArgs e)
+        {
+            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
+            if (newsEntryId != null) {
+                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
+                if (newsEntry != null) {
+                    new TabSynchronizer ().UpdateTabFromNewsEntry (PortalSettings.ActiveTab, newsEntry);
+                }
+            }
+
+            Response.Redirect (Globals.NavigateURL ());
+        }
 
         protected void OnAction (object sender, ActionEventArgs e)
         {
@@ -177,32 +162,10 @@ namespace R7.News.Agent
 
         protected void AddFromTabData ()
         {
-            var newsEntry = AddFromTabData_Internal ();
+            var newsEntry = new TabSynchronizer ().AddNewsEntryFromTabData (PortalSettings.ActiveTab, ModuleId);
             UpdateModuleTitle (newsEntry.Title);
 
             Response.Redirect (Globals.NavigateURL (), true);
-        }
-
-        private INewsEntry AddFromTabData_Internal ()
-        {
-            var tabController = new TabController ();
-            var activeTab = tabController.GetTab (TabId, PortalId);
-
-            // add default news entry based on tab data
-            var newsEntry = new NewsEntryInfo {
-                Title = activeTab.TabName,
-                Description = HttpUtility.HtmlEncode ("<p>" + activeTab.Description + "</p>"),
-                AgentModuleId = ModuleId,
-                PortalId = PortalId,
-                EndDate = DateTime.Today, // expired by default
-                ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
-                StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
-            };
-
-            // add news entry
-            NewsRepository.Instance.AddNewsEntry (newsEntry, activeTab.Terms, new List<IFileInfo> (), ModuleId, TabId);
-
-            return newsEntry;
         }
 
         /// <summary>

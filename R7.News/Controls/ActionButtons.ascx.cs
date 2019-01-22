@@ -44,8 +44,6 @@ namespace R7.News.Controls
 
         #region Public properties
 
-        public string CssClass { get; set; }
-
         public IList<NewsEntryAction> Actions { get; set; }
 
         #endregion

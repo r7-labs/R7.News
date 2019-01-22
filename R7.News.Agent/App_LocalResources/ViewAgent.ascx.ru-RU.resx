@@ -6,9 +6,6 @@
     <data name="AddFromTabData.Action" xml:space="preserve">
         <value>Создать из данных страницы</value>
     </data>
-    <data name="EditNewsEntry.Action" xml:space="preserve">
-        <value>Редактировать: </value>
-    </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>&lt;P&gt; Модуль R7.News.Agent&lt;/P&gt;</value>
     </data>
@@ -29,5 +26,11 @@
     </data>
     <data name="SystemUser.Text" xml:space="preserve">
         <value>Система</value>
+    </data>
+	<data name="EditNewsEntry.Text" xml:space="preserve">
+        <value>Редактировать новость</value>
+    </data>
+	<data name="SyncTab.Text" xml:space="preserve">
+        <value>Синхронизировать страницу с новостью</value>
     </data>
 </root>

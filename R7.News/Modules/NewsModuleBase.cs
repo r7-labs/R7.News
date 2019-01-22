@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017 Roman M. Yagodin
+//  Copyright (c) 2017-2019 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
@@ -61,18 +60,6 @@ namespace R7.News.Modules
 
         protected void BindChildControls (NewsEntryViewModelBase item, Control itemControl)
         {
-            var linkEdit = (HyperLink) itemControl.FindControl ("linkEdit");
-            var iconEdit = (Image) itemControl.FindControl ("imageEdit");
-
-            // edit link
-            if (IsEditable) {
-                linkEdit.NavigateUrl = EditUrl ("entryid", item.EntryId.ToString (), "EditNewsEntry");
-            }
-
-            // make edit link visible in edit mode
-            linkEdit.Visible = IsEditable;
-            iconEdit.Visible = IsEditable;
-
             // visibility badges
             var listBadges = (BadgeList) itemControl.FindControl ("listBadges");
             if (item.Badges != null && item.Badges.Count > 0) {

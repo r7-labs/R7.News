@@ -11,12 +11,7 @@
             ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" OnDataBound="formNewsEntry_DataBound">
         <ItemTemplate>
             <div>
-                <h3>
-                    <asp:HyperLink id="linkEdit" runat="server">
-                        <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
-                    </asp:HyperLink>
-                    <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
-                </h3>
+                <h3><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
                 </p>
@@ -35,7 +30,21 @@
                     </div>
                     <div class="<%# Item.DescriptionContainerCssClass %> news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
-					    <news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
+						<ul class="list-inline news-action-btns">
+							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
+							    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+							    <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+								    <li>
+										<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+											<i class="fas fa-pencil-alt"></i>
+											<%# LocalizeString ("EditNewsEntry.Text") %>
+							            </a>
+									</li>
+								</ul>
+							</li>
+						    <news:ActionButtons id="actionButtons" runat="server" />
+						</ul>	
                     </div>
                 </div>
             </div>

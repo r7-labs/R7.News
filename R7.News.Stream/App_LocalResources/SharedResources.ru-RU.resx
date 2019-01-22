@@ -12,4 +12,7 @@
     <data name="SystemUser.Text" xml:space="preserve">
         <value>Система</value>
     </data>
+	<data name="EditNewsEntry.Text" xml:space="preserve">
+        <value>Редактировать новость</value>
+    </data>
 </root>

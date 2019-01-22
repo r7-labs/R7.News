@@ -28,7 +28,7 @@
                             ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
                             CssClass="img-thumbnail news-entry-image" />
                     </asp:HyperLink>
-                </div>
+				</div>
                 <div class="<%# Item.SecondColumnContainerCssClass %>">
                     <h3 style="margin-top:0">
                         <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
@@ -46,7 +46,28 @@
                     <p>
                     <div class="news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
-				        <news:ActionButtons id="actionButtons" CssClass="list-inline news-action-btns" runat="server" />
+				        <ul class="list-inline news-action-btns">
+							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
+	                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+	                            <span class="caret"></span></button>
+	                            <ul class="dropdown-menu">
+								    <li>
+										<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+											<i class="fas fa-pencil-alt"></i>
+											<%# LocalizeString ("EditNewsEntry.Text") %>
+										</a>
+									</li>
+									<li>
+										<asp:LinkButton runat="server" OnCommand="btnSyncTab_Command"
+												CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
+											<i class="fas fa-sync"></i>
+											<%# LocalizeString ("SyncTab.Text") %>
+	                                    </asp:LinkButton>
+									</li>	
+								</ul>
+							</li>
+							<news:ActionButtons id="actionButtons" runat="server" />
+						</ul>	
                     </div>
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
@@ -55,12 +76,7 @@
                             </div>
                         </LayoutTemplate>
                         <ItemTemplate>
-                            <h4>
-                                <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
-                                    <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
-                                </asp:HyperLink>
-								<%# HttpUtility.HtmlDecode (Item.TitleLink) %>
-                            </h4>
+                            <h4><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h4>
                             <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
                             <p class="news-entry-info">
                                 <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
@@ -76,6 +92,20 @@
                                 </div>
                                 <div class="news-entry-description">
                                     <%# HttpUtility.HtmlDecode (Item.Description) %>
+									<ul class="list-inline news-action-btns">
+										<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
+				                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+				                            <span class="caret"></span></button>
+				                            <ul class="dropdown-menu">
+											    <li>
+													<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+														<i class="fas fa-pencil-alt"></i>
+														<%# LocalizeString ("EditNewsEntry.Text") %>
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>	
                                 </div>
                             </div>
                         </ItemTemplate>
