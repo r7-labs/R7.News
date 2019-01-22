@@ -6,7 +6,7 @@
         </LayoutTemplate>
         <ItemTemplate>
             <li style="padding-left:inherit">
-                <span class="glyphicon glyphicon-tag"></span>
+                <i class="fas fa-tag"></i>
                 <a href="<%# Item.Url %>"><%# Item.Name %></a>
             </li>
         </ItemTemplate>

@@ -36,17 +36,13 @@
     font-size:85%
 }
 
-.news-module .term-links span.glyphicon {
+.news-module .term-links i {
     color:gray
 }
 
 .news-module .news-entry-info {
     color:gray;
     font-size:85%
-}
-
-.news-module .news-entry-info .glyphicon-user {
-    margin-left:1em
 }
 
 .news-module .news-entry-image {

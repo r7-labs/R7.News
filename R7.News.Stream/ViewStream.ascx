@@ -31,10 +31,10 @@
                     <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
                 </p>
                 <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
-                <p class="news-entry-info">
-                    <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %> 
-                    <span class="glyphicon glyphicon-user"></span> <%# Item.CreatedByUserName %>
-                </p>
+                <ul class="list-inline news-entry-info">
+                    <li><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
+                    <li><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
+                </ul>
                 <div class="row news-entry-main-row">
                     <div class="<%# Item.ImageContainerCssClass %>">
                         <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">

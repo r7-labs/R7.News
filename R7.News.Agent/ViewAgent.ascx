@@ -40,10 +40,10 @@
 						<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
 					</p>
                     <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
-                    <p class="news-entry-info">
-                        <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
-                        <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Item.CreatedByUserName %></p>
-                    <p>
+                    <ul class="list-inline news-entry-info">
+                        <li><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
+                        <li><i class="fas fa-user" style="margin-left:1em"></i> <%# Item.CreatedByUserName %></li>
+                    </ul>
                     <div class="news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
 				        <ul class="list-inline news-action-btns">
@@ -85,10 +85,10 @@
                         <ItemTemplate>
                             <h4><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h4>
                             <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
-                            <p class="news-entry-info">
-                                <span class="glyphicon glyphicon-calendar"></span> <%# Item.PublishedOnDateString %>
-                                <span class="glyphicon glyphicon-user" style="margin-left:1em"></span> <%# Item.CreatedByUserName %>
-                            </p>
+                            <ul class="list-inline news-entry-info">
+                                <li><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
+                                <li><i class="fas fa-user" style="margin-left:1em"></i> <%# Item.CreatedByUserName %></li>
+                            </ul>
                             <div class="news-entry-main-row">
                                 <div>
                                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
