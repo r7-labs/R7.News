@@ -135,6 +135,20 @@ namespace R7.News.Agent
 
         #endregion
 
+        protected void btnUnbind_Command (object sender, CommandEventArgs e)
+        {
+            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
+            if (newsEntryId != null) {
+                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
+                if (newsEntry != null) {
+                    newsEntry.AgentModuleId = null;
+                    NewsRepository.Instance.UpdateNewsEntry (newsEntry);
+                }
+            }
+
+            Response.Redirect (Globals.NavigateURL ());
+        }
+
         protected void btnSyncTab_Command (object sender, CommandEventArgs e)
         {
             var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());

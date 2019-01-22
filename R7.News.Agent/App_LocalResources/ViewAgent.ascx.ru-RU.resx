@@ -33,4 +33,7 @@
 	<data name="SyncTab.Text" xml:space="preserve">
         <value>Синхронизировать страницу с новостью</value>
     </data>
+	<data name="Unbind.Text" xml:space="preserve">
+        <value>Открепить новость от Агента</value>
+    </data>
 </root>

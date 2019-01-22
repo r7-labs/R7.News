@@ -63,7 +63,14 @@
 											<i class="fas fa-sync"></i>
 											<%# LocalizeString ("SyncTab.Text") %>
 	                                    </asp:LinkButton>
-									</li>	
+									</li>
+									<li>
+										<asp:LinkButton runat="server" OnCommand="btnUnbind_Command"
+												CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
+											<i class="fas fa-unlink"></i>
+											<%# LocalizeString ("Unbind.Text") %>
+	                                    </asp:LinkButton>
+									</li>
 								</ul>
 							</li>
 							<news:ActionButtons id="actionButtons" runat="server" />
