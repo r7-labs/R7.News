@@ -21,7 +21,7 @@ or (at your option) any later version.
 - [x] Allow users to [discuss](#discuss) news on forum.
 - [x] DDRMenu integration (display news entries in the menu).
 - [x] Export news into Atoms feeds.
-- [ ] Keep news article page settings in sync with corresponding news entry properties.
+- [x] Keep news article page settings in sync with corresponding news entry properties.
 
 ### Future releases may also include:
 
