@@ -108,6 +108,9 @@
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Get Modules</value>
     </data>
+	<data name="btnDefaultImagesPath.Text" xml:space="preserve">
+        <value>Default Images Path</value>
+    </data>
     <data name="Common.Tab" xml:space="preserve">
         <value>Common</value>
     </data>

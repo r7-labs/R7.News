@@ -34,6 +34,11 @@
                     <dnn:Label id="labelImage" runat="server" ControlName="pickerImage" />
                     <dnn:Picker id="pickerImage" runat="server" />
                 </div>
+				<div class="dnnFormItem">
+					<div class="dnnLabel"></div>
+					<asp:LinkButton id="btnDefaultImagesPath" runat="server" resourcekey="btnDefaultImagesPath.Text"
+						CssClass="dnnSecondaryAction" OnClick="btnDefaultImagesPath_Click" CausesValidation="false" />
+				</div>	
                 <div class="dnnFormItem newsentry-description">
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
                     <dnn:TextEditor id="textDescription" runat="server" ChooseMode="false" />

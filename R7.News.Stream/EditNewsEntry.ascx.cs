@@ -27,6 +27,7 @@ using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.FileSystem;
 using R7.Dnn.Extensions.Controls;
+using R7.Dnn.Extensions.FileSystem;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
@@ -96,8 +97,8 @@ namespace R7.News.Stream
         {
             base.OnInit (e);
 
-            pickerImage.FolderPath = NewsConfig.Instance.DefaultImagesPath;
             pickerImage.FileFilter = Globals.glbImageFileTypes;
+            pickerImage.FolderPath = GetImagesFolderPath ();
 
             // setup weight sliders
             sliderThematicWeight.Attributes.Add ("data-max", NewsConfig.Instance.NewsEntry.MaxWeight.ToString ());
@@ -107,6 +108,19 @@ namespace R7.News.Stream
 
             // localize column headers in the gridview
             gridModules.LocalizeColumnHeaders (LocalResourceFile);
+        }
+
+        string GetImagesFolderPath ()
+        {
+            var folderId = FolderHistory.GetLastFolderId (Request, PortalId);
+            if (folderId != null) {
+                var folder = FolderManager.Instance.GetFolder (folderId.Value);
+                if (folder != null) {
+                    return folder.FolderPath;
+                }
+            }
+
+            return NewsConfig.Instance.DefaultImagesPath;
         }
 
         protected void buttonGetModules_Click (object sender, EventArgs e)
@@ -152,6 +166,19 @@ namespace R7.News.Stream
         protected void buttonSelectCurrentPage_Click (object sender, EventArgs e)
         {
             urlUrl.Url = TabId.ToString ();    
+        }
+
+        protected void btnDefaultImagesPath_Click (object sender, EventArgs e)
+        {
+            // HACK: Setting FolderPath does nothing, so trying to set FilePath - but folder should contain images
+            var defaultFolder = FolderManager.Instance.GetFolder (PortalId, NewsConfig.Instance.DefaultImagesPath);
+            if (defaultFolder != null) {
+                var file = FolderManager.Instance.GetFiles (defaultFolder)
+                    .FirstOrDefault (f => Globals.glbImageFileTypes.Contains (f.Extension));
+                if (file != null) {
+                    pickerImage.FilePath = file.RelativePath;
+                }
+            }
         }
 
         #region Implemented abstract and overriden members of EditPortalModuleBase
@@ -322,7 +349,21 @@ namespace R7.News.Stream
 
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
                 item.AgentModuleId = ModuleId;
-            }   
+            }
+        }
+
+        void RememberFolder (IFileInfo image)
+        {
+            var file = FileManager.Instance.GetFile (image.FileId);
+            if (file != null) {
+                var folder = FolderManager.Instance.GetFolder (file.FolderId);
+                if (folder != null) {
+                    var defaultFolder = FolderManager.Instance.GetFolder (PortalId, NewsConfig.Instance.DefaultImagesPath);
+                    if (folder.FolderID != defaultFolder.FolderID) {
+                        FolderHistory.RememberFolder (Request, Response, folder.FolderID, PortalId);
+                    }
+                }
+            }
         }
 
         protected override NewsEntryInfo GetItem (int itemKey)
@@ -333,11 +374,17 @@ namespace R7.News.Stream
         protected override void AddItem (NewsEntryInfo item)
         {
             NewsRepository.Instance.AddNewsEntry (item, termsTerms.Terms, images, ModuleId, TabId);
+            if (images.Count > 0) {
+                RememberFolder (images [0]);
+            }
         }
 
         protected override void UpdateItem (NewsEntryInfo item)
         {
             NewsRepository.Instance.UpdateNewsEntry (item, termsTerms.Terms, ModuleId, TabId);
+            if (images.Count > 0) {
+                RememberFolder (images [0]);
+            }
         }
 
         protected override void DeleteItem (NewsEntryInfo item)
