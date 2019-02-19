@@ -59,6 +59,8 @@
 			<InstallExcludeFiles Include="../packages/**/*" />
             <InstallExcludeFiles Include="../Deploy/**/*" />
             <InstallExcludeFiles Include="../.git/**/*" />
+			<InstallExcludeFiles Include="../.vs/**/*" />
+			<InstallExcludeFiles Include="../.vscode/**/*" />
             <InstallExcludeFiles Include="../.svn/**/*" />
             <InstallExcludeFiles Include="../*/bin/**/*" />
             <InstallExcludeFiles Include="../*/obj/**/*" />
