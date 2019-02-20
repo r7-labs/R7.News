@@ -32,9 +32,12 @@ using R7.News.Models;
 
 namespace R7.News.Feeds
 {
-    public class AtomFeed: IFeed
+    public class AtomFeed : IFeed
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
+
+        // TODO: Move to base library
+        string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
         public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl)
         {
@@ -50,7 +53,7 @@ namespace R7.News.Feeds
             writer.WriteEndElement ();
 
             writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:feed#"
-                + UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}"));
+                + Base64ToCanonicalForm (UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}")));
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "self");
@@ -59,7 +62,7 @@ namespace R7.News.Feeds
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "alternate");
-            writer.WriteAttributeString ("href", Globals.NavigateURL (module.TabID));
+            writer.WriteAttributeString ("href", Uri.EscapeUriString (Globals.NavigateURL (module.TabID)));
             writer.WriteEndElement ();
 
             writer.WriteElementString ("updated", IsoDateTime (updatedDate));
@@ -72,12 +75,12 @@ namespace R7.News.Feeds
 
                 writer.WriteStartElement ("link");
                 writer.WriteAttributeString ("rel", "alternate");
-                writer.WriteAttributeString ("href", permalink);
+                writer.WriteAttributeString ("href", Uri.EscapeUriString (permalink));
                 writer.WriteEndElement ();
 
                 writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}");
                 writer.WriteElementString ("updated", IsoDateTime (n.PublishedOnDate ()));
-                writer.WriteElementString ("summary", HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true).Trim ());
+                writer.WriteElementString ("summary", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
 
                 writer.WriteStartElement ("content");
                 writer.WriteAttributeString ("type", "html");

@@ -9,7 +9,7 @@
     <RootNamespace>R7.News.Tests</RootNamespace>
     <AssemblyName>R7.News.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>1.6.0</ReleaseVersion>
+    <ReleaseVersion>1.6.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -106,7 +106,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExamplePortalConfigTests.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProviderTests.cs" />
   </ItemGroup>
