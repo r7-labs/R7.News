@@ -35,15 +35,18 @@ using R7.News.Stream.Models;
 
 namespace R7.News.Stream.ViewModels
 {
-    public class StreamViewModel: ViewModelContext<StreamSettings>
+    public class StreamViewModel : ViewModelContext<StreamSettings>
     {
         public StreamViewModel (IModuleControl module, StreamSettings settings) : base (module, settings)
         {
         }
 
+        // TODO: Move to base library
+        string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
+
         public string FeedUrl => Globals.AddHTTP (Module.PortalAlias.HTTPAlias
                 + Globals.DesktopModulePath
-                + "R7.News.Stream/API/Feed/Atom?key=" + UrlUtils.EncryptParameter ($"{Module.TabId}-{Module.ModuleId}"));
+                + "R7.News.Stream/API/Feed/Atom?key=" + Base64ToCanonicalForm (UrlUtils.EncryptParameter ($"{Module.TabId}-{Module.ModuleId}")));
 
         public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
         {

@@ -36,6 +36,9 @@ namespace R7.News.Feeds
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
 
+        // TODO: Move to base library
+        string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
+
         public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
@@ -50,7 +53,7 @@ namespace R7.News.Feeds
             writer.WriteEndElement ();
 
             writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:feed#"
-                + UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}"));
+                + Base64ToCanonicalForm (UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}")));
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "self");
