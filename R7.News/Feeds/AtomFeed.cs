@@ -32,7 +32,7 @@ using R7.News.Models;
 
 namespace R7.News.Feeds
 {
-    public class AtomFeed: IFeed
+    public class AtomFeed : IFeed
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
 
@@ -62,7 +62,7 @@ namespace R7.News.Feeds
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "alternate");
-            writer.WriteAttributeString ("href", Globals.NavigateURL (module.TabID));
+            writer.WriteAttributeString ("href", Uri.EscapeUriString (Globals.NavigateURL (module.TabID)));
             writer.WriteEndElement ();
 
             writer.WriteElementString ("updated", IsoDateTime (updatedDate));
@@ -75,7 +75,7 @@ namespace R7.News.Feeds
 
                 writer.WriteStartElement ("link");
                 writer.WriteAttributeString ("rel", "alternate");
-                writer.WriteAttributeString ("href", permalink);
+                writer.WriteAttributeString ("href", Uri.EscapeUriString (permalink));
                 writer.WriteEndElement ();
 
                 writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}");
