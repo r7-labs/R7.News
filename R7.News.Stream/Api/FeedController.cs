@@ -120,9 +120,10 @@ namespace R7.News.Stream.Api
                 var feed = new AtomFeed ();
                 feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString ());
 
-                // media type should be "application/atom+xml", but IIS serve it as file to download
-                return Request.CreateResponse (HttpStatusCode.OK, writer.ToString (),
-                    new StringPassThroughMediaTypeFormatter (), "text/xml");
+                return new HttpResponseMessage {
+                    StatusCode = HttpStatusCode.OK,
+                    Content = new StringContent (writer.ToString (), Encoding.UTF8, "text/xml")
+                };
             }
             catch (Exception ex) {
                 var log = new LogInfo ();
