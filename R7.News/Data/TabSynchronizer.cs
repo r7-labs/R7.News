@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Web;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Content.Taxonomy;
-using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Services.FileSystem;
 using R7.News.Components;
@@ -43,7 +42,7 @@ namespace R7.News.Data
                     HttpUtility.HtmlDecode (newsEntry.Description), true).Trim (), 500, "...");
 
             activeTab.StartDate = newsEntry.StartDate.GetValueOrDefault ();
-            activeTab.EndDate = newsEntry.EndDate.GetValueOrDefault ();
+            activeTab.EndDate = (newsEntry.EndDate != null) ? newsEntry.EndDate.Value : DateTime.MaxValue;
 
             var tabCtrl = new TabController ();
             tabCtrl.UpdateTab (activeTab);
@@ -63,9 +62,9 @@ namespace R7.News.Data
                 Description = HttpUtility.HtmlEncode ("<p>" + activeTab.Description + "</p>"),
                 AgentModuleId = moduleId,
                 PortalId = activeTab.PortalID,
-                StartDate = (activeTab.StartDate == default (DateTime)) ? null : (DateTime?) activeTab.StartDate,
+                StartDate = (activeTab.StartDate == default (DateTime) || activeTab.StartDate == DateTime.MaxValue) ? null : (DateTime?) activeTab.StartDate,
                 // if no end date is set, make news entry expired by default
-                EndDate = (activeTab.EndDate == default (DateTime)) ? DateTime.Today : activeTab.EndDate,
+                EndDate = (activeTab.EndDate == default (DateTime) || activeTab.EndDate == DateTime.MaxValue) ? DateTime.Today : activeTab.EndDate,
                 ThematicWeight = NewsConfig.Instance.NewsEntry.DefaultThematicWeight,
                 StructuralWeight = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight
             };
