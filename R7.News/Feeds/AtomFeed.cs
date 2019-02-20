@@ -80,7 +80,7 @@ namespace R7.News.Feeds
 
                 writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}");
                 writer.WriteElementString ("updated", IsoDateTime (n.PublishedOnDate ()));
-                writer.WriteElementString ("summary", HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true).Trim ());
+                writer.WriteElementString ("summary", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
 
                 writer.WriteStartElement ("content");
                 writer.WriteAttributeString ("type", "html");
