@@ -189,6 +189,7 @@
     <Compile Include="Feeds\IFeed.cs" />
     <Compile Include="Feeds\AtomFeed.cs" />
     <Compile Include="Data\TabSynchronizer.cs" />
+    <Compile Include="Feeds\FeedContentType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

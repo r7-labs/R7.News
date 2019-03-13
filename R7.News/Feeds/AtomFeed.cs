@@ -39,7 +39,8 @@ namespace R7.News.Feeds
         // TODO: Move to base library
         string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
-        public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl)
+        public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module,
+            PortalSettings portalSettings, string requestUrl, string contentType)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;
@@ -83,10 +84,16 @@ namespace R7.News.Feeds
                 writer.WriteElementString ("summary", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
 
                 writer.WriteStartElement ("content");
-                writer.WriteAttributeString ("type", "html");
-                writer.WriteString (n.Description);
-                writer.WriteEndElement ();
 
+                if (contentType == "text") {
+                    writer.WriteString (HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
+                }
+                else {
+                    writer.WriteAttributeString ("type", "html");
+                    writer.WriteString (n.Description);
+                }
+
+                writer.WriteEndElement ();
                 writer.WriteEndElement ();
             }
 
