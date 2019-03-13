@@ -9,7 +9,7 @@
     <RootNamespace>R7.News</RootNamespace>
     <AssemblyName>R7.News</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <ReleaseVersion>1.6.1</ReleaseVersion>
+    <ReleaseVersion>1.6.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -189,7 +189,6 @@
     <Compile Include="Feeds\IFeed.cs" />
     <Compile Include="Feeds\AtomFeed.cs" />
     <Compile Include="Data\TabSynchronizer.cs" />
-    <Compile Include="Feeds\FeedContentType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
