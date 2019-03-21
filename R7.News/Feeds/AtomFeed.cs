@@ -40,7 +40,7 @@ namespace R7.News.Feeds
         string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
         public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module,
-            PortalSettings portalSettings, string requestUrl, string contentType)
+            PortalSettings portalSettings, string requestUrl, bool withImages)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;
@@ -85,13 +85,17 @@ namespace R7.News.Feeds
 
                 writer.WriteStartElement ("content");
 
-                if (contentType == "text") {
-                    writer.WriteString (HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
+                writer.WriteAttributeString ("type", "html");
+
+                var htmlContent = HttpUtility.HtmlDecode (n.Description);
+                if (withImages && n.ContentItem.Images.Count > 0) {
+                    var imageUrl = n.GetRawImageUrl ();
+                    if (!string.IsNullOrEmpty (imageUrl)) {
+                        htmlContent = $"<img src=\"{imageUrl}\" alt=\"{n.Title}\" />" + htmlContent;
+                    }
                 }
-                else {
-                    writer.WriteAttributeString ("type", "html");
-                    writer.WriteCData (HttpUtility.HtmlDecode (n.Description));
-                }
+
+                writer.WriteCData (htmlContent);
 
                 writer.WriteEndElement ();
                 writer.WriteEndElement ();

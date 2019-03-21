@@ -79,7 +79,7 @@ namespace R7.News.Stream.Api
 
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage Atom (string key, string contentType = "html")
+        public HttpResponseMessage Atom (string key, bool withImages = false)
         {
             var statusCode = HttpStatusCode.InternalServerError;
             var logType = EventLogController.EventLogType.HOST_ALERT;
@@ -118,8 +118,7 @@ namespace R7.News.Stream.Api
                 });
 
                 var feed = new AtomFeed ();
-                feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString (),
-                    contentType.Substring (0, Math.Min (contentType.Length, 5)));
+                feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString (), withImages);
 
                 return new HttpResponseMessage {
                     StatusCode = HttpStatusCode.OK,

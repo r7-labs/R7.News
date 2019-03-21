@@ -115,6 +115,16 @@ namespace R7.News.Models
             return string.Empty;
         }
 
+        public static string GetRawImageUrl (this INewsEntry newsEntry)
+        {
+            var image = newsEntry.GetImage ();
+            if (image != null) {
+                return Globals.AddHTTP (PortalSettings.Current.PortalAlias.HTTPAlias) + FileManager.Instance.GetUrl (image);
+            }
+
+            return string.Empty;
+        }
+
         public static IEnumerable<INewsEntry> GroupByAgentModule (this IEnumerable<INewsEntry> newsEntries,
                                                                   bool enableGrouping)
         {
