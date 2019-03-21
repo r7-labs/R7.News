@@ -90,7 +90,7 @@ namespace R7.News.Feeds
                 }
                 else {
                     writer.WriteAttributeString ("type", "html");
-                    writer.WriteString (n.Description);
+                    writer.WriteCData (HttpUtility.HtmlDecode (n.Description));
                 }
 
                 writer.WriteEndElement ();
