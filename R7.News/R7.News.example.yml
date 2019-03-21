@@ -1,6 +1,6 @@
 ﻿data-cache-time: 60
 
-default-images-path: images
+default-images-path: images/news
 
 stream-module:
   default-thumbnail-width: 768
