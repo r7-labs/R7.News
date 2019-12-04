@@ -35,11 +35,12 @@ namespace R7.News.Data
     {
         public void UpdateTabFromNewsEntry (TabInfo activeTab, INewsEntry newsEntry)
         {
-            activeTab.TabName = HtmlUtils.Shorten (newsEntry.Title, 200, "...");
-            activeTab.Title = activeTab.TabName;
+            activeTab.TabName = HtmlUtils.Shorten (newsEntry.Title, 199, "");
+            activeTab.Title = HtmlUtils.Shorten (newsEntry.Title, 199, "\u2026");
             activeTab.Description = HtmlUtils.Shorten (
-                HtmlUtils.StripTags (
-                    HttpUtility.HtmlDecode (newsEntry.Description), true).Trim (), 500, "...");
+                HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true)).Trim (),
+                499, "\u2026"
+            );
 
             activeTab.StartDate = newsEntry.StartDate.GetValueOrDefault ();
             activeTab.EndDate = (newsEntry.EndDate != null) ? newsEntry.EndDate.Value : DateTime.MaxValue;
