@@ -39,7 +39,7 @@ namespace R7.News.Data
             activeTab.Title = activeTab.TabName;
             activeTab.Description = HtmlUtils.Shorten (
                 HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true)).Trim (),
-                500, "..."
+                499, "\u2026"
             );
 
             activeTab.StartDate = newsEntry.StartDate.GetValueOrDefault ();
