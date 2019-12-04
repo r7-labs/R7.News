@@ -38,8 +38,9 @@ namespace R7.News.Data
             activeTab.TabName = HtmlUtils.Shorten (newsEntry.Title, 200, "...");
             activeTab.Title = activeTab.TabName;
             activeTab.Description = HtmlUtils.Shorten (
-                HtmlUtils.StripTags (
-                    HttpUtility.HtmlDecode (newsEntry.Description), true).Trim (), 500, "...");
+                HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true)).Trim (),
+                500, "..."
+            );
 
             activeTab.StartDate = newsEntry.StartDate.GetValueOrDefault ();
             activeTab.EndDate = (newsEntry.EndDate != null) ? newsEntry.EndDate.Value : DateTime.MaxValue;
