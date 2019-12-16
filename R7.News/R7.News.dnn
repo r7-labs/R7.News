@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
     <packages>
-        <package name="R7.News" type="Library" version="01.06.04">
+        <package name="R7.News" type="Library" version="01.07.00">
             <friendlyName>R7.News</friendlyName>
             <description>A news subsystem for DNN Platform.</description>
             <owner>
@@ -64,7 +64,7 @@
                 </component>
             </components>
         </package>
-        <package name="R7.News.Stream" type="Module" version="01.06.04">
+        <package name="R7.News.Stream" type="Module" version="01.07.00">
             <friendlyName>R7.News.Stream</friendlyName>
             <description>This module displays aggregated news stream.</description>
             <owner>
@@ -152,7 +152,7 @@
                 </component>
             </components>
         </package>
-        <package name="R7.News.Agent" type="Module" version="01.06.04">
+        <package name="R7.News.Agent" type="Module" version="01.07.00">
             <friendlyName>R7.News.Agent</friendlyName>
             <description>This module displays single news entry on the page.</description>
             <owner>
