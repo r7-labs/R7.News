@@ -102,6 +102,9 @@ namespace R7.News.Stream.Integrations.DDRMenu
             node.Description = HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), false);
             node.Url = newsEntry.GetUrl (streamModule.TabID, streamModule.ModuleID);
 
+            node.CommandName = "X-Date";
+            node.CommandArgument = newsEntry.PublishedOnDate ().ToString ();
+
             if (newsEntry.AgentModule != null) {
                 node.TabId = newsEntry.AgentModule.TabID;
             }
