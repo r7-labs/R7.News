@@ -11,12 +11,8 @@
 
 		<!-- Remove tmp directory (if previous build failed) -->
 		<RemoveDir Directories="$(TmpDir)" />
-        <!-- Read package version from the manifest -->
-        <XmlPeek Query="/dotnetnuke/packages/package[1]/@version" XmlInputPath="$(MainProjectPath)/R7.News.dnn">
-            <Output TaskParameter="Result" PropertyName="Version" />
-        </XmlPeek>
-		<PropertyGroup>
-            <PackageFileName>$(PackageName)-$(Version)-Install.$(Configuration).zip</PackageFileName>
+        <PropertyGroup>
+            <PackageFileName>$(PackageName)-$(ReleaseVersion)-Install.$(Configuration).zip</PackageFileName>
         </PropertyGroup>
         <!-- Declare binaries -->
         <ItemGroup>
