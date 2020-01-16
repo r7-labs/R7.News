@@ -130,11 +130,11 @@ namespace R7.News.Components
 
     public class NodeManipulatorConfig
     {
-        public int ParentNodeTabId { get; set; } = -1;
+        public int ParentNodeTabId { get; set; }
 
-        public int StreamModuleId { get; set; } = -1;
+        public int StreamModuleId { get; set; }
 
-        public int StreamModuleTabId { get; set; } = -1;
+        public int StreamModuleTabId { get; set; }
     }
 
     public class FeedConfig

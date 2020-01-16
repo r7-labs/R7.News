@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017-2019 Roman M. Yagodin
+//  Copyright (c) 2017-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -44,23 +44,29 @@ namespace R7.News.Stream.Integrations.DDRMenu
         {
             try {
                 var config = NewsConfig.GetInstance (portalSettings.PortalId).NodeManipulator;
-                var parentNode = FindNodeByTabId (nodes, config.ParentNodeTabId);
-                if (parentNode != null) {
-                    var streamModule = ModuleController.Instance.GetModule (config.StreamModuleId, config.StreamModuleTabId, false);
-                    if (streamModule != null) {
-                        var settingsRepository = new StreamSettingsRepository ();
-                        var settings = settingsRepository.GetSettings (streamModule);
-                        var newsEntries = GetNewsEntries (settings, settings.PageSize, portalSettings.PortalId);
-                        foreach (var newsEntry in newsEntries) {
-                            parentNode.Children.Add (CreateMenuNode (newsEntry, parentNode, streamModule));
-                        }
-                    } else {
-                        LogAdminAlert ($"Could not find Stream module with ModuleID={config.StreamModuleId} on page with TabID={config.StreamModuleTabId}.", portalSettings.PortalId);
-                    }
-                } else {
-                    LogAdminAlert ($"Could not find parent node with TabID={config.ParentNodeTabId}.", portalSettings.PortalId);
+                if (config.ParentNodeTabId <= 0) {
+                    return nodes;
                 }
-            } catch (Exception ex) {
+                var parentNode = FindNodeByTabId (nodes, config.ParentNodeTabId);
+                if (parentNode == null) {
+                    LogAdminAlert ($"Could not find parent node with TabID={config.ParentNodeTabId}.", portalSettings.PortalId);
+                    return nodes;
+                }
+
+                var streamModule = ModuleController.Instance.GetModule (config.StreamModuleId, config.StreamModuleTabId, false);
+                if (streamModule == null) {
+                    LogAdminAlert ($"Could not find Stream module with ModuleID={config.StreamModuleId} on page with TabID={config.StreamModuleTabId}.", portalSettings.PortalId);
+                }
+                else {
+                    var settingsRepository = new StreamSettingsRepository ();
+                    var settings = settingsRepository.GetSettings (streamModule);
+                    var newsEntries = GetNewsEntries (settings, settings.PageSize, portalSettings.PortalId);
+                    foreach (var newsEntry in newsEntries) {
+                        parentNode.Children.Add (CreateMenuNode (newsEntry, parentNode, streamModule));
+                    }
+                }            
+            }
+            catch (Exception ex) {
                 Exceptions.LogException (ex);
             }
 
