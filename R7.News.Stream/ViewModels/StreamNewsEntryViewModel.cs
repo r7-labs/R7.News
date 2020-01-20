@@ -46,12 +46,12 @@ namespace R7.News.Stream.ViewModels
 
         public string ImageContainerCssClass
         {
-            get { return HasImage ? "col-md-4" : "hidden"; }
+            get { return HasImage ? "col-md-4" : "d-none"; }
         }
 
         public string DescriptionContainerCssClass
         {
-            get { return HasImage ? "col-md-8" : "col-md-12"; }
+            get { return HasImage ? "col-md-8" : "col"; }
         }
     }
 }
