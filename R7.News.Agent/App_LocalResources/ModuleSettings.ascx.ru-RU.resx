@@ -13,7 +13,7 @@
         <value>Включить группировку:</value>
     </data>
     <data name="labelEnableGrouping.Help" xml:space="preserve">
-        <value>Отметьте, чтобы включить группировку новостей, относящихся к данному модулю.</value>
+        <value>Функция группировки устарела - пожалуйста, избегайте её использования! Отметьте, чтобы включить группировку новостей, относящихся к данному модулю.</value>
     </data>
     <data name="labelHideImages.Text" xml:space="preserve">
         <value>Скрывать изображения:</value>

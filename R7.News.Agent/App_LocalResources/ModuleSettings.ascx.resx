@@ -13,7 +13,7 @@
         <value>Enable Grouping:</value>
     </data>
     <data name="labelEnableGrouping.Help" xml:space="preserve">
-        <value>Check to enable grouping of news related to this agent module.</value>
+        <value>Grouping feature is obsolete, please avoid using it! Check to enable grouping of news related to this agent module.</value>
     </data>
     <data name="labelHideImages.Text" xml:space="preserve">
         <value>Hide Images:</value>
