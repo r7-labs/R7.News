@@ -51,7 +51,7 @@
 					</div>
 			        <ul class="list-inline news-action-btns">
 						<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
 							    <li>
@@ -105,7 +105,7 @@
 									</div>
 									<ul class="list-inline news-action-btns">
 										<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-				                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+				                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
 				                            <span class="caret"></span></button>
 				                            <ul class="dropdown-menu">
 											    <li>

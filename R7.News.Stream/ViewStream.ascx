@@ -49,7 +49,7 @@
 						</div>
 						<ul class="list-inline news-action-btns">
 							<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-	                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+	                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
 	                            <span class="caret"></span></button>
 	                            <ul class="dropdown-menu">
 								    <li>
@@ -72,6 +72,6 @@
     </asp:ListView>
     <hr />
     <r7:PagingControl id="pagerBottom" runat="server" OnPageChanged="pagingControl_PageChanged" />
-    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-sm btn-default btn-block" OnClick="buttonShowMore_Click" />
+    <asp:LinkButton id="buttonShowMore" runat="server" resourcekey="buttonShowMore.Text" CssClass="btn btn-sm btn-primary btn-block" OnClick="buttonShowMore_Click" />
 </asp:Panel>
 <news:AgplSignature id="agplSignature" runat="server" />
