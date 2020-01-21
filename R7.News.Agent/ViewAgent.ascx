@@ -32,7 +32,7 @@
                     </asp:HyperLink>
 				</div>
                 <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
-                    <h3 style="margin-top:0">
+                    <h3 class="mt-0">
                         <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                     </h3>
 					<p>
@@ -41,7 +41,7 @@
                     <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
                     <ul class="list-inline news-entry-info">
                         <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
-                        <li class="list-inline-item"><i class="fas fa-user" style="margin-left:1em"></i> <%# Item.CreatedByUserName %></li>
+                        <li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
                     </ul>
                     <div class="<%# Item.TextCssClass %>">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
@@ -80,7 +80,7 @@
                             <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
                             <ul class="list-inline news-entry-info">
                                 <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
-                                <li class="list-inline-item"><i class="fas fa-user" style="margin-left:1em"></i> <%# Item.CreatedByUserName %></li>
+                                <li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
                             </ul>
                             <div class="news-entry-main-row">
                                 <div>
