@@ -51,30 +51,24 @@
 					</div>
 			        <ul class="list-inline news-action-btns">
 						<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
-                            <span class="caret"></span></button>
-                            <ul class="dropdown-menu">
-							    <li>
-									<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-										<i class="fas fa-pencil-alt"></i>
-										<%# LocalizeString ("EditNewsEntry.Text") %>
-									</a>
-								</li>
-								<li>
-									<asp:LinkButton runat="server" OnCommand="btnSyncTab_Command"
-											CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
-										<i class="fas fa-sync"></i>
-										<%# LocalizeString ("SyncTab.Text") %>
-                                    </asp:LinkButton>
-								</li>
-								<li>
-									<asp:LinkButton runat="server" OnCommand="btnUnbind_Command"
-											CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
-										<i class="fas fa-unlink"></i>
-										<%# LocalizeString ("Unbind.Text") %>
-                                    </asp:LinkButton>
-								</li>
-							</ul>
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
+                            <div class="dropdown-menu">
+						    	<a class="dropdown-item" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+									<i class="fas fa-pencil-alt"></i>
+									<%# LocalizeString ("EditNewsEntry.Text") %>
+								</a>
+								<div class="dropdown-divider"></div>
+								<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnSyncTab_Command"
+										CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
+									<i class="fas fa-sync"></i>
+									<%# LocalizeString ("SyncTab.Text") %>
+                                </asp:LinkButton>
+								<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnUnbind_Command"
+										CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
+									<i class="fas fa-unlink"></i>
+									<%# LocalizeString ("Unbind.Text") %>
+                                </asp:LinkButton>
+							</div>
 						</li>
 						<news:ActionButtons id="actionButtons" runat="server" />
 					</ul>	
@@ -105,16 +99,13 @@
 									</div>
 									<ul class="list-inline news-action-btns">
 										<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-				                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
-				                            <span class="caret"></span></button>
-				                            <ul class="dropdown-menu">
-											    <li>
-													<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-														<i class="fas fa-pencil-alt"></i>
-														<%# LocalizeString ("EditNewsEntry.Text") %>
-													</a>
-												</li>
-											</ul>
+				                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
+				                            <div class="dropdown-menu">
+												<a class="dropdown-item" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+													<i class="fas fa-pencil-alt"></i>
+													<%# LocalizeString ("EditNewsEntry.Text") %>
+												</a>
+											</div>
 										</li>
 									</ul>	
                                 </div>

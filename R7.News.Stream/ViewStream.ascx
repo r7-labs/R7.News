@@ -49,16 +49,13 @@
 						</div>
 						<ul class="list-inline news-action-btns">
 							<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-	                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
-	                            <span class="caret"></span></button>
-	                            <ul class="dropdown-menu">
-								    <li>
-										<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-											<i class="fas fa-pencil-alt"></i>
-											<%# LocalizeString ("EditNewsEntry.Text") %>
-	                                    </a>
-									</li>
-								</ul>
+	                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
+	                            <div class="dropdown-menu">
+							    	<a class="dropdown-item" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+										<i class="fas fa-pencil-alt"></i>
+										<%# LocalizeString ("EditNewsEntry.Text") %>
+                                    </a>
+								</div>
 							</li>
 					        <news:ActionButtons id="actionButtons" runat="server" />
 						</ul>	
