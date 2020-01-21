@@ -94,8 +94,20 @@
         <value>Enter maximum number of news entries to export as an Atom feed.
 		You can leave this field empty, in this case the value of &quot;feed.default-max-entries&quot; option from the portal config will be used instead.</value>
     </data>
+	<data name="lblImageCssClass.Text" xml:space="preserve">
+        <value>Image CSS Class:</value>
+    </data>
+	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
+        <value>Image Column CSS Class:</value>
+    </data>
+	<data name="lblTextColumnCssClass.Text" xml:space="preserve">
+        <value>Text Column CSS Class:</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Basic Settings</value>
+    </data>
+	<data name="sectionAppearance.Text" xml:space="preserve">
+        <value>Appearance Settings</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Pagination Settings</value>

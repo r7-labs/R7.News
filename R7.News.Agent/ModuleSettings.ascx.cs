@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -58,6 +58,10 @@ namespace R7.News.Agent
                     checkHideImages.Checked = Settings.HideImages;
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
                     textGroupThumbnailWidth.Text = Settings.GroupThumbnailWidth.ToString ();
+
+                    txtImageCssClass.Text = Settings.ImageCssClass;
+                    txtImageColumnCssClass.Text = Settings.ImageColumnCssClass;
+                    txtTextColumnCssClass.Text = Settings.TextColumnCssClass;
                 }
             }
             catch (Exception ex) {
@@ -76,6 +80,10 @@ namespace R7.News.Agent
                 Settings.HideImages = checkHideImages.Checked;
                 Settings.ThumbnailWidth = ParseHelper.ParseToNullable<int> (textThumbnailWidth.Text);
                 Settings.GroupThumbnailWidth = ParseHelper.ParseToNullable<int> (textGroupThumbnailWidth.Text);
+
+                Settings.ImageCssClass = !string.IsNullOrEmpty (txtImageCssClass.Text) ? txtImageCssClass.Text : null;
+                Settings.ImageColumnCssClass = !string.IsNullOrEmpty (txtImageColumnCssClass.Text) ? txtImageColumnCssClass.Text : null;
+                Settings.TextColumnCssClass = !string.IsNullOrEmpty (txtTextColumnCssClass.Text) ? txtTextColumnCssClass.Text : null;
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 

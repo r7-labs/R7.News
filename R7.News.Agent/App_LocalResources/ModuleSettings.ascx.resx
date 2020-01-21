@@ -44,5 +44,20 @@
     </data>
     <data name="labelGroupEntry.Help" xml:space="preserve">
         <value>Select the specific entry to group other entries around. If no entry selected, most recent one will be used.</value>
-    </data>	
+    </data>
+	<data name="lblImageCssClass.Text" xml:space="preserve">
+        <value>Image CSS Class:</value>
+    </data>
+	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
+        <value>Image Column CSS Class:</value>
+    </data>
+	<data name="lblTextColumnCssClass.Text" xml:space="preserve">
+        <value>Text Column CSS Class:</value>
+    </data>
+	<data name="sectionBasic.Text" xml:space="preserve">
+        <value>Basic Settings</value>
+    </data>
+	<data name="sectionAppearance.Text" xml:space="preserve">
+        <value>Appearance Settings</value>
+    </data>
 </root>

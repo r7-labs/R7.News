@@ -24,5 +24,8 @@ namespace R7.News.Stream
         protected DropDownList comboMaxStructuralWeight;
         protected CheckBox chkEnableFeed;
         protected TextBox txtFeedMaxEntries;
+        protected TextBox txtImageCssClass;
+        protected TextBox txtImageColumnCssClass;
+        protected TextBox txtTextColumnCssClass;
     }
 }

@@ -44,5 +44,20 @@
     </data>
     <data name="labelGroupEntry.Help" xml:space="preserve">
         <value>Выберите новость для группировки других новостей вокруг нее. Если такая новость не выбрана, группировка будет производиться вокруг наиболе свежей новости.</value>
-    </data> 
+    </data>
+	<data name="lblImageCssClass.Text" xml:space="preserve">
+        <value>Класс CSS для изображений:</value>
+    </data>
+	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
+        <value>Класс CSS для колонки изображений:</value>
+    </data>
+	<data name="lblTextColumnCssClass.Text" xml:space="preserve">
+        <value>Класс CSS для колонки текста:</value>
+    </data>
+	<data name="sectionBasic.Text" xml:space="preserve">
+        <value>Основные настройки</value>
+    </data>
+    <data name="sectionAppearance.Text" xml:space="preserve">
+        <value>Настройки внешнего вида</value>
+    </data>
 </root>

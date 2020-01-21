@@ -15,5 +15,8 @@ namespace R7.News.Agent
         protected CheckBox checkHideImages;
         protected TextBox textThumbnailWidth;
         protected TextBox textGroupThumbnailWidth;
+        protected TextBox txtImageCssClass;
+        protected TextBox txtImageColumnCssClass;
+        protected TextBox txtTextColumnCssClass;
     }
 }

@@ -5,6 +5,7 @@
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Agent/admin.css" Priority="200" />
 <div class="dnnForm dnnClear">
+	<h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionBasic.Text") %></a></h2>
     <fieldset>
 		<div class="dnnFormItem">
             <dnn:Label id="labelEnableGrouping" runat="server" ControlName="checkEnableGrouping" />
@@ -17,11 +18,14 @@
                 DataValueField="EntryId"
             />
         </div>
+    </fieldset>
+	<h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionAppearance.Text") %></a></h2>
+	<fieldset>
 		<div class="dnnFormItem">
             <dnn:Label id="labelHideImages" runat="server" ControlName="checkHideImages" />
             <asp:CheckBox id="checkHideImages" runat="server" />
         </div>
-        <div class="dnnFormItem">
+		<div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
             <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth" 
@@ -35,5 +39,17 @@
                 Type="Integer" MinimumValue="1" MaximumValue="1024"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="GroupThumbnailWidth.Invalid" />
         </div>
-    </fieldset>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblImageCssClass" runat="server" ControlName="txtImageCssClass" />
+            <asp:TextBox id="txtImageCssClass" runat="server" />
+        </div>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblImageColumnCssClass" runat="server" ControlName="txtImageColumnCssClass" />
+            <asp:TextBox id="txtImageColumnCssClass" runat="server" />
+        </div>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblTextColumnCssClass" runat="server" ControlName="txtTextColumnCssClass" />
+            <asp:TextBox id="txtTextColumnCssClass" runat="server" />
+        </div>
+	</fieldset>
 </div>
