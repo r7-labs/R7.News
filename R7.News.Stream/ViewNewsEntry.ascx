@@ -28,8 +28,10 @@
                                 CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                         </asp:HyperLink>
                     </div>
-                    <div class="<%# Item.TextColumnCssClass %> news-entry-description">
-                        <%# HttpUtility.HtmlDecode (Item.Description) %>
+                    <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
+						<div class="<%# Item.TextCssClass %>">
+                            <%# HttpUtility.HtmlDecode (Item.Description) %>
+						</div>	
 						<ul class="list-inline news-action-btns">
 							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
 							    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>

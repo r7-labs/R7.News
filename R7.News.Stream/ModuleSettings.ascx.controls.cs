@@ -25,6 +25,7 @@ namespace R7.News.Stream
         protected CheckBox chkEnableFeed;
         protected TextBox txtFeedMaxEntries;
         protected TextBox txtImageCssClass;
+        protected TextBox txtTextCssClass;
         protected TextBox txtImageColumnCssClass;
         protected TextBox txtTextColumnCssClass;
     }

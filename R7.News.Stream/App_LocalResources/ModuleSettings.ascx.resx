@@ -97,6 +97,9 @@
 	<data name="lblImageCssClass.Text" xml:space="preserve">
         <value>Image CSS Class:</value>
     </data>
+	<data name="lblTextCssClass.Text" xml:space="preserve">
+        <value>Text CSS Class:</value>
+    </data>
 	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
         <value>Image Column CSS Class:</value>
     </data>

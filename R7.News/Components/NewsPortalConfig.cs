@@ -92,6 +92,8 @@ namespace R7.News.Components
 
         public string ImageCssClass { get; set; } = "img-thumbnail";
 
+        public string TextCssClass { get; set; }
+
         public string ImageColumnCssClass { get; set; } = "col-md-4";
 
         public string TextColumnCssClass { get; set; } = "col-md-8";
@@ -104,6 +106,8 @@ namespace R7.News.Components
         public int DefaultGroupThumbnailWidth { get; set; } = 133;
 
         public string ImageCssClass { get; set; } = "img-thumbnail";
+
+        public string TextCssClass { get; set; }
 
         public string ImageColumnCssClass { get; set; } = "col-md";
 

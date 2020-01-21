@@ -29,7 +29,7 @@
                             CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                     </asp:HyperLink>
 				</div>
-                <div class="<%# Item.TextColumnCssClass %>">
+                <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
                     <h3 style="margin-top:0">
                         <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
                             <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
@@ -44,38 +44,38 @@
                         <li><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
                         <li><i class="fas fa-user" style="margin-left:1em"></i> <%# Item.CreatedByUserName %></li>
                     </ul>
-                    <div class="news-entry-description">
+                    <div class="<%# Item.TextCssClass %>">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
-				        <ul class="list-inline news-action-btns">
-							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
-	                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
-	                            <span class="caret"></span></button>
-	                            <ul class="dropdown-menu">
-								    <li>
-										<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-											<i class="fas fa-pencil-alt"></i>
-											<%# LocalizeString ("EditNewsEntry.Text") %>
-										</a>
-									</li>
-									<li>
-										<asp:LinkButton runat="server" OnCommand="btnSyncTab_Command"
-												CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
-											<i class="fas fa-sync"></i>
-											<%# LocalizeString ("SyncTab.Text") %>
-	                                    </asp:LinkButton>
-									</li>
-									<li>
-										<asp:LinkButton runat="server" OnCommand="btnUnbind_Command"
-												CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
-											<i class="fas fa-unlink"></i>
-											<%# LocalizeString ("Unbind.Text") %>
-	                                    </asp:LinkButton>
-									</li>
-								</ul>
-							</li>
-							<news:ActionButtons id="actionButtons" runat="server" />
-						</ul>	
-                    </div>
+					</div>
+			        <ul class="list-inline news-action-btns">
+						<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
+                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+							    <li>
+									<a href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
+										<i class="fas fa-pencil-alt"></i>
+										<%# LocalizeString ("EditNewsEntry.Text") %>
+									</a>
+								</li>
+								<li>
+									<asp:LinkButton runat="server" OnCommand="btnSyncTab_Command"
+											CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
+										<i class="fas fa-sync"></i>
+										<%# LocalizeString ("SyncTab.Text") %>
+                                    </asp:LinkButton>
+								</li>
+								<li>
+									<asp:LinkButton runat="server" OnCommand="btnUnbind_Command"
+											CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
+										<i class="fas fa-unlink"></i>
+										<%# LocalizeString ("Unbind.Text") %>
+                                    </asp:LinkButton>
+								</li>
+							</ul>
+						</li>
+						<news:ActionButtons id="actionButtons" runat="server" />
+					</ul>	
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -97,8 +97,10 @@
                                             CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                                     </asp:HyperLink>
                                 </div>
-                                <div class="news-entry-description">
-                                    <%# HttpUtility.HtmlDecode (Item.Description) %>
+                                <div class="news-entry-text-column">
+                                    <div class="<%# Item.TextCssClass %>">
+                                        <%# HttpUtility.HtmlDecode (Item.Description) %>
+									</div>
 									<ul class="list-inline news-action-btns">
 										<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
 				                            <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>

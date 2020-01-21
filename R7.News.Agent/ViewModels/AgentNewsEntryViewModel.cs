@@ -54,6 +54,8 @@ namespace R7.News.Agent.ViewModels
 
         public string ImageCssClass => Settings.ImageCssClass ?? Config.ImageCssClass;
 
+        public string TextCssClass => Settings.TextCssClass ?? Config.TextCssClass;
+
         public string ImageColumnCssClass
         {
             get { return HasImage ? (Settings.ImageColumnCssClass ?? Config.ImageColumnCssClass) : Const.NoImageColumnCssClass; }

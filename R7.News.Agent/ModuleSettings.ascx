@@ -40,6 +40,10 @@
             <asp:TextBox id="txtImageCssClass" runat="server" />
         </div>
 		<div class="dnnFormItem">
+            <dnn:Label id="lblTextCssClass" runat="server" ControlName="txtTextCssClass" />
+            <asp:TextBox id="txtTextCssClass" runat="server" />
+        </div>
+		<div class="dnnFormItem">
             <dnn:Label id="lblImageColumnCssClass" runat="server" ControlName="txtImageColumnCssClass" />
             <asp:TextBox id="txtImageColumnCssClass" runat="server" />
         </div>

@@ -117,6 +117,9 @@ namespace R7.News.Stream.Models
         public string ImageCssClass { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
+        public string TextCssClass { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
         public string ImageColumnCssClass { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]

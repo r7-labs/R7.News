@@ -76,6 +76,7 @@ namespace R7.News.Stream
                     txtFeedMaxEntries.Text = Settings.FeedMaxEntries?.ToString ();
 
                     txtImageCssClass.Text = Settings.ImageCssClass;
+                    txtTextCssClass.Text = Settings.TextCssClass;
                     txtImageColumnCssClass.Text = Settings.ImageColumnCssClass;
                     txtTextColumnCssClass.Text = Settings.TextColumnCssClass;
 
@@ -127,6 +128,7 @@ namespace R7.News.Stream
                 Settings.FeedMaxEntries = ParseHelper.ParseToNullable<int> (txtFeedMaxEntries.Text);
 
                 Settings.ImageCssClass = !string.IsNullOrEmpty (txtImageCssClass.Text) ? txtImageCssClass.Text : null;
+                Settings.TextCssClass = !string.IsNullOrEmpty (txtTextCssClass.Text) ? txtTextCssClass.Text : null;
                 Settings.ImageColumnCssClass = !string.IsNullOrEmpty (txtImageColumnCssClass.Text) ? txtImageColumnCssClass.Text : null;
                 Settings.TextColumnCssClass = !string.IsNullOrEmpty (txtTextColumnCssClass.Text) ? txtTextColumnCssClass.Text : null;
 
