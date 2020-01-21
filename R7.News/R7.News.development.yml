@@ -1,12 +1,12 @@
-﻿data-cache-time: 60
+﻿data-cache-time: 20
 
-default-images-path: images/news
+default-images-path: images
 
 stream-module:
-  default-thumbnail-width: 768
+  default-thumbnail-width: 262
 
 agent-module:
-  default-thumbnail-width: 768
+  default-thumbnail-width: 555
   default-group-thumbnail-width: 133
 
 news-entry:
@@ -27,9 +27,6 @@ discuss-providers:
 #    params: ['1094', '1478', '2'] # tabId, moduleId, forumId
 
 node-manipulator:
-  parent-node-tab-id: 77
+  parent-node-tab-id: 2143
   stream-module-tab-id: 77
   stream-module-id: 429
-  
-feed:
-  default-max-entries: 10

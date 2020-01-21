@@ -106,7 +106,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExamplePortalConfigTests.cs" />
+    <Compile Include="DevelopmentPortalConfigTests.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProviderTests.cs" />
   </ItemGroup>
   <ItemGroup>

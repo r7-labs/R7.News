@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2017-2019 Roman M. Yagodin
+//  Copyright (c) 2017-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -27,28 +27,34 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace R7.News.Tests
 {
-    public class DefaultPortalConfigTests
+    public class DevelopmentPortalConfigTests
     {
+        [Fact]
+        public void PortalConfigExistsTest ()
+        {
+            Assert.Equal (true, File.Exists (GetDevelopmentConfigFile ()));
+        }
+
         [Fact]
         public void PortalConfigDeserializationTest ()
         {
-            var config = DeserializeConfig (GetDefaultConfigFile ());
+            var config = DeserializeConfig (GetDevelopmentConfigFile ());
             Assert.NotNull (config);
         }
 
         [Fact]
         public void PortalConfigFieldLengthTest ()
         {
-            var config = DeserializeConfig (GetDefaultConfigFile ());
+            var config = DeserializeConfig (GetDevelopmentConfigFile ());
 
             foreach (var discussProvider in config.DiscussProviders) {
                 Assert.True (discussProvider.ProviderKey.Length <= 64);
             }
         }
 
-        protected string GetDefaultConfigFile ()
+        protected string GetDevelopmentConfigFile ()
         {
-            return Path.Combine ("..", "..", "..", "R7.News", "R7.News.example.yml");
+            return Path.Combine ("..", "..", "..", "R7.News", "R7.News.development.yml");
         }
 
         protected NewsPortalConfig DeserializeConfig (string configFile)

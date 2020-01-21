@@ -52,7 +52,9 @@
         </ItemGroup>
 		<!-- Copy binaries -->
         <Copy SourceFiles="@(LocalDeployBinaryFiles)" DestinationFolder="$(DnnLocalDeployPath)/bin" SkipUnchangedFiles="true" />
-        <!-- Copy filtered Resource files to tmp/Resources dir -->
+		<!-- Copy development config file -->
+        <Copy SourceFiles="$(MainProjectPath)/R7.News.development.yml" DestinationFiles="$(DnnLocalDeployPath)/Portals/0/R7.News.yml" SkipUnchangedFiles="true" />
+		<!-- Copy filtered Resource files to tmp/Resources dir -->
         <Copy SourceFiles="@(LocalDeployResourceFilteredFiles)" DestinationFolder="$(DnnLocalDeployPath)/DesktopModules/R7.News/%(RecursiveDir)" SkipUnchangedFiles="true" />
     </Target>
 </Project>
