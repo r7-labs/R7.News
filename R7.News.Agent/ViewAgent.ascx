@@ -33,9 +33,6 @@
 				</div>
                 <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
                     <h3 style="margin-top:0">
-                        <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
-                            <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
-                        </asp:HyperLink>
                         <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
                     </h3>
 					<p>
