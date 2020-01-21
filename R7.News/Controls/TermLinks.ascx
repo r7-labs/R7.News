@@ -5,7 +5,7 @@
             <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>
         <ItemTemplate>
-            <li style="padding-left:inherit">
+            <li class="list-inline-item" style="padding-left:inherit">
                 <i class="fas fa-tag"></i>
                 <a href="<%# Item.Url %>"><%# Item.Name %></a>
             </li>

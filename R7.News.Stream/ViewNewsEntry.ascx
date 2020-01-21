@@ -15,10 +15,10 @@
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
                 </p>
-                <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="badge" />
+                <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
                 <ul class="list-inline news-entry-info">
-                    <li><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
-                    <li><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
+                    <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
+                    <li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
                 </ul>
                 <div class="row news-entry-main-row">
                     <div class="<%# Item.ImageColumnCssClass %>">
@@ -33,7 +33,7 @@
                             <%# HttpUtility.HtmlDecode (Item.Description) %>
 						</div>	
 						<ul class="list-inline news-action-btns">
-							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">
+							<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
 							    <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i>
 							    <span class="caret"></span></button>
 								<ul class="dropdown-menu">
