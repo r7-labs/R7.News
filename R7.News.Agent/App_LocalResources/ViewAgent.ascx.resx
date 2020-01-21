@@ -13,7 +13,7 @@
         <value>Module have nothing to display</value>
     </data>
     <data name="buttonAddFromTabData.Text" xml:space="preserve">
-        <value>Add From Page Data</value>
+        <value>Create from Page Data</value>
     </data>
     <data name="PublishedOnDate.Format" xml:space="preserve">
         <value>dd MMM yyyy</value>
