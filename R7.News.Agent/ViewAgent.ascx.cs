@@ -1,4 +1,4 @@
-//
+﻿//
 //  ViewAgent.ascx.cs
 //
 //  Author:
@@ -120,8 +120,8 @@ namespace R7.News.Agent
 
                 actions.Add (
                     GetNextActionID (),
-                    LocalizeString ("AddFromTabData.Action"),
-                    ModuleActionType.AddContent + "_AddFromTabData",
+                    LocalizeString ("CreateFromPageData.Action"),
+                    ModuleActionType.AddContent + "_CreateFromPageData",
                     "",
                     IconController.IconURL ("Add"),
                     "",
@@ -166,17 +166,17 @@ namespace R7.News.Agent
 
         protected void OnAction (object sender, ActionEventArgs e)
         {
-            if (e.Action.CommandName == ModuleActionType.AddContent + "_AddFromTabData") {
-                AddFromTabData ();
+            if (e.Action.CommandName == ModuleActionType.AddContent + "_CreateFromPageData") {
+                CreateFromPageData ();
             }
         }
 
-        protected void buttonAddFromTabData_Click (object sender, EventArgs e)
+        protected void buttonCreateFromPageData_Click (object sender, EventArgs e)
         {
-            AddFromTabData ();
+            CreateFromPageData ();
         }
 
-        protected void AddFromTabData ()
+        protected void CreateFromPageData ()
         {
             var newsEntry = new TabSynchronizer ().AddNewsEntryFromTabData (PortalSettings.ActiveTab, ModuleId);
             UpdateModuleTitle (newsEntry.Title);

@@ -3,7 +3,7 @@
     <data name="AddNewsEntry.Action" xml:space="preserve">
         <value>Добавить новость</value>
     </data>
-    <data name="AddFromTabData.Action" xml:space="preserve">
+    <data name="CreateFromPageData.Action" xml:space="preserve">
         <value>Создать из данных страницы</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
@@ -12,7 +12,7 @@
     <data name="NothingToDisplay.Text" xml:space="preserve">
         <value>Нет элементов для отображения</value>
     </data>
-    <data name="buttonAddFromTabData.Text" xml:space="preserve">
+    <data name="buttonCreateFromPageData.Text" xml:space="preserve">
         <value>Создать из данных страницы</value>
     </data>
     <data name="PublishedOnDate.Format" xml:space="preserve">

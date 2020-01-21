@@ -11,8 +11,8 @@
 	    <div class="flex-grow-1 align-self-center">
 			<%: LocalizeString ("NothingToDisplay.Text") %>
 		</div>
-		<asp:LinkButton id="buttonAddFromTabData" runat="server" resourcekey="buttonAddFromTabData.Text"
-	        CssClass="btn btn-warning" OnClick="buttonAddFromTabData_Click" />
+		<asp:LinkButton id="buttonCreateFromPageData" runat="server" resourcekey="buttonCreateFromPageData.Text"
+	        CssClass="btn btn-warning" OnClick="buttonCreateFromPageData_Click" />
 	</div>	
 </asp:Panel>
 <asp:ListView id="listAgent" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listAgent_ItemDataBound">

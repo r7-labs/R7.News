@@ -3,8 +3,8 @@
     <data name="AddNewsEntry.Action" xml:space="preserve">
         <value>Add News Entry</value>
     </data>
-    <data name="AddFromTabData.Action" xml:space="preserve">
-        <value>Add From Page Data</value>
+    <data name="CreateFromPageData.Action" xml:space="preserve">
+        <value>Create from Page Data</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>&lt;P&gt;A R7.News.Agent module&lt;/P&gt;</value>
@@ -12,7 +12,7 @@
     <data name="NothingToDisplay.Text" xml:space="preserve">
         <value>Module have nothing to display</value>
     </data>
-    <data name="buttonAddFromTabData.Text" xml:space="preserve">
+    <data name="buttonCreateFromPageData.Text" xml:space="preserve">
         <value>Create from Page Data</value>
     </data>
     <data name="PublishedOnDate.Format" xml:space="preserve">
