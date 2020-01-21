@@ -1,5 +1,9 @@
-﻿.news-agpl-footer > hr { margin-bottom:0;margin-top:0;width:33% }
-.news-agpl-footer > a { font-size:xx-small;color:#ccc }
+﻿.news-agpl-footer > hr { width:33% }
+
+.news-agpl-footer > a {
+	font-size:xx-small;
+	color:#ccc
+}
 
 .news-module a.btn.aspNetDisabled {
     color:inherit;
