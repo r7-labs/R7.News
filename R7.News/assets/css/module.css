@@ -15,25 +15,8 @@
     pointer-events:auto;
 }
 
-.news-module .visibility-badges {
-    font-size:85%
-}
-
 .news-module .visibility-badges ul.list-inline {
     margin-left:0
-}
-
-.news-module .visibility-badges .badge {
-    padding-left:.5em;
-    padding-right:.5em
-}
-
-.news-module .visibility-badges .badge.not-published {
-    background-color:#cc3
-}
-
-.news-module .visibility-badges .badge.expired {
-    background-color:#c33
 }
 
 .news-module .term-links {

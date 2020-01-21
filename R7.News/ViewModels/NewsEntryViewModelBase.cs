@@ -202,14 +202,14 @@ namespace R7.News.ViewModels
                     if (!NewsEntry.IsPublished (now)) {
                         if (NewsEntry.HasBeenExpired (now)) {
                             badges.Add (new Badge {
-                                CssClass = "expired",
+                                CssClass = "badge-danger",
                                 Text = string.Format (Localization.GetString (
                                     "Visibility_Expired.Format", Context.LocalResourceFile), NewsEntry.EndDate)
                             });
                         }
                         else {
                             badges.Add (new Badge {
-                                CssClass = "not-published",
+                                CssClass = "badge-warning",
                                 Text = string.Format (Localization.GetString (
                                     "Visibility_NotPublished.Format", Context.LocalResourceFile), NewsEntry.StartDate)
                             });
