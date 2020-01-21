@@ -55,7 +55,6 @@ namespace R7.News.Agent
                 if (!IsPostBack) {
                     checkEnableGrouping.Checked = Settings.EnableGrouping;
                     comboGroupEntry.SelectByValue (Settings.GroupEntryId);
-                    checkHideImages.Checked = Settings.HideImages;
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
                     textGroupThumbnailWidth.Text = Settings.GroupThumbnailWidth.ToString ();
 
@@ -77,7 +76,6 @@ namespace R7.News.Agent
             try {
                 Settings.EnableGrouping = checkEnableGrouping.Checked;
                 Settings.GroupEntryId = ParseHelper.ParseToNullable<int> (comboGroupEntry.SelectedValue);
-                Settings.HideImages = checkHideImages.Checked;
                 Settings.ThumbnailWidth = ParseHelper.ParseToNullable<int> (textThumbnailWidth.Text);
                 Settings.GroupThumbnailWidth = ParseHelper.ParseToNullable<int> (textGroupThumbnailWidth.Text);
 

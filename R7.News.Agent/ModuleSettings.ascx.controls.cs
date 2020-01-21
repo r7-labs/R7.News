@@ -12,7 +12,6 @@ namespace R7.News.Agent
     {
         protected CheckBox checkEnableGrouping;
         protected DropDownList comboGroupEntry;
-        protected CheckBox checkHideImages;
         protected TextBox textThumbnailWidth;
         protected TextBox textGroupThumbnailWidth;
         protected TextBox txtImageCssClass;

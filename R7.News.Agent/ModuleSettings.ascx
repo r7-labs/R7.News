@@ -22,10 +22,6 @@
 	<h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionAppearance.Text") %></a></h2>
 	<fieldset>
 		<div class="dnnFormItem">
-            <dnn:Label id="labelHideImages" runat="server" ControlName="checkHideImages" />
-            <asp:CheckBox id="checkHideImages" runat="server" />
-        </div>
-		<div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
             <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth" 

@@ -42,10 +42,6 @@ namespace R7.News.Agent.ViewModels
             get { return ((ViewModelContext<AgentSettings>) Context).Settings; }
         }
 
-        private bool? _hasImage;
-        public new bool HasImage =>
-            _hasImage ?? (_hasImage = !Settings.HideImages && NewsEntry.GetImage () != null).Value;
-
         public string ImageUrl
         {
             get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? Config.DefaultThumbnailWidth); }

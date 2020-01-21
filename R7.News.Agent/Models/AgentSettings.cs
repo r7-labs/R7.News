@@ -40,9 +40,6 @@ namespace R7.News.Agent.Models
         public int? GroupEntryId { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public bool HideImages { get; set; } = false;
-
-        [TabModuleSetting (Prefix = SettingPrefix)]
         public int? ThumbnailWidth { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
