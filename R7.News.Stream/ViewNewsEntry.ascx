@@ -21,14 +21,14 @@
                     <li><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
                 </ul>
                 <div class="row news-entry-main-row">
-                    <div class="<%# Item.ImageContainerCssClass %>">
-                        <asp:HyperLink id="linkImage" runat="server" NavigateUrl='<%# Item.Link %>' Visible='<%# Item.HasImage %>'>
+                    <div class="<%# Item.ImageColumnCssClass %>">
+                        <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                             <asp:Image id="imageImage" runat="server" 
-                                ImageUrl='<%# Item.ImageUrl %>' AlternateText='<%# Item.Title %>'
-                                CssClass="img-thumbnail news-entry-image" />
+                                ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
+                                CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                         </asp:HyperLink>
                     </div>
-                    <div class="<%# Item.DescriptionContainerCssClass %> news-entry-description">
+                    <div class="<%# Item.TextColumnCssClass %> news-entry-description">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
 						<ul class="list-inline news-action-btns">
 							<li runat="server" class="dropdown" Visible="<%# IsEditable %>">

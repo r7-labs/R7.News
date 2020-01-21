@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -30,6 +30,7 @@ using DotNetNuke.Services.Exceptions;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
+using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Modules;
@@ -96,7 +97,7 @@ namespace R7.News.Stream
                         ReplacePageTitleAndMeta (newsEntry);
 
                         var newsEntries = new List<StreamNewsEntryViewModel> ();
-                        newsEntries.Add (new StreamNewsEntryViewModel (newsEntry, ViewModelContext));
+                        newsEntries.Add (new StreamNewsEntryViewModel (newsEntry, ViewModelContext, NewsConfig.Instance.StreamModule));
 
                         formNewsEntry.DataSource = newsEntries;
                         formNewsEntry.DataBind ();

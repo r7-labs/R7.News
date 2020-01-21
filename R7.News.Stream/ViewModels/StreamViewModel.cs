@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019  Roman M. Yagodin
+//  Copyright (c) 2016-2020  Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -81,9 +81,11 @@ namespace R7.News.Stream.ViewModels
                 new WeightRange (Settings.MinStructuralWeight, Settings.MaxStructuralWeight),
                 Settings.ShowAllNews, Settings.IncludeTerms, out int baseItemsCount);
 
+            var streamModuleConfig = NewsConfig.Instance.StreamModule;
+
             return new StreamNewsEntryViewModelPage (
                 baseItemsCount,
-                baseItems.Select (ne => new StreamNewsEntryViewModel (ne, this))
+                baseItems.Select (ne => new StreamNewsEntryViewModel (ne, this, streamModuleConfig))
                 .ToList ()
             );
         }
@@ -122,12 +124,14 @@ namespace R7.News.Stream.ViewModels
                 return StreamNewsEntryViewModelPage.Empty;
             }
 
+            var streamModuleConfig = NewsConfig.Instance.StreamModule;
+
             return new StreamNewsEntryViewModelPage (
                 totalItems,
                 items.OrderByDescending (ne => ne.PublishedOnDate ())
                     .Skip (pageIndex * pageSize)
                     .Take (pageSize)
-                    .Select (ne => new StreamNewsEntryViewModel (ne, this))
+                    .Select (ne => new StreamNewsEntryViewModel (ne, this, streamModuleConfig))
                     .ToList ()
             );
         }

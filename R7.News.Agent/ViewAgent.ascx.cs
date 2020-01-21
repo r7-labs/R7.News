@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -33,6 +33,7 @@ using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Agent.Models;
 using R7.News.Agent.ViewModels;
+using R7.News.Components;
 using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Models;
@@ -93,6 +94,7 @@ namespace R7.News.Agent
                 }
             } else {
                 var now = HttpContext.Current.Timestamp;
+                var agentModuleConfig = NewsConfig.Instance.AgentModule;
 
                 // create viewmodels
                 var viewModels = items
@@ -100,7 +102,7 @@ namespace R7.News.Agent
                     .OrderByDescending (ne => ne.EntryId == Settings.GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
-                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
+                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig));
 
                 // bind the data
                 listAgent.DataSource = viewModels;
@@ -197,12 +199,13 @@ namespace R7.News.Agent
             // show grouped news
             var listGroup = (ListView) e.Item.FindControl ("listGroup");
             var now = HttpContext.Current.Timestamp;
+            var agentModuleConfig = NewsConfig.Instance.AgentModule;
 
             if (item.Group != null && item.Group.Count > 0) {
                 listGroup.DataSource = item.Group
                     .Where (ne => ne.IsPublished (now) || IsEditable)
                     .OrderByDescending (ne => ne.PublishedOnDate ())
-                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext));
+                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig));
                 listGroup.DataBind ();
             }
         }

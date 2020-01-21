@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -29,39 +29,43 @@ namespace R7.News.Agent.ViewModels
 {
     public class AgentNewsEntryViewModel: NewsEntryViewModelBase
     {
-        public AgentNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context) :
+        public AgentNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context, AgentModuleConfig config) :
             base (newsEntry, context)
         {
+            Config = config;
         }
+
+        protected AgentModuleConfig Config;
 
         protected AgentSettings Settings
         {
             get { return ((ViewModelContext<AgentSettings>) Context).Settings; }
         }
 
-        public new bool HasImage
-        {
-            get { return !Settings.HideImages && NewsEntry.GetImage () != null; }
-        }
+        private bool? _hasImage;
+        public new bool HasImage =>
+            _hasImage ?? (_hasImage = !Settings.HideImages && NewsEntry.GetImage () != null).Value;
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? NewsConfig.Instance.AgentModule.DefaultThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? Config.DefaultThumbnailWidth); }
         }
 
         public string GroupImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.GroupThumbnailWidth ?? NewsConfig.Instance.AgentModule.DefaultGroupThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.GroupThumbnailWidth ?? Config.DefaultGroupThumbnailWidth); }
         }
 
-        public string FirstColumnContainerCssClass
+        public string ImageCssClass => Settings.ImageCssClass ?? Config.ImageCssClass;
+
+        public string ImageColumnCssClass
         {
-            get { return HasImage ? "col-md-6" : "d-none"; }
+            get { return HasImage ? (Settings.ImageColumnCssClass ?? Config.ImageColumnCssClass) : Const.NoImageColumnCssClass; }
         }
 
-        public string SecondColumnContainerCssClass
+        public string TextColumnCssClass
         {
-            get { return HasImage ? "col-md-6" : "col"; }
+            get { return HasImage ? (Settings.TextColumnCssClass ?? Config.TextColumnCssClass) : Const.NoImageTextColumnCssClass; }
         }
     }
 }

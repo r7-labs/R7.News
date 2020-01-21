@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using R7.News.Providers.DiscussProviders;
 using R7.News.Providers.TermUrlProviders;
 
@@ -90,6 +89,12 @@ namespace R7.News.Components
     public class StreamModuleConfig
     {
         public int DefaultThumbnailWidth { get; set; } = 768;
+
+        public string ImageCssClass { get; set; } = "img-thumbnail";
+
+        public string ImageColumnCssClass { get; set; } = "col-md-4";
+
+        public string TextColumnCssClass { get; set; } = "col-md-8";
     }
 
     public class AgentModuleConfig
@@ -97,6 +102,12 @@ namespace R7.News.Components
         public int DefaultThumbnailWidth { get; set; } = 768;
 
         public int DefaultGroupThumbnailWidth { get; set; } = 133;
+
+        public string ImageCssClass { get; set; } = "img-thumbnail";
+
+        public string ImageColumnCssClass { get; set; } = "col-md";
+
+        public string TextColumnCssClass { get; set; } = "col-md";
     }
 
     public enum PermalinkMode

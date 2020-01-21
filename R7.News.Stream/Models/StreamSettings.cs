@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -112,6 +112,15 @@ namespace R7.News.Stream.Models
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public int? FeedMaxEntries { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public string ImageCssClass { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public string ImageColumnCssClass { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public string TextColumnCssClass { get; set; }
     }
 
     public class StreamSettingsRepository : SettingsRepository<StreamSettings>

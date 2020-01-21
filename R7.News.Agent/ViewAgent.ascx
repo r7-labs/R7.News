@@ -22,14 +22,14 @@
     <ItemTemplate>
         <div>
             <div class="row">
-                <div class="<%# Item.FirstColumnContainerCssClass %>">
+                <div class="<%# Item.ImageColumnCssClass %>">
                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                         <asp:Image id="imageImage" runat="server" 
                             ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
-                            CssClass="img-thumbnail news-entry-image" />
+                            CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                     </asp:HyperLink>
 				</div>
-                <div class="<%# Item.SecondColumnContainerCssClass %>">
+                <div class="<%# Item.TextColumnCssClass %>">
                     <h3 style="margin-top:0">
                         <asp:HyperLink id="linkEdit" runat="server" Visible="<%# IsEditable %>" NavigateUrl='<%# EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry") %>'>
                             <asp:Image id="imageEdit" runat="server" IconKey="Edit" IconSize="16X16" IconStyle="Gray" resourcekey="Edit" />
@@ -94,7 +94,7 @@
                                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
                                         <asp:Image id="imageImage" runat="server" 
                                             ImageUrl="<%# Item.GroupImageUrl %>" AlternateText="<%# Item.Title %>"
-                                            CssClass="img-thumbnail news-entry-image" />
+                                            CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                                     </asp:HyperLink>
                                 </div>
                                 <div class="news-entry-description">

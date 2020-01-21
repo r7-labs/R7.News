@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2017 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -34,6 +34,10 @@ namespace R7.News.Components
         public const string InstallPath = "DesktopModules/R7.News";
 
         public const string LibraryInstallPath = InstallPath + "/R7.News";
+
+        public const string NoImageColumnCssClass = "d-none";
+
+        public const string NoImageTextColumnCssClass = "col";
     }
 }
 

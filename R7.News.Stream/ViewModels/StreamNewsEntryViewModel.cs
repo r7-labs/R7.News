@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -29,10 +29,13 @@ namespace R7.News.Stream.ViewModels
 {
     public class StreamNewsEntryViewModel: NewsEntryViewModelBase
     {
-        public StreamNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context) :
+        public StreamNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context, StreamModuleConfig config) :
             base (newsEntry, context)
         {
+            Config = config;
         }
+
+        protected StreamModuleConfig Config;
 
         protected StreamSettings Settings
         {
@@ -41,17 +44,19 @@ namespace R7.News.Stream.ViewModels
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? NewsConfig.Instance.StreamModule.DefaultThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? Config.DefaultThumbnailWidth); }
         }
 
-        public string ImageContainerCssClass
+        public string ImageCssClass => Settings.ImageCssClass ?? Config.ImageCssClass;
+
+        public string ImageColumnCssClass
         {
-            get { return HasImage ? "col-md-4" : "d-none"; }
+            get { return HasImage ? (Settings.ImageColumnCssClass ?? Config.ImageColumnCssClass) : Const.NoImageColumnCssClass; }
         }
 
-        public string DescriptionContainerCssClass
+        public string TextColumnCssClass
         {
-            get { return HasImage ? "col-md-8" : "col"; }
+            get { return HasImage ? (Settings.TextColumnCssClass ?? Config.TextColumnCssClass) : Const.NoImageTextColumnCssClass; }
         }
     }
 }
