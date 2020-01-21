@@ -153,10 +153,8 @@ namespace R7.News.ViewModels
 
         #endregion
 
-        public bool HasImage
-        {
-            get { return NewsEntry.GetImage () != null; }
-        }
+        bool? _hasImage;
+        public bool HasImage => _hasImage ?? (_hasImage = NewsEntry.GetImage () != null).Value;
 
         public string Link
         {
