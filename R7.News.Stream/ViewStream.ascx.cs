@@ -64,12 +64,8 @@ namespace R7.News.Stream
 
             // setup top paging control
             if (Settings.ShowTopPager) {
-                pagerTop.CurrentPage = CurrentPage;
-                pagerTop.TabID = TabId;
-                pagerTop.PageSize = PageSize;
-                pagerTop.PageLinksPerPage = Settings.MaxPageLinks;
-                pagerTop.Mode = PagingControlMode.PostBack;
-                pagerTop.QuerystringParams = "pagingModuleId=" + ModuleId;
+                InitPager (pagerTop);
+                pagerTop.CssClass = "news-pager news-pager-top";
             }
             else {
                 pagerTop.Visible = false;
@@ -77,12 +73,8 @@ namespace R7.News.Stream
 
             // setup bottom paging control
             if (Settings.ShowBottomPager) {
-                pagerBottom.CurrentPage = CurrentPage;
-                pagerBottom.TabID = TabId;
-                pagerBottom.PageSize = PageSize;
-                pagerBottom.PageLinksPerPage = Settings.MaxPageLinks;
-                pagerBottom.Mode = PagingControlMode.PostBack;
-                pagerBottom.QuerystringParams = "pagingModuleId=" + ModuleId;
+                InitPager (pagerBottom);
+                pagerBottom.CssClass = "news-pager news-pager-bottom";
             }
             else {
                 pagerBottom.Visible = false;
@@ -92,6 +84,35 @@ namespace R7.News.Stream
             agplSignature.ShowRule = !Settings.UseShowMore;
 
             pnlFeed.Visible = Settings.EnableFeed;
+        }
+
+        protected void InitPager (PagingControl pager)
+        {
+            pager.CurrentPage = CurrentPage;
+            pager.TabID = TabId;
+            pager.PageSize = PageSize;
+            pager.PageLinksPerPage = Settings.MaxPageLinks;
+            pager.Mode = PagingControlMode.PostBack;
+            pager.QuerystringParams = "pagingModuleId=" + ModuleId;
+
+            // TODO: Allow to configure via module settings?
+            pager.ShowStatus = true;
+            pager.ShowFirstLast = true;
+
+            pager.ListCssClass = "pagination";
+            pager.ItemCssClass = "page-item";
+            pager.LinkCssClass = "page-link";
+            pager.StatusCssClass = "news-pager-status";
+            pager.CurrentItemCssClass = "active";
+            pager.InactiveItemCssClass = "disabled";
+
+            pager.PrevText = LocalizeString ("Pager_Prev.Text");
+            pager.NextText = LocalizeString ("Pager_Next.Text");
+            pager.FirstText = LocalizeString ("Pager_First.Text");
+            pager.LastText = LocalizeString ("Pager_Last.Text");
+            pager.CurrentText = LocalizeString ("Pager_Current.Text");
+            pager.AriaLabel = LocalizeString ("Pager_ArialLabel.Text");
+            pager.StatusFormat = LocalizeString ("Pager_StatusFormat.Text");
         }
 
         /// <summary>

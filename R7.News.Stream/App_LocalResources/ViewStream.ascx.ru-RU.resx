@@ -18,4 +18,25 @@
 	<data name="btnFeed.Title" xml:space="preserve">
         <value>Канал Atom 1.0</value>
     </data>
+	<data name="Pager_Prev.Text" xml:space="preserve">
+		<value>Пред.</value>
+	</data>
+	<data name="Pager_Next.Text" xml:space="preserve">
+		<value>След.</value>
+	</data>
+	<data name="Pager_First.Text" xml:space="preserve">
+		<value>В начало</value>
+	</data>
+	<data name="Pager_Last.Text" xml:space="preserve">
+		<value>В конец</value>
+	</data>
+	<data name="Pager_Current.Text" xml:space="preserve">
+		<value>(текущая)</value>
+	</data>
+	<data name="Pager_AriaLabel.Text" xml:space="preserve">
+		<value>Постраничная навигация по новостям</value>
+	</data>
+	<data name="Pager_StatusFormat.Text" xml:space="preserve">
+		<value>Стр. {0} из {1}</value>
+	</data>
 </root>

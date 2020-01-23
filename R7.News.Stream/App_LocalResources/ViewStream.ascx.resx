@@ -18,4 +18,25 @@
 	<data name="btnFeed.Title" xml:space="preserve">
         <value>Atom 1.0 feed</value>
     </data>
+	<data name="Pager_Prev.Text" xml:space="preserve">
+		<value>Prev.</value>
+	</data>
+	<data name="Pager_Next.Text" xml:space="preserve">
+		<value>Next</value>
+	</data>
+	<data name="Pager_First.Text" xml:space="preserve">
+		<value>First</value>
+	</data>
+	<data name="Pager_Last.Text" xml:space="preserve">
+		<value>Last</value>
+	</data>
+	<data name="Pager_Current.Text" xml:space="preserve">
+		<value>(current)</value>
+	</data>
+	<data name="Pager_AriaLabel.Text" xml:space="preserve">
+		<value>News pagination</value>
+	</data>
+	<data name="Pager_StatusFormat.Text" xml:space="preserve">
+		<value>Page {0} of {1}</value>
+	</data>
 </root>
