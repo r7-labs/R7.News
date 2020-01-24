@@ -4,7 +4,7 @@
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
 //
-//  Copyright (c) 2016-2019 Roman M. Yagodin
+//  Copyright (c) 2016-2020 Roman M. Yagodin
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU Affero General Public License as published by
@@ -30,6 +30,7 @@ using DotNetNuke.Web.UI.WebControls;
 using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.FileSystem;
 using R7.Dnn.Extensions.Modules;
+using R7.Dnn.Extensions.Text;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
 using R7.News.Data;
@@ -104,6 +105,8 @@ namespace R7.News.Stream
             sliderThematicWeight.Text = NewsConfig.Instance.NewsEntry.DefaultThematicWeight.ToString ();
             sliderStructuralWeight.Text = NewsConfig.Instance.NewsEntry.DefaultStructuralWeight.ToString ();
 
+            txtAgentModuleId.ReadOnly = !IsAdmin ();
+
             // localize column headers in the gridview
             gridModules.LocalizeColumnHeaders (LocalResourceFile);
         }
@@ -115,6 +118,11 @@ namespace R7.News.Stream
             }
 
             return ctlUrl.Url;
+        }
+
+        bool IsAdmin ()
+        {
+            return Request.IsAuthenticated && (UserInfo.IsSuperUser || UserInfo.IsInRole ("Administrators"));
         }
 
         string GetImagesFolderPath ()
@@ -203,6 +211,8 @@ namespace R7.News.Stream
             // Agent: get terms from current tab
             if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
                 terms = PortalSettings.ActiveTab.Terms;
+
+                txtAgentModuleId.Text = ModuleId.ToString ();
             }
 
             termsTerms.Terms = terms ?? new List<Term> ();
@@ -263,12 +273,14 @@ namespace R7.News.Stream
             hiddenDiscussEntryId.Value = item.DiscussEntryId;
 
             if (!string.IsNullOrEmpty (item.DiscussProviderKey)) {
-                buttonClearDiscussionLink.Visible = true;
+                buttonClearDiscussionLink.Visible = IsAdmin ();
                 var discussProvider = NewsConfig.Instance.GetDiscussProviders ().FirstOrDefault (dp => dp.ProviderKey == item.DiscussProviderKey);
                 if (discussProvider != null) {
                     textDiscussionLink.Text = discussProvider.GetDiscussUrl (item.DiscussEntryId);
                 }
             }
+
+            txtAgentModuleId.Text = item.AgentModuleId.ToString ();
 
             var auditData = new AuditData {
                 CreatedDate = item.ContentItem.CreatedOnDate.ToLongDateString (),
@@ -349,8 +361,17 @@ namespace R7.News.Stream
             item.DiscussProviderKey = (hiddenDiscussProviderKey.Value.Length > 0)? hiddenDiscussProviderKey.Value : null;
             item.DiscussEntryId = (hiddenDiscussEntryId.Value.Length > 0) ? hiddenDiscussEntryId.Value : null; ;
 
-            if (ModuleConfiguration.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
-                item.AgentModuleId = ModuleId;
+            var agentModuleId = ParseHelper.ParseToNullable<int> (txtAgentModuleId.Text);
+            if (agentModuleId == null) {
+                // unbind news entry from Agent
+                item.AgentModuleId = agentModuleId;
+            }
+            else {
+                // bind news entry to Agent, if it exists
+                var module = ModuleController.Instance.GetModule (agentModuleId.Value, -1, false);
+                if (module != null && module.ModuleDefinition.DefinitionName == Const.AgentModuleDefinitionName) {
+                    item.AgentModuleId = agentModuleId;
+                }
             }
         }
 

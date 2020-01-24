@@ -105,6 +105,12 @@
     <data name="labelPermalinks.Help" xml:space="preserve">
         <value>Отсюда Вы можете скопировать постоянные ссылки на новость.</value>
     </data>
+	<data name="lblAgentModule.Text" xml:space="preserve">
+        <value>Ид. модуля-агента:</value>
+    </data>
+    <data name="lblAgentModule.Help" xml:space="preserve">
+        <value>Используйте это значение, чтобы управлять привязкой новости к модулю новостного агента.</value>
+    </data>
     <data name="buttonGetModules.Text" xml:space="preserve">
         <value>Показать модули</value>
     </data>

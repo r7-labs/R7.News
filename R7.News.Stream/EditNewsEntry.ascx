@@ -17,7 +17,7 @@
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
             <li><a href="#newsentry-terms-and-weigths-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
-            <li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
+			<li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
         </ul>
         <div id="newsentry-common-tab">
             <fieldset>
@@ -111,8 +111,12 @@
                 </div>
             </fieldset>
         </div>
-        <div id="newsentry-audit-tab">
+		<div id="newsentry-audit-tab">
             <fieldset>
+				<div class="dnnFormItem">
+                    <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" /> 
+					<asp:TextBox id="txtAgentModuleId" runat="server" ReadOnly="true" />
+                </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelPermalinks" runat="server" ControlName="textPermalinkFriendly" /> 
                     <asp:TextBox id="textPermalinkFriendly" runat="server" ReadOnly="true" />
@@ -123,21 +127,21 @@
                 </div>
 				<div class="dnnFormItem">
                     <dnn:Label id="labelDiscussionLink" runat="server" ControlName="textDiscussionLink" /> 
-                        <asp:TextBox id="textDiscussionLink" runat="server" ReadOnly="true" />
+					<asp:TextBox id="textDiscussionLink" runat="server" ReadOnly="true" />
                 </div>
-                <div class="dnnFormItem">
+				<div class="dnnFormItem">
                     <label class="dnnLabel"></label>
                     <asp:LinkButton id="buttonClearDiscussionLink" runat="server" Visible="false"
-                        CssClass="dnnSecondaryAction" ResourceKey="buttonClearDiscussionLink"
+                        CssClass="btn btn-outline-danger" ResourceKey="buttonClearDiscussionLink"
 						OnClick="buttonClearDiscussionLink_Click" />
                 </div>
-                <div class="dnnFormItem">
+				<asp:HiddenField id="hiddenDiscussProviderKey" runat="server" />
+				<asp:HiddenField id="hiddenDiscussEntryId" runat="server" />
+				<div class="dnnFormItem">
                     <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" /> 
                     <dnn:Audit id="ctlAudit" runat="server" />
                 </div>
 			</fieldset>
-			<asp:HiddenField id="hiddenDiscussProviderKey" runat="server" />
-			<asp:HiddenField id="hiddenDiscussEntryId" runat="server" />
         </div>
     </div>
     <ul class="dnnActions dnnClear">
