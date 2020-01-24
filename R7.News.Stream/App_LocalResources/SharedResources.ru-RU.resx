@@ -15,4 +15,7 @@
 	<data name="EditNewsEntry.Text" xml:space="preserve">
         <value>Редактировать новость</value>
     </data>
+	<data name="DefaultValue.Text" xml:space="preserve">
+        <value>(по умолчанию)</value>
+    </data>
 </root>

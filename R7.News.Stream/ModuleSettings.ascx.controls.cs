@@ -28,5 +28,8 @@ namespace R7.News.Stream
         protected TextBox txtTextCssClass;
         protected TextBox txtImageColumnCssClass;
         protected TextBox txtTextColumnCssClass;
+        protected RadioButtonList rblPagerShowFirstLast;
+        protected RadioButtonList rblPagerShowStatus;
+
     }
 }

@@ -1,5 +1,5 @@
-//
-//  SettingsStream.ascx.cs
+﻿//
+//  ModuleSettings.ascx.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -44,6 +44,16 @@ namespace R7.News.Stream
                 comboMinStructuralWeight.Items.Add (i.ToString ());
                 comboMaxStructuralWeight.Items.Add (i.ToString ());
             }
+
+            rblPagerShowFirstLast.AddItem (LocalizeString ("DefaultValue.Text"), "null");
+            rblPagerShowFirstLast.AddItem (LocalizeString ("Yes"), "true");
+            rblPagerShowFirstLast.AddItem (LocalizeString ("No"), "false");
+            rblPagerShowFirstLast.SelectedIndex = 0;
+
+            rblPagerShowStatus.AddItem (LocalizeString ("DefaultValue.Text"), "null");
+            rblPagerShowStatus.AddItem (LocalizeString ("Yes"), "true");
+            rblPagerShowStatus.AddItem (LocalizeString ("No"), "false");
+            rblPagerShowStatus.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -80,6 +90,13 @@ namespace R7.News.Stream
                     txtImageColumnCssClass.Text = Settings.ImageColumnCssClass;
                     txtTextColumnCssClass.Text = Settings.TextColumnCssClass;
 
+                    if (Settings.PagerShowFirstLast != null) {
+                        rblPagerShowFirstLast.SelectedIndex = Settings.PagerShowFirstLast.Value ? 1 : 2;
+                    }
+
+                    if (Settings.PagerShowStatus != null) {
+                        rblPagerShowStatus.SelectedIndex = Settings.PagerShowStatus.Value ? 1 : 2;
+                    }
                 }
             }
             catch (Exception ex) {
@@ -131,6 +148,9 @@ namespace R7.News.Stream
                 Settings.TextCssClass = !string.IsNullOrEmpty (txtTextCssClass.Text) ? txtTextCssClass.Text : null;
                 Settings.ImageColumnCssClass = !string.IsNullOrEmpty (txtImageColumnCssClass.Text) ? txtImageColumnCssClass.Text : null;
                 Settings.TextColumnCssClass = !string.IsNullOrEmpty (txtTextColumnCssClass.Text) ? txtTextColumnCssClass.Text : null;
+
+                Settings.PagerShowStatus = ParseHelper.ParseToNullable<bool> (rblPagerShowStatus.SelectedValue);
+                Settings.PagerShowFirstLast = ParseHelper.ParseToNullable<bool> (rblPagerShowFirstLast.SelectedValue);
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 

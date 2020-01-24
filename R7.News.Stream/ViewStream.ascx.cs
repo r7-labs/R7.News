@@ -1,4 +1,4 @@
-//
+﻿//
 //  ViewStream.ascx.cs
 //
 //  Author:
@@ -27,6 +27,7 @@ using R7.Dnn.Extensions.Controls.PagingControl;
 using R7.News.Modules;
 using R7.News.Stream.ViewModels;
 using R7.News.Stream.Models;
+using R7.News.Components;
 
 namespace R7.News.Stream
 {
@@ -95,9 +96,8 @@ namespace R7.News.Stream
             pager.Mode = PagingControlMode.PostBack;
             pager.QuerystringParams = "pagingModuleId=" + ModuleId;
 
-            // TODO: Allow to configure via module settings?
-            pager.ShowStatus = true;
-            pager.ShowFirstLast = true;
+            pager.ShowStatus = Settings.PagerShowStatus ?? NewsConfig.Instance.StreamModule.PagerShowStatus;
+            pager.ShowFirstLast = Settings.PagerShowFirstLast ?? NewsConfig.Instance.StreamModule.PagerShowFirstLast;
 
             pager.ListCssClass = "pagination";
             pager.ItemCssClass = "page-item";

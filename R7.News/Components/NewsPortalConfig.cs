@@ -1,4 +1,4 @@
-//
+﻿//
 //  NewsPortalConfig.cs
 //
 //  Author:
@@ -97,6 +97,10 @@ namespace R7.News.Components
         public string ImageColumnCssClass { get; set; } = "col-md-4";
 
         public string TextColumnCssClass { get; set; } = "col-md-8";
+
+        public bool PagerShowFirstLast { get; set; }
+
+        public bool PagerShowStatus { get; set; }
     }
 
     public class AgentModuleConfig

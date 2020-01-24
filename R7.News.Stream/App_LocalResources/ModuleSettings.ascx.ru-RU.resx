@@ -106,6 +106,12 @@
 	<data name="lblTextColumnCssClass.Text" xml:space="preserve">
         <value>Класс CSS для колонки текста:</value>
     </data>
+	<data name="lblPagerShowFirstLast.Text" xml:space="preserve">
+        <value>Отображать ссылки на первую и последнюю страницы?</value>
+    </data>
+	<data name="lblPagerShowStatus.Text" xml:space="preserve">
+        <value>Отображать состояние?</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Основные настройки</value>
     </data>

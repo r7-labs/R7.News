@@ -15,4 +15,7 @@
 	<data name="EditNewsEntry.Text" xml:space="preserve">
         <value>Edit News Entry</value>
     </data>
+	<data name="DefaultValue.Text" xml:space="preserve">
+        <value>(default)</value>
+    </data>
 </root>

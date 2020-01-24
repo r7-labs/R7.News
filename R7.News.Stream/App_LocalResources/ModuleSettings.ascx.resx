@@ -106,6 +106,12 @@
 	<data name="lblTextColumnCssClass.Text" xml:space="preserve">
         <value>Text Column CSS Class:</value>
     </data>
+	<data name="lblPagerShowFirstLast.Text" xml:space="preserve">
+        <value>Show First &amp; Last Page Links?</value>
+    </data>
+	<data name="lblPagerShowStatus.Text" xml:space="preserve">
+        <value>Show Status Info?</value>
+    </data>
     <data name="sectionBasic.Text" xml:space="preserve">
         <value>Basic Settings</value>
     </data>

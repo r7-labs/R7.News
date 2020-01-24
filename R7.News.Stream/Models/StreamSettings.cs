@@ -1,4 +1,4 @@
-//
+﻿//
 //  StreamSettings.cs
 //
 //  Author:
@@ -124,6 +124,12 @@ namespace R7.News.Stream.Models
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public string TextColumnCssClass { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool? PagerShowFirstLast { get; set; }
+
+        [TabModuleSetting (Prefix = SettingPrefix)]
+        public bool? PagerShowStatus { get; set; }
     }
 
     public class StreamSettingsRepository : SettingsRepository<StreamSettings>

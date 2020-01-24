@@ -68,7 +68,7 @@
             <dnn:Label id="labelShowBottomPager" runat="server" ControlName="checkShowBottomPager" />
             <asp:CheckBox id="checkShowBottomPager" runat="server" />
         </div>
-        <div class="dnnFormItem">
+		<div class="dnnFormItem">
             <dnn:Label id="labelPageSize" runat="server" ControlName="textPageSize" />
             <asp:TextBox id="textPageSize" runat="server" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="textPageSize"
@@ -86,6 +86,14 @@
                 Type="Integer" MinimumValue="1" MaximumValue="100"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="MaxPageLinks.Invalid" />
         </div>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblPagerShowFirstLast" runat="server" ControlName="rblPagerShowFirstLast" />
+            <asp:RadioButtonList id="rblPagerShowFirstLast" runat="server" RepeatDirection="Horizontal" />
+        </div>
+		<div class="dnnFormItem">
+			<dnn:Label id="lblPagerShowStatus" runat="server" ControlName="rblPagerShowStatus" />
+			<asp:RadioButtonList id="rblPagerShowStatus" runat="server" RepeatDirection="Horizontal" />
+		</div>
     </fieldset>
 	<h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionFeed.Text") %></a></h2>
 	<fieldset>
