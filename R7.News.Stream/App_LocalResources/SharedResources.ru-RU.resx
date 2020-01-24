@@ -18,4 +18,7 @@
 	<data name="DefaultValue.Text" xml:space="preserve">
         <value>(по умолчанию)</value>
     </data>
+	<data name="Duplicate.Text" xml:space="preserve">
+        <value>Дублировать новость</value>
+    </data>
 </root>

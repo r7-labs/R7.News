@@ -20,12 +20,16 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Security;
 using R7.Dnn.Extensions.Modules;
+using R7.Dnn.Extensions.Text;
 using R7.News.Controls;
+using R7.News.Data;
 using R7.News.Models;
 using R7.News.ViewModels;
 
@@ -89,6 +93,19 @@ namespace R7.News.Modules
             } else {
                 actionButtons.Visible = false;
             }
+        }
+
+        protected void btnDuplicate_Command (object sender, CommandEventArgs e)
+        {
+            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
+            if (newsEntryId != null) {
+                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
+                if (newsEntry != null) {
+                    NewsRepository.Instance.DuplicateNewsEntry (newsEntry, ModuleId, TabId);
+                }
+            }
+
+            Response.Redirect (Globals.NavigateURL ());
         }
     }
 }

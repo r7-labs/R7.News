@@ -40,6 +40,12 @@
 										<i class="fas fa-pencil-alt"></i>
 										<%# LocalizeString ("EditNewsEntry.Text") %>
 						            </a>
+									<div class="dropdown-divider"></div>
+									<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnDuplicate_Command"
+											CommandName="Duplicate" CommandArgument="<%# Item.EntryId.ToString () %>">
+										<i class="far fa-clone"></i>
+										<%# LocalizeString ("Duplicate.Text") %>
+                                    </asp:LinkButton>
 								</div>
 							</li>
 						    <news:ActionButtons id="actionButtons" runat="server" />

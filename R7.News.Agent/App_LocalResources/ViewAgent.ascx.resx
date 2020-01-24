@@ -30,6 +30,9 @@
 	<data name="EditNewsEntry.Text" xml:space="preserve">
         <value>Edit News Entry</value>
     </data>
+	<data name="Duplicate.Text" xml:space="preserve">
+        <value>Duplicate News Entry</value>
+    </data>
 	<data name="SyncTab.Text" xml:space="preserve">
         <value>Sync Page with News Entry</value>
     </data>

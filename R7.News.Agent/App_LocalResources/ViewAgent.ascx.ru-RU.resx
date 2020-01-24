@@ -30,6 +30,9 @@
 	<data name="EditNewsEntry.Text" xml:space="preserve">
         <value>Редактировать новость</value>
     </data>
+	<data name="Duplicate.Text" xml:space="preserve">
+        <value>Дублировать новость</value>
+    </data>
 	<data name="SyncTab.Text" xml:space="preserve">
         <value>Синхронизировать страницу с новостью</value>
     </data>

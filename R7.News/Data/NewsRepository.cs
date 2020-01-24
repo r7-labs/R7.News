@@ -117,6 +117,18 @@ namespace R7.News.Data
             return contentItem;
         }
 
+        public int DuplicateNewsEntry (NewsEntryInfo item, int moduleId, int tabId)
+        {
+            item.EntryId = 0;
+
+            if (item.IsPublished (DateTime.Now)) {
+                item.StartDate = null;
+                item.EndDate = DateTime.Today;   
+            }
+
+            return AddNewsEntry (item, item.ContentItem.Terms, item.ContentItem.Images, moduleId, tabId);
+        }
+
         static void UpdateContentItem (ContentItem contentItem, NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images)
         {
             // update content item after EntryId get its value

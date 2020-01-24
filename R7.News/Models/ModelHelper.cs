@@ -30,6 +30,7 @@ namespace R7.News.Models
     {
         public static bool IsPublished (DateTime now, DateTime? startDate, DateTime? endDate)
         {
+            // TODO: Check logic, prioritize endDate?
             return (startDate == null || now >= startDate) && (endDate == null || now < endDate);
         }
 
