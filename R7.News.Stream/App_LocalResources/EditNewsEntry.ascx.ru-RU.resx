@@ -152,7 +152,7 @@
     <data name="buttonClearDiscussionLink.Text" xml:space="preserve">
         <value>Удалить ссылку на обсуждение</value>
     </data>
-	<data name="buttonSelectCurrentPage.Text" xml:space="preserve">
+	<data name="CurrentPage.Text" xml:space="preserve">
         <value>Текущая страница</value>
     </data>
 </root>

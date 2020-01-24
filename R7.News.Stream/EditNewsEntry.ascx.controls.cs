@@ -22,7 +22,7 @@ namespace R7.News.Stream
         protected DnnDateTimePicker datetimeEndDate;
         protected TermsSelector termsTerms;
         protected DnnFilePickerUploader pickerImage;
-        protected DnnUrlControl urlUrl;
+        protected DnnUrlControl ctlUrl;
         protected TextBox sliderThematicWeight;
         protected TextBox sliderStructuralWeight;
         protected LinkButton buttonGetModules;
@@ -33,6 +33,6 @@ namespace R7.News.Stream
         protected HiddenField hiddenDiscussEntryId;
         protected TextBox textDiscussionLink;
         protected LinkButton buttonClearDiscussionLink;
-        protected LinkButton buttonSelectCurrentPage;
+        protected CheckBox chkCurrentPage;
     }
 }

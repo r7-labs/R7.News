@@ -99,17 +99,15 @@
                     <dnn:DnnDateTimePicker id="datetimeDueDate" runat="server" />
                 </div>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelUrl" runat="server" ControlName="urlUrl" />
-                    <dnn:UrlControl id="urlUrl" runat="server"
+                    <dnn:Label id="labelUrl" runat="server" ControlName="ctlUrl" />
+                    <dnn:UrlControl id="ctlUrl" runat="server"
                         IncludeActiveTab="true"
                         UrlType="N"
                         ShowNone="true"
                         ShowLog="false"
                         ShowTrack="false"
                     />
-					<asp:LinkButton id="buttonSelectCurrentPage" runat="server" resourcekey="buttonSelectCurrentPage.Text"
-					    CssClass="dnnSecondaryAction newsentry-button-select-current-page"
-					    OnClick="buttonSelectCurrentPage_Click" />
+					<asp:CheckBox id="chkCurrentPage" runat="server" resourcekey="CurrentPage.Text" />
                 </div>
             </fieldset>
         </div>

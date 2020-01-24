@@ -26,6 +26,7 @@ using DotNetNuke.Common;
 using DotNetNuke.Entities.Content.Taxonomy;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.FileSystem;
+using DotNetNuke.Web.UI.WebControls;
 using R7.Dnn.Extensions.Controls;
 using R7.Dnn.Extensions.FileSystem;
 using R7.Dnn.Extensions.Modules;
@@ -46,25 +47,22 @@ namespace R7.News.Stream
         Audit
     }
 
-    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo,int>
+    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo, int>
     {
         #region Properties
 
         ViewModelContext viewModelContext;
 
-        protected ViewModelContext ViewModelContext
-        {
+        protected ViewModelContext ViewModelContext {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
         }
 
-        protected EditNewsEntryTab SelectedTab
-        {
+        protected EditNewsEntryTab SelectedTab {
             get {
                 // get postback initiator
                 var eventTarget = Request.Form ["__EVENTTARGET"];
                 if (!string.IsNullOrEmpty (eventTarget)) {
-                    if (eventTarget.Contains ("$" + urlUrl.ID) ||
-                        eventTarget.Contains ("$" + buttonSelectCurrentPage.ID)) {
+                    if (eventTarget.Contains ("$" + ctlUrl.ID)) {
                         ViewState ["SelectedTab"] = EditNewsEntryTab.Advanced;
                         return EditNewsEntryTab.Advanced;
                     }
@@ -79,10 +77,10 @@ namespace R7.News.Stream
                         return EditNewsEntryTab.Audit;
                     }
                 }
-                    
+
                 // otherwise, get active tab from viewstate
                 var obj = ViewState ["SelectedTab"];
-                return (obj != null) ? (EditNewsEntryTab) obj : EditNewsEntryTab.Common;
+                return (obj != null) ? (EditNewsEntryTab)obj : EditNewsEntryTab.Common;
             }
             set { ViewState ["SelectedTab"] = value; }
         }
@@ -108,6 +106,15 @@ namespace R7.News.Stream
 
             // localize column headers in the gridview
             gridModules.LocalizeColumnHeaders (LocalResourceFile);
+        }
+
+        string GetUrl (DnnUrlControl ctlUrl)
+        {
+            if (chkCurrentPage.Checked) {
+                return TabId.ToString ();
+            }
+
+            return ctlUrl.Url;
         }
 
         string GetImagesFolderPath ()
@@ -161,11 +168,6 @@ namespace R7.News.Stream
             hiddenDiscussProviderKey.Value = null;
             hiddenDiscussEntryId.Value = null;
             textDiscussionLink.Text = string.Empty;
-        }
-
-        protected void buttonSelectCurrentPage_Click (object sender, EventArgs e)
-        {
-            urlUrl.Url = TabId.ToString ();    
         }
 
         protected void btnDefaultImagesPath_Click (object sender, EventArgs e)
@@ -246,7 +248,7 @@ namespace R7.News.Stream
             termsTerms.Terms = item.ContentItem.Terms;
             termsTerms.DataBind ();
 
-            urlUrl.Url = item.Url;
+            ctlUrl.Url = item.Url;
 
             textPermalinkRaw.Text = item.GetPermalinkRaw (NewsDataProvider.Instance.ModuleController,
                                                           PortalAlias, ModuleId, TabId);
@@ -339,7 +341,7 @@ namespace R7.News.Stream
             item.EndDate = datetimeEndDate.SelectedDate;
             item.PortalId = PortalId;
 
-            item.Url = urlUrl.Url;
+            item.Url = GetUrl (ctlUrl);
 
             item.ThematicWeight = int.Parse (sliderThematicWeight.Text);
             item.StructuralWeight = int.Parse (sliderStructuralWeight.Text);
