@@ -60,7 +60,7 @@ namespace R7.News.Tests
         protected NewsPortalConfig DeserializeConfig (string configFile)
         {
             using (var configReader = new StringReader (File.ReadAllText (configFile))) {
-                var deserializer = new DeserializerBuilder ().WithNamingConvention (new HyphenatedNamingConvention ()).Build ();
+                var deserializer = new DeserializerBuilder ().WithNamingConvention (HyphenatedNamingConvention.Instance).Build ();
                 return deserializer.Deserialize<NewsPortalConfig> (configReader);
             }
         }
