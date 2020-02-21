@@ -14,8 +14,7 @@
             <azureCompatible>true</azureCompatible>
             <dependencies>
                 <dependency type="CoreVersion">08.00.04</dependency>
-                <!-- .NET 4.5 -->
-                <dependency type="Type">System.Reflection.ReflectionContext</dependency>
+                <dependency type="Type">System.Reflection.ReflectionContext</dependency> <!-- .NET 4.5 -->
                 <dependency type="managedPackage" version="0.14.0">R7.Dnn.Extensions</dependency>
                 <dependency type="managedPackage" version="1.1.0">R7.ImageHandler</dependency>
             </dependencies>
