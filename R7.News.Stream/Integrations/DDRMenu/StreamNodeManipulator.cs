@@ -49,7 +49,6 @@ namespace R7.News.Stream.Integrations.DDRMenu
                 }
                 var parentNode = FindNodeByTabId (nodes, config.ParentNodeTabId);
                 if (parentNode == null) {
-                    LogAdminAlert ($"Could not find parent node with TabID={config.ParentNodeTabId}.", portalSettings.PortalId);
                     return nodes;
                 }
 
