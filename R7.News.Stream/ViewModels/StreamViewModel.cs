@@ -52,17 +52,18 @@ namespace R7.News.Stream.ViewModels
         {
             var now = Module.IsEditable ? null : (DateTime?) HttpContext.Current.Timestamp;
 
-            // REVIEW: Should 'now' value be used in the cache key? 
+            // TODO: Should 'now' value be used in the cache key? 
             // var today = DateTime.Today; 
             // var now = today + new TimeSpan (today.Hour, 0, 0);
 
-            // REVIEW: Check for sorting options also
+            // TODO: Check for sorting options also
             if (pageIndex == 0 && pageSize == Settings.PageSize) {
                 
                 // we cache viewmodels for first page, so there are no need to implement caching
                 // in the GetNewsEntries..._Count and GetNewsEntries..._FirstPage repository methods
 
-                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "ModuleId=" + Module.ModuleId
+                // if we will cache models instead of viewmodels, then we need to vary cache key by ModuleId, not TabModuleId
+                var cacheKey = NewsRepository.NewsCacheKeyPrefix + "TabModuleId=" + Module.TabModuleId
                                + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
                 
                 return DataCache.GetCachedData<StreamNewsEntryViewModelPage> (
