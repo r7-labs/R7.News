@@ -56,8 +56,10 @@
         <div id="newsentry-terms-and-weigths-tab">
             <fieldset>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelTerms" runat="server" ControlName="termsTerms" />
-                    <dnn:TermsSelector id="termsTerms" runat="server" />
+                    <dnn:Label id="lblTerms" runat="server" ControlName="selTerms" />
+                    <asp:ListBox id="selTerms" runat="server" SelectionMode="Multiple"
+						DataValueField="TermId" DataTextField="Name" 
+						CssClass="dnn-select2" Style="width:100%" />
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelThematicWeight" runat="server" ControlName="sliderThematicWeight" />
@@ -162,6 +164,7 @@
         $("#newsentry-tabs .dnnSliderInput").each(function(){
             $(this).dnnSliderInput({min: -1, max: this.getAttribute ("data-max")});
         });
+		$(".dnn-select2").select2();
     };
     $(document).ready(function() {
         setupModule();

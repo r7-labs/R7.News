@@ -129,6 +129,7 @@ namespace R7.News.Data
             return AddNewsEntry (item, item.ContentItem.Terms, item.ContentItem.Images, moduleId, tabId);
         }
 
+        // TODO: Can use IEnumerable<Term>
         static void UpdateContentItem (ContentItem contentItem, NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images)
         {
             // update content item after EntryId get its value

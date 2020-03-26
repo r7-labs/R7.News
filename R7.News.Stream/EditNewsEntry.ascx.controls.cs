@@ -16,7 +16,6 @@ namespace R7.News.Stream
         protected DnnDateTimePicker datetimeDueDate;
         protected DnnDateTimePicker datetimeStartDate;
         protected DnnDateTimePicker datetimeEndDate;
-        protected TermsSelector termsTerms;
         protected DnnFilePickerUploader pickerImage;
         protected DnnUrlControl ctlUrl;
         protected TextBox sliderThematicWeight;
@@ -31,5 +30,6 @@ namespace R7.News.Stream
         protected LinkButton buttonClearDiscussionLink;
         protected CheckBox chkCurrentPage;
         protected TextBox txtAgentModuleId;
+        protected ListBox selTerms;
     }
 }
