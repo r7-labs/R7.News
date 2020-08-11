@@ -1,11 +1,13 @@
 # User-specific
+/.vs/
+*.user
 *.userprefs
 *.usertasks
 
 # Build output
 */bin/*
 */obj/*
-Packaging/output/*
+Deploy/output/*
 
 # Downloaded NuGet packages
 packages/*
