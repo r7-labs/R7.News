@@ -2,13 +2,13 @@
 
     <!-- Import MSBuild.Community.Tasks -->
     <Import Project="../packages/MSBuildTasks.1.5.0.235/tools/MSBuild.Community.Tasks.Targets" />
-    
+
     <!-- Main properties -->
     <PropertyGroup>
         <PackageName>R7.News</PackageName>
         <PackageOutputPath>bin/Deploy</PackageOutputPath>
         <TmpDir>bin/tmp</TmpDir>
-        <DnnLocalDeployPath Condition=" '$(OS)' == 'Unix' ">$(HOME)/mnt/dnn8</DnnLocalDeployPath>
+        <DnnLocalDeployPath Condition=" '$(OS)' == 'Unix' ">/mnt/hdd/$(HOME)/mnt/dnn804</DnnLocalDeployPath>
         <DnnLocalDeployPath Condition=" '$(OS)' != 'Unix' ">C:\Dotnetnuke804</DnnLocalDeployPath>
         <BuildSettingsImported>true</BuildSettingsImported>
     </PropertyGroup>
