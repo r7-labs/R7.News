@@ -82,7 +82,7 @@ namespace R7.News.Agent
         {
             var items = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
 
-            // check if we have some content to display, 
+            // check if we have some content to display,
             // otherwise display a message for module editors.
             if (items == null || !items.Any ()) {
                 // show panel with add button
@@ -136,20 +136,6 @@ namespace R7.News.Agent
         }
 
         #endregion
-
-        protected void btnUnbind_Command (object sender, CommandEventArgs e)
-        {
-            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
-            if (newsEntryId != null) {
-                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
-                if (newsEntry != null) {
-                    newsEntry.AgentModuleId = null;
-                    NewsRepository.Instance.UpdateNewsEntry (newsEntry);
-                }
-            }
-
-            Response.Redirect (Globals.NavigateURL ());
-        }
 
         protected void btnSyncTab_Command (object sender, CommandEventArgs e)
         {

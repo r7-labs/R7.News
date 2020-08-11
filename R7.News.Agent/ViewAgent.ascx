@@ -13,7 +13,7 @@
 		</div>
 		<asp:LinkButton id="buttonCreateFromPageData" runat="server" resourcekey="buttonCreateFromPageData.Text"
 	        CssClass="btn btn-warning" OnClick="buttonCreateFromPageData_Click" />
-	</div>	
+	</div>
 </asp:Panel>
 <asp:ListView id="listAgent" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listAgent_ItemDataBound">
     <LayoutTemplate>
@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="<%# Item.ImageColumnCssClass %>">
                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
-                        <asp:Image id="imageImage" runat="server" 
+                        <asp:Image id="imageImage" runat="server"
                             ImageUrl="<%# Item.ImageUrl %>" AlternateText="<%# Item.Title %>"
                             CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                     </asp:HyperLink>
@@ -66,15 +66,10 @@
 									<i class="fas fa-sync"></i>
 									<%# LocalizeString ("SyncTab.Text") %>
                                 </asp:LinkButton>
-								<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnUnbind_Command"
-										CommandName="Unbind" CommandArgument="<%# Item.EntryId.ToString () %>">
-									<i class="fas fa-unlink"></i>
-									<%# LocalizeString ("Unbind.Text") %>
-                                </asp:LinkButton>
 							</div>
 						</li>
 						<news:ActionButtons id="actionButtons" runat="server" />
-					</ul>	
+					</ul>
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -91,7 +86,7 @@
                             <div class="news-entry-main-row">
                                 <div>
                                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
-                                        <asp:Image id="imageImage" runat="server" 
+                                        <asp:Image id="imageImage" runat="server"
                                             ImageUrl="<%# Item.GroupImageUrl %>" AlternateText="<%# Item.Title %>"
                                             CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
                                     </asp:HyperLink>
@@ -110,7 +105,7 @@
 												</a>
 											</div>
 										</li>
-									</ul>	
+									</ul>
                                 </div>
                             </div>
                         </ItemTemplate>

@@ -171,7 +171,7 @@ namespace R7.News.Stream
             return moduleController.GetModulesByDefinition (PortalId, Const.StreamModuleDefinitionName)
                 .Cast<ModuleInfo> ()
                 .Where (m => !m.IsDeleted)
-                .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (settingsRepository.GetSettings (m), 
+                .Where (m => StreamModuleViewModel.IsNewsEntryWillBePassedByModule (settingsRepository.GetSettings (m),
                 thematicWeight, structuralWeight, terms))
                 .Select (m => new StreamModuleViewModel (
                 m,
@@ -207,7 +207,7 @@ namespace R7.News.Stream
 
         protected override void InitControls ()
         {
-            InitControls (buttonUpdate, buttonDelete, linkCancel, ctlAudit); 
+            InitControls (buttonUpdate, buttonDelete, linkCancel, ctlAudit);
         }
 
         protected override void LoadNewItem ()
@@ -374,7 +374,7 @@ namespace R7.News.Stream
             var agentModuleId = ParseHelper.ParseToNullable<int> (txtAgentModuleId.Text);
             if (agentModuleId == null) {
                 // unbind news entry from Agent
-                item.AgentModuleId = agentModuleId;
+                item.AgentModuleId = null;
             }
             else {
                 // bind news entry to Agent, if it exists

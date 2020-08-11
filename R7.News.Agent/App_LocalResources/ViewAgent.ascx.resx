@@ -36,7 +36,4 @@
 	<data name="SyncTab.Text" xml:space="preserve">
         <value>Sync Page with News Entry</value>
     </data>
-	<data name="Unbind.Text" xml:space="preserve">
-        <value>Unbind News Entry from Agent</value>
-    </data>
 </root>
