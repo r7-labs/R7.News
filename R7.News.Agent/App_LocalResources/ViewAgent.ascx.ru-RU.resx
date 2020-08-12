@@ -36,4 +36,10 @@
 	<data name="SyncTab.Text" xml:space="preserve">
         <value>Синхронизировать страницу с новостью</value>
     </data>
+	<data name="EditActions.Text" xml:space="preserve">
+        <value>Комманды редактирования</value>
+    </data>
+	<data name="MoreEditActions.Text" xml:space="preserve">
+        <value>Больше комманд редактирования</value>
+    </data>
 </root>

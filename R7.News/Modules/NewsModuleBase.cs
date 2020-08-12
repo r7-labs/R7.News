@@ -1,30 +1,11 @@
-﻿//
-//  NewsModuleBase.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2017-2019 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+﻿using System;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common;
 using DotNetNuke.Entities.Icons;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
+using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Security;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.Text;
@@ -64,7 +45,6 @@ namespace R7.News.Modules
 
         protected void BindChildControls (NewsEntryViewModelBase item, Control itemControl)
         {
-            // visibility badges
             var listBadges = (BadgeList) itemControl.FindControl ("listBadges");
             if (item.Badges != null && item.Badges.Count > 0) {
                 listBadges.DataSource = item.Badges;
@@ -73,7 +53,6 @@ namespace R7.News.Modules
                 listBadges.Visible = false;
             }
 
-            // show term links
             var termLinks = (TermLinks) itemControl.FindControl ("termLinks");
             if (item.ContentItem.Terms.Count > 0) {
                 termLinks.Module = this;
@@ -83,10 +62,8 @@ namespace R7.News.Modules
                 termLinks.Visible = false;
             }
 
-            // action buttons
-            var actionButtons = (ActionButtons) itemControl.FindControl ("actionButtons");
+            var actionButtons = ((ActionsControl) itemControl.FindControl ("ctlActions")).ActionButtons;
             var actions = item.GetActions ();
-
             if (actions.Count > 0) {
                 actionButtons.Actions = actions;
                 actionButtons.DataBind ();
@@ -97,13 +74,9 @@ namespace R7.News.Modules
 
         protected void btnDuplicate_Command (object sender, CommandEventArgs e)
         {
-            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
-            if (newsEntryId != null) {
-                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
-                if (newsEntry != null) {
-                    NewsRepository.Instance.DuplicateNewsEntry (newsEntry, ModuleId, TabId);
-                }
-            }
+            Exceptions.LogException (new Exception ($"btnDuplicate_Command: CommandName: {e.CommandName} CommandArgument {e.CommandArgument}"));
+
+
 
             Response.Redirect (Globals.NavigateURL ());
         }

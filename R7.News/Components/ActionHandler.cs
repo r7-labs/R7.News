@@ -1,29 +1,11 @@
-﻿//
-//  ActionHandler.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2017 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Web;
+using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
+using R7.Dnn.Extensions.Text;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Providers.DiscussProviders;
@@ -38,11 +20,13 @@ namespace R7.News.Components
         public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
         {
             try {
-                if (action.Action == NewsEntryActions.StartDiscussion) {
-                    StartDiscussion (action.Params [0], action.EntryId, portalId, userId);
-                }
-                else if (action.Action == NewsEntryActions.JoinDiscussion) {
-                    JoinDiscussion (action.EntryId, portalId);
+                switch (action.Action) {
+                    case NewsEntryActions.StartDiscussion:
+                        StartDiscussion (action.Params [0], action.EntryId, portalId, userId);
+                        break;
+                    case NewsEntryActions.JoinDiscussion:
+                        JoinDiscussion (action.EntryId, portalId);
+                        break;
                 }
             }
             catch (Exception ex) {
@@ -52,6 +36,22 @@ namespace R7.News.Components
                 log.LogPortalID = portalId;
                 log.AddProperty ("Message", $"Cannot execute {action.Action} action");
                 EventLogController.Instance.AddLog (log);
+            }
+        }
+
+        public void Duplicate (int entryId, int portalId, int tabId, int moduleId)
+        {
+            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
+            if (newsEntry != null) {
+                NewsRepository.Instance.DuplicateNewsEntry (newsEntry, moduleId, tabId);
+            }
+        }
+
+        public void SyncTab (int entryId, int portalId, TabInfo activeTab)
+        {
+            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
+            if (newsEntry != null) {
+                new TabSynchronizer ().UpdateTabFromNewsEntry (activeTab, newsEntry);
             }
         }
 

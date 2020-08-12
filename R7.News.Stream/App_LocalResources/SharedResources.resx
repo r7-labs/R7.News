@@ -21,4 +21,10 @@
 	<data name="Duplicate.Text" xml:space="preserve">
         <value>Duplicate News Entry</value>
     </data>
+	<data name="EditActions.Text" xml:space="preserve">
+        <value>Edit Actions</value>
+    </data>
+	<data name="MoreEditActions.Text" xml:space="preserve">
+        <value>More Edit Actions</value>
+    </data>
 </root>

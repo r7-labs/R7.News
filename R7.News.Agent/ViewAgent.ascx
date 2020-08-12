@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ViewAgent.ascx.cs" Inherits="R7.News.Agent.ViewAgent" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
-<%@ Register TagPrefix="news" TagName="ActionButtons" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionButtons.ascx" %>
+<%@ Register TagPrefix="news" TagName="Actions" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionsControl.ascx" %>
 <%@ Register TagPrefix="news" TagName="AgplSignature" Src="~/DesktopModules/R7.News/R7.News/Controls/AgplSignature.ascx" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
@@ -46,30 +46,10 @@
                     <div class="<%# Item.TextCssClass %>">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
 					</div>
-			        <ul class="list-inline news-action-btns">
-						<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
-                            <div class="dropdown-menu">
-						    	<a class="dropdown-item" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-									<i class="fas fa-pencil-alt"></i>
-									<%# LocalizeString ("EditNewsEntry.Text") %>
-								</a>
-								<div class="dropdown-divider"></div>
-								<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnDuplicate_Command"
-										CommandName="Duplicate" CommandArgument="<%# Item.EntryId.ToString () %>">
-									<i class="far fa-clone"></i>
-									<%# LocalizeString ("Duplicate.Text") %>
-                                </asp:LinkButton>
-								<div class="dropdown-divider"></div>
-								<asp:LinkButton runat="server" CssClass="dropdown-item" OnCommand="btnSyncTab_Command"
-										CommandName="SyncTab" CommandArgument="<%# Item.EntryId.ToString () %>">
-									<i class="fas fa-sync"></i>
-									<%# LocalizeString ("SyncTab.Text") %>
-                                </asp:LinkButton>
-							</div>
-						</li>
-						<news:ActionButtons id="actionButtons" runat="server" />
-					</ul>
+					<news:Actions id="ctlActions" runat="server"
+						EntryId="<%# Item.EntryId %>"
+						EnableDuplicate="true"
+						EnableSyncTab="true" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -95,17 +75,9 @@
                                     <div class="<%# Item.TextCssClass %>">
                                         <%# HttpUtility.HtmlDecode (Item.Description) %>
 									</div>
-									<ul class="list-inline news-action-btns">
-										<li runat="server" class="list-inline-item dropdown" Visible="<%# IsEditable %>">
-				                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown"><i class="fas fa-cog"></i></button>
-				                            <div class="dropdown-menu">
-												<a class="dropdown-item" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ("entryid", Item.EntryId.ToString (), "EditNewsEntry")) %>'>
-													<i class="fas fa-pencil-alt"></i>
-													<%# LocalizeString ("EditNewsEntry.Text") %>
-												</a>
-											</div>
-										</li>
-									</ul>
+									<news:Actions id="ctlActions" runat="server"
+										EntryId="<%# Item.EntryId %>"
+										EnableDuplicate="true" />
                                 </div>
                             </div>
                         </ItemTemplate>

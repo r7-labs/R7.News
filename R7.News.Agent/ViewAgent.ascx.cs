@@ -1,25 +1,4 @@
-﻿//
-//  ViewAgent.ascx.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2016-2020 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -136,19 +115,6 @@ namespace R7.News.Agent
         }
 
         #endregion
-
-        protected void btnSyncTab_Command (object sender, CommandEventArgs e)
-        {
-            var newsEntryId = ParseHelper.ParseToNullable<int> (e.CommandArgument.ToString ());
-            if (newsEntryId != null) {
-                var newsEntry = NewsRepository.Instance.GetNewsEntry (newsEntryId.Value, PortalId);
-                if (newsEntry != null) {
-                    new TabSynchronizer ().UpdateTabFromNewsEntry (PortalSettings.ActiveTab, newsEntry);
-                }
-            }
-
-            Response.Redirect (Globals.NavigateURL ());
-        }
 
         protected void OnAction (object sender, ActionEventArgs e)
         {

@@ -7,7 +7,7 @@
     text-decoration:inherit;
 }
 
-.news-module .news-action-btns a.btn.disabled {
+.news-module .news-entry-actions a.btn.disabled {
     pointer-events:auto;
 }
 
