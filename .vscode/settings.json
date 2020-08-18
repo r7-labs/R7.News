@@ -9,7 +9,9 @@
         "**/packages": true,
         // build output
         "**/bin": true,
-        "**/obj": true
+        "**/obj": true,
+        // etc
+        "**/mono_crash.*.json": true
     },
 
     "files.associations": {
