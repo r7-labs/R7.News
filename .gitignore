@@ -12,3 +12,6 @@ Deploy/output/*
 # Downloaded NuGet packages
 packages/*
 Packages/*
+
+# Other
+mono_crash.*.json
