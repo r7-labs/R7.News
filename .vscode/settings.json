@@ -13,6 +13,7 @@
     },
 
     "files.associations": {
-        "*.SqlDataProvider": "sql"
+        "*.SqlDataProvider": "sql",
+        "*.dnn": "xml"
     }
 }
