@@ -12,7 +12,7 @@ using R7.News.Controls.Models;
 
 namespace R7.News.Controls
 {
-    // TODO: Rename to EditActionsControl or just EditActions
+    // TODO: Rename to EditActionsControl or just EditActions?
     public class ActionsControl: UserControl
     {
         public int EntryId { get; set; }
@@ -59,7 +59,6 @@ namespace R7.News.Controls
             var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
             var moduleId = int.Parse (action.Params [0]);
             actionHandler.Duplicate (action.EntryId, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab.TabID, moduleId);
-            Response.Redirect (Globals.NavigateURL ());
         }
 
         protected void btnSyncTab_Command (object sender, CommandEventArgs e)
@@ -67,7 +66,6 @@ namespace R7.News.Controls
             var actionHandler = new ActionHandler ();
             var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
             actionHandler.SyncTab (action.EntryId, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab);
-            Response.Redirect (Globals.NavigateURL ());
         }
     }
 }

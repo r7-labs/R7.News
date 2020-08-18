@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using DotNetNuke.Entities.Tabs;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Portals;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Log.EventLog;
@@ -16,6 +17,8 @@ namespace R7.News.Components
     public class ActionHandler
     {
         static readonly object discussLock = new object ();
+
+        protected HttpResponse Response = HttpContext.Current.Response;
 
         public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
         {
@@ -45,6 +48,7 @@ namespace R7.News.Components
             if (newsEntry != null) {
                 NewsRepository.Instance.DuplicateNewsEntry (newsEntry, moduleId, tabId);
             }
+            Response.Redirect (Globals.NavigateURL ());
         }
 
         public void SyncTab (int entryId, int portalId, TabInfo activeTab)
@@ -53,6 +57,7 @@ namespace R7.News.Components
             if (newsEntry != null) {
                 new TabSynchronizer ().UpdateTabFromNewsEntry (activeTab, newsEntry);
             }
+            Response.Redirect (Globals.NavigateURL ());
         }
 
         public void StartDiscussion (string providerKey, int entryId, int portalId, int userId)
@@ -68,6 +73,7 @@ namespace R7.News.Components
                             newsEntry.DiscussEntryId = discussEntryId;
                             NewsRepository.Instance.UpdateNewsEntry (newsEntry);
                             RedirectToDiscussion (newsEntry, discussProvider);
+                            return;
                         }
                         else {
                             LogAdminAlert ($"Error adding discussion for news entry using {providerKey} provider", portalId);
@@ -78,6 +84,7 @@ namespace R7.News.Components
                     }
                 }
             }
+            Response.Redirect (Globals.NavigateURL ());
         }
 
         public void JoinDiscussion (int entryId, int portalId)
@@ -87,10 +94,13 @@ namespace R7.News.Components
                 var discussProvider = GetDiscussProviderByKey (newsEntry.DiscussProviderKey);
                 if (discussProvider != null) {
                     RedirectToDiscussion (newsEntry, discussProvider);
-                } else {
+                    return;
+                }
+                else {
                     LogAdminAlert ($"Cannot redirect to discussion, {newsEntry.DiscussProviderKey} provider does not exists", portalId);
                 }
             }
+            Response.Redirect (Globals.NavigateURL ());
         }
 
         protected IDiscussProvider GetDiscussProviderByKey (string providerKey)
@@ -100,7 +110,7 @@ namespace R7.News.Components
 
         protected void RedirectToDiscussion (INewsEntry newsEntry, IDiscussProvider discussProvider)
         {
-            HttpContext.Current.Response.Redirect (discussProvider.GetDiscussUrl (newsEntry.DiscussEntryId), false);
+            Response.Redirect (discussProvider.GetDiscussUrl (newsEntry.DiscussEntryId), false);
         }
 
         protected void LogAdminAlert (string message, int portalId)
