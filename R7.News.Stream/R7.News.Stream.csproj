@@ -151,6 +151,9 @@
     </Compile>
     <Compile Include="Components\StreamController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\R7.News\Properties\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="ModuleSettings.ascx.cs">
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>

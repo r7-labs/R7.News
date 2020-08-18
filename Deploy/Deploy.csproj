@@ -74,19 +74,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="BuildDefaults.targets" />
-    <None Include="BuildSettings.targets" />
+    <None Include="__Defaults.targets" />
+    <None Include="__Settings.targets" />
     <None Include="Deploy.csproj" />
     <None Include="InstallPackage.targets" />
     <None Include="LocalDeploy.targets" />
     <None Include="Tests.targets" />
+    <None Include="GenerateManifest.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dummy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="BuildSettings.targets" />
-  <Import Project="BuildDefaults.targets" />
+  <Import Project="__Settings.targets" />
+  <Import Project="__Defaults.targets" />
   <Import Project="Tests.targets" />
   <Import Project="LocalDeploy.targets" />
   <Import Project="InstallPackage.targets" />

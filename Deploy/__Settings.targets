@@ -5,6 +5,7 @@
 
     <!-- Main properties -->
     <PropertyGroup>
+        <MainProjectName>R7.News</MainProjectName>
         <PackageName>R7.News</PackageName>
         <PackageOutputPath>bin/Deploy</PackageOutputPath>
         <TmpDir>bin/tmp</TmpDir>
