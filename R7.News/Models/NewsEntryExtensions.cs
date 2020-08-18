@@ -49,12 +49,12 @@ namespace R7.News.Models
             var contentController = new ContentController ();
             var contentItems = contentController.GetContentItemsByContentType (NewsDataProvider.Instance.NewsContentType);
 
-            return newsEntries.Join (contentItems.DefaultIfEmpty (), 
+            return newsEntries.Join (contentItems.DefaultIfEmpty (),
                 ne => ne.ContentItemId,
-                ci => ci.ContentItemId, 
-                (ne, ci) => { 
-                    ne.ContentItem = ci; 
-                    return ne; 
+                ci => ci.ContentItemId,
+                (ne, ci) => {
+                    ne.ContentItem = ci;
+                    return ne;
                 }
             );
         }
@@ -180,7 +180,7 @@ namespace R7.News.Models
         public static bool IsVisible (this INewsEntry newsEntry, int minThematicWeight, int maxThematicWeight,
                                       int minStructuralWeight, int maxStructuralWeight)
         {
-            return ModelHelper.IsVisible (newsEntry.ThematicWeight, newsEntry.StructuralWeight, 
+            return ModelHelper.IsVisible (newsEntry.ThematicWeight, newsEntry.StructuralWeight,
                 minThematicWeight, maxThematicWeight, minStructuralWeight, maxStructuralWeight);
         }
 
@@ -195,7 +195,7 @@ namespace R7.News.Models
                 GetPermalinkFriendly (newsEntry, moduleController, moduleId, tabId) :
                 GetPermalinkRaw (newsEntry, moduleController, portalAlias, moduleId, tabId);
         }
-        
+
         public static string GetPermalinkFriendly (this INewsEntry newsEntry,
                                                    IModuleController moduleController,
                                                    int moduleId,
@@ -212,7 +212,7 @@ namespace R7.News.Models
                 "mid",
                 moduleId.ToString (),
                 "entryid",
-                newsEntry.EntryId.ToString ()); 
+                newsEntry.EntryId.ToString ());
         }
 
         public static string GetPermalinkRaw (this INewsEntry newsEntry,
@@ -230,7 +230,7 @@ namespace R7.News.Models
             + "&mid=" + moduleId + "&ctl=entry&entryid=" + newsEntry.EntryId);
         }
 
-        public static IList<NewsEntryAction> GetActions (this INewsEntry newsEntry)
+        public static IList<NewsEntryAction> GetActions (this INewsEntry newsEntry, int moduleId)
         {
             var actions = new List<NewsEntryAction> ();
             var discussionStarted = !string.IsNullOrEmpty (newsEntry.DiscussProviderKey);
@@ -240,6 +240,7 @@ namespace R7.News.Models
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         Action = NewsEntryActions.StartDiscussion,
+                        ModuleId = moduleId,
                         Params = new string [] { discussProvider.ProviderKey },
                         Enabled = HttpContext.Current.Request.IsAuthenticated
                     });
@@ -251,6 +252,7 @@ namespace R7.News.Models
                     actions.Add (new NewsEntryAction {
                         EntryId = newsEntry.EntryId,
                         Action = NewsEntryActions.JoinDiscussion,
+                        ModuleId = moduleId,
                         Params = new string [] {
                             discussProvider.ProviderKey,
                             discussProvider.GetReplyCount (newsEntry.DiscussEntryId).ToString ()

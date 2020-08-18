@@ -49,7 +49,8 @@ namespace R7.News.Modules
             if (item.Badges != null && item.Badges.Count > 0) {
                 listBadges.DataSource = item.Badges;
                 listBadges.DataBind ();
-            } else {
+            }
+            else {
                 listBadges.Visible = false;
             }
 
@@ -58,12 +59,13 @@ namespace R7.News.Modules
                 termLinks.Module = this;
                 termLinks.DataSource = item.ContentItem.Terms;
                 termLinks.DataBind ();
-            } else {
+            }
+            else {
                 termLinks.Visible = false;
             }
 
             var actionButtons = ((ActionsControl) itemControl.FindControl ("ctlActions")).ActionButtons;
-            var actions = item.GetActions ();
+            var actions = item.GetActions (ModuleId);
             if (actions.Count > 0) {
                 actionButtons.Actions = actions;
                 actionButtons.DataBind ();

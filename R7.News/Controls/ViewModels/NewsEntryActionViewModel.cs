@@ -33,6 +33,7 @@ namespace R7.News.Controls.ViewModels
         {
             Action = action.Action;
             EntryId = action.EntryId;
+            ModuleId = action.ModuleId;
             Params = action.Params;
             Enabled = action.Enabled;
             Context = context;

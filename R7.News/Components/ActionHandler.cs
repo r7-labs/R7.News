@@ -20,12 +20,18 @@ namespace R7.News.Components
 
         protected HttpResponse Response = HttpContext.Current.Response;
 
-        public void ExecuteAction (NewsEntryAction action, int portalId, int userId)
+        public void ExecuteAction (NewsEntryAction action, int portalId, int tabId, int? userId = null)
         {
             try {
                 switch (action.Action) {
+                    case NewsEntryActions.Duplicate:
+                        Duplicate (action.EntryId, portalId, tabId, action.ModuleId);
+                        break;
+                    case NewsEntryActions.SyncTab:
+                        SyncTab (action.EntryId, portalId, tabId);
+                        break;
                     case NewsEntryActions.StartDiscussion:
-                        StartDiscussion (action.Params [0], action.EntryId, portalId, userId);
+                        StartDiscussion (action.EntryId, portalId, userId.Value, action.Params [0]);
                         break;
                     case NewsEntryActions.JoinDiscussion:
                         JoinDiscussion (action.EntryId, portalId);
@@ -42,7 +48,7 @@ namespace R7.News.Components
             }
         }
 
-        public void Duplicate (int entryId, int portalId, int tabId, int moduleId)
+        protected void Duplicate (int entryId, int portalId, int tabId, int moduleId)
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
             if (newsEntry != null) {
@@ -51,16 +57,18 @@ namespace R7.News.Components
             Response.Redirect (Globals.NavigateURL ());
         }
 
-        public void SyncTab (int entryId, int portalId, TabInfo activeTab)
+        protected void SyncTab (int entryId, int portalId, int tabId)
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
             if (newsEntry != null) {
+                var tabCtrl = new TabController ();
+                var activeTab = tabCtrl.GetTab (tabId, portalId, false);
                 new TabSynchronizer ().UpdateTabFromNewsEntry (activeTab, newsEntry);
             }
             Response.Redirect (Globals.NavigateURL ());
         }
 
-        public void StartDiscussion (string providerKey, int entryId, int portalId, int userId)
+        protected void StartDiscussion (int entryId, int portalId, int userId, string providerKey)
         {
             lock (discussLock) {
                 var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
@@ -87,7 +95,7 @@ namespace R7.News.Components
             Response.Redirect (Globals.NavigateURL ());
         }
 
-        public void JoinDiscussion (int entryId, int portalId)
+        protected void JoinDiscussion (int entryId, int portalId)
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
             if (newsEntry != null && !string.IsNullOrEmpty (newsEntry.DiscussProviderKey)) {
