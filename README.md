@@ -2,15 +2,15 @@
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/roman-yagodin/R7.News)](https://bettercodehub.com/)
 
-The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform, 
+The goal of *R7.News* project is to provide a streamlined news subsystem for DNN Platform,
 which would take advantage from tight CMS integration and combinational approach to news article content authoring.
 
 ## License
 
 [![AGPLv3](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.html)
 
-The *R7.News* is free software: you can redistribute it and/or modify it under the terms of 
-the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, 
+The *R7.News* is free software: you can redistribute it and/or modify it under the terms of
+the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License,
 or (at your option) any later version.
 
 ## Main features outline:
@@ -41,7 +41,6 @@ or (at your option) any later version.
 ### <a name="dependencies">Dependencies</a>
 
 * [R7.DotNetNuke.Extensions](https://github.com/roman-yagodin/R7.DotNetNuke.Extensions) (base library)
-* [R7.ImageHandler](https://github.com/roman-yagodin/R7.ImageHandler) (automatic image thumbnailer)
 
 ## <a name="discuss">Setup discussion</a>
 
@@ -112,4 +111,3 @@ Remember to check event log in case if something went wrong.
 
 1. Uninstall *R7.News* library package first, this will remove all database objects and data.
 2. Uninstall *R7.News.Agent* and *R7.News.Stream* module packages (in any order).
-3. Uninstall *R7.ImageHandler* and *R7.DotNetNuke.Extensions* library packages, if you don't need them anymore.

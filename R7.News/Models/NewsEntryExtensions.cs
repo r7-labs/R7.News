@@ -108,8 +108,13 @@ namespace R7.News.Models
             var image = newsEntry.GetImage ();
             if (image != null) {
                 return Globals.AddHTTP (PortalSettings.Current.PortalAlias.HTTPAlias)
-                + "/imagehandler.ashx?fileticket=" + UrlUtils.EncryptParameter (image.FileId.ToString ())
-                + "&width=" + width + "&ext=." + image.Extension;
+                + "/dnnimagehandler.ashx"
+                + "?mode=securefile"
+                + "&fileid=" + image.FileId
+                + "&filter=resize"
+                + "&w=" + width
+                // this helps external services to understand mimetype
+                + "&ext=." + image.Extension;
             }
 
             return string.Empty;
