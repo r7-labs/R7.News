@@ -48,8 +48,8 @@
 					</div>
 					<news:Actions id="ctlActions" runat="server"
 						EntryId="<%# Item.EntryId %>"
-						EnableDuplicate="true"
-						EnableSyncTab="true" />
+						ShowDuplicateAction="true"
+						ShowSyncTabAction="true" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -77,7 +77,7 @@
 									</div>
 									<news:Actions id="ctlActions" runat="server"
 										EntryId="<%# Item.EntryId %>"
-										EnableDuplicate="true" />
+										ShowDuplicateAction="true" />
                                 </div>
                             </div>
                         </ItemTemplate>

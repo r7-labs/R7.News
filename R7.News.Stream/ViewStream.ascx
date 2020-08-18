@@ -49,7 +49,7 @@
 						</div>
 						<news:Actions id="ctlActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
-							EnableDuplicate="true" />
+							ShowDuplicateAction="true" />
                     </div>
                 </div>
 			</div>

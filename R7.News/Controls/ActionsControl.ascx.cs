@@ -24,11 +24,9 @@ namespace R7.News.Controls
 
         public ActionButtons ActionButtons => (ActionButtons) FindControl ("actionButtons");
 
-        // TODO: Module should export list of available actions?
-        // TODO: Convert Enable<SomeAction> props to Has<SomeAction> methods
-        public bool EnableSyncTab { get; set; }
+        public bool ShowSyncTabAction { get; set; }
 
-        public bool EnableDuplicate { get; set; }
+        public bool ShowDuplicateAction { get; set; }
 
         protected string LocalizeString (string text)
         {

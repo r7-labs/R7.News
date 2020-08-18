@@ -15,13 +15,13 @@
 				<i class="fas fa-cog"></i>
 			</button>
 			<div class="dropdown-menu" aria-labelledby="<%# btnDropMoreEditActions.ClientID %>">
-				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# EnableDuplicate %>"
+				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# ShowDuplicateAction %>"
 						OnCommand="btnDuplicate_Command" CommandName="Duplicate" CommandArgument="<%# JsonExtensionsWeb.ToJson(DuplicateAction) %>">
 					<i class="far fa-clone"></i>
 					<%: LocalizeString ("Duplicate.Text") %>
 				</asp:LinkButton>
-				<div class="dropdown-divider" runat="server" Visible="<%# EnableSyncTab %>"></div>
-				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# EnableSyncTab %>"
+				<div class="dropdown-divider" runat="server" Visible="<%# ShowSyncTabAction %>"></div>
+				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# ShowSyncTabAction %>"
 						OnCommand="btnSyncTab_Command" CommandName="SyncTab" CommandArgument="<%# JsonExtensionsWeb.ToJson(SyncTabAction) %>">
 					<i class="fas fa-sync"></i>
 					<%: LocalizeString ("SyncTab.Text") %>

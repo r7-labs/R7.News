@@ -71,14 +71,5 @@ namespace R7.News.Modules
                 actionButtons.Visible = false;
             }
         }
-
-        protected void btnDuplicate_Command (object sender, CommandEventArgs e)
-        {
-            Exceptions.LogException (new Exception ($"btnDuplicate_Command: CommandName: {e.CommandName} CommandArgument {e.CommandArgument}"));
-
-
-
-            Response.Redirect (Globals.NavigateURL ());
-        }
     }
 }
