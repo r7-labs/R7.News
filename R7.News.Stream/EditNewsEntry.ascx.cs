@@ -106,7 +106,8 @@ namespace R7.News.Stream
                 JavaScriptLibraryHelper.RegisterStyleSheet (select2Library, Page, "css/select2.min.css");
             }
 
-            TermSelector.InitTerms (selTerms);
+            var termSelector = new TermSelector ();
+            termSelector.InitTerms (selTerms);
 
             pickerImage.FileFilter = Globals.glbImageFileTypes;
             pickerImage.FolderPath = GetImagesFolderPath ();
@@ -154,7 +155,9 @@ namespace R7.News.Stream
         {
             var thematicWeight = int.Parse (sliderThematicWeight.Text);
             var structuralWeight = int.Parse (sliderStructuralWeight.Text);
-            var terms = TermSelector.GetSelectedTerms (selTerms);
+
+            var termSelector = new TermSelector ();
+            var terms = termSelector.GetSelectedTerms (selTerms);
 
             gridModules.DataSource = GetStreamModules (thematicWeight, structuralWeight, terms);
             gridModules.DataBind ();
@@ -228,7 +231,8 @@ namespace R7.News.Stream
             }
 
             if (!terms.IsNullOrEmpty ()) {
-                TermSelector.SelectTerms (selTerms, terms);
+                var termSelector = new TermSelector ();
+                termSelector.SelectTerms (selTerms, terms);
             }
 
             buttonUpdate.Text = LocalizeString ("Add.Text");
@@ -266,7 +270,8 @@ namespace R7.News.Stream
             datetimeStartDate.SelectedDate = item.StartDate;
             datetimeEndDate.SelectedDate = item.EndDate;
 
-            TermSelector.SelectTerms (selTerms, item.ContentItem.Terms);
+            var termSelector = new TermSelector ();
+            termSelector.SelectTerms (selTerms, item.ContentItem.Terms);
 
             ctlUrl.Url = item.Url;
 
@@ -406,7 +411,8 @@ namespace R7.News.Stream
 
         protected override void AddItem (NewsEntryInfo item)
         {
-            NewsRepository.Instance.AddNewsEntry (item, TermSelector.GetSelectedTerms (selTerms), images, ModuleId, TabId);
+            var termSelector = new TermSelector ();
+            NewsRepository.Instance.AddNewsEntry (item, termSelector.GetSelectedTerms (selTerms), images, ModuleId, TabId);
             if (images.Count > 0) {
                 RememberFolder (images [0]);
             }
@@ -414,7 +420,8 @@ namespace R7.News.Stream
 
         protected override void UpdateItem (NewsEntryInfo item)
         {
-            NewsRepository.Instance.UpdateNewsEntry (item, TermSelector.GetSelectedTerms (selTerms), ModuleId, TabId);
+            var termSelector = new TermSelector ();
+            NewsRepository.Instance.UpdateNewsEntry (item, termSelector.GetSelectedTerms (selTerms), ModuleId, TabId);
             if (images.Count > 0) {
                 RememberFolder (images [0]);
             }

@@ -5,15 +5,15 @@ using DotNetNuke.Entities.Content.Taxonomy;
 
 namespace R7.News.Controls
 {
-    public static class TermSelector
+    public class TermSelector
     {
-        public static void InitTerms (ListControl listControl)
+        public void InitTerms (ListControl listControl)
         {
             listControl.DataSource = GetTerms ();
             listControl.DataBind ();
         }
 
-        static IEnumerable<Term> GetTerms ()
+        protected IEnumerable<Term> GetTerms ()
         {
             var terms = new List<Term> ();
             var vocCtrl = new VocabularyController ();
@@ -26,7 +26,7 @@ namespace R7.News.Controls
             return terms.OrderBy (t => t.Name);
         }
 
-        public static void SelectTerms (ListControl listControl, IEnumerable<Term> selectedTerms)
+        public void SelectTerms (ListControl listControl, IEnumerable<Term> selectedTerms)
         {
             foreach (ListItem item in listControl.Items) {
                 var itemId = int.Parse (item.Value);
@@ -38,7 +38,7 @@ namespace R7.News.Controls
         }
 
         // TODO: Return IList or IEnumerable
-        public static List<Term> GetSelectedTerms (ListControl listControl)
+        public List<Term> GetSelectedTerms (ListControl listControl)
         {
             var termCtrl = new TermController ();
             var selectedTerms = new List<Term> ();
