@@ -5,9 +5,8 @@
             <li runat="server" id="itemPlaceholder"></li>
         </LayoutTemplate>
         <ItemTemplate>
-            <li class="list-inline-item" style="padding-left:inherit">
-                <i class="fas fa-tag"></i>
-                <a href="<%# Item.Url %>"><%# Item.Name %></a>
+            <li class="list-inline-item">
+                <a href="<%# Item.Url %>" rel="tag" class="badge badge-secondary"><%# Item.Name %></a>
             </li>
         </ItemTemplate>
     </asp:ListView>

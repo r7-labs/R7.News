@@ -15,12 +15,8 @@
     margin-left:0
 }
 
-.news-module .term-links {
-    font-size:85%
-}
-
-.news-module .term-links i {
-    color:gray
+.news-module .term-links .list-inline-item {
+    padding-left:inherit
 }
 
 .news-module .news-entry-info {
