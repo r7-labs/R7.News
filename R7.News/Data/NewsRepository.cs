@@ -76,8 +76,9 @@ namespace R7.News.Data
         {
             var contentItem = AddContentItem (newsEntry, tabId, moduleId);
             newsEntry.ContentItemId = contentItem.ContentItemId;
-            NewsDataProvider.Instance.Add (newsEntry);
 
+            NewsDataProvider.Instance.Add (newsEntry);
+            UpdateNewsEntryText (newsEntry);
             UpdateContentItem (contentItem, newsEntry, terms, images);
 
             DataCache.ClearCache (NewsCacheKeyPrefix);
@@ -85,6 +86,34 @@ namespace R7.News.Data
             return newsEntry.EntryId;
         }
 
+        public void UpdateNewsEntryText (NewsEntryInfo newsEntry)
+        {
+            // TODO: More careful handling of "empty" text
+            if (!string.IsNullOrEmpty (newsEntry.Text)) {
+                var newsEntryText = new NewsEntryText {
+                    EntryId = newsEntry.EntryId,
+                    Text = newsEntry.Text
+                };
+                if (newsEntry.EntryTextId == null) {
+                    NewsDataProvider.Instance.Add (newsEntryText);
+                    newsEntry.EntryTextId = newsEntryText.EntryTextId;
+                    NewsDataProvider.Instance.Update (newsEntry);
+                }
+                else {
+                    newsEntryText.EntryTextId = newsEntry.EntryTextId.Value;
+                    NewsDataProvider.Instance.Update (newsEntryText);
+                }
+            }
+            else {
+                if (newsEntry.EntryTextId != null) {
+                    NewsDataProvider.Instance.Delete<NewsEntryText, int> (newsEntry.EntryTextId.Value);
+                    newsEntry.EntryTextId = null;
+                    NewsDataProvider.Instance.Update (newsEntry);
+                }
+            }
+        }
+
+        [Obsolete]
         internal int AddNewsEntry_Internal (IRepository<NewsEntryInfo> repository, NewsEntryInfo newsEntry,
             List<Term> terms,
             List<IFileInfo> images,
@@ -120,10 +149,11 @@ namespace R7.News.Data
         public int DuplicateNewsEntry (NewsEntryInfo item, int moduleId, int tabId)
         {
             item.EntryId = 0;
+            item.EntryTextId = null;
 
             if (item.IsPublished (DateTime.Now)) {
                 item.StartDate = null;
-                item.EndDate = DateTime.Today;   
+                item.EndDate = DateTime.Today;
             }
 
             return AddNewsEntry (item, item.ContentItem.Terms, item.ContentItem.Images, moduleId, tabId);
@@ -161,7 +191,8 @@ namespace R7.News.Data
             newsEntry.ContentItem.TabID = tabId;
             NewsDataProvider.Instance.ContentController.UpdateContentItem (newsEntry.ContentItem);
 
-            NewsDataProvider.Instance.Update<NewsEntryInfo> (newsEntry);
+            NewsDataProvider.Instance.Update (newsEntry);
+            UpdateNewsEntryText (newsEntry);
 
             // update content item terms
             var termController = new TermController ();
@@ -174,7 +205,7 @@ namespace R7.News.Data
         }
 
         /// <summary>
-        /// Updates the news entry w/o associated content item.
+        /// Updates the news entry w/o associated entities.
         /// </summary>
         /// <param name="newsEntry">News entry.</param>
         public void UpdateNewsEntry (NewsEntryInfo newsEntry)
@@ -185,7 +216,7 @@ namespace R7.News.Data
 
         public void DeleteNewsEntry (INewsEntry newsEntry)
         {
-            // delete content item, related news entry will be deleted by foreign key rule
+            // delete content item, related news entry and text records will be deleted by foreign key rules
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
 
             DataCache.ClearCache (NewsCacheKeyPrefix);
@@ -200,18 +231,18 @@ namespace R7.News.Data
 
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
-                c => GetAllNewsEntriesInternal (portalId, 
+                c => GetAllNewsEntriesInternal (portalId,
                     thematicWeights, structuralWeights)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetAllNewsEntriesInternal (int portalId, 
+        protected IEnumerable<NewsEntryInfo> GetAllNewsEntriesInternal (int portalId,
                                                                      WeightRange thematicWeights,
                                                                      WeightRange structuralWeights)
         {
             return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (
-                System.Data.CommandType.StoredProcedure, 
-                SpNamePrefix + "GetNewsEntries", portalId, 
+                System.Data.CommandType.StoredProcedure,
+                SpNamePrefix + "GetNewsEntries", portalId,
                 thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
@@ -231,7 +262,7 @@ namespace R7.News.Data
 
         public IEnumerable<NewsEntryInfo> GetAllNewsEntries_FirstPage (int portalId,
                                                                        int pageSize,
-                                                                       DateTime? now, 
+                                                                       DateTime? now,
                                                                        WeightRange thematicWeights,
                                                                        WeightRange structuralWeights)
         {
@@ -254,12 +285,12 @@ namespace R7.News.Data
 
             return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
-                c => GetNewsEntriesByTermsInternal (portalId, 
+                c => GetNewsEntriesByTermsInternal (portalId,
                     thematicWeights, structuralWeights, terms)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int portalId, 
+        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int portalId,
                                                                             WeightRange thematicWeights,
                                                                             WeightRange structuralWeights,
                                                                             IList<Term> terms)
@@ -269,7 +300,7 @@ namespace R7.News.Data
             if (terms.Count > 0) {
                 return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (
                     System.Data.CommandType.StoredProcedure,
-                    SpNamePrefix + "GetNewsEntriesByTerms", portalId, 
+                    SpNamePrefix + "GetNewsEntriesByTerms", portalId,
                     thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max,
                     terms.Select (t => t.TermId).ToArray ())
                         .WithContentItems ()
@@ -351,7 +382,7 @@ namespace R7.News.Data
             return GetNewsEntriesByTerms_FirstPage (portalId, pageSize, now, thematicRange, structRange, includeTerms);
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries_Page (int moduleId, int portalId, 
+        public IEnumerable<NewsEntryInfo> GetNewsEntries_Page (int moduleId, int portalId,
             WeightRange thematicRange, WeightRange structRange, bool showAllNews, IList<Term> includeTerms)
         {
             if (showAllNews) {

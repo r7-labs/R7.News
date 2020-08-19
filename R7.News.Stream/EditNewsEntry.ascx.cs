@@ -254,8 +254,7 @@ namespace R7.News.Stream
 
         protected override void LoadItem (NewsEntryInfo item)
         {
-            // load also content item
-            item = (NewsEntryInfo) item.WithContentItem ();
+            item = (NewsEntryInfo) item.WithContentItem ().WithText ();
 
             var image = item.ContentItem.Images.FirstOrDefault ();
             if (image != null) {
@@ -264,6 +263,7 @@ namespace R7.News.Stream
 
             textTitle.Text = item.Title;
             textDescription.Text = item.Description;
+            txtExtendedText.Text = item.Text;
 
             datetimeThresholdDate.SelectedDate = item.ThresholdDate;
             datetimeDueDate.SelectedDate = item.DueDate;
@@ -361,6 +361,7 @@ namespace R7.News.Stream
             // fill the object
             item.Title = textTitle.Text.Trim ();
             item.Description = textDescription.Text.Trim ();
+            item.Text = txtExtendedText.Text.Trim ();
 
             item.ThresholdDate = datetimeThresholdDate.SelectedDate;
             item.DueDate = datetimeDueDate.SelectedDate;
@@ -375,7 +376,6 @@ namespace R7.News.Stream
 
             item.DiscussProviderKey = (hiddenDiscussProviderKey.Value.Length > 0)? hiddenDiscussProviderKey.Value : null;
             item.DiscussEntryId = (hiddenDiscussEntryId.Value.Length > 0) ? hiddenDiscussEntryId.Value : null; ;
-
             var agentModuleId = ParseHelper.ParseToNullable<int> (txtAgentModuleId.Text);
             if (agentModuleId == null) {
                 // unbind news entry from Agent

@@ -155,6 +155,7 @@
     <Compile Include="Properties\SolutionInfo.cs" />
     <Compile Include="Components\NewsController.cs" />
     <Compile Include="Models\INewsEntry.cs" />
+    <Compile Include="Models\NewsEntryText.cs" />
     <Compile Include="Components\NewsConfig.cs" />
     <Compile Include="Components\NewsPortalConfig.cs" />
     <Compile Include="Models\NewsEntryExtensions.cs" />

@@ -16,6 +16,7 @@
     <div id="newsentry-tabs">
         <ul class="dnnAdminTabNav dnnClear">
             <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
+			<li><a href="#newsentry_extended_text_tab"><%= LocalizeString("ExtendedText_Tab.Text") %></a></li>
             <li><a href="#newsentry-terms-and-weigths-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
 			<li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
@@ -54,6 +55,14 @@
                 </div>
             </fieldset>
         </div>
+		<div id="newsentry_extended_text_tab">
+			<fieldset>
+				<div class="dnnFormItem">
+					<dnn:Label id="lblExtendedText" runat="server" ControlName="txtExtendedText" />
+					<dnn:TextEditor id="txtExtendedText" runat="server" ChooseMode="false" />
+				</div>
+			</fieldset>
+		</div>
         <div id="newsentry-terms-and-weigths-tab">
             <fieldset>
                 <div class="dnnFormItem mb-3">

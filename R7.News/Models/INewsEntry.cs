@@ -51,6 +51,10 @@ namespace R7.News.Models
 
         string Description { get; set; }
 
+        int? EntryTextId { get; set; }
+
+        string Text { get; set; }
+
         int ThematicWeight { get; set; }
 
         int StructuralWeight { get; set; }

@@ -124,6 +124,18 @@ namespace R7.News.Agent.Models
             set { @This.Description = value; }
         }
 
+        public int? EntryTextId
+        {
+            get { return @This.EntryTextId; }
+            set { @This.EntryTextId = value; }
+        }
+
+        public string Text
+        {
+            get { return @This.Text; }
+            set { @This.Text = value; }
+        }
+
         public int ThematicWeight
         {
             get { return @This.ThematicWeight; }
@@ -197,7 +209,7 @@ namespace R7.News.Agent.Models
 
                 return termIds;
             }
-           
+
             set { termIds = value; }
         }
 

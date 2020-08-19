@@ -92,6 +92,18 @@ namespace R7.News.ViewModels
             set { throw new InvalidOperationException (); }
         }
 
+        public int? EntryTextId
+        {
+            get { return NewsEntry.EntryTextId; }
+            set { throw new InvalidOperationException (); }
+        }
+
+        public string Text
+        {
+            get { return NewsEntry.Text; }
+            set { throw new InvalidOperationException (); }
+        }
+
         public int ThematicWeight
         {
             get { return NewsEntry.ThematicWeight; }

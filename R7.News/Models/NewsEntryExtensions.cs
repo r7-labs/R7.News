@@ -24,6 +24,14 @@ namespace R7.News.Models
             return newsEntry;
         }
 
+        public static INewsEntry WithText (this INewsEntry newsEntry)
+        {
+            if (newsEntry.EntryTextId != null) {
+                newsEntry.Text = NewsDataProvider.Instance.Get<NewsEntryText, int> (newsEntry.EntryTextId.Value).Text;
+            }
+            return newsEntry;
+        }
+
         public static IEnumerable<INewsEntry> WithContentItems (this IEnumerable<INewsEntry> newsEntries)
         {
             var contentController = new ContentController ();

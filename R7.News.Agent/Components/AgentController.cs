@@ -152,6 +152,7 @@ namespace R7.News.Agent.Components
                         // get news entry and reset ids
                         var newsEntry = xmlNewsEntry.GetNewsEntryInfo ();
                         newsEntry.EntryId = 0;
+                        newsEntry.EntryTextId = null;
                         newsEntry.AgentModuleId = ModuleID;
                         newsEntry.ContentItemId = 0;
                         newsEntry.PortalId = module.PortalID;
@@ -175,8 +176,7 @@ namespace R7.News.Agent.Components
                         }
 
                         // add news entry
-                        NewsRepository.Instance.AddNewsEntry (newsEntry, terms, images,
-                            ModuleID, module.TabID);
+                        NewsRepository.Instance.AddNewsEntry (newsEntry, terms, images, ModuleID, module.TabID);
                     }
                 }
             }

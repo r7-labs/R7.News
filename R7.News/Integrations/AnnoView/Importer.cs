@@ -37,6 +37,7 @@ using R7.News.Models;
 
 namespace R7.News.Integrations.AnnoView
 {
+    [Obsolete]
     public class Importer: SchedulerClient
     {
         public Importer (ScheduleHistoryItem oItem)
@@ -78,14 +79,14 @@ namespace R7.News.Integrations.AnnoView
 
             var announcements = NewsDataProvider.Instance.GetObjects<AnnouncementInfo> ();
             if (announcements != null) {
-                
+
                 var moduleController = new ModuleController ();
                 var tabController = new TabController ();
                 var termController = new TermController ();
 
                 using (var dc = DataContext.Instance ()) {
                     var repository = dc.GetRepository<NewsEntryInfo> ();
-                    
+
                     foreach (var announcement in announcements) {
                         var module = moduleController.GetModule (announcement.ModuleId);
                         if (module != null) {
@@ -131,7 +132,7 @@ namespace R7.News.Integrations.AnnoView
                     }
                 }
             }
-        
+
             return itemsImported;
         }
 
