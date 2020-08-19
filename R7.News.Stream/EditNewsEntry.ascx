@@ -8,8 +8,9 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 
-<dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Stream/admin.css" Priority="200" />
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
+<dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/admin.css" />
+<dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Stream/admin.css" Priority="200" />
 
 <div class="dnnForm dnnClear edit-newsentry">
     <div id="newsentry-tabs">
@@ -24,7 +25,7 @@
                 <div class="dnnFormItem dnnFormRequired">
                     <dnn:Label id="labelTitle" runat="server" ControlName="textTitle" />
                     <asp:TextBox id="textTitle" runat="server" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="textTitle" 
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="textTitle"
                         CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="Title.Required" />
                     <asp:RegularExpressionValidator runat="server"
                         ControlToValidate="textTitle" ValidationExpression="[\s\S]{0,255}"
@@ -38,7 +39,7 @@
 					<div class="dnnLabel"></div>
 					<asp:LinkButton id="btnDefaultImagesPath" runat="server" resourcekey="btnDefaultImagesPath.Text"
 						CssClass="dnnSecondaryAction" OnClick="btnDefaultImagesPath_Click" CausesValidation="false" />
-				</div>	
+				</div>
                 <div class="dnnFormItem newsentry-description">
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
                     <dnn:TextEditor id="textDescription" runat="server" ChooseMode="false" />
@@ -55,10 +56,10 @@
         </div>
         <div id="newsentry-terms-and-weigths-tab">
             <fieldset>
-                <div class="dnnFormItem">
+                <div class="dnnFormItem mb-3">
                     <dnn:Label id="lblTerms" runat="server" ControlName="selTerms" />
                     <asp:ListBox id="selTerms" runat="server" SelectionMode="Multiple"
-						DataValueField="TermId" DataTextField="Name" 
+						DataValueField="TermId" DataTextField="Name"
 						CssClass="dnn-select2" Style="width:100%" />
                 </div>
                 <div class="dnnFormItem">
@@ -116,11 +117,11 @@
 		<div id="newsentry-audit-tab">
             <fieldset>
 				<div class="dnnFormItem">
-                    <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" /> 
+                    <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" />
 					<asp:TextBox id="txtAgentModuleId" runat="server" ReadOnly="true" />
                 </div>
                 <div class="dnnFormItem">
-                    <dnn:Label id="labelPermalinks" runat="server" ControlName="textPermalinkFriendly" /> 
+                    <dnn:Label id="labelPermalinks" runat="server" ControlName="textPermalinkFriendly" />
                     <asp:TextBox id="textPermalinkFriendly" runat="server" ReadOnly="true" />
                 </div>
 				<div class="dnnFormItem">
@@ -128,7 +129,7 @@
 					<asp:TextBox id="textPermalinkRaw" runat="server" ReadOnly="true" />
                 </div>
 				<div class="dnnFormItem">
-                    <dnn:Label id="labelDiscussionLink" runat="server" ControlName="textDiscussionLink" /> 
+                    <dnn:Label id="labelDiscussionLink" runat="server" ControlName="textDiscussionLink" />
 					<asp:TextBox id="textDiscussionLink" runat="server" ReadOnly="true" />
                 </div>
 				<div class="dnnFormItem">
@@ -140,7 +141,7 @@
 				<asp:HiddenField id="hiddenDiscussProviderKey" runat="server" />
 				<asp:HiddenField id="hiddenDiscussEntryId" runat="server" />
 				<div class="dnnFormItem">
-                    <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" /> 
+                    <dnn:Label id="labelAudit" runat="server" ControlName="ctlAudit" />
                     <dnn:Audit id="ctlAudit" runat="server" />
                 </div>
 			</fieldset>

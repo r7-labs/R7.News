@@ -131,6 +131,7 @@
     <Content Include="Controls\BadgeList.ascx" />
     <Content Include="Controls\AgplSignature.ascx" />
     <Content Include="assets\css\module.css" />
+    <Content Include="assets\css\admin.css" />
     <Content Include="Controls\ActionsControl.ascx" />
     <Content Include="Controls\ActionButtons.ascx" />
   </ItemGroup>
