@@ -1,0 +1,22 @@
+﻿-- Create table for extended text
+
+IF NOT EXISTS (select * from sys.tables where name = N'{databaseOwner}[{objectQualifier}r7_News_Texts]')
+BEGIN
+    CREATE TABLE {databaseOwner}[{objectQualifier}r7_News_Texts]
+    (
+        EntryTextID int NOT NULL IDENTITY (1, 1),
+        EntryID int NOT NULL,
+        [Text] nvarchar (max) NULL
+
+        CONSTRAINT [PK_{objectQualifier}r7_News_Texts] PRIMARY KEY (EntryTextID)
+        CONSTRAINT [FK_{objectQualifier}r7_News_Texts_Entries] FOREIGN KEY (EntryID)
+            REFERENCES {databaseOwner}[{objectQualifier}r7_News] (EntryID) ON DELETE CASCADE,
+        CONSTRAINT [UN_{objectQualifier}r7_News_Texts] UNIQUE (EntryID)
+    )
+END
+GO
+
+IF NOT EXISTS (select * from sys.columns where object_id = object_id (N'{databaseOwner}[{objectQualifier}r7_News]') and name = N'EntryTextID')
+    ALTER TABLE {databaseOwner}[{objectQualifier}r7_News]
+        ADD EntryTextID int NULL
+GO

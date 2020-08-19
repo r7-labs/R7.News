@@ -144,6 +144,7 @@
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.resx" />
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.ru-RU.resx" />
     <None Include="SqlDataProvider\01.03.00.SqlDataProvider" />
+    <None Include="SqlDataProvider\01.08.00.SqlDataProvider" />
     <None Include="App_LocalResources\SharedResources.resx" />
     <None Include="App_LocalResources\SharedResources.ru-RU.resx" />
     <None Include="lib\DotNetNuke.Web.DDRMenu.dll" />
