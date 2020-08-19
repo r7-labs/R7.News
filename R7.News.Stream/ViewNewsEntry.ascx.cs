@@ -65,9 +65,9 @@ namespace R7.News.Stream
             try {
                 if (!IsPostBack) {
                     // get news entry
-                    NewsEntryInfo newsEntry = null;
+                    INewsEntry newsEntry = null;
                     if (EntryId != null) {
-                        newsEntry = NewsRepository.Instance.GetNewsEntry (EntryId.Value, PortalId);
+                        newsEntry = NewsRepository.Instance.GetNewsEntry (EntryId.Value, PortalId).WithText ();
                     }
 
                     if (newsEntry != null) {

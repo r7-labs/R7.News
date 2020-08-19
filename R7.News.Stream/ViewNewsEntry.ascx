@@ -37,6 +37,11 @@
 							ShowDuplicateAction="true" />
                     </div>
                 </div>
+				<div class="row">
+					<div class="col">
+						<%# HttpUtility.HtmlDecode (Item.Text) %>
+					</div>
+				</div>
             </div>
         </ItemTemplate>
     </asp:FormView>
