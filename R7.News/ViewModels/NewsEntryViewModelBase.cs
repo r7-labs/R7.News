@@ -1,29 +1,10 @@
-//
-//  NewsEntryViewModelBase.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2016-2017 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
 using System.Collections.Generic;
 using System.Web;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Content;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Entities.Tabs;
 using DotNetNuke.Services.Localization;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Controls;
@@ -112,13 +93,13 @@ namespace R7.News.ViewModels
         }
 
         public int ThematicWeight
-        { 
+        {
             get { return NewsEntry.ThematicWeight; }
             set { throw new InvalidOperationException (); }
         }
 
         public int StructuralWeight
-        { 
+        {
             get { return NewsEntry.StructuralWeight; }
             set { throw new InvalidOperationException (); }
         }
@@ -165,8 +146,12 @@ namespace R7.News.ViewModels
         {
             get {
                 if (!string.IsNullOrEmpty (Link)) {
-                    return string.Format ("<a href=\"{0}\">{1}</a>", Link, Title);
-                } 
+                    var targetAttr = string.Empty;
+                    if (Globals.GetURLType (NewsEntry.Url) == TabType.Url) {
+                        targetAttr = " target=\"_blank\"";
+                    }
+                    return string.Format ("<a href=\"{0}\"{2}>{1}</a>", Link, Title, targetAttr);
+                }
 
                 return Title;
             }
@@ -174,7 +159,7 @@ namespace R7.News.ViewModels
 
         public string PublishedOnDateString
         {
-            get { 
+            get {
                 return this.PublishedOnDate ().ToString (
                     Localization.GetString ("PublishedOnDate.Format", Context.LocalResourceFile));
             }
@@ -185,7 +170,7 @@ namespace R7.News.ViewModels
             get {
                 var user = ContentItem.CreatedByUser (Context.Module.PortalId);
                 if (user != null) {
-                    return user.DisplayName;        
+                    return user.DisplayName;
                 }
 
                 return Localization.GetString ("SystemUser.Text", Context.LocalResourceFile);
@@ -194,7 +179,7 @@ namespace R7.News.ViewModels
 
         public List<Badge> Badges
         {
-            get { 
+            get {
                 if (Context.Module.IsEditable) {
                     var badges = new List<Badge> ();
                     var now = HttpContext.Current.Timestamp;
