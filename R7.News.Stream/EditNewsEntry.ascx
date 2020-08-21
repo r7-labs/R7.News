@@ -101,6 +101,10 @@
         </div>
         <div id="editNewsEntry_advancedTab">
             <fieldset>
+				<div class="dnnFormItem">
+                    <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" />
+					<asp:TextBox id="txtAgentModuleId" runat="server" ReadOnly="true" />
+                </div>
                 <div class="dnnFormItem mb-3">
                     <dnn:Label id="labelThresholdDate" runat="server" ControlName="datetimeThresholdDate" />
                     <dnn:DnnDateTimePicker id="datetimeThresholdDate" runat="server" />
@@ -124,11 +128,7 @@
         </div>
 		<div id="editNewsEntry_auditTab">
             <fieldset>
-				<div class="dnnFormItem">
-                    <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" />
-					<asp:TextBox id="txtAgentModuleId" runat="server" ReadOnly="true" />
-                </div>
-                <div class="dnnFormItem">
+			    <div class="dnnFormItem">
                     <dnn:Label id="labelPermalinks" runat="server" ControlName="textPermalinkFriendly" />
                     <asp:TextBox id="textPermalinkFriendly" runat="server" ReadOnly="true" />
                 </div>
