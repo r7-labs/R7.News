@@ -104,8 +104,6 @@ namespace R7.News.ViewModels
             set { throw new InvalidOperationException (); }
         }
 
-        public bool HasMoreText => EntryTextId != null;
-
         public int ThematicWeight
         {
             get { return NewsEntry.ThematicWeight; }
