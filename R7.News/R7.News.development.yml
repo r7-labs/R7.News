@@ -27,6 +27,6 @@ discuss-providers:
 #    params: ['1094', '1478', '2'] # tabId, moduleId, forumId
 
 node-manipulator:
-  parent-node-tab-id: 2143
-  stream-module-tab-id: 77
-  stream-module-id: 429
+  parent-node-tab-id: 88
+  stream-module-tab-id: 88
+  stream-module-id: 444

@@ -1,27 +1,7 @@
-﻿//
-//  StreamNodeManipulator.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2017-2020 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Web;
+using System.Web.Caching;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
@@ -39,7 +19,7 @@ namespace R7.News.Stream.Integrations.DDRMenu
     {
         #region INodeManipulator implementation
 
-        // TODO: Pass parameters via specific node, remove it after processing?
+        // TODO: Pass extra parameters via specific node instead of config, remove that node after processing?
         public List<MenuNode> ManipulateNodes (List<MenuNode> nodes, PortalSettings portalSettings)
         {
             try {
@@ -59,7 +39,7 @@ namespace R7.News.Stream.Integrations.DDRMenu
                 else {
                     var settingsRepository = new StreamSettingsRepository ();
                     var settings = settingsRepository.GetSettings (streamModule);
-                    var newsEntries = GetNewsEntries (settings, settings.PageSize, portalSettings.PortalId);
+                    var newsEntries = GetNewsEntries_Cached (streamModule.ModuleID, portalSettings.PortalId, settings);
                     foreach (var newsEntry in newsEntries) {
                         parentNode.Children.Add (CreateMenuNode (newsEntry, parentNode, streamModule));
                     }
@@ -86,11 +66,20 @@ namespace R7.News.Stream.Integrations.DDRMenu
             return null;
         }
 
-        protected IEnumerable<INewsEntry> GetNewsEntries (StreamSettings settings, int newsCount, int portalId)
+        protected IEnumerable<INewsEntry> GetNewsEntries_Cached (int moduleId, int portalId, StreamSettings settings)
         {
-            // TODO: Cache the results!
+            // TODO: Reuse cached data from StreamViewModel or (better) move caching to repository
+            var cacheKey = "//" + Const.Prefix + "/NodeManipulator?ModuleId=" + moduleId;
+            return DataCache.GetCachedData<IEnumerable<INewsEntry>> (
+                new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
+                c => GetNewsEntries (portalId, settings)
+            );
+        }
+
+        protected IEnumerable<INewsEntry> GetNewsEntries (int portalId, StreamSettings settings)
+        {
             return NewsRepository.Instance.GetNewsEntries_FirstPage (
-                portalId, newsCount, DateTime.Now,
+                portalId, settings.PageSize, DateTime.Now,
                 new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
                 new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight),
                 settings.ShowAllNews, settings.IncludeTerms, out int newsEntriesCount
