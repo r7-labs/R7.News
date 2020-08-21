@@ -50,7 +50,7 @@ namespace R7.News.Controls
             actionHandler.ExecuteAction (action, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab.TabID, GetSuperUserId ());
         }
 
-        protected int GetSuperUserId ()
+        int GetSuperUserId ()
         {
             var superUsers = UserController.GetUsers (false, true, -1);
             return ((UserInfo) superUsers [0]).UserID;
