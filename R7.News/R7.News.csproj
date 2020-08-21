@@ -107,12 +107,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Integrations\" />
     <Folder Include="Providers\" />
     <Folder Include="Controls\" />
     <Folder Include="Controls\ViewModels\" />
     <Folder Include="Data\" />
-    <Folder Include="Integrations\AnnoView\" />
     <Folder Include="ViewModels\" />
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
@@ -172,8 +170,6 @@
       <DependentUpon>BadgeList.ascx</DependentUpon>
     </Compile>
     <Compile Include="Data\NewsDataProvider.cs" />
-    <Compile Include="Integrations\AnnoView\Importer.cs" />
-    <Compile Include="Integrations\AnnoView\AnnouncementInfo.cs" />
     <Compile Include="Components\Const.cs" />
     <Compile Include="ViewModels\NewsEntryViewModelBase.cs" />
     <Compile Include="Controls\AgplSignature.ascx.cs">
