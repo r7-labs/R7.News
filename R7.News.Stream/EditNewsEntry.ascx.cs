@@ -263,7 +263,7 @@ namespace R7.News.Stream
 
             textTitle.Text = item.Title;
             textDescription.Text = item.Description;
-            txtExtendedText.Text = item.Text;
+            txtText.Text = item.Text;
 
             datetimeThresholdDate.SelectedDate = item.ThresholdDate;
             datetimeDueDate.SelectedDate = item.DueDate;
@@ -361,7 +361,7 @@ namespace R7.News.Stream
             // fill the object
             item.Title = textTitle.Text.Trim ();
             item.Description = textDescription.Text.Trim ();
-            item.Text = txtExtendedText.Text.Trim ();
+            item.Text = txtText.Text.Trim ();
 
             item.ThresholdDate = datetimeThresholdDate.SelectedDate;
             item.DueDate = datetimeDueDate.SelectedDate;

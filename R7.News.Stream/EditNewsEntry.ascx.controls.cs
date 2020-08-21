@@ -12,7 +12,7 @@ namespace R7.News.Stream
         protected ModuleAuditControl ctlAudit;
         protected TextBox textTitle;
         protected TextEditor textDescription;
-        protected TextEditor txtExtendedText;
+        protected TextEditor txtText;
         protected DnnDateTimePicker datetimeThresholdDate;
         protected DnnDateTimePicker datetimeDueDate;
         protected DnnDateTimePicker datetimeStartDate;

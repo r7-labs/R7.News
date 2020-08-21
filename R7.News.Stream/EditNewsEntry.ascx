@@ -14,7 +14,7 @@
     <div id="editNewsEntry_Tabs">
         <ul class="dnnAdminTabNav dnnClear">
             <li><a href="#editNewsEntry_commonTab"><%= LocalizeString("Common.Tab") %></a></li>
-			<li><a href="#editNewsEntry_extendedTextTab"><%= LocalizeString("ExtendedText_Tab.Text") %></a></li>
+			<li><a href="#editNewsEntry_textTab"><%= LocalizeString("Text_Tab.Text") %></a></li>
             <li><a href="#editNewsEntry_termsAndWeigthsTab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
             <li><a href="#editNewsEntry_advancedTab"><%= LocalizeString("Advanced.Tab") %></a></li>
 			<li><a href="#editNewsEntry_auditTab"><%= LocalizeString("Audit.Tab") %></a></li>
@@ -53,11 +53,11 @@
                 </div>
             </fieldset>
         </div>
-		<div id="editNewsEntry_extendedTextTab">
+		<div id="editNewsEntry_textTab">
 			<fieldset>
 				<div class="dnnFormItem">
-					<dnn:Label id="lblExtendedText" runat="server" ControlName="txtExtendedText" />
-					<dnn:TextEditor id="txtExtendedText" runat="server" ChooseMode="false" />
+					<dnn:Label id="lblText" runat="server" ControlName="txtText" />
+					<dnn:TextEditor id="txtText" runat="server" ChooseMode="false" />
 				</div>
 			</fieldset>
 		</div>
