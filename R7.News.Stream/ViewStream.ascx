@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
-<%@ Register TagPrefix="news" TagName="Actions" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionsControl.ascx" %>
+<%@ Register TagPrefix="news" TagName="ActionList" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionList.ascx" %>
 <%@ Register TagPrefix="news" TagName="AgplSignature" Src="~/DesktopModules/R7.News/R7.News/Controls/AgplSignature.ascx" %>
 <%@ Register TagPrefix="r7" Assembly="R7.Dnn.Extensions" Namespace="R7.Dnn.Extensions.Controls.PagingControl" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
@@ -45,7 +45,7 @@
                         <div class="<%# Item.TextCssClass %>">
                             <%# HttpUtility.HtmlDecode (Item.Description) %>
 						</div>
-						<news:Actions id="ctlActions" runat="server"
+						<news:ActionList id="listActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
 							EntryTextId="<%# Item.EntryTextId %>"
 							ShowDuplicateAction="true"

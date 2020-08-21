@@ -12,8 +12,7 @@ using R7.News.Controls.Models;
 
 namespace R7.News.Controls
 {
-    // TODO: Rename to EditActionsControl or just EditActions?
-    public class ActionsControl: UserControl
+    public class ActionList: UserControl
     {
         public int EntryId { get; set; }
 

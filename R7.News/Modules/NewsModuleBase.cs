@@ -64,7 +64,7 @@ namespace R7.News.Modules
                 termLinks.Visible = false;
             }
 
-            var actionButtons = ((ActionsControl) itemControl.FindControl ("ctlActions")).ActionButtons;
+            var actionButtons = ((ActionList) itemControl.FindControl ("listActions")).ActionButtons;
             var actions = item.GetActions (ModuleId);
             if (actions.Count > 0) {
                 actionButtons.Actions = actions;

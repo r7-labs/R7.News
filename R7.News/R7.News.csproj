@@ -135,7 +135,7 @@
     <Content Include="assets\css\module.css" />
     <Content Include="assets\css\admin.css" />
     <Content Include="assets\js\news.js" />
-    <Content Include="Controls\ActionsControl.ascx" />
+    <Content Include="Controls\ActionList.ascx" />
     <Content Include="Controls\ActionButtons.ascx" />
   </ItemGroup>
   <ItemGroup>
@@ -190,8 +190,8 @@
     <Compile Include="Providers\DiscussProviders\DnnForumDiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\IDiscussProvider.cs" />
     <Compile Include="Providers\DiscussProviders\ForumDiscussParams.cs" />
-    <Compile Include="Controls\ActionsControl.ascx.cs">
-      <DependentUpon>ActionsControl.ascx</DependentUpon>
+    <Compile Include="Controls\ActionList.ascx.cs">
+      <DependentUpon>ActionList.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ActionButtons.ascx.cs">
       <DependentUpon>ActionButtons.ascx</DependentUpon>

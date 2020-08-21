@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewNewsEntry.ascx.cs" Inherits="R7.News.Stream.ViewNewsEntry" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
-<%@ Register TagPrefix="news" TagName="Actions" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionsControl.ascx" %>
+<%@ Register TagPrefix="news" TagName="ActionList" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionList.ascx" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 
@@ -32,7 +32,7 @@
 						<div class="<%# Item.TextCssClass %>">
                             <%# HttpUtility.HtmlDecode (Item.Description) %>
 						</div>
-						<news:Actions id="ctlActions" runat="server"
+						<news:ActionList id="listActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
 							ShowDuplicateAction="true"
 							ShowLoadMoreTextAction="false" />
