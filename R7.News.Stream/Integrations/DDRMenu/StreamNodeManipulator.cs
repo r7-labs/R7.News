@@ -63,7 +63,7 @@ namespace R7.News.Stream.Integrations.DDRMenu
                     foreach (var newsEntry in newsEntries) {
                         parentNode.Children.Add (CreateMenuNode (newsEntry, parentNode, streamModule));
                     }
-                }            
+                }
             }
             catch (Exception ex) {
                 Exceptions.LogException (ex);
@@ -88,7 +88,7 @@ namespace R7.News.Stream.Integrations.DDRMenu
 
         protected IEnumerable<INewsEntry> GetNewsEntries (StreamSettings settings, int newsCount, int portalId)
         {
-            // TODO: Cache the result?
+            // TODO: Cache the results!
             return NewsRepository.Instance.GetNewsEntries_FirstPage (
                 portalId, newsCount, DateTime.Now,
                 new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),

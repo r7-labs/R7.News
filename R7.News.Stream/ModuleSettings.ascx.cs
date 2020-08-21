@@ -127,7 +127,7 @@ namespace R7.News.Stream
                 var minStructuralWeight = int.Parse (comboMinStructuralWeight.SelectedValue);
                 var maxStructuralWeight = int.Parse (comboMaxStructuralWeight.SelectedValue);
 
-                // HACK: Implement custom validator for this
+                // TODO: Implement custom validator for this?
                 if (minThematicWeight > maxThematicWeight) {
                     minThematicWeight = maxThematicWeight;
                 }

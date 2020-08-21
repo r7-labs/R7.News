@@ -37,7 +37,7 @@ namespace R7.News.Controls
             }
         }
 
-        // TODO: Return IList or IEnumerable
+        // TODO: Can use IList or IEnumerable here
         public List<Term> GetSelectedTerms (ListControl listControl)
         {
             var termCtrl = new TermController ();

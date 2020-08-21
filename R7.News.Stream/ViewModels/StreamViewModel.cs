@@ -41,7 +41,7 @@ namespace R7.News.Stream.ViewModels
         {
         }
 
-        // TODO: Move to base library
+        // TODO: Move to the base library?
         string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
         public string FeedUrl => Globals.AddHTTP (Module.PortalAlias.HTTPAlias
@@ -52,20 +52,20 @@ namespace R7.News.Stream.ViewModels
         {
             var now = Module.IsEditable ? null : (DateTime?) HttpContext.Current.Timestamp;
 
-            // TODO: Should 'now' value be used in the cache key? 
-            // var today = DateTime.Today; 
+            // TODO: Should 'now' value be used in the cache key?
+            // var today = DateTime.Today;
             // var now = today + new TimeSpan (today.Hour, 0, 0);
 
             // TODO: Check for sorting options also
             if (pageIndex == 0 && pageSize == Settings.PageSize) {
-                
+
                 // we cache viewmodels for first page, so there are no need to implement caching
                 // in the GetNewsEntries..._Count and GetNewsEntries..._FirstPage repository methods
 
                 // if we will cache models instead of viewmodels, then we need to vary cache key by ModuleId, not TabModuleId
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "TabModuleId=" + Module.TabModuleId
                                + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
-                
+
                 return DataCache.GetCachedData<StreamNewsEntryViewModelPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                     c => GetFirstPageInternal (pageSize, now)
@@ -112,7 +112,7 @@ namespace R7.News.Stream.ViewModels
             IList<NewsEntryInfo> items = baseItems
                 .Where (ne => now == null || ne.IsPublished (now.Value))
                 .ToList ();
-            
+
             // check for no data available
             var totalItems = items.Count;
             if (totalItems == 0) {

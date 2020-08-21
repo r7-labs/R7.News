@@ -72,7 +72,7 @@ namespace R7.News.Data
 
         public void UpdateNewsEntryText (NewsEntryInfo newsEntry)
         {
-            // TODO: More careful handling of "empty" text
+            // TODO: More careful handling of empty text including "empty" HTML markup like `<P>&nbsp;</P>`
             if (!string.IsNullOrEmpty (newsEntry.Text)) {
                 var newsEntryText = new NewsEntryText {
                     EntryId = newsEntry.EntryId,
@@ -143,7 +143,7 @@ namespace R7.News.Data
             return AddNewsEntry (item, item.ContentItem.Terms, item.ContentItem.Images, moduleId, tabId);
         }
 
-        // TODO: Can use IEnumerable<Term>
+        // TODO: Can use IEnumerable here
         static void UpdateContentItem (ContentItem contentItem, NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images)
         {
             // update content item after EntryId get its value

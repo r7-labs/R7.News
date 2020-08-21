@@ -30,7 +30,7 @@ namespace R7.News.Models
     {
         public static bool IsPublished (DateTime now, DateTime? startDate, DateTime? endDate)
         {
-            // TODO: Check logic, prioritize endDate?
+            // TODO: Check logic - prioritize endDate?
             return (startDate == null || now >= startDate) && (endDate == null || now < endDate);
         }
 
@@ -45,7 +45,7 @@ namespace R7.News.Models
         }
 
         public static bool IsVisible (int thematicWeight,
-                                      int structuralWeight, 
+                                      int structuralWeight,
                                       int minThematicWeight,
                                       int maxThematicWeight,
                                       int minStructuralWeight,

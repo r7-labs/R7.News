@@ -36,7 +36,7 @@ namespace R7.News.Feeds
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
 
-        // TODO: Move to base library
+        // TODO: Move to the base library?
         string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
         public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module,
