@@ -37,13 +37,13 @@
 				<div class="dnnFormItem">
 					<div class="dnnLabel"></div>
 					<asp:LinkButton id="btnDefaultImagesPath" runat="server" resourcekey="btnDefaultImagesPath.Text"
-						CssClass="dnnSecondaryAction" OnClick="btnDefaultImagesPath_Click" CausesValidation="false" />
+						CssClass="btn btn-sm btn-outline-secondary" OnClick="btnDefaultImagesPath_Click" CausesValidation="false" />
 				</div>
                 <div class="dnnFormItem newsentry-description">
                     <dnn:Label id="labelDescription" runat="server" ControlName="textDescription" />
                     <dnn:TextEditor id="textDescription" runat="server" ChooseMode="false" />
                 </div>
-				<div class="dnnFormItem">
+				<div class="dnnFormItem mb-3">
                     <dnn:Label id="labelStartDate" runat="server" ControlName="datetimeStartDate" />
                     <dnn:DnnDateTimePicker id="datetimeStartDate" runat="server" />
                 </div>
@@ -79,7 +79,8 @@
                 </div>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelModules" runat="server" ControlName="buttonGetModules" />
-                    <asp:LinkButton id="buttonGetModules" runat="server" resourcekey="buttonGetModules.Text" CssClass="dnnSecondaryAction"
+                    <asp:LinkButton id="buttonGetModules" runat="server" resourcekey="buttonGetModules.Text"
+						CssClass="btn btn-sm btn-outline-secondary"
                         CausesValidation="false" OnClick="buttonGetModules_Click" />
                 </div>
                 <div class="dnnFormItem">
@@ -100,11 +101,11 @@
         </div>
         <div id="editNewsEntry_advancedTab">
             <fieldset>
-                <div class="dnnFormItem">
+                <div class="dnnFormItem mb-3">
                     <dnn:Label id="labelThresholdDate" runat="server" ControlName="datetimeThresholdDate" />
                     <dnn:DnnDateTimePicker id="datetimeThresholdDate" runat="server" />
                 </div>
-                <div class="dnnFormItem">
+                <div class="dnnFormItem mb-3">
                     <dnn:Label id="labelDueDate" runat="server" ControlName="datetimeDueDate" />
                     <dnn:DnnDateTimePicker id="datetimeDueDate" runat="server" />
                 </div>
@@ -157,9 +158,9 @@
     <ul class="dnnActions dnnClear">
         <li><asp:LinkButton id="buttonUpdate" runat="server" CssClass="dnnPrimaryAction" CausesValidation="true" /></li>
 		<li>&nbsp;</li>
-		<li><asp:LinkButton id="buttonDelete" runat="server" CssClass="dnnSecondaryAction" ResourceKey="cmdDelete" /></li>
+		<li><asp:LinkButton id="buttonDelete" runat="server" CssClass="btn btn-danger" ResourceKey="cmdDelete" /></li>
 		<li>&nbsp;</li>
-        <li><asp:HyperLink id="linkCancel" runat="server" CssClass="dnnSecondaryAction cancel-action" ResourceKey="cmdCancel" /></li>
+        <li><asp:HyperLink id="linkCancel" runat="server" CssClass="btn btn-outline-secondary" ResourceKey="cmdCancel" /></li>
 	</ul>
 	<news:AgplSignature runat="server" ShowRule="false" />
 </div>

@@ -9,8 +9,6 @@ select.dnnSmallSizeComboBox {
 
 .edit-newsentry .newsentry-button-select-current-page { margin-left:1em; }
 
-.edit-newsentry .dnnSecondaryAction.cancel-action { margin-left:2em; }
-
 /* Title, Description (basic mode): override width */
 .edit-newsentry .newsentry-title input[type="text"],
 .edit-newsentry .newsentry-description textarea {
