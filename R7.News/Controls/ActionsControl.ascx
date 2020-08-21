@@ -10,7 +10,7 @@
 				<i class="fas fa-pencil-alt"></i>
 			</a>
 			<button id="btnDropMoreEditActions" runat="server" type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
-					title='<%: LocalizeString ("MoreEditActions.Text") %>'
+					title='<%# LocalizeString ("MoreEditActions.Text") %>'
 					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<i class="fas fa-cog"></i>
 			</button>
@@ -18,13 +18,13 @@
 				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# ShowDuplicateAction %>"
 						OnCommand="btnExecuteAction_Command" CommandName="Duplicate" CommandArgument="<%# JsonExtensionsWeb.ToJson(DuplicateAction) %>">
 					<i class="far fa-clone"></i>
-					<%: LocalizeString ("Duplicate.Text") %>
+					<%# LocalizeString ("Duplicate.Text") %>
 				</asp:LinkButton>
 				<div class="dropdown-divider" runat="server" Visible="<%# ShowSyncTabAction %>"></div>
 				<asp:LinkButton runat="server" role="button" CssClass="dropdown-item" Visible="<%# ShowSyncTabAction %>"
 						OnCommand="btnExecuteAction_Command" CommandName="SyncTab" CommandArgument="<%# JsonExtensionsWeb.ToJson(SyncTabAction) %>">
 					<i class="fas fa-sync"></i>
-					<%: LocalizeString ("SyncTab.Text") %>
+					<%# LocalizeString ("SyncTab.Text") %>
 				</asp:LinkButton>
 			</div>
 		</div>

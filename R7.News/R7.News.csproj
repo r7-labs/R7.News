@@ -116,12 +116,14 @@
     <Folder Include="ViewModels\" />
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
+    <Folder Include="assets\js\" />
     <Folder Include="Modules\" />
     <Folder Include="Providers\TermUrlProviders\" />
     <Folder Include="Providers\DiscussProviders\" />
     <Folder Include="Controls\App_LocalResources\" />
     <Folder Include="App_LocalResources\" />
     <Folder Include="Feeds\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.htm" />
@@ -132,6 +134,7 @@
     <Content Include="Controls\AgplSignature.ascx" />
     <Content Include="assets\css\module.css" />
     <Content Include="assets\css\admin.css" />
+    <Content Include="assets\js\news.js" />
     <Content Include="Controls\ActionsControl.ascx" />
     <Content Include="Controls\ActionButtons.ascx" />
   </ItemGroup>
@@ -203,6 +206,9 @@
     <Compile Include="Feeds\AtomFeed.cs" />
     <Compile Include="Data\TabSynchronizer.cs" />
     <Compile Include="Controls\TermSelector.cs" />
+    <Compile Include="Services\NewsController.cs" />
+    <Compile Include="Services\NewsServiceRouteMapper.cs" />
+    <Compile Include="ViewModels\JsonNewsEntryText.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

@@ -18,7 +18,7 @@ namespace R7.News.Controls
         public int EntryId { get; set; }
 
         ViewModelContext dnnContext;
-        ViewModelContext DnnContext {
+        protected ViewModelContext DnnContext {
             get { return dnnContext ?? (dnnContext = new ViewModelContext (this, this.FindParentOfType<IModuleControl> ())); }
         }
 
@@ -57,7 +57,7 @@ namespace R7.News.Controls
 
         protected void btnExecuteAction_Command (object sender, CommandEventArgs e)
         {
-            // Cannot use DnnContext here!
+            // Cannot use DnnContext here?
             var actionHandler = new ActionHandler ();
             var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
             actionHandler.ExecuteAction (action, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab.TabID, action.ModuleId);

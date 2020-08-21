@@ -23,11 +23,12 @@ using DotNetNuke.Web.Api;
 
 namespace R7.News.Stream.Api
 {
+    // TODO: Use single route mapper class?
     public class RouteMapper : IServiceRouteMapper
     {
         public void RegisterRoutes (IMapRoute mapRouteManager)
         {
-            mapRouteManager.MapHttpRoute ("R7.News.Stream", "NewsStreamFeedMap1", "{controller}/{action}", null, null, new [] { "R7.News.Stream.Api" });
+            mapRouteManager.MapHttpRoute ("R7.News.Stream", "r7_News_StreamFeedMap1", "{controller}/{action}", null, null, new [] { "R7.News.Stream.Api" });
         }
     }
 }

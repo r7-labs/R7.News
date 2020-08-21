@@ -28,7 +28,7 @@ namespace R7.News.Controls
         #endregion
 
         ViewModelContext viewModelContext;
-        ViewModelContext DnnContext {
+        protected ViewModelContext DnnContext {
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this, this.FindParentOfType<IModuleControl> ())); }
         }
 
@@ -43,7 +43,7 @@ namespace R7.News.Controls
 
         protected void linkActionButton_Command (object sender, CommandEventArgs e)
         {
-            // Cannot use DnnContext here!
+            // Cannot use DnnContext here?
             var actionHandler = new ActionHandler ();
             var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
             // TODO: Get the superuser id

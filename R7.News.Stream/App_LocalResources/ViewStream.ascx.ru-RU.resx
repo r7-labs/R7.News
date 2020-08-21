@@ -3,7 +3,7 @@
     <data name="AddNewsEntry.Action" xml:space="preserve">
         <value>Добавить новость</value>
     </data>
-    <data name="ModuleHelp.Text" xml:space="preserve"> 
+    <data name="ModuleHelp.Text" xml:space="preserve">
         <value>&lt;P&gt; Модуль R7.News.Stream&lt;/P&gt;</value>
     </data>
     <data name="NothingToDisplay.Text" xml:space="preserve">
@@ -39,4 +39,7 @@
 	<data name="Pager_StatusFormat.Text" xml:space="preserve">
 		<value>Стр. {0} из {1}</value>
 	</data>
+	<data name="MoreText.Text" xml:space="preserve">
+        <value>Подробнее&amp;hellip;</value>
+    </data>
 </root>

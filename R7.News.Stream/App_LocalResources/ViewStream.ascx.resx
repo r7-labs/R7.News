@@ -39,4 +39,7 @@
 	<data name="Pager_StatusFormat.Text" xml:space="preserve">
 		<value>Page {0} of {1}</value>
 	</data>
+	<data name="MoreText.Text" xml:space="preserve">
+        <value>More&amp;hellip;</value>
+    </data>
 </root>

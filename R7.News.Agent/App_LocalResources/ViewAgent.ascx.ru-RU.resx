@@ -27,19 +27,7 @@
     <data name="SystemUser.Text" xml:space="preserve">
         <value>Система</value>
     </data>
-	<data name="EditNewsEntry.Text" xml:space="preserve">
-        <value>Редактировать новость</value>
-    </data>
-	<data name="Duplicate.Text" xml:space="preserve">
-        <value>Дублировать новость</value>
-    </data>
-	<data name="SyncTab.Text" xml:space="preserve">
-        <value>Синхронизировать страницу с новостью</value>
-    </data>
-	<data name="EditActions.Text" xml:space="preserve">
-        <value>Комманды редактирования</value>
-    </data>
-	<data name="MoreEditActions.Text" xml:space="preserve">
-        <value>Больше комманд редактирования</value>
+	<data name="MoreText.Text" xml:space="preserve">
+        <value>Подробнее&amp;hellip;</value>
     </data>
 </root>
