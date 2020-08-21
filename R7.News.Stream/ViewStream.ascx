@@ -49,7 +49,7 @@
 							EntryId="<%# Item.EntryId %>"
 							EntryTextId="<%# Item.EntryTextId %>"
 							ShowDuplicateAction="true"
-							ShowLoadMoreTextAction="true" />
+							ShowExpandTextAction="true" />
                     </div>
                 </div>
 			</div>

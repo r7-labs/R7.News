@@ -35,7 +35,7 @@
 						<news:ActionList id="listActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
 							ShowDuplicateAction="true"
-							ShowLoadMoreTextAction="false" />
+							ShowExpandTextAction="false" />
                     </div>
                 </div>
 				<div class="row">

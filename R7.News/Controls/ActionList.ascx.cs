@@ -29,7 +29,7 @@ namespace R7.News.Controls
 
         public bool ShowDuplicateAction { get; set; }
 
-        public bool ShowLoadMoreTextAction { get; set; }
+        public bool ShowExpandTextAction { get; set; }
 
         protected string LocalizeString (string text)
         {

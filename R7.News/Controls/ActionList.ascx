@@ -31,10 +31,10 @@
 			</div>
 		</div>
 	</li>
-	<li runat="server" class="list-inline-item" Visible="<%# ShowLoadMoreTextAction && EntryTextId != null %>">
+	<li runat="server" class="list-inline-item" Visible="<%# ShowExpandTextAction && EntryTextId != null %>">
 		<button type="button" class="btn btn-sm btn-outline-secondary"
-				onclick="r7_news.loadMoreText(this,<%# EntryTextId %>,<%# DnnContext.Module.ModuleId %>)">
-			<%# LocalizeString ("LoadMoreText.Text") %>
+				onclick="r7_news.expandText(this,<%# EntryTextId %>,<%# DnnContext.Module.ModuleId %>)">
+			<%# LocalizeString ("btnExpandText.Text") %>
 		</button>
 	</li>
 	<news:ActionButtons id="actionButtons" runat="server" />

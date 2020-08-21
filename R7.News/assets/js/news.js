@@ -24,7 +24,7 @@ r7_news.service = function ($, moduleId) {
     };
 }
 
-r7_news.loadMoreText = function (btn, entryTextId, moduleId) {
+r7_news.expandText = function (btn, entryTextId, moduleId) {
 	var service = new r7_news.service ($, moduleId);
 	service.getNewsEntryText (
 		function (data) {
@@ -32,9 +32,9 @@ r7_news.loadMoreText = function (btn, entryTextId, moduleId) {
             $(btn).parent().hide();
 		},
 		function (xhr, status) {
-            console.error ("R7.News: Error loading more text!", xhr);
+            console.error ("R7.News: Error loading text!", xhr);
             // TODO: Localize error message
-            $(btn).parent().parent().prev().append('<p class="text-danger">Error loading more text!</p>');
+            $(btn).parent().parent().prev().append('<p class="text-danger">Error loading text! You can try to reload the page and try again.</p>');
             $(btn).parent().hide();
 		},
 		{ entryTextId: entryTextId }

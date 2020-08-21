@@ -51,7 +51,7 @@
 						EntryTextId="<%# Item.EntryTextId %>"
 						ShowDuplicateAction="true"
 						ShowSyncTabAction="true"
-						ShowLoadMoreTextAction="true" />
+						ShowExpandTextAction="true" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -81,7 +81,7 @@
 										EntryId="<%# Item.EntryId %>"
 										EntryTextId="<%# Item.EntryTextId %>"
 										ShowDuplicateAction="true"
-										ShowLoadMoreTextAction="true" />
+										ShowExpandTextAction="true" />
                                 </div>
                             </div>
                         </ItemTemplate>
