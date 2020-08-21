@@ -27,7 +27,7 @@
 	<data name="MoreEditActions.Text" xml:space="preserve">
         <value>Больше комманд редактирования</value>
     </data>
-	<data name="MoreText.Text" xml:space="preserve">
+	<data name="LoadMoreText.Text" xml:space="preserve">
         <value>Подробнее&hellip;</value>
     </data>
 </root>

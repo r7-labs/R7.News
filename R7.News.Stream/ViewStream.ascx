@@ -7,7 +7,6 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
-<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/js/news.js" />
 <asp:Panel id="panelStream" runat="server" CssClass="news-module news-stream">
 	<asp:Panel id="pnlFeed" runat="server" CssClass="news-top-actions">
 		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link"
@@ -45,16 +44,12 @@
                     <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
                         <div class="<%# Item.TextCssClass %>">
                             <%# HttpUtility.HtmlDecode (Item.Description) %>
-							<div runat="server" Visible="<%# Item.HasMoreText %>">
-								<button type="button" class="btn btn-sm btn-outline-secondary mb-3"
-										onclick="r7_news.loadMoreText(this,<%# Item.EntryTextId %>,<%# ViewModelContext.Module.ModuleId %>)">
-									<%# LocalizeString ("MoreText.Text") %>
-								</button>
-							</div>
 						</div>
 						<news:Actions id="ctlActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
-							ShowDuplicateAction="true" />
+							EntryTextId="<%# Item.EntryTextId %>"
+							ShowDuplicateAction="true"
+							ShowLoadMoreTextAction="true" />
                     </div>
                 </div>
 			</div>

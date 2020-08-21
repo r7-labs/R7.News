@@ -39,7 +39,4 @@
 	<data name="Pager_StatusFormat.Text" xml:space="preserve">
 		<value>Стр. {0} из {1}</value>
 	</data>
-	<data name="MoreText.Text" xml:space="preserve">
-        <value>Подробнее&amp;hellip;</value>
-    </data>
 </root>

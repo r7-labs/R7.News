@@ -1,8 +1,10 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ActionButtons.ascx.cs" Inherits="R7.News.Controls.ActionsControl" %>
 <%@ Register TagPrefix="news" TagName="ActionButtons" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionButtons.ascx" %>
+<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 <%@ Import Namespace="DotNetNuke.Common.Utilities" %>
- <ul class="list-inline news-entry-actions">
+<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/js/news.js" />
+<ul class="list-inline news-entry-actions">
 	<li runat="server" class="list-inline-item" Visible="<%# IsEditable %>">
 		<div class="btn-group" role="group" aria-label='<%: LocalizeString ("EditActions.Text") %>'>
 			<a class="btn btn-sm btn-outline-secondary" href='<%# HttpUtility.HtmlAttributeEncode (EditUrl ()) %>'
@@ -28,6 +30,12 @@
 				</asp:LinkButton>
 			</div>
 		</div>
+	</li>
+	<li runat="server" class="list-inline-item" Visible="<%# ShowLoadMoreTextAction && EntryTextId != null %>">
+		<button type="button" class="btn btn-sm btn-outline-secondary"
+				onclick="r7_news.loadMoreText(this,<%# EntryTextId %>,<%# DnnContext.Module.ModuleId %>)">
+			<%# LocalizeString ("LoadMoreText.Text") %>
+		</button>
 	</li>
 	<news:ActionButtons id="actionButtons" runat="server" />
 </ul>

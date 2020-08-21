@@ -27,7 +27,4 @@
     <data name="SystemUser.Text" xml:space="preserve">
         <value>System</value>
     </data>
-	<data name="MoreText.Text" xml:space="preserve">
-        <value>More&amp;hellip;</value>
-    </data>
 </root>

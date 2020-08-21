@@ -6,7 +6,6 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
-<dnn:DnnJsInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/js/news.js" />
 <asp:Panel id="panelAddDefaultEntry" runat="server" Visible="false" CssClass="alert alert-warning">
 	<div class="d-flex">
 	    <div class="flex-grow-1 align-self-center">
@@ -46,17 +45,13 @@
                     </ul>
                     <div class="<%# Item.TextCssClass %>">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
-						<div runat="server" Visible="<%# Item.HasMoreText %>">
-							<button type="button" class="btn btn-sm btn-outline-secondary mb-3"
-									onclick="r7_news.loadMoreText(this,<%# Item.EntryTextId %>,<%# ViewModelContext.Module.ModuleId %>)">
-								<%# LocalizeString ("MoreText.Text") %>
-							</button>
-						</div>
 					</div>
 					<news:Actions id="ctlActions" runat="server"
 						EntryId="<%# Item.EntryId %>"
+						EntryTextId="<%# Item.EntryTextId %>"
 						ShowDuplicateAction="true"
-						ShowSyncTabAction="true" />
+						ShowSyncTabAction="true"
+						ShowLoadMoreTextAction="true" />
                     <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
                         <LayoutTemplate>
                             <div runat="server" class="list-group">
@@ -81,16 +76,12 @@
                                 <div class="news-entry-text-column">
                                     <div class="<%# Item.TextCssClass %>">
                                         <%# HttpUtility.HtmlDecode (Item.Description) %>
-										<div runat="server" Visible="<%# Item.HasMoreText %>">
-											<button type="button" class="btn btn-sm btn-outline-secondary mb-3"
-													onclick="r7_news.loadMoreText(this,<%# Item.EntryTextId %>,<%# ViewModelContext.Module.ModuleId %>)">
-												<%# LocalizeString ("MoreText.Text") %>
-											</button>
-										</div>
 									</div>
 									<news:Actions id="ctlActions" runat="server"
 										EntryId="<%# Item.EntryId %>"
-										ShowDuplicateAction="true" />
+										EntryTextId="<%# Item.EntryTextId %>"
+										ShowDuplicateAction="true"
+										ShowLoadMoreTextAction="true" />
                                 </div>
                             </div>
                         </ItemTemplate>

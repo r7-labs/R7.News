@@ -27,4 +27,7 @@
 	<data name="MoreEditActions.Text" xml:space="preserve">
         <value>More Edit Actions</value>
     </data>
+	<data name="LoadMoreText.Text" xml:space="preserve">
+        <value>More Info&amp;hellip;</value>
+    </data>
 </root>

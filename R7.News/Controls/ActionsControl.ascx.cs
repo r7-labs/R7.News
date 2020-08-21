@@ -17,6 +17,8 @@ namespace R7.News.Controls
     {
         public int EntryId { get; set; }
 
+        public int? EntryTextId { get; set; }
+
         ViewModelContext dnnContext;
         protected ViewModelContext DnnContext {
             get { return dnnContext ?? (dnnContext = new ViewModelContext (this, this.FindParentOfType<IModuleControl> ())); }
@@ -27,6 +29,8 @@ namespace R7.News.Controls
         public bool ShowSyncTabAction { get; set; }
 
         public bool ShowDuplicateAction { get; set; }
+
+        public bool ShowLoadMoreTextAction { get; set; }
 
         protected string LocalizeString (string text)
         {

@@ -34,7 +34,8 @@
 						</div>
 						<news:Actions id="ctlActions" runat="server"
 							EntryId="<%# Item.EntryId %>"
-							ShowDuplicateAction="true" />
+							ShowDuplicateAction="true"
+							ShowLoadMoreTextAction="false" />
                     </div>
                 </div>
 				<div class="row">
