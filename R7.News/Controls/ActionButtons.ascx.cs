@@ -4,6 +4,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Portals;
+using DotNetNuke.Entities.Users;
 using DotNetNuke.UI.Modules;
 using R7.Dnn.Extensions.ViewModels;
 using R7.News.Components;
@@ -46,10 +47,13 @@ namespace R7.News.Controls
             // Cannot use DnnContext here?
             var actionHandler = new ActionHandler ();
             var action = JsonExtensionsWeb.FromJson<NewsEntryAction> ((string) e.CommandArgument);
-            // TODO: Get the superuser id
-            var superUserId = 1;
-            actionHandler.ExecuteAction (action, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab.TabID, superUserId);
+            actionHandler.ExecuteAction (action, PortalSettings.Current.PortalId, PortalSettings.Current.ActiveTab.TabID, GetSuperUserId ());
+        }
+
+        protected int GetSuperUserId ()
+        {
+            var superUsers = UserController.GetUsers (false, true, -1);
+            return ((UserInfo) superUsers [0]).UserID;
         }
     }
 }
-
