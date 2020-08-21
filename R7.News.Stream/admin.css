@@ -5,34 +5,33 @@ select.dnnSmallSizeComboBox {
     display:inline-block
 }
 
-.dnnForm.edit-newsentry .dnnFormItem.newsentry-description .dnnLabel { margin-bottom:18px; }
+.edit-newsentry .newsentry-description .dnnLabel { margin-bottom:18px; }
 
-.dnnForm.edit-newsentry .newsentry-button-select-current-page { margin-left:1em; }
+.edit-newsentry .newsentry-button-select-current-page { margin-left:1em; }
 
-/* Title, Description: override textbox and text editor (in basic mode) width */
-#newsentry-common-tab .dnnFormItem input[type="text"],
-#newsentry-common-tab .dnnFormItem textarea {
+.edit-newsentry .dnnSecondaryAction.cancel-action { margin-left:2em; }
+
+/* Title, Description (basic mode): override width */
+.edit-newsentry .newsentry-title input[type="text"],
+.edit-newsentry .newsentry-description textarea {
     width:97%;
     max-width:inherit;
     margin-top:8px
 }
 
-#newsentry-audit-tab .dnnModuleAuditControl {
+.edit-newsentry .dnnModuleAuditControl {
     display:inline-block;
     width:45%;
-    max-width:445px   
+    max-width:445px
 }
 
 /* make modules grid scrollable */
-#newsentry-terms-and-weigths-tab table.grid-modules {
+.edit-newsentry table.grid-modules {
     display:inline-block;
     max-height:10em;
     overflow:auto
 }
 
-#edit-newsentry .dnnSecondaryAction.cancel-action {
-    margin-left:2em
-}
 
 /* Adjust terms dropdown bottom margin */
 #news-stream-settings .dnnFormItem .terms-include-terms {

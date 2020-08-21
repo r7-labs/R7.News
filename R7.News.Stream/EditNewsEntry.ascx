@@ -7,23 +7,21 @@
 <%@ Register TagPrefix="news" TagName="AgplSignature" Src="~/DesktopModules/R7.News/R7.News/Controls/AgplSignature.ascx" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
-
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/admin.css" />
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Stream/admin.css" Priority="200" />
-
 <div class="dnnForm dnnClear edit-newsentry">
-    <div id="newsentry-tabs">
+    <div id="editNewsEntry_Tabs">
         <ul class="dnnAdminTabNav dnnClear">
-            <li><a href="#newsentry-common-tab"><%= LocalizeString("Common.Tab") %></a></li>
-			<li><a href="#newsentry_extended_text_tab"><%= LocalizeString("ExtendedText_Tab.Text") %></a></li>
-            <li><a href="#newsentry-terms-and-weigths-tab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
-            <li><a href="#newsentry-advanced-tab"><%= LocalizeString("Advanced.Tab") %></a></li>
-			<li><a href="#newsentry-audit-tab"><%= LocalizeString("Audit.Tab") %></a></li>
+            <li><a href="#editNewsEntry_commonTab"><%= LocalizeString("Common.Tab") %></a></li>
+			<li><a href="#editNewsEntry_extendedTextTab"><%= LocalizeString("ExtendedText_Tab.Text") %></a></li>
+            <li><a href="#editNewsEntry_termsAndWeigthsTab"><%= LocalizeString("TermsAndWeights.Tab") %></a></li>
+            <li><a href="#editNewsEntry_advancedTab"><%= LocalizeString("Advanced.Tab") %></a></li>
+			<li><a href="#editNewsEntry_auditTab"><%= LocalizeString("Audit.Tab") %></a></li>
         </ul>
-        <div id="newsentry-common-tab">
+        <div id="editNewsEntry_commonTab">
             <fieldset>
-                <div class="dnnFormItem dnnFormRequired">
+                <div class="dnnFormItem dnnFormRequired newsentry-title">
                     <dnn:Label id="labelTitle" runat="server" ControlName="textTitle" />
                     <asp:TextBox id="textTitle" runat="server" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="textTitle"
@@ -55,7 +53,7 @@
                 </div>
             </fieldset>
         </div>
-		<div id="newsentry_extended_text_tab">
+		<div id="editNewsEntry_extendedTextTab">
 			<fieldset>
 				<div class="dnnFormItem">
 					<dnn:Label id="lblExtendedText" runat="server" ControlName="txtExtendedText" />
@@ -63,7 +61,7 @@
 				</div>
 			</fieldset>
 		</div>
-        <div id="newsentry-terms-and-weigths-tab">
+        <div id="editNewsEntry_termsAndWeigthsTab">
             <fieldset>
                 <div class="dnnFormItem mb-3">
                     <dnn:Label id="lblTerms" runat="server" ControlName="selTerms" />
@@ -100,7 +98,7 @@
                 </div>
             </fieldset>
         </div>
-        <div id="newsentry-advanced-tab">
+        <div id="editNewsEntry_advancedTab">
             <fieldset>
                 <div class="dnnFormItem">
                     <dnn:Label id="labelThresholdDate" runat="server" ControlName="datetimeThresholdDate" />
@@ -123,7 +121,7 @@
                 </div>
             </fieldset>
         </div>
-		<div id="newsentry-audit-tab">
+		<div id="editNewsEntry_auditTab">
             <fieldset>
 				<div class="dnnFormItem">
                     <dnn:Label id="lblAgentModule" runat="server" ControlName="txtAgentModuleId" />
@@ -170,8 +168,8 @@
 (function($, Sys) {
     function setupModule() {
         var selectedTab = document.getElementById("hiddenSelectedTab").value;
-        $("#newsentry-tabs").dnnTabs({selected: selectedTab});
-        $("#newsentry-tabs .dnnSliderInput").each(function(){
+        $("#editNewsEntry_Tabs").dnnTabs({selected: selectedTab});
+        $(".edit-newsentry .dnnSliderInput").each(function(){
             $(this).dnnSliderInput({min: -1, max: this.getAttribute ("data-max")});
         });
 		$(".dnn-select2").select2();
