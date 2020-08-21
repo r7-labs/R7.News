@@ -207,7 +207,7 @@
     <Compile Include="Data\TabSynchronizer.cs" />
     <Compile Include="Controls\TermSelector.cs" />
     <Compile Include="Services\NewsController.cs" />
-    <Compile Include="Services\NewsServiceRouteMapper.cs" />
+    <Compile Include="Services\NewsRouteMapper.cs" />
     <Compile Include="ViewModels\JsonNewsEntryText.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

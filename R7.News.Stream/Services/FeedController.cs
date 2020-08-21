@@ -41,7 +41,7 @@ using R7.News.Feeds;
 using R7.News.Models;
 using R7.News.Stream.Models;
 
-namespace R7.News.Stream.Api
+namespace R7.News.Stream.Services
 {
     // TODO: Move to the base library
     public class Utf8StringWriter : StringWriter

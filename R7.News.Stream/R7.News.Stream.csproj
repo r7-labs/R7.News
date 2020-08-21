@@ -171,8 +171,8 @@
     <Compile Include="ViewModels\StreamNewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
-    <Compile Include="Api\RouteMapper.cs" />
-    <Compile Include="Api\FeedController.cs" />
+    <Compile Include="Services\StreamRouteMapper.cs" />
+    <Compile Include="Services\FeedController.cs" />
     <Compile Include="Models\AuditData.cs" />
     <Compile Include="Models\StreamSettings.cs" />
   </ItemGroup>
