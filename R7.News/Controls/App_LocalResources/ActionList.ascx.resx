@@ -28,6 +28,6 @@
         <value>More Edit Actions</value>
     </data>
 	<data name="btnExpandText.Text" xml:space="preserve">
-        <value>Expand Text&amp;hellip;</value>
+        <value>Full Text&amp;hellip;</value>
     </data>
 </root>
