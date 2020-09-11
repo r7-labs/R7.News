@@ -150,6 +150,8 @@
     <None Include="App_LocalResources\SharedResources.ru-RU.resx" />
     <None Include="lib\DotNetNuke.Web.DDRMenu.dll" />
     <None Include="R7.News.development.yml" />
+    <None Include="Controls\App_LocalResources\ActionList.ascx.resx" />
+    <None Include="Controls\App_LocalResources\ActionList.ascx.ru-RU.resx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

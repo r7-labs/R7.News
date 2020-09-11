@@ -111,7 +111,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Integrations\" />
     <Folder Include="Integrations\DDRMenu\" />
-    <Folder Include="Api\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +134,7 @@
     <None Include="App_LocalResources\ViewNewsEntry.ascx.ru-RU.resx" />
     <None Include="App_LocalResources\SharedResources.resx" />
     <None Include="App_LocalResources\SharedResources.ru-RU.resx" />
+    <None Include="R7.News.Stream.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditNewsEntry.ascx.cs">
