@@ -124,6 +124,7 @@
     <None Include="README.md" />
     <None Include="App_LocalResources\ModuleSettings.ascx.resx" />
     <None Include="App_LocalResources\ModuleSettings.ascx.ru-RU.resx" />
+    <None Include="R7.News.Agent.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

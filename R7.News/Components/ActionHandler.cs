@@ -50,9 +50,9 @@ namespace R7.News.Components
 
         protected void Duplicate (int entryId, int portalId, int tabId, int moduleId)
         {
-            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId);
+            var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId).WithText ();
             if (newsEntry != null) {
-                NewsRepository.Instance.DuplicateNewsEntry (newsEntry, moduleId, tabId);
+                NewsRepository.Instance.DuplicateNewsEntry ((NewsEntryInfo) newsEntry, moduleId, tabId);
             }
             Response.Redirect (Globals.NavigateURL ());
         }

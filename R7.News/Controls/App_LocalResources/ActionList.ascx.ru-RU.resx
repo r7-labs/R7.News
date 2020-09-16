@@ -28,6 +28,6 @@
         <value>Больше комманд редактирования</value>
     </data>
 	<data name="btnExpandText.Text" xml:space="preserve">
-        <value>Развернуть текст&amp;hellip;</value>
+        <value>Полный текст&hellip;</value>
     </data>
 </root>
