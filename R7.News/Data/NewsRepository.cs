@@ -65,7 +65,7 @@ namespace R7.News.Data
             UpdateNewsEntryText (newsEntry);
             UpdateContentItem (contentItem, newsEntry, terms, images);
 
-            DataCache.ClearCache (NewsCacheKeyPrefix);
+            ClearCache ();
 
             return newsEntry.EntryId;
         }
@@ -185,7 +185,7 @@ namespace R7.News.Data
                 termController.AddTermToContent (term, newsEntry.ContentItem);
             }
 
-            DataCache.ClearCache (NewsCacheKeyPrefix);
+            ClearCache ();
         }
 
         /// <summary>
@@ -195,7 +195,8 @@ namespace R7.News.Data
         public void UpdateNewsEntry (NewsEntryInfo newsEntry)
         {
             NewsDataProvider.Instance.Update (newsEntry);
-            DataCache.ClearCache (NewsCacheKeyPrefix);
+
+            ClearCache ();
         }
 
         public void DeleteNewsEntry (INewsEntry newsEntry)
@@ -203,7 +204,7 @@ namespace R7.News.Data
             // delete content item, related news entry and text records will be deleted by foreign key rules
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
 
-            DataCache.ClearCache (NewsCacheKeyPrefix);
+            ClearCache ();
         }
 
         public IEnumerable<NewsEntryInfo> GetAllNewsEntries (int moduleId,
@@ -379,6 +380,11 @@ namespace R7.News.Data
         public void RemoveModuleCache (int moduleId)
         {
             DataCache.ClearCache (NewsCacheKeyPrefix + "ModuleId=" + moduleId);
+        }
+
+        public void ClearCache ()
+        {
+            DataCache.ClearCache (NewsCacheKeyPrefix);
         }
     }
 }
