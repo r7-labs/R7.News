@@ -53,12 +53,19 @@ namespace R7.News.Controls
             return Localization.GetString (key, LocalResourceFile);
         }
 
-        protected string AppName {
-            get { return Assembly.GetExecutingAssembly ().GetName ().Name; }
+        protected string GetVersionString ()
+        {
+            var assembly = Assembly.GetExecutingAssembly ();
+            var assemblyInformationalVersion = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute> ();
+            if (assemblyInformationalVersion != null) {
+                return assemblyInformationalVersion.InformationalVersion;
+            }
+
+            return assembly.GetName ().Version.ToString (3);
         }
 
-        protected Version AppVersion {
-            get { return Assembly.GetExecutingAssembly ().GetName ().Version; }
+        protected string AppName {
+            get { return Assembly.GetExecutingAssembly ().GetName ().Name; }
         }
     }
 }
