@@ -377,8 +377,9 @@ namespace R7.News.Data
             return GetNewsEntriesByTerms (moduleId, portalId, thematicRange, structRange, includeTerms);
         }
 
-        public void RemoveModuleCache (int moduleId)
+        public void ClearModuleCache (int moduleId, int tabModuleId)
         {
+            DataCache.ClearCache (NewsCacheKeyPrefix + "TabModuleId=" + tabModuleId);
             DataCache.ClearCache (NewsCacheKeyPrefix + "ModuleId=" + moduleId);
         }
 

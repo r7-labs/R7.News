@@ -154,8 +154,7 @@ namespace R7.News.Stream
 
                 SettingsRepository.SaveSettings (ModuleConfiguration, Settings);
 
-                // clear module-specific cache
-                NewsRepository.Instance.RemoveModuleCache (ModuleId);
+                NewsRepository.Instance.ClearModuleCache (ModuleId, TabModuleId);
 
                 ModuleController.SynchronizeModule (ModuleId);
             }
