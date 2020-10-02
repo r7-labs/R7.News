@@ -116,7 +116,7 @@
         <value>Основные настройки</value>
     </data>
 	<data name="sectionAppearance.Text" xml:space="preserve">
-        <value>Настройки внешнего вида</value>
+        <value>Настройки внешнего вида ленты</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Настройки разбивки на страницы</value>

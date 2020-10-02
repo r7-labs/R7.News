@@ -116,7 +116,7 @@
         <value>Basic Settings</value>
     </data>
 	<data name="sectionAppearance.Text" xml:space="preserve">
-        <value>Appearance Settings</value>
+        <value>Stream Appearance Settings</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Pagination Settings</value>
