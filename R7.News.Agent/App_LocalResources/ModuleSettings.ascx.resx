@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>R7.News.Agent Settings</value>
+        <value>News Agent Settings</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
-        <value>About R7.News.Agent Settings</value>
+        <value>About R7.News.Agent Module Settings</value>
     </data>
 	<data name="NotSelected.Text" xml:space="preserve">
         <value>&lt; Not Selected &gt;</value>
@@ -58,6 +58,6 @@
         <value>Basic Settings</value>
     </data>
 	<data name="sectionAppearance.Text" xml:space="preserve">
-        <value>Appearance Settings</value>
+        <value>News Agent Appearance Settings</value>
     </data>
 </root>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>Настройки R7.News.Agent</value>
+        <value>Настройки новостного агента</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
-        <value>О настройках R7.News.Agent</value>
+        <value>О настройках модуля R7.News.Agent</value>
     </data>
 	<data name="NotSelected.Text" xml:space="preserve">
         <value>&lt; Не выбрано &gt;</value>
@@ -58,6 +58,6 @@
         <value>Основные настройки</value>
     </data>
     <data name="sectionAppearance.Text" xml:space="preserve">
-        <value>Настройки внешнего вида</value>
+        <value>Настройки внешнего вида новостного агента</value>
     </data>
 </root>

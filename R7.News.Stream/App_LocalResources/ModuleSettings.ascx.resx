@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>R7.News.Stream Settings</value>
+        <value>News Stream Settings</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
-        <value>About R7.News.Stream Settings</value>
+        <value>About R7.News.Stream Module Settings</value>
     </data>
     <data name="labelIncludeTerms.Text" xml:space="preserve">
         <value>Include Terms:</value>

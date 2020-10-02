@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>Настройки R7.News.Stream</value>
+        <value>Настройки ленты новостейё</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
-        <value>О настройках R7.News.Stream</value>
+        <value>О настройках модуля R7.News.Stream</value>
     </data>
     <data name="labelIncludeTerms.Text" xml:space="preserve">
         <value>Показывать новости с метками:</value>
@@ -116,7 +116,7 @@
         <value>Основные настройки</value>
     </data>
 	<data name="sectionAppearance.Text" xml:space="preserve">
-        <value>Настройки внешнего вида ленты</value>
+        <value>Настройки внешнего вида ленты новостей</value>
     </data>
     <data name="sectionPagination.Text" xml:space="preserve">
         <value>Настройки разбивки на страницы</value>
