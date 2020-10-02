@@ -24,7 +24,7 @@ namespace R7.News.Stream.ViewModels
 
         public string ImageCssClass => Config.ImageCssClass;
 
-        public string TextCssClass => "lead";
+        public string TextCssClass => Config.TopEntryTextCssClass;
 
         public string ImageColumnCssClass
         {

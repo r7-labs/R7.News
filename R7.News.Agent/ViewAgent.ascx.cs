@@ -81,7 +81,12 @@ namespace R7.News.Agent
                     .OrderByDescending (ne => ne.EntryId == Settings.GroupEntryId)
                     .ThenByDescending (ne => ne.PublishedOnDate ())
                     .GroupByAgentModule (Settings.EnableGrouping)
-                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig));
+                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig))
+                    .ToList ();
+
+                if (viewModels.Count > 0) {
+                    viewModels [0].IsTopEntry = true;
+                }
 
                 // bind the data
                 listAgent.DataSource = viewModels;
