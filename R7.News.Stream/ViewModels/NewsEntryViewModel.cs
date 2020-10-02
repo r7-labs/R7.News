@@ -8,38 +8,32 @@ namespace R7.News.Stream.ViewModels
 {
     public class NewsEntryViewModel: NewsEntryViewModelBase
     {
-        public NewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context, StreamModuleConfig config) :
+        public NewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context, AgentModuleConfig config) :
             base (newsEntry, context)
         {
             Config = config;
         }
 
-        protected StreamModuleConfig Config;
-
-        protected StreamSettings Settings
-        {
-            get { return ((ViewModelContext<StreamSettings>) Context).Settings; }
-        }
+        // TODO: Introduce separate config options and maybe module settings GH-119
+        protected AgentModuleConfig Config;
 
         public string ImageUrl
         {
-            get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? Config.DefaultThumbnailWidth); }
+            get { return NewsEntry.GetImageUrl (width: Config.DefaultThumbnailWidth); }
         }
 
-        // TODO: Introduce config options and maybe module settings
-
-        public string ImageCssClass => "img-thumbnail";
+        public string ImageCssClass => Config.ImageCssClass;
 
         public string TextCssClass => "lead";
 
         public string ImageColumnCssClass
         {
-            get { return HasImage ? "col-md" : Const.NoImageColumnCssClass; }
+            get { return HasImage ? Config.ImageColumnCssClass : Const.NoImageColumnCssClass; }
         }
 
         public string TextColumnCssClass
         {
-            get { return HasImage ? "col-md" : Const.NoImageTextColumnCssClass; }
+            get { return HasImage ? Config.TextColumnCssClass : Const.NoImageTextColumnCssClass; }
         }
     }
 }

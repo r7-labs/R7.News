@@ -76,7 +76,7 @@ namespace R7.News.Stream
                         ReplacePageTitleAndMeta (newsEntry);
 
                         var newsEntries = new List<NewsEntryViewModel> ();
-                        newsEntries.Add (new NewsEntryViewModel (newsEntry, ViewModelContext, NewsConfig.Instance.StreamModule));
+                        newsEntries.Add (new NewsEntryViewModel (newsEntry, ViewModelContext, NewsConfig.Instance.AgentModule));
 
                         formNewsEntry.DataSource = newsEntries;
                         formNewsEntry.DataBind ();
