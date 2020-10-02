@@ -60,6 +60,26 @@ namespace R7.News.Stream.ViewModels
         {
             get { return HasImage ? (Settings.TextColumnCssClass ?? Config.TextColumnCssClass) : Const.NoImageTextColumnCssClass; }
         }
+
+        #region CSS classes for ViewNewsEntry
+
+        // TODO: Introduce config options and maybe module settings, move to separate class
+
+        public string SingleEntry_ImageCssClass => "img-thumbnail";
+
+        public string SingleEntry_TextCssClass => "lead";
+
+        public string SingleEntry_ImageColumnCssClass
+        {
+            get { return HasImage ? "col-md" : Const.NoImageColumnCssClass; }
+        }
+
+        public string SingleEntry_TextColumnCssClass
+        {
+            get { return HasImage ? "col-md" : Const.NoImageTextColumnCssClass; }
+        }
+
+        #endregion
     }
 }
 

@@ -13,6 +13,7 @@ using R7.News.Components;
 using R7.News.Data;
 using R7.News.Models;
 using R7.News.Modules;
+using R7.News.ViewModels;
 using R7.News.Stream.Models;
 using R7.News.Stream.ViewModels;
 
@@ -74,8 +75,8 @@ namespace R7.News.Stream
 
                         ReplacePageTitleAndMeta (newsEntry);
 
-                        var newsEntries = new List<StreamNewsEntryViewModel> ();
-                        newsEntries.Add (new StreamNewsEntryViewModel (newsEntry, ViewModelContext, NewsConfig.Instance.StreamModule));
+                        var newsEntries = new List<NewsEntryViewModel> ();
+                        newsEntries.Add (new NewsEntryViewModel (newsEntry, ViewModelContext, NewsConfig.Instance.StreamModule));
 
                         formNewsEntry.DataSource = newsEntries;
                         formNewsEntry.DataBind ();
@@ -112,7 +113,7 @@ namespace R7.News.Stream
 
         protected void formNewsEntry_DataBound (object sender, EventArgs e)
         {
-            BindChildControls ((StreamNewsEntryViewModel) formNewsEntry.DataItem, formNewsEntry);
+            BindChildControls ((NewsEntryViewModelBase) formNewsEntry.DataItem, formNewsEntry);
         }
     }
 

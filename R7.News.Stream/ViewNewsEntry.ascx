@@ -8,7 +8,7 @@
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 <div class="news-module news-entry">
     <asp:FormView id="formNewsEntry" runat="server" RenderOuterTable="false"
-            ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" OnDataBound="formNewsEntry_DataBound">
+            ItemType="R7.News.Stream.ViewModels.NewsEntryViewModel" OnDataBound="formNewsEntry_DataBound">
         <ItemTemplate>
             <div>
                 <h3><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>

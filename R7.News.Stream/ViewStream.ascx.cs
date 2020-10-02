@@ -5,6 +5,7 @@ using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.ViewModels;
 using R7.Dnn.Extensions.Controls.PagingControl;
 using R7.News.Modules;
+using R7.News.ViewModels;
 using R7.News.Stream.ViewModels;
 using R7.News.Stream.Models;
 using R7.News.Components;
@@ -211,7 +212,7 @@ namespace R7.News.Stream
         /// <param name="e"></param>
         protected void listStream_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            BindChildControls ((StreamNewsEntryViewModel) e.Item.DataItem, e.Item);
+            BindChildControls ((NewsEntryViewModelBase) e.Item.DataItem, e.Item);
         }
     }
 }
