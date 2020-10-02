@@ -16,6 +16,7 @@ namespace R7.News.Agent
         protected TextBox textGroupThumbnailWidth;
         protected TextBox txtImageCssClass;
         protected TextBox txtTextCssClass;
+        protected TextBox txtTopEntryTextCssClass;
         protected TextBox txtImageColumnCssClass;
         protected TextBox txtTextColumnCssClass;
     }

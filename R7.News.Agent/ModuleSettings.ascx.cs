@@ -1,24 +1,3 @@
-//
-//  SettingsAgent.ascx.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2016-2020 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
@@ -60,6 +39,7 @@ namespace R7.News.Agent
 
                     txtImageCssClass.Text = Settings.ImageCssClass;
                     txtTextCssClass.Text = Settings.TextCssClass;
+                    txtTopEntryTextCssClass.Text = Settings.TopEntryTextCssClass;
                     txtImageColumnCssClass.Text = Settings.ImageColumnCssClass;
                     txtTextColumnCssClass.Text = Settings.TextColumnCssClass;
                 }
@@ -82,6 +62,8 @@ namespace R7.News.Agent
 
                 Settings.ImageCssClass = !string.IsNullOrEmpty (txtImageCssClass.Text) ? txtImageCssClass.Text : null;
                 Settings.TextCssClass = !string.IsNullOrEmpty (txtTextCssClass.Text) ? txtTextCssClass.Text : null;
+                Settings.TopEntryTextCssClass = !string.IsNullOrEmpty (txtTopEntryTextCssClass.Text) ? txtTopEntryTextCssClass.Text : null;
+
                 Settings.ImageColumnCssClass = !string.IsNullOrEmpty (txtImageColumnCssClass.Text) ? txtImageColumnCssClass.Text : null;
                 Settings.TextColumnCssClass = !string.IsNullOrEmpty (txtTextColumnCssClass.Text) ? txtTextColumnCssClass.Text : null;
 

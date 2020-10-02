@@ -24,14 +24,14 @@
 		<div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
-            <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth" 
+            <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth"
                 Type="Integer" MinimumValue="1" MaximumValue="4096"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="ThumbnailWidth.Invalid" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelGroupThumbnailWidth" runat="server" ControlName="textGroupThumbnailWidth" />
             <asp:TextBox id="textGroupThumbnailWidth" runat="server" />
-            <asp:RangeValidator runat="server" ControlToValidate="textGroupThumbnailWidth" 
+            <asp:RangeValidator runat="server" ControlToValidate="textGroupThumbnailWidth"
                 Type="Integer" MinimumValue="1" MaximumValue="1024"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="GroupThumbnailWidth.Invalid" />
         </div>
@@ -42,6 +42,10 @@
 		<div class="dnnFormItem">
             <dnn:Label id="lblTextCssClass" runat="server" ControlName="txtTextCssClass" />
             <asp:TextBox id="txtTextCssClass" runat="server" />
+        </div>
+		<div class="dnnFormItem">
+            <dnn:Label id="lblTopEntryTextCssClass" runat="server" ControlName="txtTopEntryTextCssClass" />
+            <asp:TextBox id="txtTopEntryTextCssClass" runat="server" />
         </div>
 		<div class="dnnFormItem">
             <dnn:Label id="lblImageColumnCssClass" runat="server" ControlName="txtImageColumnCssClass" />

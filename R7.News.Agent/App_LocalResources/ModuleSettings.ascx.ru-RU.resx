@@ -45,6 +45,9 @@
 	<data name="lblTextCssClass.Text" xml:space="preserve">
         <value>Класс CSS для текста новости:</value>
     </data>
+	<data name="lblTopEntryTextCssClass.Text" xml:space="preserve">
+        <value>Класс CSS для текста последней (верхней) новости:</value>
+    </data>
 	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
         <value>Класс CSS для колонки изображений:</value>
     </data>

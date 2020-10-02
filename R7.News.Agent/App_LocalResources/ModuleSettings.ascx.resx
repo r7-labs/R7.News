@@ -45,6 +45,9 @@
 	<data name="lblTextCssClass.Text" xml:space="preserve">
         <value>Text CSS Class:</value>
     </data>
+	<data name="lblTopEntryTextCssClass.Text" xml:space="preserve">
+        <value>Text CSS Class (Top News Entry):</value>
+    </data>
 	<data name="lblImageColumnCssClass.Text" xml:space="preserve">
         <value>Image Column CSS Class:</value>
     </data>
