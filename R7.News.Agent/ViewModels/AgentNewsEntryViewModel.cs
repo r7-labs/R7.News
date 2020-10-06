@@ -16,6 +16,8 @@ namespace R7.News.Agent.ViewModels
 
         public bool IsTopEntry { get; set; }
 
+        public bool IsOnlyEntry { get; set; }
+
         protected AgentModuleConfig Config;
 
         protected AgentSettings Settings

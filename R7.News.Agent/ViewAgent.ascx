@@ -23,7 +23,7 @@
     </LayoutTemplate>
     <ItemTemplate>
         <div>
-			<h3><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
+			<h3 class='<%# (Item.IsOnlyEntry ? "d-none" : "") %>'><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
 			<p>
 				<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
 			</p>

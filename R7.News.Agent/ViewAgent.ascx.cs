@@ -86,6 +86,10 @@ namespace R7.News.Agent
                     viewModels [0].IsTopEntry = true;
                 }
 
+                if (viewModels.Count == 1) {
+                    viewModels [0].IsOnlyEntry = true;
+                }
+
                 // bind the data
                 listAgent.DataSource = viewModels;
                 listAgent.DataBind ();
