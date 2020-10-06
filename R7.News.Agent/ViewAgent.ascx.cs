@@ -79,7 +79,7 @@ namespace R7.News.Agent
                 var viewModels = items
                     .Where (ne => ne.IsPublished (now) || IsEditable)
                     .OrderByDescending (ne => ne.PublishedOnDate ())
-                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig))
+                    .Select (ne => new AgentNewsEntry (ne, ViewModelContext, agentModuleConfig))
                     .ToList ();
 
                 if (viewModels.Count > 0) {
@@ -151,7 +151,7 @@ namespace R7.News.Agent
         /// <param name="e"></param>
         protected void listAgent_ItemDataBound (object sender, ListViewItemEventArgs e)
         {
-            var item = (AgentNewsEntryViewModel) e.Item.DataItem;
+            var item = (AgentNewsEntry) e.Item.DataItem;
 
             BindChildControls (item, e.Item);
         }

@@ -15,7 +15,7 @@
 	        CssClass="btn btn-warning" OnClick="buttonCreateFromPageData_Click" />
 	</div>
 </asp:Panel>
-<asp:ListView id="listAgent" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listAgent_ItemDataBound">
+<asp:ListView id="listAgent" ItemType="R7.News.Agent.ViewModels.AgentNewsEntry" runat="server" OnItemDataBound="listAgent_ItemDataBound">
     <LayoutTemplate>
         <div runat="server" class="news-module news-agent">
             <div runat="server" id="itemPlaceholder"></div>

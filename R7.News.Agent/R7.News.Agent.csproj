@@ -144,7 +144,7 @@
     <Compile Include="ModuleSettings.ascx.controls.cs">
       <DependentUpon>ModuleSettings.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AgentNewsEntryViewModel.cs" />
+    <Compile Include="ViewModels\AgentNewsEntry.cs" />
     <Compile Include="Models\XmlNewsEntryInfo.cs" />
     <Compile Include="Models\AgentSettings.cs" />
   </ItemGroup>

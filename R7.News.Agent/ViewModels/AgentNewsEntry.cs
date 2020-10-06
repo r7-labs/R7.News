@@ -6,9 +6,9 @@ using R7.News.ViewModels;
 
 namespace R7.News.Agent.ViewModels
 {
-    public class AgentNewsEntryViewModel: NewsEntryViewModelBase
+    public class AgentNewsEntry: NewsEntryViewModelBase
     {
-        public AgentNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<AgentSettings> context, AgentModuleConfig config) :
+        public AgentNewsEntry (INewsEntry newsEntry, ViewModelContext<AgentSettings> context, AgentModuleConfig config) :
             base (newsEntry, context)
         {
             Config = config;
