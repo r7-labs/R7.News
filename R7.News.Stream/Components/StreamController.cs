@@ -39,7 +39,7 @@ namespace R7.News.Stream.Components
     public class StreamController : ModuleSearchBase
     {
         // TODO: Move to NewsRepository
-        protected IEnumerable<NewsEntryInfo> GetNewsEntries (int moduleId,
+        protected IEnumerable<NewsEntry> GetNewsEntries (int moduleId,
                                                              int portalId,
                                                              WeightRange thematicWeights,
                                                              WeightRange structuralWeights,
@@ -93,7 +93,7 @@ namespace R7.News.Stream.Components
                     });
                 }
             }
-        
+
             return searchDocs;
         }
 

@@ -1,5 +1,5 @@
 //
-//  NewsEntryInfo.cs
+//  NewsEntry.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -31,7 +31,7 @@ namespace R7.News.Models
     [TableName (Const.Prefix)]
     [PrimaryKey ("EntryId", AutoIncrement = true)]
     [Scope ("PortalId")]
-    public class NewsEntryInfo: INewsEntry
+    public class NewsEntry: INewsEntry
     {
         #region INewsEntry implementation
 

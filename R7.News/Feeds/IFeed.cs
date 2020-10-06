@@ -30,7 +30,7 @@ namespace R7.News.Feeds
 {
     public interface IFeed
     {
-        void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module,
+        void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
             PortalSettings portalSettings, string requestUrl, bool withImages);
     }
 }

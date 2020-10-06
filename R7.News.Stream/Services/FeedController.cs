@@ -51,7 +51,7 @@ namespace R7.News.Stream.Services
 
     public class FeedController : DnnApiController
     {
-        IEnumerable<NewsEntryInfo> GetNewsEntries (ModuleInfo module, StreamSettings settings)
+        IEnumerable<NewsEntry> GetNewsEntries (ModuleInfo module, StreamSettings settings)
         {
             return NewsRepository.Instance.GetNewsEntries_FirstPage (PortalSettings.PortalId,
                 settings.FeedMaxEntries ?? NewsConfig.Instance.Feed.DefaultMaxEntries,

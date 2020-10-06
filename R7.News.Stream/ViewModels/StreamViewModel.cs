@@ -109,7 +109,7 @@ namespace R7.News.Stream.ViewModels
             }
 
             // get only published items
-            IList<NewsEntryInfo> items = baseItems
+            IList<NewsEntry> items = baseItems
                 .Where (ne => now == null || ne.IsPublished (now.Value))
                 .ToList ();
 

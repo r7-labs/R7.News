@@ -58,7 +58,7 @@ namespace R7.News.Data
         public INewsEntry AddNewsEntryFromTabData (TabInfo activeTab, int moduleId)
         {
             // add default news entry based on tab data
-            var newsEntry = new NewsEntryInfo {
+            var newsEntry = new NewsEntry {
                 Title = activeTab.TabName,
                 Description = HttpUtility.HtmlEncode ("<p>" + activeTab.Description + "</p>"),
                 AgentModuleId = moduleId,

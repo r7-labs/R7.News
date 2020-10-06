@@ -30,11 +30,11 @@ namespace R7.News.Data
 
         protected const string SpNamePrefix = Const.Prefix + "_";
 
-        public NewsEntryInfo GetNewsEntry (int entryId, int portalId)
+        public NewsEntry GetNewsEntry (int entryId, int portalId)
         {
-            var newsEntry = NewsDataProvider.Instance.Get<NewsEntryInfo,int,int> (entryId, portalId);
+            var newsEntry = NewsDataProvider.Instance.Get<NewsEntry,int,int> (entryId, portalId);
             if (newsEntry != null) {
-                return (NewsEntryInfo) newsEntry
+                return (NewsEntry) newsEntry
                     .WithAgentModule (NewsDataProvider.Instance.ModuleController)
                     .WithContentItem ();
             }
@@ -47,12 +47,12 @@ namespace R7.News.Data
             return NewsDataProvider.Instance.Get<NewsEntryText,int> (entryTextId);
         }
 
-        public NewsEntryInfo GetNewsEntryByContentItem (ContentItem contentItem)
+        public NewsEntry GetNewsEntryByContentItem (ContentItem contentItem)
         {
-            return NewsDataProvider.Instance.Get<NewsEntryInfo,int> (int.Parse (contentItem.ContentKey));
+            return NewsDataProvider.Instance.Get<NewsEntry,int> (int.Parse (contentItem.ContentKey));
         }
 
-        public int AddNewsEntry (NewsEntryInfo newsEntry,
+        public int AddNewsEntry (NewsEntry newsEntry,
                                  List<Term> terms,
                                  List<IFileInfo> images,
                                  int moduleId,
@@ -70,7 +70,7 @@ namespace R7.News.Data
             return newsEntry.EntryId;
         }
 
-        public void UpdateNewsEntryText (NewsEntryInfo newsEntry)
+        public void UpdateNewsEntryText (NewsEntry newsEntry)
         {
             // TODO: More careful handling of empty text including "empty" HTML markup like `<P>&nbsp;</P>`
             if (!string.IsNullOrEmpty (newsEntry.Text)) {
@@ -98,7 +98,7 @@ namespace R7.News.Data
         }
 
         [Obsolete]
-        internal int AddNewsEntry_Internal (IRepository<NewsEntryInfo> repository, NewsEntryInfo newsEntry,
+        internal int AddNewsEntry_Internal (IRepository<NewsEntry> repository, NewsEntry newsEntry,
             List<Term> terms,
             List<IFileInfo> images,
             int moduleId,
@@ -130,7 +130,7 @@ namespace R7.News.Data
             return contentItem;
         }
 
-        public int DuplicateNewsEntry (NewsEntryInfo item, int moduleId, int tabId)
+        public int DuplicateNewsEntry (NewsEntry item, int moduleId, int tabId)
         {
             item.EntryId = 0;
             item.EntryTextId = null;
@@ -144,7 +144,7 @@ namespace R7.News.Data
         }
 
         // TODO: Can use IEnumerable here
-        static void UpdateContentItem (ContentItem contentItem, NewsEntryInfo newsEntry, List<Term> terms, List<IFileInfo> images)
+        static void UpdateContentItem (ContentItem contentItem, NewsEntry newsEntry, List<Term> terms, List<IFileInfo> images)
         {
             // update content item after EntryId get its value
             // TODO: ContentKey should allow users to view your content item directly based on links provided from the tag search results
@@ -165,7 +165,7 @@ namespace R7.News.Data
             }
         }
 
-        public void UpdateNewsEntry (NewsEntryInfo newsEntry, List<Term> terms, int moduleId, int tabId)
+        public void UpdateNewsEntry (NewsEntry newsEntry, List<Term> terms, int moduleId, int tabId)
         {
             // TODO: Update value of ContentKey
             // update content item
@@ -192,7 +192,7 @@ namespace R7.News.Data
         /// Updates the news entry w/o associated entities.
         /// </summary>
         /// <param name="newsEntry">News entry.</param>
-        public void UpdateNewsEntry (NewsEntryInfo newsEntry)
+        public void UpdateNewsEntry (NewsEntry newsEntry)
         {
             NewsDataProvider.Instance.Update (newsEntry);
 
@@ -207,31 +207,31 @@ namespace R7.News.Data
             ClearCache ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetAllNewsEntries (int moduleId,
+        public IEnumerable<NewsEntry> GetAllNewsEntries (int moduleId,
                                                              int portalId,
                                                              WeightRange thematicWeights,
                                                              WeightRange structuralWeights)
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
-            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+            return DataCache.GetCachedData<IEnumerable<NewsEntry>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetAllNewsEntriesInternal (portalId,
                     thematicWeights, structuralWeights)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetAllNewsEntriesInternal (int portalId,
+        protected IEnumerable<NewsEntry> GetAllNewsEntriesInternal (int portalId,
                                                                      WeightRange thematicWeights,
                                                                      WeightRange structuralWeights)
         {
-            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (
+            return NewsDataProvider.Instance.GetObjects<NewsEntry> (
                 System.Data.CommandType.StoredProcedure,
                 SpNamePrefix + "GetNewsEntries", portalId,
                 thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                    .Cast<NewsEntryInfo> ();
+                    .Cast<NewsEntry> ();
         }
 
         public int GetAllNewsEntries_Count (int portalId,
@@ -245,22 +245,22 @@ namespace R7.News.Data
             );
         }
 
-        public IEnumerable<NewsEntryInfo> GetAllNewsEntries_FirstPage (int portalId,
+        public IEnumerable<NewsEntry> GetAllNewsEntries_FirstPage (int portalId,
                                                                        int pageSize,
                                                                        DateTime? now,
                                                                        WeightRange thematicWeights,
                                                                        WeightRange structuralWeights)
         {
-            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (
+            return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntry> (
                 SpNamePrefix + "GetNewsEntries_FirstPage",
                 portalId, pageSize, now,
                 thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max)
                     .WithContentItems ()
                     .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                    .Cast<NewsEntryInfo> ();
+                    .Cast<NewsEntry> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms (int moduleId,
+        public IEnumerable<NewsEntry> GetNewsEntriesByTerms (int moduleId,
                                                                  int portalId,
                                                                  WeightRange thematicWeights,
                                                                  WeightRange structuralWeights,
@@ -268,14 +268,14 @@ namespace R7.News.Data
         {
             var cacheKey = NewsCacheKeyPrefix + "ModuleId=" + moduleId;
 
-            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+            return DataCache.GetCachedData<IEnumerable<NewsEntry>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByTermsInternal (portalId,
                     thematicWeights, structuralWeights, terms)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTermsInternal (int portalId,
+        protected IEnumerable<NewsEntry> GetNewsEntriesByTermsInternal (int portalId,
                                                                             WeightRange thematicWeights,
                                                                             WeightRange structuralWeights,
                                                                             IList<Term> terms)
@@ -283,17 +283,17 @@ namespace R7.News.Data
             Contract.Requires (terms != null);
 
             if (terms.Count > 0) {
-                return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> (
+                return NewsDataProvider.Instance.GetObjects<NewsEntry> (
                     System.Data.CommandType.StoredProcedure,
                     SpNamePrefix + "GetNewsEntriesByTerms", portalId,
                     thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max,
                     terms.Select (t => t.TermId).ToArray ())
                         .WithContentItems ()
                         .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                        .Cast<NewsEntryInfo> ();
+                        .Cast<NewsEntry> ();
             }
 
-            return Enumerable.Empty<NewsEntryInfo> ();
+            return Enumerable.Empty<NewsEntry> ();
         }
 
         public int GetNewsEntriesByTerms_Count (int portalId,
@@ -315,7 +315,7 @@ namespace R7.News.Data
             return 0;
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByTerms_FirstPage (int portalId,
+        protected IEnumerable<NewsEntry> GetNewsEntriesByTerms_FirstPage (int portalId,
                                                                            int pageSize,
                                                                            DateTime? now,
                                                                            WeightRange thematicWeights,
@@ -325,36 +325,36 @@ namespace R7.News.Data
             Contract.Requires (terms != null);
 
             if (terms.Count > 0) {
-                return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntryInfo> (SpNamePrefix + "GetNewsEntriesByTerms_FirstPage",
+                return NewsDataProvider.Instance.GetObjectsFromSp<NewsEntry> (SpNamePrefix + "GetNewsEntriesByTerms_FirstPage",
                     portalId, pageSize, now,
                     thematicWeights.Min, thematicWeights.Max, structuralWeights.Min, structuralWeights.Max,
                     terms.Select (t => t.TermId).ToArray ())
                         .WithContentItems ()
                         .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                        .Cast<NewsEntryInfo> ();
+                        .Cast<NewsEntry> ();
             }
 
-            return Enumerable.Empty<NewsEntryInfo> ();
+            return Enumerable.Empty<NewsEntry> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntriesByAgent (int moduleId, int portalId)
+        public IEnumerable<NewsEntry> GetNewsEntriesByAgent (int moduleId, int portalId)
         {
             var cacheKey = NewsCacheKeyPrefix + "AgentModuleId=" + moduleId;
-            return DataCache.GetCachedData<IEnumerable<NewsEntryInfo>> (
+            return DataCache.GetCachedData<IEnumerable<NewsEntry>> (
                 new CacheItemArgs (cacheKey, NewsConfig.GetInstance (portalId).DataCacheTime, CacheItemPriority.Normal),
                 c => GetNewsEntriesByAgentInternal (moduleId)
             );
         }
 
-        protected IEnumerable<NewsEntryInfo> GetNewsEntriesByAgentInternal (int moduleId)
+        protected IEnumerable<NewsEntry> GetNewsEntriesByAgentInternal (int moduleId)
         {
-            return NewsDataProvider.Instance.GetObjects<NewsEntryInfo> ("WHERE AgentModuleId = @0", moduleId)
+            return NewsDataProvider.Instance.GetObjects<NewsEntry> ("WHERE AgentModuleId = @0", moduleId)
                 .WithContentItemsOneByOne ()
             // .WithAgentModules (NewsDataProvider.Instance.ModuleController)
-                .Cast<NewsEntryInfo> ();
+                .Cast<NewsEntry> ();
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries_FirstPage (int portalId, int pageSize, DateTime? now,
+        public IEnumerable<NewsEntry> GetNewsEntries_FirstPage (int portalId, int pageSize, DateTime? now,
             WeightRange thematicRange, WeightRange structRange, bool showAllNews, IList<Term> includeTerms,
             out int newsEntriesCount)
         {
@@ -367,7 +367,7 @@ namespace R7.News.Data
             return GetNewsEntriesByTerms_FirstPage (portalId, pageSize, now, thematicRange, structRange, includeTerms);
         }
 
-        public IEnumerable<NewsEntryInfo> GetNewsEntries_Page (int moduleId, int portalId,
+        public IEnumerable<NewsEntry> GetNewsEntries_Page (int moduleId, int portalId,
             WeightRange thematicRange, WeightRange structRange, bool showAllNews, IList<Term> includeTerms)
         {
             if (showAllNews) {

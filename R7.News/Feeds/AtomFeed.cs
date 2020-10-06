@@ -39,7 +39,7 @@ namespace R7.News.Feeds
         // TODO: Move to the base library?
         string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
 
-        public void Render (XmlWriter writer, IEnumerable<NewsEntryInfo> newsEntries, ModuleInfo module,
+        public void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
             PortalSettings portalSettings, string requestUrl, bool withImages)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");

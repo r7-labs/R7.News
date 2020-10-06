@@ -52,7 +52,7 @@ namespace R7.News.Components
         {
             var newsEntry = NewsRepository.Instance.GetNewsEntry (entryId, portalId).WithText ();
             if (newsEntry != null) {
-                NewsRepository.Instance.DuplicateNewsEntry ((NewsEntryInfo) newsEntry, moduleId, tabId);
+                NewsRepository.Instance.DuplicateNewsEntry ((NewsEntry) newsEntry, moduleId, tabId);
             }
             Response.Redirect (Globals.NavigateURL ());
         }

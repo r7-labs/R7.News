@@ -30,24 +30,24 @@ using R7.News.Models;
 namespace R7.News.Agent.Models
 {
     /// <summary>
-    /// XML serialization adapter for NewsEntryInfo
+    /// XML serialization adapter for NewsEntry
     /// </summary>
     [Serializable]
     public class XmlNewsEntryInfo: INewsEntry
     {
-        protected NewsEntryInfo @This;
+        protected NewsEntry @This;
 
         public XmlNewsEntryInfo ()
         {
-            @This = new NewsEntryInfo ();
+            @This = new NewsEntry ();
         }
 
-        public XmlNewsEntryInfo (NewsEntryInfo newsEntry)
+        public XmlNewsEntryInfo (NewsEntry newsEntry)
         {
             @This = newsEntry;
         }
 
-        public NewsEntryInfo GetNewsEntryInfo ()
+        public NewsEntry GetNewsEntryInfo ()
         {
             return @This;
         }

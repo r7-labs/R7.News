@@ -52,7 +52,7 @@ namespace R7.News.Stream
         Audit
     }
 
-    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntryInfo, int>
+    public partial class EditNewsEntry : EditPortalModuleBase<NewsEntry, int>
     {
         #region Properties
 
@@ -252,9 +252,9 @@ namespace R7.News.Stream
         }
         */
 
-        protected override void LoadItem (NewsEntryInfo item)
+        protected override void LoadItem (NewsEntry item)
         {
-            item = (NewsEntryInfo) item.WithContentItem ().WithText ();
+            item = (NewsEntry) item.WithContentItem ().WithText ();
 
             var image = item.ContentItem.Images.FirstOrDefault ();
             if (image != null) {
@@ -334,7 +334,7 @@ namespace R7.News.Stream
 
         private List<IFileInfo> images;
 
-        protected override void BeforeUpdateItem (NewsEntryInfo item, bool isNew)
+        protected override void BeforeUpdateItem (NewsEntry item, bool isNew)
         {
             if (ItemKey == null) {
                 images = new List<IFileInfo> ();
@@ -404,12 +404,12 @@ namespace R7.News.Stream
             }
         }
 
-        protected override NewsEntryInfo GetItem (int itemKey)
+        protected override NewsEntry GetItem (int itemKey)
         {
             return NewsRepository.Instance.GetNewsEntry (itemKey, PortalId);
         }
 
-        protected override void AddItem (NewsEntryInfo item)
+        protected override void AddItem (NewsEntry item)
         {
             var termSelector = new TermSelector ();
             NewsRepository.Instance.AddNewsEntry (item, termSelector.GetSelectedTerms (selTerms), images, ModuleId, TabId);
@@ -418,7 +418,7 @@ namespace R7.News.Stream
             }
         }
 
-        protected override void UpdateItem (NewsEntryInfo item)
+        protected override void UpdateItem (NewsEntry item)
         {
             var termSelector = new TermSelector ();
             NewsRepository.Instance.UpdateNewsEntry (item, termSelector.GetSelectedTerms (selTerms), ModuleId, TabId);
@@ -427,7 +427,7 @@ namespace R7.News.Stream
             }
         }
 
-        protected override void DeleteItem (NewsEntryInfo item)
+        protected override void DeleteItem (NewsEntry item)
         {
             NewsRepository.Instance.DeleteNewsEntry (item);
         }
