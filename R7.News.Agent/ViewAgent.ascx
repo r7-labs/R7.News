@@ -23,6 +23,15 @@
     </LayoutTemplate>
     <ItemTemplate>
         <div>
+			<h3><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
+			<p>
+				<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
+			</p>
+			<news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
+			<ul class="list-inline news-entry-info">
+				<li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
+				<li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
+			</ul>
             <div class="row">
                 <div class="<%# Item.ImageColumnCssClass %>">
                     <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
@@ -32,17 +41,6 @@
                     </asp:HyperLink>
 				</div>
                 <div class='<%# Item.TextColumnCssClass + " news-entry-text-column" %>'>
-                    <h3 class="mt-0">
-                        <%# HttpUtility.HtmlDecode (Item.TitleLink) %>
-                    </h3>
-					<p>
-						<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
-					</p>
-                    <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
-                    <ul class="list-inline news-entry-info">
-                        <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
-                        <li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
-                    </ul>
                     <div class="<%# Item.TextCssClass %>">
                         <%# HttpUtility.HtmlDecode (Item.Description) %>
 					</div>
