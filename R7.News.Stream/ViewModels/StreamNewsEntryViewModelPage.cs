@@ -27,7 +27,7 @@ namespace R7.News.Stream.ViewModels
 {
     public struct StreamNewsEntryViewModelPage
     {
-        public IList<StreamNewsEntryViewModel> Page { get; private set; }
+        public IList<StreamNewsEntry> Page { get; private set; }
 
         public int TotalItems { get; private set; }
 
@@ -36,7 +36,7 @@ namespace R7.News.Stream.ViewModels
             get { return new StreamNewsEntryViewModelPage (0, null); }
         }
 
-        public StreamNewsEntryViewModelPage (int totalItems, IList<StreamNewsEntryViewModel> page)
+        public StreamNewsEntryViewModelPage (int totalItems, IList<StreamNewsEntry> page)
         {
             TotalItems = totalItems;
             Page = page;

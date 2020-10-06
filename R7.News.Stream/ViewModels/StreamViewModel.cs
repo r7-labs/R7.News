@@ -86,7 +86,7 @@ namespace R7.News.Stream.ViewModels
 
             return new StreamNewsEntryViewModelPage (
                 baseItemsCount,
-                baseItems.Select (ne => new StreamNewsEntryViewModel (ne, this, streamModuleConfig))
+                baseItems.Select (ne => new StreamNewsEntry (ne, this, streamModuleConfig))
                 .ToList ()
             );
         }
@@ -132,7 +132,7 @@ namespace R7.News.Stream.ViewModels
                 items.OrderByDescending (ne => ne.PublishedOnDate ())
                     .Skip (pageIndex * pageSize)
                     .Take (pageSize)
-                    .Select (ne => new StreamNewsEntryViewModel (ne, this, streamModuleConfig))
+                    .Select (ne => new StreamNewsEntry (ne, this, streamModuleConfig))
                     .ToList ()
             );
         }

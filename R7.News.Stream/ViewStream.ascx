@@ -16,7 +16,7 @@
 		</a>
 	</asp:Panel>
     <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
-    <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntryViewModel" runat="server" OnItemDataBound="listStream_ItemDataBound">
+    <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntry" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
             <div runat="server">
                 <div runat="server" id="itemPlaceholder"></div>

@@ -1,5 +1,5 @@
 //
-//  StreamNewsEntryViewModel.cs
+//  StreamNewsEntry.cs
 //
 //  Author:
 //       Roman M. Yagodin <roman.yagodin@gmail.com>
@@ -27,9 +27,9 @@ using R7.News.ViewModels;
 
 namespace R7.News.Stream.ViewModels
 {
-    public class StreamNewsEntryViewModel: NewsEntryViewModelBase
+    public class StreamNewsEntry: NewsEntryViewModelBase
     {
-        public StreamNewsEntryViewModel (INewsEntry newsEntry, ViewModelContext<StreamSettings> context, StreamModuleConfig config) :
+        public StreamNewsEntry (INewsEntry newsEntry, ViewModelContext<StreamSettings> context, StreamModuleConfig config) :
             base (newsEntry, context)
         {
             Config = config;

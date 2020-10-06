@@ -168,7 +168,7 @@
     <Compile Include="ViewNewsEntry.ascx.controls.cs">
       <DependentUpon>ViewNewsEntry.ascx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\StreamNewsEntryViewModel.cs" />
+    <Compile Include="ViewModels\StreamNewsEntry.cs" />
     <Compile Include="ViewModels\NewsEntryViewModel.cs" />
     <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
