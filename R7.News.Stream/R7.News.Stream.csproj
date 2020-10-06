@@ -170,7 +170,7 @@
     </Compile>
     <Compile Include="ViewModels\StreamNewsEntry.cs" />
     <Compile Include="ViewModels\NewsEntryViewModel.cs" />
-    <Compile Include="ViewModels\StreamNewsEntryViewModelPage.cs" />
+    <Compile Include="ViewModels\StreamNewsEntriesPage.cs" />
     <Compile Include="Integrations\DDRMenu\StreamNodeManipulator.cs" />
     <Compile Include="Services\StreamRouteMapper.cs" />
     <Compile Include="Services\FeedController.cs" />

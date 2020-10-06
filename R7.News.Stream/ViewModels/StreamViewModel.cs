@@ -48,7 +48,7 @@ namespace R7.News.Stream.ViewModels
                 + Globals.DesktopModulePath
                 + "R7.News.Stream/API/Feed/Atom?key=" + Base64ToCanonicalForm (UrlUtils.EncryptParameter ($"{Module.TabId}-{Module.ModuleId}")));
 
-        public StreamNewsEntryViewModelPage GetPage (int pageIndex, int pageSize)
+        public StreamNewsEntriesPage GetPage (int pageIndex, int pageSize)
         {
             var now = Module.IsEditable ? null : (DateTime?) HttpContext.Current.Timestamp;
 
@@ -66,7 +66,7 @@ namespace R7.News.Stream.ViewModels
                 var cacheKey = NewsRepository.NewsCacheKeyPrefix + "TabModuleId=" + Module.TabModuleId
                                + "&PageIndex=0&PageSize=" + pageSize + "&CheckNow=" + !Module.IsEditable;
 
-                return DataCache.GetCachedData<StreamNewsEntryViewModelPage> (
+                return DataCache.GetCachedData<StreamNewsEntriesPage> (
                     new CacheItemArgs (cacheKey, NewsConfig.Instance.DataCacheTime, CacheItemPriority.Normal),
                     c => GetFirstPageInternal (pageSize, now)
                 );
@@ -75,7 +75,7 @@ namespace R7.News.Stream.ViewModels
             return GetPageInternal (pageIndex, pageSize, now);
         }
 
-        protected StreamNewsEntryViewModelPage GetFirstPageInternal (int pageSize, DateTime? now)
+        protected StreamNewsEntriesPage GetFirstPageInternal (int pageSize, DateTime? now)
         {
             var baseItems = NewsRepository.Instance.GetNewsEntries_FirstPage (Module.PortalId, Settings.PageSize, now,
                 new WeightRange (Settings.MinThematicWeight, Settings.MaxThematicWeight),
@@ -84,18 +84,18 @@ namespace R7.News.Stream.ViewModels
 
             var streamModuleConfig = NewsConfig.Instance.StreamModule;
 
-            return new StreamNewsEntryViewModelPage (
+            return new StreamNewsEntriesPage (
                 baseItemsCount,
                 baseItems.Select (ne => new StreamNewsEntry (ne, this, streamModuleConfig))
                 .ToList ()
             );
         }
 
-        protected StreamNewsEntryViewModelPage GetPageInternal (int pageIndex, int pageSize, DateTime? now)
+        protected StreamNewsEntriesPage GetPageInternal (int pageIndex, int pageSize, DateTime? now)
         {
             // check for pageIndex < 0
             if (pageIndex < 0) {
-                return StreamNewsEntryViewModelPage.Empty;
+                return StreamNewsEntriesPage.Empty;
             }
 
             var baseItems = NewsRepository.Instance.GetNewsEntries_Page (Module.ModuleId, Module.PortalId,
@@ -105,7 +105,7 @@ namespace R7.News.Stream.ViewModels
 
             // check for no data available
             if (baseItems == null || !baseItems.Any ()) {
-                return StreamNewsEntryViewModelPage.Empty;
+                return StreamNewsEntriesPage.Empty;
             }
 
             // get only published items
@@ -116,18 +116,18 @@ namespace R7.News.Stream.ViewModels
             // check for no data available
             var totalItems = items.Count;
             if (totalItems == 0) {
-                return StreamNewsEntryViewModelPage.Empty;
+                return StreamNewsEntriesPage.Empty;
             }
 
             // check for pageIndex > totalPages
             var totalPages = totalItems / pageSize + ((totalItems % pageSize == 0) ? 0 : 1);
             if (pageIndex > totalPages) {
-                return StreamNewsEntryViewModelPage.Empty;
+                return StreamNewsEntriesPage.Empty;
             }
 
             var streamModuleConfig = NewsConfig.Instance.StreamModule;
 
-            return new StreamNewsEntryViewModelPage (
+            return new StreamNewsEntriesPage (
                 totalItems,
                 items.OrderByDescending (ne => ne.PublishedOnDate ())
                     .Skip (pageIndex * pageSize)
