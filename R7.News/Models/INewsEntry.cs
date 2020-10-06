@@ -63,8 +63,6 @@ namespace R7.News.Models
 
         ModuleInfo AgentModule { get; set; }
 
-        ICollection<INewsEntry> Group { get; set; }
-
         string DiscussProviderKey { get; set; }
 
         string DiscussEntryId { get; set; }

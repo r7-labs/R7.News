@@ -28,11 +28,6 @@ namespace R7.News.Agent.ViewModels
             get { return NewsEntry.GetImageUrl (width: Settings.ThumbnailWidth ?? Config.DefaultThumbnailWidth); }
         }
 
-        public string GroupImageUrl
-        {
-            get { return NewsEntry.GetImageUrl (width: Settings.GroupThumbnailWidth ?? Config.DefaultGroupThumbnailWidth); }
-        }
-
         public string ImageCssClass => Settings.ImageCssClass ?? Config.ImageCssClass;
 
         public string TextCssClass => IsTopEntry ? (Settings.TopEntryTextCssClass ?? Config.TopEntryTextCssClass) : (Settings.TextCssClass ?? Config.TextCssClass);

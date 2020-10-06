@@ -78,9 +78,7 @@ namespace R7.News.Agent
                 // create viewmodels
                 var viewModels = items
                     .Where (ne => ne.IsPublished (now) || IsEditable)
-                    .OrderByDescending (ne => ne.EntryId == Settings.GroupEntryId)
-                    .ThenByDescending (ne => ne.PublishedOnDate ())
-                    .GroupByAgentModule (Settings.EnableGrouping)
+                    .OrderByDescending (ne => ne.PublishedOnDate ())
                     .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig))
                     .ToList ();
 
@@ -92,7 +90,7 @@ namespace R7.News.Agent
                 listAgent.DataSource = viewModels;
                 listAgent.DataBind ();
 
-                agplSignature.Visible = (Settings.EnableGrouping == false && listAgent.Items.Count > 1);
+                agplSignature.Visible = listAgent.Items.Count > 1;
             }
         }
 
@@ -152,35 +150,6 @@ namespace R7.News.Agent
             var item = (AgentNewsEntryViewModel) e.Item.DataItem;
 
             BindChildControls (item, e.Item);
-
-            // show grouped news
-            var listGroup = (ListView) e.Item.FindControl ("listGroup");
-            var now = HttpContext.Current.Timestamp;
-            var agentModuleConfig = NewsConfig.Instance.AgentModule;
-
-            if (item.Group != null && item.Group.Count > 0) {
-                listGroup.DataSource = item.Group
-                    .Where (ne => ne.IsPublished (now) || IsEditable)
-                    .OrderByDescending (ne => ne.PublishedOnDate ())
-                    .Select (ne => new AgentNewsEntryViewModel (ne, ViewModelContext, agentModuleConfig));
-                listGroup.DataBind ();
-            }
-        }
-
-        /// <summary>
-        /// Handles the items being bound to the listview control. In this method we merge the data with the
-        /// template defined for this control to produce the result to display to the user
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void listGroup_ItemDataBound (object sender, ListViewItemEventArgs e)
-        {
-            var item = (AgentNewsEntryViewModel) e.Item.DataItem;
-
-            // visibility badges
-            var listBadges = (BadgeList) e.Item.FindControl ("listBadges");
-            listBadges.DataSource = item.Badges;
-            listBadges.DataBind ();
         }
 
         protected void UpdateModuleTitle (string title)

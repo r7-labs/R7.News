@@ -86,8 +86,6 @@ namespace R7.News.Components
     {
         public int DefaultThumbnailWidth { get; set; } = 768;
 
-        public int DefaultGroupThumbnailWidth { get; set; } = 133;
-
         public string ImageCssClass { get; set; } = "img-thumbnail";
 
         public string TextCssClass { get; set; }

@@ -17,14 +17,6 @@ namespace R7.News.Agent
             get { return viewModelContext ?? (viewModelContext = new ViewModelContext (this)); }
         }
 
-        protected override void OnInit (EventArgs e)
-        {
-            comboGroupEntry.DataSource = NewsRepository.Instance.GetNewsEntriesByAgent (ModuleId, PortalId);
-            comboGroupEntry.DataBind ();
-            comboGroupEntry.InsertDefaultItem (LocalizeString ("NotSelected.Text"));
-            comboGroupEntry.SelectedIndex = 0;
-        }
-
         /// <summary>
         /// Handles the loading of the module setting for this control
         /// </summary>
@@ -32,11 +24,7 @@ namespace R7.News.Agent
         {
             try {
                 if (!IsPostBack) {
-                    checkEnableGrouping.Checked = Settings.EnableGrouping;
-                    comboGroupEntry.SelectByValue (Settings.GroupEntryId);
                     textThumbnailWidth.Text = Settings.ThumbnailWidth.ToString ();
-                    textGroupThumbnailWidth.Text = Settings.GroupThumbnailWidth.ToString ();
-
                     txtImageCssClass.Text = Settings.ImageCssClass;
                     txtTextCssClass.Text = Settings.TextCssClass;
                     txtTopEntryTextCssClass.Text = Settings.TopEntryTextCssClass;
@@ -55,10 +43,7 @@ namespace R7.News.Agent
         public override void UpdateSettings ()
         {
             try {
-                Settings.EnableGrouping = checkEnableGrouping.Checked;
-                Settings.GroupEntryId = ParseHelper.ParseToNullable<int> (comboGroupEntry.SelectedValue);
                 Settings.ThumbnailWidth = ParseHelper.ParseToNullable<int> (textThumbnailWidth.Text);
-                Settings.GroupThumbnailWidth = ParseHelper.ParseToNullable<int> (textGroupThumbnailWidth.Text);
 
                 Settings.ImageCssClass = !string.IsNullOrEmpty (txtImageCssClass.Text) ? txtImageCssClass.Text : null;
                 Settings.TextCssClass = !string.IsNullOrEmpty (txtTextCssClass.Text) ? txtTextCssClass.Text : null;

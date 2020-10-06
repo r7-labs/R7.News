@@ -10,10 +10,7 @@ namespace R7.News.Agent
 {
     public partial class ModuleSettings
     {
-        protected CheckBox checkEnableGrouping;
-        protected DropDownList comboGroupEntry;
         protected TextBox textThumbnailWidth;
-        protected TextBox textGroupThumbnailWidth;
         protected TextBox txtImageCssClass;
         protected TextBox txtTextCssClass;
         protected TextBox txtTopEntryTextCssClass;

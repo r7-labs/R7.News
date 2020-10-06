@@ -7,7 +7,6 @@ stream-module:
 
 agent-module:
   default-thumbnail-width: 555
-  default-group-thumbnail-width: 133
 
 news-entry:
   max-weight: 10

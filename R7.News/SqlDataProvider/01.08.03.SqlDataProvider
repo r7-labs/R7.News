@@ -1,0 +1,13 @@
+﻿-- Cleanup removed Agent settings for grouping
+
+IF EXISTS (select * from {databaseOwner}[{objectQualifier}TabModuleSettings] where SettingName = N'r7_News_Agent_EnableGrouping')
+    DELETE FROM {databaseOwner}[{objectQualifier}TabModuleSettings] WHERE SettingName = N'r7_News_Agent_EnableGrouping'
+GO
+
+IF EXISTS (select * from {databaseOwner}[{objectQualifier}TabModuleSettings] where SettingName = N'r7_News_Agent_GroupEntryId')
+    DELETE FROM {databaseOwner}[{objectQualifier}TabModuleSettings] WHERE SettingName = N'r7_News_Agent_GroupEntryId'
+GO
+
+IF EXISTS (select * from {databaseOwner}[{objectQualifier}TabModuleSettings] where SettingName = N'r7_News_Agent_GroupThumbnailWidth')
+    DELETE FROM {databaseOwner}[{objectQualifier}TabModuleSettings] WHERE SettingName = N'r7_News_Agent_GroupThumbnailWidth'
+GO

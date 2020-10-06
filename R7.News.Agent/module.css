@@ -1,16 +1,1 @@
-﻿.news-agent .list-group .news-entry-main-row {
-    display:table-row
-}
-
-.news-agent .list-group .news-entry-main-row > div {
-    display:table-cell
-}
-
-.news-agent .list-group .news-entry-image {
-    margin-right:1em
-}
-
-.news-agent .list-group .news-entry-text-column {
-    vertical-align:top;
-    font-size:85%
-}
+﻿

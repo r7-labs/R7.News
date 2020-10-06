@@ -52,40 +52,6 @@
 						ShowDuplicateAction="true"
 						ShowSyncTabAction="true"
 						ShowExpandTextAction="true" />
-                    <asp:ListView id="listGroup" ItemType="R7.News.Agent.ViewModels.AgentNewsEntryViewModel" runat="server" OnItemDataBound="listGroup_ItemDataBound">
-                        <LayoutTemplate>
-                            <div runat="server" class="list-group">
-                                <div runat="server" id="itemPlaceholder"></div>
-                            </div>
-                        </LayoutTemplate>
-                        <ItemTemplate>
-                            <h4><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h4>
-                            <news:BadgeList id="listBadges" runat="server" CssClass="list-inline visibility-badges" BadgeCssClass="list-inline-item badge" />
-                            <ul class="list-inline news-entry-info">
-                                <li class="list-inline-item"><i class="fas fa-calendar-alt"></i> <%# Item.PublishedOnDateString %></li>
-                                <li class="list-inline-item"><i class="fas fa-user"></i> <%# Item.CreatedByUserName %></li>
-                            </ul>
-                            <div class="news-entry-main-row">
-                                <div>
-                                    <asp:HyperLink id="linkImage" runat="server" NavigateUrl="<%# Item.Link %>" Visible="<%# Item.HasImage %>">
-                                        <asp:Image id="imageImage" runat="server"
-                                            ImageUrl="<%# Item.GroupImageUrl %>" AlternateText="<%# Item.Title %>"
-                                            CssClass='<%# Item.ImageCssClass + " news-entry-image" %>' />
-                                    </asp:HyperLink>
-                                </div>
-                                <div class="news-entry-text-column">
-                                    <div class="<%# Item.TextCssClass %>">
-                                        <%# HttpUtility.HtmlDecode (Item.Description) %>
-									</div>
-									<news:ActionList id="listActions" runat="server"
-										EntryId="<%# Item.EntryId %>"
-										EntryTextId="<%# Item.EntryTextId %>"
-										ShowDuplicateAction="true"
-										ShowExpandTextAction="true" />
-                                </div>
-                            </div>
-                        </ItemTemplate>
-                    </asp:ListView>
                 </div>
             </div>
         </div>

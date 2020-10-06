@@ -9,12 +9,6 @@
 	<data name="NotSelected.Text" xml:space="preserve">
         <value>&lt; Not Selected &gt;</value>
     </data>
-    <data name="labelEnableGrouping.Text" xml:space="preserve">
-        <value>Enable Grouping:</value>
-    </data>
-    <data name="labelEnableGrouping.Help" xml:space="preserve">
-        <value>Grouping feature is obsolete, please avoid using it! Check to enable grouping of news related to this agent module.</value>
-    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Thumbnail Width:</value>
     </data>
@@ -23,21 +17,6 @@
     </data>
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Thumbnail width must be an integer from 1 to 4096.</value>
-    </data>
-    <data name="labelGroupThumbnailWidth.Text" xml:space="preserve">
-        <value>Thumbnail Width in Group:</value>
-    </data>
-    <data name="labelGroupThumbnailWidth.Help" xml:space="preserve">
-        <value>Grouping feature is obsolete, please avoid using it! Set width in px for generated thumbnail images for grouped news entries.</value>
-    </data>
-    <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
-        <value>Thumbnail width in group must be an integer from 1 to 1024.</value>
-    </data>
-	<data name="labelGroupEntry.Text" xml:space="preserve">
-        <value>Group Entry:</value>
-    </data>
-    <data name="labelGroupEntry.Help" xml:space="preserve">
-        <value>Grouping feature is obsolete, please avoid using it! Select the specific entry to group other entries around. If no entry selected, most recent one will be used.</value>
     </data>
 	<data name="lblImageCssClass.Text" xml:space="preserve">
         <value>Image CSS Class:</value>

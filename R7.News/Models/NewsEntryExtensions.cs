@@ -118,43 +118,6 @@ namespace R7.News.Models
             return string.Empty;
         }
 
-        public static IEnumerable<INewsEntry> GroupByAgentModule (this IEnumerable<INewsEntry> newsEntries,
-                                                                  bool enableGrouping)
-        {
-            if (enableGrouping) {
-                var newsList = new List<INewsEntry> ();
-                foreach (var newsEntry in newsEntries) {
-
-                    // find group entry
-                    var groupEntry = newsList
-                        .SingleOrDefault (ne => ne.AgentModuleId != null && ne.AgentModuleId == newsEntry.AgentModuleId);
-
-                    // add current entry to the group
-                    if (groupEntry != null) {
-                        if (groupEntry.Group == null) {
-                            groupEntry.Group = new Collection<INewsEntry> ();
-                        }
-                        groupEntry.Group.Add (newsEntry);
-                        continue;
-                    }
-
-                    // add current entry as group entry
-                    newsEntry.Group = null;
-                    newsList.Add (newsEntry);
-                }
-
-                return newsList;
-            }
-            else {
-                // clear group references
-                foreach (var newsEntry in newsEntries) {
-                    newsEntry.Group = null;
-                }
-
-                return newsEntries;
-            }
-        }
-
         public static bool IsPublished (this INewsEntry newsEntry, DateTime now)
         {
             return ModelHelper.IsPublished (now, newsEntry.StartDate, newsEntry.EndDate);

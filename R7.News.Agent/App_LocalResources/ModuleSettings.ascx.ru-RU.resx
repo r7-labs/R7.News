@@ -9,12 +9,6 @@
 	<data name="NotSelected.Text" xml:space="preserve">
         <value>&lt; Не выбрано &gt;</value>
     </data>
-    <data name="labelEnableGrouping.Text" xml:space="preserve">
-        <value>Включить группировку:</value>
-    </data>
-    <data name="labelEnableGrouping.Help" xml:space="preserve">
-        <value>Функция группировки устарела - пожалуйста, избегайте её использования! Отметьте, чтобы включить группировку новостей, относящихся к данному модулю.</value>
-    </data>
     <data name="labelThumbnailWidth.Text" xml:space="preserve">
         <value>Ширина миниатюры:</value>
     </data>
@@ -24,22 +18,7 @@
     <data name="ThumbnailWidth.Invalid" xml:space="preserve">
         <value>Ширина миниатюры должна быть целым числом от 1 до 4096.</value>
     </data>
-    <data name="labelGroupThumbnailWidth.Text" xml:space="preserve">
-        <value>Ширина миниатюры в группе:</value>
-    </data>
-    <data name="labelGroupThumbnailWidth.Help" xml:space="preserve">
-        <value>Функция группировки устарела - пожалуйста, избегайте её использования! Задайте ширину в пикселах генерируемых миниатюр изображений для новостей в группе.</value>
-    </data>
-    <data name="GroupThumbnailWidth.Invalid" xml:space="preserve">
-        <value>Ширина миниатюры в группе должна быть целым числом от 1 до 1024.</value>
-    </data>
-	<data name="labelGroupEntry.Text" xml:space="preserve">
-        <value>Новость для группировки:</value>
-    </data>
-    <data name="labelGroupEntry.Help" xml:space="preserve">
-        <value>Функция группировки устарела - пожалуйста, избегайте её использования! Выберите новость для группировки других новостей вокруг нее. Если такая новость не выбрана, группировка будет производиться вокруг наиболе свежей новости.</value>
-    </data>
-	<data name="lblImageCssClass.Text" xml:space="preserve">
+    <data name="lblImageCssClass.Text" xml:space="preserve">
         <value>Класс CSS для изображений:</value>
     </data>
 	<data name="lblTextCssClass.Text" xml:space="preserve">

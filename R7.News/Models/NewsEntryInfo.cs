@@ -72,9 +72,6 @@ namespace R7.News.Models
         [IgnoreColumn]
         public ModuleInfo AgentModule { get; set; }
 
-        [IgnoreColumn]
-        public ICollection<INewsEntry> Group { get; set; }
-
         public string DiscussProviderKey { get; set; }
 
         public  string DiscussEntryId { get; set; }

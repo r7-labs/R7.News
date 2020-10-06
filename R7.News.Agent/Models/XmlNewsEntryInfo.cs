@@ -162,13 +162,6 @@ namespace R7.News.Agent.Models
             set { @This.AgentModule = value; }
         }
 
-        [XmlIgnore]
-        public ICollection<INewsEntry> Group
-        {
-            get { return @This.Group; }
-            set { @This.Group = value; }
-        }
-
         public string DiscussProviderKey {
             get { return @This.DiscussProviderKey; }
             set { @This.DiscussProviderKey = value; }

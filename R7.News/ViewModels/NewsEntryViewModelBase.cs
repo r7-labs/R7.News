@@ -128,12 +128,6 @@ namespace R7.News.ViewModels
             set { throw new InvalidOperationException (); }
         }
 
-        public ICollection<INewsEntry> Group
-        {
-            get { return NewsEntry.Group; }
-            set { throw new InvalidOperationException (); }
-        }
-
         public string DiscussProviderKey {
             get { return NewsEntry.DiscussProviderKey; }
             set { throw new InvalidOperationException (); }

@@ -13,16 +13,7 @@ namespace R7.News.Agent.Models
         protected const string SettingPrefix = Const.Prefix + "_Agent_";
 
         [TabModuleSetting (Prefix = SettingPrefix)]
-        public bool EnableGrouping { get; set; } = false;
-
-        [TabModuleSetting (Prefix = SettingPrefix)]
-        public int? GroupEntryId { get; set; }
-
-        [TabModuleSetting (Prefix = SettingPrefix)]
         public int? ThumbnailWidth { get; set; }
-
-        [TabModuleSetting (Prefix = SettingPrefix)]
-        public int? GroupThumbnailWidth { get; set; }
 
         [TabModuleSetting (Prefix = SettingPrefix)]
         public string ImageCssClass { get; set; }
