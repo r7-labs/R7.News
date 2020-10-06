@@ -76,7 +76,7 @@ namespace R7.News.Stream.Models
         [ModuleSetting (Prefix = SettingPrefix)]
         public bool ShowAllNews { get; set; } = false;
 
-        // REVIEW: Separate config settings for weight filters
+        // TODO: Separate config settings for weight filters?
         [ModuleSetting (Prefix = SettingPrefix)]
         public int MinThematicWeight { get; set; } = 0;
 

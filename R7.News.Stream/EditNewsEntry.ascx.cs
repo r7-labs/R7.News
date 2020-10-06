@@ -163,7 +163,7 @@ namespace R7.News.Stream
             gridModules.DataBind ();
         }
 
-        // REVIEW: Move to business logic layer
+        // TODO: Move to BLL?
         protected IEnumerable<StreamModuleViewModel> GetStreamModules (
             int thematicWeight,
             int structuralWeight,
@@ -280,7 +280,7 @@ namespace R7.News.Stream
             textPermalinkFriendly.Text = item.GetPermalinkFriendly (NewsDataProvider.Instance.ModuleController,
                                                                     ModuleId, TabId);
 
-            // REVIEW: Check for max value?
+            // TODO: Check for max value?
             sliderThematicWeight.Text = item.ThematicWeight.ToString ();
             sliderStructuralWeight.Text = item.StructuralWeight.ToString ();
 

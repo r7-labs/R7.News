@@ -67,7 +67,7 @@ namespace R7.News.Feeds
 
                 var htmlContent = HttpUtility.HtmlDecode (n.Description);
 
-                // FIXME: Temporary workaround for GH-113
+                // HACK: Temporary workaround for GH-113
                 htmlContent = htmlContent.Replace ("&mdash;", "&ndash;");
 
                 if (withImages && n.ContentItem.Images.Count > 0) {
