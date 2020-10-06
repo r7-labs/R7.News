@@ -122,7 +122,10 @@
                         ShowLog="false"
                         ShowTrack="false"
                     />
-					<asp:CheckBox id="chkCurrentPage" runat="server" resourcekey="CurrentPage.Text" />
+                </div>
+				<div class="dnnFormItem">
+                    <div class="dnnLabel"></div>
+                    <asp:CheckBox id="chkCurrentPage" runat="server" resourcekey="CurrentPage.Text" />
                 </div>
             </fieldset>
         </div>

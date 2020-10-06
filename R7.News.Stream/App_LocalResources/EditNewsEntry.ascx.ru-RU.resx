@@ -168,6 +168,6 @@
         <value>Удалить ссылку на обсуждение</value>
     </data>
 	<data name="CurrentPage.Text" xml:space="preserve">
-        <value>Текущая страница</value>
+        <value>Ссылка на текущую страницу</value>
     </data>
 </root>

@@ -168,6 +168,6 @@
         <value>Clear Discussion Link</value>
     </data>
 	<data name="CurrentPage.Text" xml:space="preserve">
-        <value>Current Page</value>
+        <value>Link to Current Page</value>
     </data>
 </root>
