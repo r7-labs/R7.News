@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="ControlTitle_settings.Text" xml:space="preserve">
-        <value>Настройки ленты новостейё</value>
+        <value>Настройки ленты новостей</value>
     </data>
     <data name="ModuleHelp.Text" xml:space="preserve">
         <value>О настройках модуля R7.News.Stream</value>
