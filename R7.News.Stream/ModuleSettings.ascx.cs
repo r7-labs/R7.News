@@ -1,31 +1,14 @@
-﻿//
-//  ModuleSettings.ascx.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2016-2020 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Framework.JavaScriptLibraries;
+using R7.Dnn.Extensions.Client;
 using R7.Dnn.Extensions.Controls;
+using R7.Dnn.Extensions.Collections;
 using R7.Dnn.Extensions.Modules;
 using R7.Dnn.Extensions.Text;
 using R7.News.Components;
+using R7.News.Controls;
 using R7.News.Data;
 using R7.News.Stream.Models;
 
@@ -36,6 +19,12 @@ namespace R7.News.Stream
         protected override void OnInit (EventArgs e)
         {
             base.OnInit (e);
+
+            JavaScript.RequestRegistration ("Select2");
+            var select2Library = JavaScriptLibraryHelper.GetHighestVersionLibrary ("Select2");
+            if (select2Library != null) {
+                JavaScriptLibraryHelper.RegisterStyleSheet (select2Library, Page, "css/select2.min.css");
+            }
 
             // fill weight comboboxes
             for (var i = 0; i <= NewsConfig.Instance.NewsEntry.MaxWeight; i++) {
@@ -54,6 +43,9 @@ namespace R7.News.Stream
             rblPagerShowStatus.AddItem (LocalizeString ("Yes"), "true");
             rblPagerShowStatus.AddItem (LocalizeString ("No"), "false");
             rblPagerShowStatus.SelectedIndex = 0;
+
+            var termSelector = new TermSelector ();
+            termSelector.InitTerms (selIncludeTerms);
         }
 
         /// <summary>
@@ -73,9 +65,12 @@ namespace R7.News.Stream
                     textMaxPageLinks.Text = Settings.MaxPageLinks.ToString ();
 
                     checkShowAllNews.Checked = Settings.ShowAllNews;
-                    termsIncludeTerms.PortalId = PortalId;
-                    termsIncludeTerms.Terms = Settings.IncludeTerms;
-                    termsIncludeTerms.DataBind ();
+
+                    var terms = Settings.IncludeTerms;
+                    if (!terms.IsNullOrEmpty ()) {
+                        var termSelector = new TermSelector ();
+                        termSelector.SelectTerms (selIncludeTerms, terms);
+                    }
 
                     comboMinThematicWeight.SelectByValue (Settings.MinThematicWeight);
                     comboMaxThematicWeight.SelectByValue (Settings.MaxThematicWeight);
@@ -120,7 +115,9 @@ namespace R7.News.Stream
                 Settings.MaxPageLinks = int.Parse (textMaxPageLinks.Text);
 
                 Settings.ShowAllNews = checkShowAllNews.Checked;
-                Settings.IncludeTerms = termsIncludeTerms.Terms;
+
+                var termSelector = new TermSelector ();
+                Settings.IncludeTerms = termSelector.GetSelectedTerms (selIncludeTerms);
 
                 var minThematicWeight = int.Parse (comboMinThematicWeight.SelectedValue);
                 var maxThematicWeight = int.Parse (comboMaxThematicWeight.SelectedValue);

@@ -11,7 +11,6 @@ namespace R7.News.Stream
     public partial class ModuleSettings
     {
         protected CheckBox checkShowAllNews;
-        protected TermsSelector termsIncludeTerms;
         protected TextBox textThumbnailWidth;
         protected CheckBox checkUseShowMore;
         protected CheckBox checkShowTopPager;
@@ -30,6 +29,6 @@ namespace R7.News.Stream
         protected TextBox txtTextColumnCssClass;
         protected RadioButtonList rblPagerShowFirstLast;
         protected RadioButtonList rblPagerShowStatus;
-
+        protected ListBox selIncludeTerms;
     }
 }

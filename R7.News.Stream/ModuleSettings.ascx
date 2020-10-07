@@ -1,15 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ModuleSettings.ascx.cs" Inherits="R7.News.Stream.ModuleSettings" %>
 <%@ Register TagPrefix="dnn" TagName="Label" Src="~/controls/LabelControl.ascx" %>
-<%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.UI.WebControls" Assembly="DotNetNuke.Web.Deprecated" %>
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
-
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News.Stream/admin.css" Priority="200" />
 <div id="news-stream-settings" class="dnnForm dnnClear">
     <h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionBasic.Text") %></a></h2>
     <fieldset>
         <div class="dnnFormItem">
-            <dnn:Label id="labelIncludeTerms" runat="server" ControlName="termsIncludeTerms" />
-            <dnn:TermsSelector id="termsIncludeTerms" CssClass="terms-include-terms" runat="server" />
+            <dnn:Label id="labelIncludeTerms" runat="server" ControlName="selIncludeTerms" />
+			<asp:ListBox id="selIncludeTerms" runat="server" SelectionMode="Multiple"
+				DataValueField="TermId" DataTextField="Name"
+				CssClass="dnn-select2" Style="width:100%" />
         </div>
         <div class="dnnFormItem">
             <dnn:Label id="labelShowAllNews" runat="server" ControlName="checkShowAllNews" />
@@ -33,7 +33,7 @@
 		<div class="dnnFormItem">
             <dnn:Label id="labelThumbnailWidth" runat="server" ControlName="textThumbnailWidth" />
             <asp:TextBox id="textThumbnailWidth" runat="server" />
-            <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth" 
+            <asp:RangeValidator runat="server" ControlToValidate="textThumbnailWidth"
                 Type="Integer" MinimumValue="1" MaximumValue="4096"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="ThumbnailWidth.Invalid" />
         </div>
@@ -53,7 +53,7 @@
             <dnn:Label id="lblTextColumnCssClass" runat="server" ControlName="txtTextColumnCssClass" />
             <asp:TextBox id="txtTextColumnCssClass" runat="server" />
         </div>
-	</fieldset>	
+	</fieldset>
     <h2 class="dnnFormSectionHead dnnClear"><a href="#"><%: LocalizeString ("sectionPagination.Text") %></a></h2>
     <fieldset>
         <div class="dnnFormItem">
@@ -73,7 +73,7 @@
             <asp:TextBox id="textPageSize" runat="server" />
             <asp:RequiredFieldValidator runat="server" ControlToValidate="textPageSize"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="PageSize.Required" />
-            <asp:RangeValidator runat="server" ControlToValidate="textPageSize" 
+            <asp:RangeValidator runat="server" ControlToValidate="textPageSize"
                 Type="Integer" MinimumValue="1" MaximumValue="100"
                 CssClass="dnnFormMessage dnnFormError" Display="Dynamic" resourcekey="PageSize.Invalid" />
         </div>
@@ -107,3 +107,16 @@
         </div>
 	</fieldset>
 </div>
+<script type="text/javascript">
+(function($, Sys) {
+    function setupModule() {
+        $(".dnn-select2").select2();
+    };
+    $(document).ready(function() {
+        setupModule();
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(function() {
+            setupModule();
+        });
+    });
+} (jQuery, window.Sys));
+</script>
