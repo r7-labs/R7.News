@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="false" CodeBehind="ViewStream.ascx.cs" Inherits="R7.News.Stream.ViewStream" %>
+<%@ Register TagPrefix="news" TagName="JsVars" Src="~/DesktopModules/R7.News/R7.News/Controls/JsVars.ascx" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Register TagPrefix="news" TagName="ActionList" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionList.ascx" %>
@@ -7,6 +8,7 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
+<news:JsVars runat="server" />
 <asp:Panel id="panelStream" runat="server" CssClass="news-module news-stream">
 	<asp:Panel id="pnlFeed" runat="server" CssClass="news-top-actions">
 		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link"

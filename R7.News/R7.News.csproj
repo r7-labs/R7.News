@@ -130,6 +130,7 @@
     <Content Include="Controls\TermLinks.ascx" />
     <Content Include="Controls\BadgeList.ascx" />
     <Content Include="Controls\AgplSignature.ascx" />
+    <Content Include="Controls\JsVars.ascx" />
     <Content Include="assets\css\module.css" />
     <Content Include="assets\css\admin.css" />
     <Content Include="assets\js\news.js" />
@@ -146,6 +147,8 @@
     <None Include="Controls\App_LocalResources\AgplSignature.ascx.ru-RU.resx" />
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.resx" />
     <None Include="Controls\App_LocalResources\ActionButtons.ascx.ru-RU.resx" />
+    <None Include="Controls\App_LocalResources\JsVars.ascx.resx" />
+    <None Include="Controls\App_LocalResources\JsVars.ascx.ru-RU.resx" />
     <None Include="SqlDataProvider\01.03.00.SqlDataProvider" />
     <None Include="SqlDataProvider\01.08.00.SqlDataProvider" />
     <None Include="SqlDataProvider\01.09.00.SqlDataProvider" />
@@ -178,6 +181,9 @@
     <Compile Include="ViewModels\NewsEntryViewModelBase.cs" />
     <Compile Include="Controls\AgplSignature.ascx.cs">
       <DependentUpon>AgplSignature.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\JsVars.ascx.cs">
+      <DependentUpon>JsVars.ascx</DependentUpon>
     </Compile>
     <Compile Include="Modules\NewsModuleBase.cs" />
     <Compile Include="Providers\TermUrlProviders\DescriptionTermUrlProvider.cs" />

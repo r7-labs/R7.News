@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ViewAgent.ascx.cs" Inherits="R7.News.Agent.ViewAgent" %>
+<%@ Register TagPrefix="news" TagName="JsVars" Src="~/DesktopModules/R7.News/R7.News/Controls/JsVars.ascx" %>
 <%@ Register TagPrefix="news" TagName="TermLinks" Src="~/DesktopModules/R7.News/R7.News/Controls/TermLinks.ascx" %>
 <%@ Register TagPrefix="news" TagName="BadgeList" Src="~/DesktopModules/R7.News/R7.News/Controls/BadgeList.ascx" %>
 <%@ Register TagPrefix="news" TagName="ActionList" Src="~/DesktopModules/R7.News/R7.News/Controls/ActionList.ascx" %>
@@ -6,6 +7,7 @@
 <%@ Register TagPrefix="dnn" Namespace="DotNetNuke.Web.Client.ClientResourceManagement" Assembly="DotNetNuke.Web.Client" %>
 <%@ Import Namespace="System.Web" %>
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
+<news:JsVars runat="server" />
 <asp:Panel id="panelAddDefaultEntry" runat="server" Visible="false" CssClass="alert alert-warning">
 	<div class="d-flex">
 	    <div class="flex-grow-1 align-self-center">

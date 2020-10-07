@@ -33,8 +33,7 @@ r7_news.expandText = function (btn, entryTextId, moduleId) {
 		},
 		function (xhr, status) {
             console.error ("R7.News: Error loading text!", xhr);
-            // TODO: Localize error message
-            $(btn).parent().parent().prev().append('<p class="text-danger">Error loading text! You can try to reload the page and try again.</p>');
+            $(btn).parent().parent().prev().append('<p class="alert alert-danger">' + r7_news.resx ["errorLoadingExpandedText"] + '</p>');
             $(btn).parent().hide();
 		},
 		{ entryTextId: entryTextId }
