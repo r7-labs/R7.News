@@ -24,7 +24,7 @@
         </div>
     </LayoutTemplate>
     <ItemTemplate>
-        <div>
+        <div class="news-entry">
 			<h3 class='<%# (Item.IsOnlyEntry ? "d-none" : "") %>'><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
 			<p>
 				<news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
@@ -54,6 +54,7 @@
 						ShowExpandTextAction="true" />
                 </div>
             </div>
+			<div class="news-entry-expanded-text"></div>
         </div>
     </ItemTemplate>
     <ItemSeparatorTemplate>

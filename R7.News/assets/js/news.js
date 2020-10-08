@@ -28,12 +28,12 @@ r7_news.expandText = function (btn, entryTextId, moduleId) {
 	var service = new r7_news.service ($, moduleId);
 	service.getNewsEntryText (
 		function (data) {
-			$(btn).parent().parent().prev().append(data.rawText);
+			$(btn).closest(".news-entry").find(".news-entry-expanded-text").append(data.rawText);
             $(btn).parent().hide();
 		},
 		function (xhr, status) {
             console.error ("R7.News: Error loading text!", xhr);
-            $(btn).parent().parent().prev().append('<p class="alert alert-danger">' + r7_news.resx ["errorLoadingExpandedText"] + '</p>');
+            $(btn).closest(".news-entry").find(".news-entry-expanded-text").append('<p class="alert alert-danger">' + r7_news.resx ["errorLoadingExpandedText"] + '</p>');
             $(btn).parent().hide();
 		},
 		{ entryTextId: entryTextId }

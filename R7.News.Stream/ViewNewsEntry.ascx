@@ -6,11 +6,11 @@
 <%@ Import Namespace="System.Web" %>
 
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
-<div class="news-module news-entry">
+<div class="news-module news-entry-single">
     <asp:FormView id="formNewsEntry" runat="server" RenderOuterTable="false"
             ItemType="R7.News.Stream.ViewModels.NewsEntryViewModel" OnDataBound="formNewsEntry_DataBound">
         <ItemTemplate>
-            <div>
+            <div class="news-entry">
                 <h3><%# HttpUtility.HtmlDecode (Item.TitleLink) %></h3>
                 <p>
                     <news:TermLinks id="termLinks" runat="server" CssClass="list-inline term-links" />
@@ -38,10 +38,8 @@
 							ShowExpandTextAction="false" />
                     </div>
                 </div>
-				<div class="row">
-					<div class="col">
-						<%# HttpUtility.HtmlDecode (Item.Text) %>
-					</div>
+				<div class="news-entry-expanded-text">
+					<%# HttpUtility.HtmlDecode (Item.Text) %>
 				</div>
             </div>
         </ItemTemplate>
