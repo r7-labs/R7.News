@@ -210,6 +210,7 @@
     <Compile Include="Models\WeightRange.cs" />
     <Compile Include="Feeds\IFeed.cs" />
     <Compile Include="Feeds\AtomFeed.cs" />
+    <Compile Include="Feeds\RssFeed.cs" />
     <Compile Include="Data\TabSynchronizer.cs" />
     <Compile Include="Controls\TermSelector.cs" />
     <Compile Include="Services\NewsController.cs" />

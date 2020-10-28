@@ -1,25 +1,4 @@
-﻿//
-//  FeedController.cs
-//
-//  Author:
-//       Roman M. Yagodin <roman.yagodin@gmail.com>
-//
-//  Copyright (c) 2019 Roman M. Yagodin
-//
-//  This program is free software: you can redistribute it and/or modify
-//  it under the terms of the GNU Affero General Public License as published by
-//  the Free Software Foundation, either version 3 of the License, or
-//  (at your option) any later version.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU Affero General Public License for more details.
-//
-//  You should have received a copy of the GNU Affero General Public License
-//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -81,6 +60,18 @@ namespace R7.News.Stream.Services
         [AllowAnonymous]
         public HttpResponseMessage Atom (string key, bool withImages = false)
         {
+            return RenderFeed (new AtomFeed (), key, withImages);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public HttpResponseMessage Rss (string key, bool withImages = false)
+        {
+            return RenderFeed (new RssFeed (), key, withImages);
+        }
+
+        HttpResponseMessage RenderFeed (IFeed feed, string key, bool withImages = false)
+        {
             var statusCode = HttpStatusCode.InternalServerError;
             var logType = EventLogController.EventLogType.HOST_ALERT;
             var tabId = -1;
@@ -117,7 +108,6 @@ namespace R7.News.Stream.Services
                     Encoding = Encoding.UTF8
                 });
 
-                var feed = new AtomFeed ();
                 feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString (), withImages);
 
                 return new HttpResponseMessage {
@@ -126,22 +116,26 @@ namespace R7.News.Stream.Services
                 };
             }
             catch (Exception ex) {
-                var log = new LogInfo ();
-                log.AddProperty ("Source", GetType ().FullName);
-                log.AddProperty ("PortalId", PortalSettings.PortalId.ToString ());
-                log.AddProperty ("TabId", tabId.ToString ());
-                log.AddProperty ("ModuleId", moduleId.ToString ());
-                log.AddProperty ("RawUrl", Request.GetHttpContext ().Request.RawUrl);
-                log.AddProperty ("Referrer", Request.GetHttpContext ().Request.UrlReferrer?.ToString ());
-                log.LogPortalID = PortalSettings.PortalId;
-                log.LogUserID = UserInfo?.UserID ?? -1;
-                log.LogUserName = UserInfo?.Username ?? "Unknown";
-                log.LogTypeKey = logType.ToString ();
-                log.Exception = new ExceptionInfo (ex);
-                EventLogController.Instance.AddLog (log);
-
+                LogFeedException (logType, ex, tabId, moduleId);
                 return Request.CreateResponse (statusCode);
             }
+        }
+
+        void LogFeedException (EventLogController.EventLogType logType, Exception ex, int tabId, int moduleId)
+        {
+            var log = new LogInfo ();
+            log.AddProperty ("Source", GetType ().FullName);
+            log.AddProperty ("PortalId", PortalSettings.PortalId.ToString ());
+            log.AddProperty ("TabId", tabId.ToString ());
+            log.AddProperty ("ModuleId", moduleId.ToString ());
+            log.AddProperty ("RawUrl", Request.GetHttpContext ().Request.RawUrl);
+            log.AddProperty ("Referrer", Request.GetHttpContext ().Request.UrlReferrer?.ToString ());
+            log.LogPortalID = PortalSettings.PortalId;
+            log.LogUserID = UserInfo?.UserID ?? -1;
+            log.LogUserName = UserInfo?.Username ?? "Unknown";
+            log.LogTypeKey = logType.ToString ();
+            log.Exception = new ExceptionInfo (ex);
+            EventLogController.Instance.AddLog (log);
         }
     }
 }

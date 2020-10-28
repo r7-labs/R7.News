@@ -11,6 +11,7 @@ using R7.News.Models;
 
 namespace R7.News.Feeds
 {
+    // TODO: Extract base class
     public class AtomFeed : IFeed
     {
         string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
