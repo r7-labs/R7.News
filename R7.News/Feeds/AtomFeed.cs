@@ -11,14 +11,15 @@ using R7.News.Models;
 
 namespace R7.News.Feeds
 {
-    // TODO: Extract base class
-    public class AtomFeed : IFeed
+    // FIXME: Missing namespace for feed: https://validator.w3.org/feed/docs/error/MissingNamespace.html
+    // FIXME: Whitespace not permitted in <id>: https://validator.w3.org/feed/docs/error/UnexpectedWhitespace.html
+    public class AtomFeed : FeedBase
     {
-        string IsoDateTime (DateTime datetime) => datetime.ToUniversalTime ().ToString ("s") + "Z";
+        protected string IsoDateTime (DateTime dateTime) => dateTime.ToUniversalTime ().ToString ("s") + "Z";
 
-        string Base64ToCanonicalForm (string base64String) => base64String.Replace ("%3d", "%3D");
+        protected override string FormatDateTime (DateTime dateTime) => IsoDateTime (dateTime);
 
-        public void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
+        public override void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
             PortalSettings portalSettings, string requestUrl, bool withImages)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
@@ -33,7 +34,7 @@ namespace R7.News.Feeds
             writer.WriteEndElement ();
 
             writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:feed#"
-                + Base64ToCanonicalForm (UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}")));
+                + Base64ToCanonicalFormFix (UrlUtils.EncryptParameter ($"{module.TabID}-{module.ModuleID}")));
 
             writer.WriteStartElement ("link");
             writer.WriteAttributeString ("rel", "self");
@@ -45,7 +46,7 @@ namespace R7.News.Feeds
             writer.WriteAttributeString ("href", Uri.EscapeUriString (Globals.NavigateURL (module.TabID)));
             writer.WriteEndElement ();
 
-            writer.WriteElementString ("updated", IsoDateTime (updatedDate));
+            writer.WriteElementString ("updated", FormatDateTime (updatedDate));
 
             foreach (var n in newsEntries) {
                 var permalink = n.GetPermalinkFriendly (ModuleController.Instance, module.ModuleID, module.TabID);
@@ -59,7 +60,7 @@ namespace R7.News.Feeds
                 writer.WriteEndElement ();
 
                 writer.WriteElementString ("id", $"tag:{portalSettings.PortalAlias.HTTPAlias},{authorityDate}:entry#{n.EntryId}");
-                writer.WriteElementString ("updated", IsoDateTime (n.PublishedOnDate ()));
+                writer.WriteElementString ("updated", FormatDateTime (n.PublishedOnDate ()));
                 writer.WriteElementString ("summary", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
 
                 writer.WriteStartElement ("content");
