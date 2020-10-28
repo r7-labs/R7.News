@@ -65,9 +65,16 @@ namespace R7.News.Stream.Services
 
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage Rss (string key, bool withImages = false)
+        public HttpResponseMessage Rss (string key)
         {
-            return RenderFeed (new RssFeed (), key, withImages);
+            return RenderFeed (new RssFeed (), key, false);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public HttpResponseMessage RssVk (string key)
+        {
+            return RenderFeed (new RssVkFeed (), key, true);
         }
 
         HttpResponseMessage RenderFeed (IFeed feed, string key, bool withImages = false)

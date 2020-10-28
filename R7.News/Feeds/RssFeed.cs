@@ -53,7 +53,8 @@ namespace R7.News.Feeds
                 writer.WriteEndElement ();
 
                 writer.WriteElementString ("pubDate", FormatDateTime (n.PublishedOnDate ()));
-                writer.WriteElementString ("description", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
+
+                RenderEntrySummary (writer, n);
 
                 writer.WriteEndElement ();
             }
@@ -63,6 +64,11 @@ namespace R7.News.Feeds
             writer.WriteEndDocument ();
 
             writer.Close ();
+        }
+
+        protected virtual void RenderEntrySummary (XmlWriter writer, INewsEntry newsEntry)
+        {
+            writer.WriteElementString ("description", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (newsEntry.Description), true)).Trim ());
         }
     }
 }

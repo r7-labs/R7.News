@@ -212,6 +212,7 @@
     <Compile Include="Feeds\FeedBase.cs" />
     <Compile Include="Feeds\AtomFeed.cs" />
     <Compile Include="Feeds\RssFeed.cs" />
+    <Compile Include="Feeds\RssVkFeed.cs" />
     <Compile Include="Data\TabSynchronizer.cs" />
     <Compile Include="Controls\TermSelector.cs" />
     <Compile Include="Services\NewsController.cs" />
