@@ -11,8 +11,6 @@ using R7.News.Models;
 
 namespace R7.News.Feeds
 {
-    // FIXME: Missing namespace for feed: https://validator.w3.org/feed/docs/error/MissingNamespace.html
-    // FIXME: Whitespace not permitted in <id>: https://validator.w3.org/feed/docs/error/UnexpectedWhitespace.html
     public class AtomFeed : FeedBase
     {
         protected string IsoDateTime (DateTime dateTime) => dateTime.ToUniversalTime ().ToString ("s") + "Z";
