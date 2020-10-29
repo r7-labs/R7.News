@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Xml;
+using DotNetNuke.Common;
 using DotNetNuke.Common.Utilities;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Portals;
@@ -35,7 +36,7 @@ namespace R7.News.Feeds
 
             writer.WriteElementString ("generator", portalSettings.PortalName);
 
-            writer.WriteElementString ("link", requestUrl);
+            writer.WriteElementString ("link", Uri.EscapeUriString (Globals.NavigateURL (module.TabID)));
 
             writer.WriteStartElement ("atom", "link", "http://www.w3.org/2005/Atom");
             writer.WriteAttributeString ("rel", "self");
