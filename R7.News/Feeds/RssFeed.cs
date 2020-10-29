@@ -11,7 +11,6 @@ using R7.News.Models;
 namespace R7.News.Feeds
 {
     // TODO: Add description to the RSS feed
-    // TODO: Implement https://validator.w3.org/feed/docs/warning/MissingAtomSelfLink.html
     public class RssFeed : FeedBase
     {
         protected string Rfc822DateTime (DateTime dateTime) => dateTime.ToUniversalTime ().ToString ("ddd, dd MMM yyyy HH:mm:ss K");
@@ -37,6 +36,12 @@ namespace R7.News.Feeds
             writer.WriteElementString ("generator", portalSettings.PortalName);
 
             writer.WriteElementString ("link", requestUrl);
+
+            writer.WriteStartElement ("atom", "link", "http://www.w3.org/2005/Atom");
+            writer.WriteAttributeString ("rel", "self");
+            writer.WriteAttributeString ("href", requestUrl);
+            writer.WriteEndElement ();
+
             writer.WriteElementString ("pubDate", FormatDateTime (updatedDate));
 
             foreach (var n in newsEntries) {
