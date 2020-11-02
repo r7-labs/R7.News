@@ -14,7 +14,7 @@ namespace R7.News.Feeds
     // TODO: Add description to the RSS feed
     public class RssFeed : FeedBase
     {
-        protected string Rfc822DateTime (DateTime dateTime) => dateTime.ToUniversalTime ().ToString ("ddd, dd MMM yyyy HH:mm:ss K");
+        protected string Rfc822DateTime (DateTime dateTime) => dateTime.ToUniversalTime ().ToString ("r");
 
         protected override string FormatDateTime (DateTime dateTime) => Rfc822DateTime (dateTime);
 
