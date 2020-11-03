@@ -12,11 +12,20 @@
     <data name="buttonShowMore.Text" xml:space="preserve">
         <value>Больше новостей...</value>
     </data>
-	<data name="btnFeed.Text" xml:space="preserve">
-        <value>Подписаться на</value>
+	<data name="Subscribe.Text" xml:space="preserve">
+        <value>Подписаться на новости в формате </value>
     </data>
-	<data name="btnFeed.Title" xml:space="preserve">
+	<data name="btnAtomFeed.Text" xml:space="preserve">
+        <value>Atom</value>
+    </data>
+	<data name="btnRssFeed.Text" xml:space="preserve">
+        <value>RSS</value>
+    </data>
+	<data name="btnAtomFeed_Title.Text" xml:space="preserve">
         <value>Канал Atom 1.0</value>
+    </data>
+	<data name="btnRssFeed_Title.Text" xml:space="preserve">
+        <value>Канал RSS 2.0</value>
     </data>
 	<data name="Pager_Prev.Text" xml:space="preserve">
 		<value>Пред.</value>

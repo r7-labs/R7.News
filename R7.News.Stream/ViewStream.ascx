@@ -10,14 +10,30 @@
 <dnn:DnnCssInclude runat="server" FilePath="~/DesktopModules/R7.News/R7.News/assets/css/module.css" />
 <news:JsVars runat="server" />
 <asp:Panel id="panelStream" runat="server" CssClass="news-module news-stream">
-	<asp:Panel id="pnlFeed" runat="server" CssClass="news-top-actions">
-		<a href="<%= ViewModel.FeedUrl %>" target="_blank" class="btn btn-link"
-			title='<%: LocalizeString ("btnFeed.Title") %>'>
-			<span class="fas fa-rss-square"></span>
-			<%: LocalizeString ("btnFeed.Text") %> <%: ModuleConfiguration.ModuleTitle %>
-		</a>
-	</asp:Panel>
-    <r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
+	<% if (ViewModel.EnableAtomFeed || ViewModel.EnableRssFeed) { %>
+	<div class="card card-body mb-3 bg-light news-feeds">
+		<p class="mb-0">
+			<%: LocalizeString ("Subscribe.Text") %>
+			<% if (ViewModel.EnableAtomFeed) { %>
+				<span class="news-feeds-item">
+					<i class="fas fa-rss-square news-feeds-atom-icon"></i>
+					<a href="<%= ViewModel.AtomFeedUrl %>" target="_blank" title='<%: LocalizeString ("btnAtomFeed_Title.Text") %>'>
+						<%: LocalizeString ("btnAtomFeed.Text") %>
+					</a>
+				</span>
+			<% } %>
+			<% if (ViewModel.EnableRssFeed) { %>
+			<span class="news-feeds-item">
+				<i class="fas fa-rss-square news-feeds-rss-icon"></i>
+				<a href="<%= ViewModel.RssFeedUrl %>" target="_blank" title='<%: LocalizeString ("btnRssFeed_Title.Text") %>'>
+					<%: LocalizeString ("btnRssFeed.Text") %>
+				</a>
+			</span>
+			<% } %>
+		</p>
+	</div>
+	<% } %>
+	<r7:PagingControl id="pagerTop" runat="server" OnPageChanged="pagingControl_PageChanged" />
     <asp:ListView id="listStream" ItemType="R7.News.Stream.ViewModels.StreamNewsEntry" runat="server" OnItemDataBound="listStream_ItemDataBound">
         <LayoutTemplate>
             <div runat="server">

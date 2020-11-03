@@ -138,5 +138,9 @@ namespace R7.News.Components
     public class FeedConfig
     {
         public int DefaultMaxEntries { get; set; } = 10;
+
+        public bool DisableRss { get; set; }
+
+        public bool DisableAtom { get; set; }
     }
 }

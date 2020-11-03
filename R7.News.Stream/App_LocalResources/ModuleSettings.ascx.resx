@@ -82,10 +82,10 @@
         <value>Maximum page links value must be an integer between from 1 to 100.</value>
     </data>
 	<data name="lblEnableFeed.Text" xml:space="preserve">
-        <value>Enable Atom Feed?</value>
+        <value>Enable Atom/RSS Feeds?</value>
     </data>
     <data name="lblEnableFeed.Help" xml:space="preserve">
-        <value>Check to enable news stream export as the Atom feed.</value>
+        <value>Check to enable news stream export as the Atom or RSS feeds.</value>
     </data>
 	<data name="lblFeedMaxEntries.Text" xml:space="preserve">
         <value>Max. Entries:</value>
@@ -122,6 +122,6 @@
         <value>Pagination Settings</value>
     </data>
 	<data name="sectionFeed.Text" xml:space="preserve">
-        <value>Atom Feed Settings</value>
+        <value>Atom/RSS Feed Settings</value>
     </data>
 </root>

@@ -82,16 +82,16 @@
         <value>Максимальное число ссылок в переключателе должно быть целым числом от 1 до 100.</value>
     </data>
 	<data name="lblEnableFeed.Text" xml:space="preserve">
-        <value>Включить канал Atom?</value>
+        <value>Включить каналы Atom/RSS?</value>
     </data>
     <data name="lblEnableFeed.Help" xml:space="preserve">
-        <value>Отметьте, чтобы включить экспорт новостной ленты в виде канала Atom.</value>
+        <value>Отметьте, чтобы включить экспорт новостной ленты в виде канала Atom или RSS.</value>
     </data>
 	<data name="lblFeedMaxEntries.Text" xml:space="preserve">
         <value>Макс. новостей:</value>
     </data>
     <data name="lblFeedMaxEntries.Help" xml:space="preserve">
-        <value>Введите максимальное количество новостей для экспорта в виде канала Atom.
+        <value>Введите максимальное количество новостей для экспорта в виде канала Atom или RSS.
 		Если оставить поле пустым, вместо этого будет использоваться значение параметра &quot;feed.default-max-entries&quot; из конфигурации портала.</value>
     </data>
 	<data name="lblImageCssClass.Text" xml:space="preserve">
@@ -122,6 +122,6 @@
         <value>Настройки разбивки на страницы</value>
     </data>
 	<data name="sectionFeed.Text" xml:space="preserve">
-        <value>Настройки канала Atom</value>
+        <value>Настройки канала Atom/RSS</value>
     </data>
 </root>

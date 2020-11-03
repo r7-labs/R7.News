@@ -19,6 +19,5 @@ namespace R7.News.Stream
         protected PagingControl pagerBottom;
         protected LinkButton buttonShowMore;
         protected AgplSignature agplSignature;
-        protected Panel pnlFeed;
     }
 }

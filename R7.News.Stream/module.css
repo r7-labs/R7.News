@@ -1,4 +1,9 @@
-﻿.news-top-actions { text-align:right }
+﻿.news-feeds .news-feeds-item {
+	display:inline-block;
+	margin-left:.25rem
+}
+.news-feeds .news-feeds-atom-icon { color:blue }
+.news-feeds .news-feeds-rss-icon { color:orange }
 
 .news-pager {
 	display:flex;
