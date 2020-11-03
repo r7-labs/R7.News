@@ -32,9 +32,9 @@ namespace R7.News.Stream.ViewModels
 
         public string RssFeedUrl => GetFeedUrl ("Rss");
 
-        public bool EnableAtomFeed => Settings.EnableFeed && !NewsConfig.Instance.Feed.DisableAtom;
+        public bool EnableAtomFeed => Settings.EnableFeed && NewsConfig.Instance.Feeds.EnableAtom;
 
-        public bool EnableRssFeed => Settings.EnableFeed && !NewsConfig.Instance.Feed.DisableRss;
+        public bool EnableRssFeed => Settings.EnableFeed && NewsConfig.Instance.Feeds.EnableRss;
 
         public StreamNewsEntriesPage GetPage (int pageIndex, int pageSize)
         {

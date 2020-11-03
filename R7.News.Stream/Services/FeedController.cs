@@ -33,7 +33,7 @@ namespace R7.News.Stream.Services
         IEnumerable<NewsEntry> GetNewsEntries (ModuleInfo module, StreamSettings settings)
         {
             return NewsRepository.Instance.GetNewsEntries_FirstPage (PortalSettings.PortalId,
-                settings.FeedMaxEntries ?? NewsConfig.Instance.Feed.DefaultMaxEntries,
+                settings.FeedMaxEntries ?? NewsConfig.Instance.Feeds.DefaultMaxEntries,
                 HttpContext.Current.Timestamp,
                 new WeightRange (settings.MinThematicWeight, settings.MaxThematicWeight),
                 new WeightRange (settings.MinStructuralWeight, settings.MaxStructuralWeight),
