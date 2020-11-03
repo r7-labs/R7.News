@@ -13,6 +13,6 @@ namespace R7.News.Feeds
 
         protected abstract string FormatDateTime (DateTime dateTime);
 
-        public abstract void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl, bool withImages);
+        public abstract void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module, PortalSettings portalSettings, string requestUrl);
     }
 }

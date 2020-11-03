@@ -18,7 +18,7 @@ namespace R7.News.Feeds
         protected override string FormatDateTime (DateTime dateTime) => IsoDateTime (dateTime);
 
         public override void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
-            PortalSettings portalSettings, string requestUrl, bool withImages)
+            PortalSettings portalSettings, string requestUrl)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;
@@ -61,25 +61,6 @@ namespace R7.News.Feeds
                 writer.WriteElementString ("updated", FormatDateTime (n.PublishedOnDate ()));
                 writer.WriteElementString ("summary", HttpUtility.HtmlDecode (HtmlUtils.StripTags (HttpUtility.HtmlDecode (n.Description), true)).Trim ());
 
-                writer.WriteStartElement ("content");
-
-                writer.WriteAttributeString ("type", "html");
-
-                var htmlContent = HttpUtility.HtmlDecode (n.Description);
-
-                // HACK: Temporary workaround for GH-113
-                htmlContent = htmlContent.Replace ("&mdash;", "&ndash;");
-
-                if (withImages && n.ContentItem.Images.Count > 0) {
-                    var imageUrl = n.GetRawImageUrl ();
-                    if (!string.IsNullOrEmpty (imageUrl)) {
-                        htmlContent = $"<img src=\"{imageUrl}\" alt=\"{n.Title}\" />" + htmlContent;
-                    }
-                }
-
-                writer.WriteCData (htmlContent);
-
-                writer.WriteEndElement ();
                 writer.WriteEndElement ();
             }
 

@@ -19,7 +19,7 @@ namespace R7.News.Feeds
         protected override string FormatDateTime (DateTime dateTime) => Rfc822DateTime (dateTime);
 
         public override void Render (XmlWriter writer, IEnumerable<NewsEntry> newsEntries, ModuleInfo module,
-            PortalSettings portalSettings, string requestUrl, bool withImages)
+            PortalSettings portalSettings, string requestUrl)
         {
             var authorityDate = portalSettings.PortalAlias.CreatedOnDate.ToUniversalTime ().ToString ("yyyy-MM-dd");
             var updatedDate = newsEntries.Any () ? newsEntries.First ().PublishedOnDate () : module.LastModifiedOnDate;

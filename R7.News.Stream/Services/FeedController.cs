@@ -58,26 +58,26 @@ namespace R7.News.Stream.Services
 
         [HttpGet]
         [AllowAnonymous]
-        public HttpResponseMessage Atom (string key, bool withImages = false)
+        public HttpResponseMessage Atom (string key)
         {
-            return RenderFeed (new AtomFeed (), key, withImages);
+            return RenderFeed (new AtomFeed (), key);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage Rss (string key)
         {
-            return RenderFeed (new RssFeed (), key, false);
+            return RenderFeed (new RssFeed (), key);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public HttpResponseMessage RssVk (string key)
         {
-            return RenderFeed (new RssVkFeed (), key, true);
+            return RenderFeed (new RssVkFeed (), key);
         }
 
-        HttpResponseMessage RenderFeed (IFeed feed, string key, bool withImages = false)
+        HttpResponseMessage RenderFeed (IFeed feed, string key)
         {
             var statusCode = HttpStatusCode.InternalServerError;
             var logType = EventLogController.EventLogType.HOST_ALERT;
@@ -115,7 +115,7 @@ namespace R7.News.Stream.Services
                     Encoding = Encoding.UTF8
                 });
 
-                feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString (), withImages);
+                feed.Render (xmlWriter, newsEntries, module, PortalSettings, Request.RequestUri.ToString ());
 
                 return new HttpResponseMessage {
                     StatusCode = HttpStatusCode.OK,
