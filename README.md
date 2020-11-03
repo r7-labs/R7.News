@@ -20,7 +20,7 @@ or (at your option) any later version.
 - [x] Streamline new articles creation by adding *R7.News.Agent* module into the page template.
 - [x] Allow users to [discuss](#discuss) news on forum.
 - [x] DDRMenu integration (display news entries in the menu).
-- [x] Export news into Atoms feeds.
+- [x] Export news into Atom or RSS feeds.
 - [x] Keep news article page settings in sync with corresponding news entry properties.
 
 ### Future releases may also include:
