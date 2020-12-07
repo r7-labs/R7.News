@@ -96,11 +96,11 @@ namespace R7.News.Models
             var image = newsEntry.GetImage ();
             if (image != null) {
                 return Globals.AddHTTP (PortalSettings.Current.PortalAlias.HTTPAlias)
-                + "/dnnimagehandler.ashx"
-                + "?mode=securefile"
-                + "&fileid=" + image.FileId
-                + "&filter=resize"
-                + "&w=" + width
+                + "/imagehandler.ashx"
+                //+ "?mode=securefile"
+                + "?fileid=" + image.FileId
+                //+ "&filter=resize"
+                + "&width=" + width
                 // this helps external services to understand mimetype
                 + "&ext=." + image.Extension;
             }
