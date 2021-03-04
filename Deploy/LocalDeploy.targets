@@ -39,8 +39,9 @@
             <LocalDeployExcludeFiles Include="../packages/**/*" />
             <LocalDeployExcludeFiles Include="../Deploy/**/*" />
             <LocalDeployExcludeFiles Include="../.git/**/*" />
-			<LocalDeployExcludeFiles Include="../.vs/**/*" />
-			<LocalDeployExcludeFiles Include="../.vscode/**/*" />
+            <LocalDeployExcludeFiles Include="../.vs/**/*" />
+			      <LocalDeployExcludeFiles Include="../.vscode/**/*" />
+            <LocalDeployExcludeFiles Include="../.idea/**/*" />
             <LocalDeployExcludeFiles Include="../.svn/**/*" />
             <LocalDeployExcludeFiles Include="../*/bin/**/*" />
             <LocalDeployExcludeFiles Include="../*/obj/**/*" />
