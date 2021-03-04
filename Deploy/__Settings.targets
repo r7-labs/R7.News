@@ -9,8 +9,8 @@
         <PackageName>R7.News</PackageName>
         <PackageOutputPath>bin/Deploy</PackageOutputPath>
         <TmpDir>bin/tmp</TmpDir>
-        <DnnLocalDeployPath Condition=" '$(OS)' == 'Unix' ">/mnt/hdd/$(HOME)/mnt/dnn804</DnnLocalDeployPath>
-        <DnnLocalDeployPath Condition=" '$(OS)' != 'Unix' ">C:\Dotnetnuke804</DnnLocalDeployPath>
+        <DnnLocalDeployPath Condition=" '$(OS)' == 'Unix' ">$(HOME)/mnt/dnn990</DnnLocalDeployPath>
+        <DnnLocalDeployPath Condition=" '$(OS)' != 'Unix' ">C:\Dotnetnuke990</DnnLocalDeployPath>
         <BuildSettingsImported>true</BuildSettingsImported>
     </PropertyGroup>
 
