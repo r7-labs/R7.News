@@ -65,7 +65,7 @@ namespace R7.News.Data
             UpdateNewsEntryText (newsEntry);
             UpdateContentItem (contentItem, newsEntry, terms, images);
 
-            ClearCache ();
+            ClearCache (newsEntry);
 
             return newsEntry.EntryId;
         }
@@ -185,7 +185,7 @@ namespace R7.News.Data
                 termController.AddTermToContent (term, newsEntry.ContentItem);
             }
 
-            ClearCache ();
+            ClearCache (newsEntry);
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace R7.News.Data
         {
             NewsDataProvider.Instance.Update (newsEntry);
 
-            ClearCache ();
+            ClearCache (newsEntry);
         }
 
         public void DeleteNewsEntry (INewsEntry newsEntry)
@@ -204,7 +204,7 @@ namespace R7.News.Data
             // delete content item, related news entry and text records will be deleted by foreign key rules
             NewsDataProvider.Instance.ContentController.DeleteContentItem (newsEntry.ContentItem);
 
-            ClearCache ();
+            ClearCache (newsEntry);
         }
 
         public IEnumerable<NewsEntry> GetAllNewsEntries (int moduleId,
@@ -383,8 +383,17 @@ namespace R7.News.Data
             DataCache.ClearCache (NewsCacheKeyPrefix + "ModuleId=" + moduleId);
         }
 
-        public void ClearCache ()
+        // Workaround for GH-139: Content items cache issues on DNN 9
+        private void ClearContentItemCache (int? contentItemId)
         {
+            if (contentItemId != null) {
+                DataCache.RemoveCache ($"ContentItems{contentItemId}");
+            }
+        }
+
+        private void ClearCache (INewsEntry newsEntry)
+        {
+            ClearContentItemCache (newsEntry.ContentItemId);
             DataCache.ClearCache (NewsCacheKeyPrefix);
         }
     }
